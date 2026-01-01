@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "type": "frontend",
+  "baseUrl": "http://localhost:3000",
+  "requiresLogin": false,
+  "tests": [
+    {
+      "id": "auth-login-page-renders",
+      "name": "Login page shows email and password fields",
+      "path": "/login",
+      "steps": [
+        { "action": "navigate", "to": "/login" },
+        { "action": "assertSelector", "selector": "input[type=email]" },
+        { "action": "assertSelector", "selector": "input[type=password]" },
+        { "action": "assertText", "text": "Login" }
+      ]
+    },
+    {
+      "id": "auth-register-page-renders",
+      "name": "Register page shows basic fields",
+      "path": "/register",
+      "steps": [
+        { "action": "navigate", "to": "/register" },
+        { "action": "assertText", "text": "Register" }
+      ]
+    },
+    {
+      "id": "dashboard-redirects-when-unauthenticated",
+      "name": "Dashboard redirects to login when unauthenticated",
+      "path": "/dashboard",
+      "steps": [
+        { "action": "navigate", "to": "/dashboard" },
+        { "action": "assertUrlIncludes", "text": "/login" }
+      ]
+    }
+  ]
+}
