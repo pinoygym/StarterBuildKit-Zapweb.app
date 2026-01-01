@@ -1,0 +1,366 @@
+﻿bun : $ tsc --noEmit
+At line:1 char:1
++ bun run type-check 2>&1 | Out-File -FilePath type-errors.txt -Encodin ...
++ ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: ($ tsc --noEmit:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+.next/dev/types/validator.ts(585,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/customers/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/customers/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: CustomerWithRelations; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(657,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/data-maintenance/[type]/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/data-maintenance/[type]/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { type: string; id: string; }; }) => Promise<NextResponse<{ success: boolean; data: any; }> | NextResponse<{ success: boolean; error: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ type: string; id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ type: string; id: string; }>; }' is not assignable to type '{ params: { type: string; id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<{ type: string; id: string; }>' is missing the following properties from type '{ type: string; id: string; }': type, id
+.next/dev/types/validator.ts(666,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/data-maintenance/[type]/[id]/toggle-status/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/data-maintenance/[type]/[id]/toggle-status">'.
+  Types of property 'PATCH' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { type: string; id: string; }; }) => Promise<NextResponse<{ success: boolean; data: any; }> | NextResponse<{ success: boolean; error: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ type: string; id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ type: string; id: string; }>; }' is not assignable to type '{ params: { type: string; id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<{ type: string; id: string; }>' is missing the following properties from type '{ type: string; id: string; }': type, id
+.next/dev/types/validator.ts(891,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/purchase-orders/[id]/cancel/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/purchase-orders/[id]/cancel">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; error: string; }> | NextResponse<{ success: boolean; data: PurchaseOrderWithDetails; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(900,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/purchase-orders/[id]/receive/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/purchase-orders/[id]/receive">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: PurchaseOrderWithDetails; message: string; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1080,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/roles/[id]/permissions/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/roles/[id]/permissions">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; permissions: any; }> | NextResponse<{ success: boolean; message: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1089,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/roles/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/roles/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; role: { name: string; id: string; createdAt: Date; updatedAt: Date; description: string | null; isSystem: boolean; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1161,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/settings/company/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/settings/company/[id]">'.
+  Types of property 'PATCH' are incompatible.
+    Type '(request: Request, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: { id: string; createdAt: Date; updatedAt: Date; phone: string | null; email: string | null; ... 21 more ...; vatRegistrationNumber: string | null; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/dev/types/validator.ts(1332,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/users/[id]/verify/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/users/[id]/verify">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: RouteParams) => Promise<NextResponse<{ success: boolean; user: { Branch: { name: string; id: string; createdAt: Date; status: string; updatedAt: Date; code: string; location: string; manager: string; phone: string; } | null; Role: { ...; }; } & { ...; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type 'RouteParams'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(585,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/customers/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/customers/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: CustomerWithRelations; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(657,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/data-maintenance/[type]/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/data-maintenance/[type]/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { type: string; id: string; }; }) => Promise<NextResponse<{ success: boolean; data: any; }> | NextResponse<{ success: boolean; error: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ type: string; id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ type: string; id: string; }>; }' is not assignable to type '{ params: { type: string; id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<{ type: string; id: string; }>' is missing the following properties from type '{ type: string; id: string; }': type, id
+.next/types/validator.ts(666,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/data-maintenance/[type]/[id]/toggle-status/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/data-maintenance/[type]/[id]/toggle-status">'.
+  Types of property 'PATCH' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { type: string; id: string; }; }) => Promise<NextResponse<{ success: boolean; data: any; }> | NextResponse<{ success: boolean; error: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ type: string; id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ type: string; id: string; }>; }' is not assignable to type '{ params: { type: string; id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Type 'Promise<{ type: string; id: string; }>' is missing the following properties from type '{ type: string; id: string; }': type, id
+.next/types/validator.ts(891,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/purchase-orders/[id]/cancel/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/purchase-orders/[id]/cancel">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; error: string; }> | NextResponse<{ success: boolean; data: PurchaseOrderWithDetails; message: string; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(900,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/purchase-orders/[id]/receive/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/purchase-orders/[id]/receive">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: PurchaseOrderWithDetails; message: string; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1080,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/roles/[id]/permissions/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/roles/[id]/permissions">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; permissions: any; }> | NextResponse<{ success: boolean; message: any; }>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1089,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/roles/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/roles/[id]">'.
+  Types of property 'GET' are incompatible.
+    Type '(request: NextRequest, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; role: { name: string; id: string; createdAt: Date; updatedAt: Date; description: string | null; isSystem: boolean; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1161,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/settings/company/[id]/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/settings/company/[id]">'.
+  Types of property 'PATCH' are incompatible.
+    Type '(request: Request, { params }: { params: { id: string; }; }) => Promise<NextResponse<{ success: boolean; data: { id: string; createdAt: Date; updatedAt: Date; phone: string | null; email: string | null; ... 21 more ...; vatRegistrationNumber: string | null; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type '{ params: { id: string; }; }'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+.next/types/validator.ts(1332,31): error TS2344: Type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/app/api/users/[id]/verify/route")' does not satisfy the constraint 'RouteHandlerConfig<"/api/users/[id]/verify">'.
+  Types of property 'POST' are incompatible.
+    Type '(request: NextRequest, { params }: RouteParams) => Promise<NextResponse<{ success: boolean; user: { Branch: { name: string; id: string; createdAt: Date; status: string; updatedAt: Date; code: string; location: string; manager: string; phone: string; } | null; Role: { ...; }; } & { ...; }; }> | NextResponse<...>>' is not assignable to type '(request: NextRequest, context: { params: Promise<{ id: string; }>; }) => void | Response | Promise<void | Response>'.
+      Types of parameters '__1' and 'context' are incompatible.
+        Type '{ params: Promise<{ id: string; }>; }' is not assignable to type 'RouteParams'.
+          Types of property 'params' are incompatible.
+            Property 'id' is missing in type 'Promise<{ id: string; }>' but required in type '{ id: string; }'.
+app/(dashboard)/inventory/movements/page.tsx(198,23): error TS2339: Property 'map' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'map' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/inventory/movements/page.tsx(198,28): error TS7006: Parameter 'product' implicitly has an 'any' type.
+app/(dashboard)/inventory/page.tsx(173,25): error TS2339: Property 'map' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'map' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/inventory/page.tsx(173,30): error TS7006: Parameter 'product' implicitly has an 'any' type.
+app/(dashboard)/products/page.tsx(130,20): error TS2339: Property 'length' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'length' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/products/page.tsx(138,20): error TS2339: Property 'length' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'length' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/products/page.tsx(146,11): error TS2322: Type 'never[] | NonNullable<NoInfer<TQueryFnData>>' is not assignable to type 'ProductWithUOMs[]'.
+  Type '{}' is missing the following properties from type 'ProductWithUOMs[]': length, pop, push, concat, and 35 more.
+app/(dashboard)/purchase-orders/[id]/edit/page.tsx(104,9): error TS2322: Type 'never[] | NonNullable<NoInfer<TQueryFnData>>' is not assignable to type 'ProductWithUOMs[]'.
+  Type '{}' is missing the following properties from type 'ProductWithUOMs[]': length, pop, push, concat, and 35 more.
+app/(dashboard)/purchase-orders/new/page.tsx(110,9): error TS2322: Type 'never[] | NonNullable<NoInfer<TQueryFnData>>' is not assignable to type 'ProductWithUOMs[]'.
+  Type '{}' is missing the following properties from type 'ProductWithUOMs[]': length, pop, push, concat, and 35 more.
+app/(dashboard)/sales-orders/page.tsx(149,20): error TS2339: Property 'length' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'length' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/sales-orders/page.tsx(160,23): error TS2339: Property 'length' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'length' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+app/(dashboard)/sales-orders/page.tsx(168,11): error TS2322: Type 'never[] | NonNullable<NoInfer<TQueryFnData>>' is not assignable to type 'SalesOrderWithItems[]'.
+  Type '{}' is missing the following properties from type 'SalesOrderWithItems[]': length, pop, push, concat, and 35 more.
+app/api/auth/verify-email/route.ts(23,63): error TS2554: Expected 1 arguments, but got 3.
+app/api/inventory/[id]/route.ts(14,42): error TS2339: Property 'getBatchById' does not exist on type 'InventoryService'.
+app/api/inventory/adjust/route.ts(18,40): error TS2345: Argument of type 'AdjustStockRequest' is not assignable to parameter of type '{ productId: string; warehouseId: string; newQuantity: number; reason: string; }'.
+  Type 'AdjustStockRequest' is missing the following properties from type '{ productId: string; warehouseId: string; newQuantity: number; reason: string; }': productId, warehouseId
+app/api/receiving-vouchers/route.ts(34,69): error TS2345: Argument of type '{ purchaseOrderId: string; receiverName: string; items: { productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; uom: string; varianceReason?: string | undefined; poItemId?: string | undefined; }[]; ... 5 more ...; supplierDiscountType?: "fixed" | ... 1 more ... | undefined; }' is not assignable to parameter of type 'CreateReceivingVoucherInput'.
+  Types of property 'items' are incompatible.
+    Type '{ productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; uom: string; varianceReason?: string | undefined; poItemId?: string | undefined; }[]' is not assignable to type 'CreateReceivingVoucherItemInput[]'.
+      Type '{ productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; uom: string; varianceReason?: string | undefined; poItemId?: string | undefined; }' is not assignable to type 'CreateReceivingVoucherItemInput'.
+        Types of property 'poItemId' are incompatible.
+          Type 'string | undefined' is not assignable to type 'string'.
+            Type 'undefined' is not assignable to type 'string'.
+app/api/reports/discount-promotion-analytics/route.ts(72,9): error TS2322: Type '{ promotionName: any; promotionCode: any; customerId: any; branchId: any; discountAmount: any; discountType: any; discountValue: any; saleId: any; usageDate: Date; }' is not assignable to type '(Without<PromotionUsageCreateInput, PromotionUsageUncheckedCreateInput> & PromotionUsageUncheckedCreateInput) | (Without<...> & PromotionUsageCreateInput)'.
+  Type '{ promotionName: any; promotionCode: any; customerId: any; branchId: any; discountAmount: any; discountType: any; discountValue: any; saleId: any; usageDate: Date; }' is not assignable to type 'Without<PromotionUsageUncheckedCreateInput, PromotionUsageCreateInput> & PromotionUsageCreateInput'.
+    Type '{ promotionName: any; promotionCode: any; customerId: any; branchId: any; discountAmount: any; discountType: any; discountValue: any; saleId: any; usageDate: Date; }' is missing the following properties from type 'PromotionUsageCreateInput': id, Branch, POSSale
+app/api/reports/employee-performance/route.ts(19,32): error TS2339: Property 'ip' does not exist on type 'NextRequest'.
+app/api/reports/employee-performance/route.ts(175,32): error TS2339: Property 'ip' does not exist on type 'NextRequest'.
+app/api/reports/employee-performance/route.ts(258,11): error TS2322: Type '{ userId: string; branchId: string; date: Date; totalSales: any; transactionCount: any; averageTransaction: any; itemsSold: any; returnsHandled: any; customerSatisfaction: any; }' is not assignable to type '(Without<EmployeePerformanceCreateInput, EmployeePerformanceUncheckedCreateInput> & EmployeePerformanceUncheckedCreateInput) | (Without<...> & EmployeePerformanceCreateInput)'.
+  Type '{ userId: string; branchId: string; date: Date; totalSales: any; transactionCount: any; averageTransaction: any; itemsSold: any; returnsHandled: any; customerSatisfaction: any; }' is not assignable to type 'Without<EmployeePerformanceCreateInput, EmployeePerformanceUncheckedCreateInput> & EmployeePerformanceUncheckedCreateInput'.
+    Type '{ userId: string; branchId: string; date: Date; totalSales: any; transactionCount: any; averageTransaction: any; itemsSold: any; returnsHandled: any; customerSatisfaction: any; }' is missing the following properties from type 'EmployeePerformanceUncheckedCreateInput': id, updatedAt
+app/api/roles/[id]/route.ts(150,7): error TS2345: Argument of type '{ name?: string | undefined; description?: string | null | undefined; }' is not assignable to parameter of type '{ name?: string | undefined; description?: string | undefined; }'.
+  Types of property 'description' are incompatible.
+    Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+app/dashboard/users/page.tsx(103,60): error TS2345: Argument of type 'string' is not assignable to parameter of type 'UserStatus'.
+components/customers/customer-dialog.tsx(73,18): error TS2345: Argument of type '{ contactPerson: string; phone: string; email: string | null; companyName: string; address: string; city: string; region: string; postalCode: string; paymentTerms: any; creditLimit: number | undefined; taxId: string; customerType: any; notes: string; status: any; }' is not assignable to parameter of type '{ status: "active" | "inactive"; phone: string; contactPerson: string; paymentTerms: "Net 30" | "Net 15" | "Net 60" | "COD"; customerType: "regular" | "wholesale" | "retail"; notes?: string | undefined; ... 8 more ...; taxId?: string | undefined; } | { ...; } | ResetAction<...> | undefined'.
+  Types of property 'email' are incompatible.
+    Type 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+components/inventory/inventory-product-table.tsx(86,73): error TS2339: Property 'batchCount' does not exist on type 'ProductInventorySummary'.
+components/reports/comprehensive-pos-receipt.tsx(62,5): error TS2353: Object literal may only specify known properties, and 'content' does not exist in type 'UseReactToPrintOptions'.
+components/reports/daily-sales-summary-report.tsx(54,5): error TS2322: Type '() => void' is not assignable to type '() => Promise<void>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+components/reports/discount-promotion-analytics-report.tsx(101,21): error TS2304: Cannot find name 'useRef'.
+components/reports/discount-promotion-analytics-report.tsx(106,5): error TS2322: Type '() => void' is not assignable to type '() => Promise<void>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+components/reports/employee-sales-performance-report.tsx(99,21): error TS2552: Cannot find name 'useRef'. Did you mean 'User'?
+components/reports/employee-sales-performance-report.tsx(104,5): error TS2322: Type '() => void' is not assignable to type '() => Promise<void>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+components/reports/inventory-movement-report.tsx(89,21): error TS2304: Cannot find name 'useRef'.
+components/reports/inventory-movement-report.tsx(94,5): error TS2322: Type '() => void' is not assignable to type '() => Promise<void>'.
+  Type 'void' is not assignable to type 'Promise<void>'.
+components/sales-history/sale-detail-modal.tsx(85,23): error TS2551: Property 'customerName' does not exist on type 'POSSaleWithItems'. Did you mean 'Customer'?
+components/sales-history/sale-detail-modal.tsx(252,56): error TS2339: Property 'partialPayment' does not exist on type 'POSSaleWithItems'.
+components/sales-history/sale-detail-modal.tsx(252,86): error TS2339: Property 'partialPayment' does not exist on type 'POSSaleWithItems'.
+components/sales-history/sale-detail-modal.tsx(256,55): error TS2339: Property 'partialPayment' does not exist on type 'POSSaleWithItems'.
+components/sales-history/sale-detail-modal.tsx(261,78): error TS2339: Property 'partialPayment' does not exist on type 'POSSaleWithItems'.
+components/sales-history/sale-detail-modal.tsx(270,17): error TS2339: Property 'notes' does not exist on type 'POSSaleWithItems'.
+components/sales-history/sale-detail-modal.tsx(275,68): error TS2339: Property 'notes' does not exist on type 'POSSaleWithItems'.
+components/sales-orders/sales-order-dialog.tsx(166,30): error TS2339: Property 'find' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'find' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+components/sales-orders/sales-order-dialog.tsx(166,36): error TS7006: Parameter 'p' implicitly has an 'any' type.
+components/sales-orders/sales-order-dialog.tsx(180,30): error TS2339: Property 'find' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'find' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+components/sales-orders/sales-order-dialog.tsx(180,36): error TS7006: Parameter 'p' implicitly has an 'any' type.
+components/sales-orders/sales-order-dialog.tsx(187,58): error TS7006: Parameter 'u' implicitly has an 'any' type.
+components/sales-orders/sales-order-dialog.tsx(243,30): error TS2339: Property 'find' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'find' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+components/sales-orders/sales-order-dialog.tsx(243,36): error TS7006: Parameter 'p' implicitly has an 'any' type.
+components/sales-orders/sales-order-dialog.tsx(248,37): error TS7006: Parameter 'uom' implicitly has an 'any' type.
+components/sales-orders/sales-order-dialog.tsx(493,45): error TS2339: Property 'map' does not exist on type 'never[] | NonNullable<NoInfer<TQueryFnData>>'.
+  Property 'map' does not exist on type 'NonNullable<NoInfer<TQueryFnData>>'.
+components/sales-orders/sales-order-dialog.tsx(493,50): error TS7006: Parameter 'product' implicitly has an 'any' type.
+components/suppliers/supplier-dialog.tsx(66,18): error TS2345: Argument of type '{ companyName: string; contactPerson: string; phone: string; email: string | null; paymentTerms: any; status: "active" | "inactive"; }' is not assignable to parameter of type '{ status: "active" | "inactive"; phone: string; companyName: string; contactPerson: string; paymentTerms: "Net 30" | "Net 15" | "Net 60" | "COD"; email?: string | undefined; } | { status?: "active" | ... 1 more ... | undefined; ... 4 more ...; email?: string | undefined; } | ResetAction<...> | undefined'.
+  Types of property 'email' are incompatible.
+    Type 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+hooks/use-dashboard.ts(23,54): error TS2322: Type 'number' is not assignable to type 'string'.
+hooks/use-dashboard.ts(62,54): error TS2322: Type 'number' is not assignable to type 'string'.
+hooks/use-dashboard.ts(81,51): error TS2322: Type 'number' is not assignable to type 'string'.
+hooks/use-products.ts(43,5): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(options: DefinedInitialDataOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>, queryClient?: QueryClient | undefined): DefinedUseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'DefinedInitialDataOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>'.
+  Overload 2 of 3, '(options: UndefinedInitialDataOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>, queryClient?: QueryClient | undefined): UseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'UndefinedInitialDataOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>'.
+  Overload 3 of 3, '(options: UseQueryOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>, queryClient?: QueryClient | undefined): UseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'UseQueryOptions<ProductWithUOMs[], Error, ProductWithUOMs[], readonly unknown[]>'.
+hooks/use-receiving-vouchers.ts(8,3): error TS2724: '"@/types/receiving-voucher.types"' has no exported member named 'CancelReceivingVoucherInput'. Did you mean 'CreateReceivingVoucherInput'?
+hooks/use-sales-orders.ts(45,5): error TS2769: No overload matches this call.
+  Overload 1 of 3, '(options: DefinedInitialDataOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>, queryClient?: QueryClient | undefined): DefinedUseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'DefinedInitialDataOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>'.
+  Overload 2 of 3, '(options: UndefinedInitialDataOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>, queryClient?: QueryClient | undefined): UseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'UndefinedInitialDataOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>'.
+  Overload 3 of 3, '(options: UseQueryOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>, queryClient?: QueryClient | undefined): UseQueryResult<...>', gave the following error.
+    Object literal may only specify known properties, and 'keepPreviousData' does not exist in type 'UseQueryOptions<SalesOrderWithItems[], Error, SalesOrderWithItems[], readonly unknown[]>'.
+lib/export-utils.ts(133,18): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(134,51): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(135,49): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(136,49): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(137,47): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(143,18): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(148,18): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(159,20): error TS2322: Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(164,15): error TS2345: Argument of type 'string[]' is not assignable to parameter of type 'never[]'.
+  Type 'string' is not assignable to type 'never'.
+lib/export-utils.ts(165,15): error TS2345: Argument of type 'any[]' is not assignable to parameter of type 'never[]'.
+  Type 'any' is not assignable to type 'never'.
+lib/report-security.ts(342,25): error TS18046: 'error' is of type 'unknown'.
+prisma.config.ts(10,9): error TS2322: Type 'string | undefined' is not assignable to type 'string'.
+  Type 'undefined' is not assignable to type 'string'.
+prisma/seeds/add-discount-category.seed.ts(12,7): error TS2322: Type '{ name: string; code: string; description: string; status: string; displayOrder: number; isSystemDefined: true; }' is not assignable to type '(Without<ExpenseCategoryCreateInput, ExpenseCategoryUncheckedCreateInput> & ExpenseCategoryUncheckedCreateInput) | (Without<...> & ExpenseCategoryCreateInput)'.
+  Type '{ name: string; code: string; description: string; status: string; displayOrder: number; isSystemDefined: true; }' is not assignable to type 'Without<ExpenseCategoryUncheckedCreateInput, ExpenseCategoryCreateInput> & ExpenseCategoryCreateInput'.
+    Property 'updatedAt' is missing in type '{ name: string; code: string; description: string; status: string; displayOrder: number; isSystemDefined: true; }' but required in type 'ExpenseCategoryCreateInput'.
+prisma/seeds/reference-data.seed.ts(22,7): error TS2322: Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type '(Without<ProductCategoryCreateInput, ProductCategoryUncheckedCreateInput> & ProductCategoryUncheckedCreateInput) | (Without<...> & ProductCategoryCreateInput)'.
+  Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type 'Without<ProductCategoryUncheckedCreateInput, ProductCategoryCreateInput> & ProductCategoryCreateInput'.
+    Property 'updatedAt' is missing in type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' but required in type 'ProductCategoryCreateInput'.
+prisma/seeds/reference-data.seed.ts(44,7): error TS2322: Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type '(Without<ExpenseCategoryCreateInput, ExpenseCategoryUncheckedCreateInput> & ExpenseCategoryUncheckedCreateInput) | (Without<...> & ExpenseCategoryCreateInput)'.
+  Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type 'Without<ExpenseCategoryUncheckedCreateInput, ExpenseCategoryCreateInput> & ExpenseCategoryCreateInput'.
+    Property 'updatedAt' is missing in type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' but required in type 'ExpenseCategoryCreateInput'.
+prisma/seeds/reference-data.seed.ts(114,7): error TS2322: Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; applicableTo: string[]; }' is not assignable to type '(Without<PaymentMethodCreateInput, PaymentMethodUncheckedCreateInput> & PaymentMethodUncheckedCreateInput) | (Without<...> & PaymentMethodCreateInput)'.
+  Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; applicableTo: string[]; }' is not assignable to type 'Without<PaymentMethodUncheckedCreateInput, PaymentMethodCreateInput> & PaymentMethodCreateInput'.
+    Property 'updatedAt' is missing in type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; applicableTo: string[]; }' but required in type 'PaymentMethodCreateInput'.
+prisma/seeds/reference-data.seed.ts(136,7): error TS2322: Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type '(Without<UnitOfMeasureCreateInput, UnitOfMeasureUncheckedCreateInput> & UnitOfMeasureUncheckedCreateInput) | (Without<...> & UnitOfMeasureCreateInput)'.
+  Type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' is not assignable to type 'Without<UnitOfMeasureUncheckedCreateInput, UnitOfMeasureCreateInput> & UnitOfMeasureCreateInput'.
+    Property 'updatedAt' is missing in type '{ name: string; code: string; description: string; displayOrder: number; isSystemDefined: boolean; }' but required in type 'UnitOfMeasureCreateInput'.
+prisma/seeds/reference-data.seed.ts(183,7): error TS2322: Type '{ name: string; contactPerson: string; phone: string; email: string; displayOrder: number; } | { name: string; contactPerson: string; phone: string; displayOrder: number; email?: undefined; }' is not assignable to type '(Without<ExpenseVendorCreateInput, ExpenseVendorUncheckedCreateInput> & ExpenseVendorUncheckedCreateInput) | (Without<...> & ExpenseVendorCreateInput)'.
+  Type '{ name: string; contactPerson: string; phone: string; email: string; displayOrder: number; }' is not assignable to type '(Without<ExpenseVendorCreateInput, ExpenseVendorUncheckedCreateInput> & ExpenseVendorUncheckedCreateInput) | (Without<...> & ExpenseVendorCreateInput)'.
+    Type '{ name: string; contactPerson: string; phone: string; email: string; displayOrder: number; }' is not assignable to type 'Without<ExpenseVendorUncheckedCreateInput, ExpenseVendorCreateInput> & ExpenseVendorCreateInput'.
+      Property 'updatedAt' is missing in type '{ name: string; contactPerson: string; phone: string; email: string; displayOrder: number; }' but required in type 'ExpenseVendorCreateInput'.
+prisma/seeds/users.seed.ts(64,13): error TS2322: Type '{ isSuperMegaAdmin: boolean; updatedAt?: Date | undefined; createdAt?: Date | undefined; lastLoginAt?: Date | undefined; id: string; email: string; passwordHash: string; ... 6 more ...; emailVerified: boolean; }' is not assignable to type '(Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput) | (Without<...> & UserCreateInput)'.
+  Type '{ isSuperMegaAdmin: boolean; updatedAt?: Date | undefined; createdAt?: Date | undefined; lastLoginAt?: Date | undefined; id: string; email: string; passwordHash: string; ... 6 more ...; emailVerified: boolean; }' is not assignable to type 'Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput'.
+    Type '{ isSuperMegaAdmin: boolean; updatedAt?: Date | undefined; createdAt?: Date | undefined; lastLoginAt?: Date | undefined; id: string; email: string; passwordHash: string; ... 6 more ...; emailVerified: boolean; }' is not assignable to type 'UserUncheckedCreateInput'.
+      Types of property 'updatedAt' are incompatible.
+        Type 'Date | undefined' is not assignable to type 'string | Date'.
+          Type 'undefined' is not assignable to type 'string | Date'.
+repositories/audit-log.repository.ts(17,9): error TS2578: Unused '@ts-expect-error' directive.
+repositories/inventory.repository.ts(168,9): error TS2322: Type '{ productId: string; warehouseId: string; type: StockMovementType; quantity: number; reason: string | undefined; referenceId: string | undefined; referenceType: ReferenceType | undefined; }' is not assignable to type '(Without<StockMovementCreateInput, StockMovementUncheckedCreateInput> & StockMovementUncheckedCreateInput) | (Without<...> & StockMovementCreateInput)'.
+  Type '{ productId: string; warehouseId: string; type: StockMovementType; quantity: number; reason: string | undefined; referenceId: string | undefined; referenceType: ReferenceType | undefined; }' is not assignable to type 'Without<StockMovementCreateInput, StockMovementUncheckedCreateInput> & StockMovementUncheckedCreateInput'.
+    Property 'id' is missing in type '{ productId: string; warehouseId: string; type: StockMovementType; quantity: number; reason: string | undefined; referenceId: string | undefined; referenceType: ReferenceType | undefined; }' but required in type 'StockMovementUncheckedCreateInput'.
+repositories/purchase-order.repository.ts(95,84): error TS2339: Property 'status' does not exist on type 'CreatePurchaseOrderInput & { poNumber: string; totalAmount: number; }'.
+repositories/role-permission.repository.ts(33,7): error TS2322: Type '{ roleId: string; permissionId: string; }' is not assignable to type '(Without<RolePermissionCreateInput, RolePermissionUncheckedCreateInput> & RolePermissionUncheckedCreateInput) | (Without<...> & RolePermissionCreateInput)'.
+  Type '{ roleId: string; permissionId: string; }' is not assignable to type 'Without<RolePermissionCreateInput, RolePermissionUncheckedCreateInput> & RolePermissionUncheckedCreateInput'.
+    Property 'id' is missing in type '{ roleId: string; permissionId: string; }' but required in type 'RolePermissionUncheckedCreateInput'.
+repositories/role-permission.repository.ts(75,7): error TS2322: Type '{ roleId: string; permissionId: string; }[]' is not assignable to type 'RolePermissionCreateManyInput | RolePermissionCreateManyInput[]'.
+  Type '{ roleId: string; permissionId: string; }[]' is not assignable to type 'RolePermissionCreateManyInput[]'.
+    Property 'id' is missing in type '{ roleId: string; permissionId: string; }' but required in type 'RolePermissionCreateManyInput'.
+repositories/sales-order.repository.ts(178,11): error TS2322: Type '{ create: SalesOrderItemInput[]; }' is not assignable to type 'SalesOrderItemUncheckedUpdateManyWithoutSalesOrderNestedInput | SalesOrderItemUpdateManyWithoutSalesOrderNestedInput | undefined'.
+  Types of property 'create' are incompatible.
+    Type 'SalesOrderItemInput[]' is not assignable to type '(Without<SalesOrderItemCreateWithoutSalesOrderInput, SalesOrderItemUncheckedCreateWithoutSalesOrderInput> & SalesOrderItemUncheckedCreateWithoutSalesOrderInput) | (Without<...> & SalesOrderItemCreateWithoutSalesOrderInput) | SalesOrderItemCreateWithoutSalesOrderInput[] | SalesOrderItemUncheckedCreateWithoutSalesOrde...'.
+      Type 'SalesOrderItemInput[]' is not assignable to type 'SalesOrderItemCreateWithoutSalesOrderInput[]'.
+        Type 'SalesOrderItemInput' is missing the following properties from type 'SalesOrderItemCreateWithoutSalesOrderInput': id, Product
+repositories/supplier.repository.ts(64,7): error TS2322: Type '{ status: SupplierStatus; updatedAt: Date; companyName: string; contactPerson: string; phone: string; email?: string; paymentTerms: PaymentTerms; }' is not assignable to type '(Without<SupplierCreateInput, SupplierUncheckedCreateInput> & SupplierUncheckedCreateInput) | (Without<...> & SupplierCreateInput)'.
+  Type '{ status: SupplierStatus; updatedAt: Date; companyName: string; contactPerson: string; phone: string; email?: string; paymentTerms: PaymentTerms; }' is not assignable to type 'Without<SupplierUncheckedCreateInput, SupplierCreateInput> & SupplierCreateInput'.
+    Property 'id' is missing in type '{ status: SupplierStatus; updatedAt: Date; companyName: string; contactPerson: string; phone: string; email?: string; paymentTerms: PaymentTerms; }' but required in type 'SupplierCreateInput'.
+scripts/check-data-loss-risk.ts(18,46): error TS18046: 'batchCount' is of type 'unknown'.
+scripts/demo/generators/products.generator.ts(18,40): error TS2339: Property 'category' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+scripts/demo/generators/products.generator.ts(24,45): error TS2339: Property 'category' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+scripts/demo/generators/products.generator.ts(30,40): error TS2339: Property 'category' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+scripts/demo/generators/products.generator.ts(36,41): error TS2339: Property 'category' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+scripts/demo/generators/products.generator.ts(42,41): error TS2339: Property 'category' does not exist on type 'PrismaClient<PrismaClientOptions, never, DefaultArgs>'.
+scripts/demo/generators/products.generator.ts(124,11): error TS2561: Object literal may only specify known properties, but 'categoryId' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'. Did you mean to write 'category'?
+scripts/demo/generators/products.generator.ts(141,11): error TS2561: Object literal may only specify known properties, but 'categoryId' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'. Did you mean to write 'category'?
+scripts/demo/generators/products.generator.ts(158,11): error TS2561: Object literal may only specify known properties, but 'categoryId' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'. Did you mean to write 'category'?
+scripts/demo/generators/products.generator.ts(175,11): error TS2561: Object literal may only specify known properties, but 'categoryId' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'. Did you mean to write 'category'?
+scripts/demo/generators/products.generator.ts(192,11): error TS2561: Object literal may only specify known properties, but 'categoryId' does not exist in type '(Without<ProductCreateInput, ProductUncheckedCreateInput> & ProductUncheckedCreateInput) | (Without<...> & ProductCreateInput)'. Did you mean to write 'category'?
+scripts/post-production/burn-subtitles.ts(1,20): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/burn-subtitles.ts(62,21): error TS7006: Parameter 'commandLine' implicitly has an 'any' type.
+scripts/post-production/burn-subtitles.ts(66,24): error TS7006: Parameter 'progress' implicitly has an 'any' type.
+scripts/post-production/burn-subtitles.ts(76,21): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/burn-subtitles.ts(76,26): error TS7006: Parameter 'stdout' implicitly has an 'any' type.
+scripts/post-production/burn-subtitles.ts(76,34): error TS7006: Parameter 'stderr' implicitly has an 'any' type.
+scripts/post-production/extract-silent-video.ts(1,20): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/extract-silent-video.ts(22,17): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/generate-demo-video.ts(112,31): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/generate-demo-video.ts(133,21): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/generate-demo-video.ts(142,31): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/generate-demo-video.ts(161,21): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/generate-tts-free.ts(76,19): error TS2339: Property 'ttsToFile' does not exist on type 'typeof import("C:/Users/HI/Documents/GitHub/buenasv2/node_modules/edge-tts-node/dist/index")'.
+scripts/post-production/generate-tts.ts(68,23): error TS1355: A 'const' assertions can only be applied to references to enum members, or string, number, boolean, array, or object literals.
+scripts/post-production/generate-tts.ts(131,35): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/generate-tts.ts(161,25): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/merge-audio-subtitles.ts(1,20): error TS7016: Could not find a declaration file for module 'fluent-ffmpeg'. 'C:/Users/HI/Documents/GitHub/buenasv2/node_modules/fluent-ffmpeg/index.js' implicitly has an 'any' type.
+  Try `npm i --save-dev @types/fluent-ffmpeg` if it exists or add a new declaration (.d.ts) file containing `declare module 'fluent-ffmpeg';`
+scripts/post-production/merge-audio-subtitles.ts(66,21): error TS7006: Parameter 'commandLine' implicitly has an 'any' type.
+scripts/post-production/merge-audio-subtitles.ts(70,24): error TS7006: Parameter 'progress' implicitly has an 'any' type.
+scripts/post-production/merge-audio-subtitles.ts(80,21): error TS7006: Parameter 'err' implicitly has an 'any' type.
+scripts/post-production/merge-audio-subtitles.ts(80,26): error TS7006: Parameter 'stdout' implicitly has an 'any' type.
+scripts/post-production/merge-audio-subtitles.ts(80,34): error TS7006: Parameter 'stderr' implicitly has an 'any' type.
+scripts/test-case-sensitivity.ts(19,9): error TS2322: Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is not assignable to type '(Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput) | (Without<...> & UserCreateInput)'.
+  Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is not assignable to type 'Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput'.
+    Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is missing the following properties from type 'UserUncheckedCreateInput': id, updatedAt
+scripts/test-db.ts(5,5): error TS2353: Object literal may only specify known properties, and 'datasourceUrl' does not exist in type 'Subset<PrismaClientOptions, PrismaClientOptions>'.
+scripts/test-rv-creation.ts(39,73): error TS2345: Argument of type '{ purchaseOrderId: string; receiverName: string; deliveryNotes: string; items: { productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; varianceReason: undefined; }[]; }' is not assignable to parameter of type 'CreateReceivingVoucherInput'.
+  Types of property 'items' are incompatible.
+    Type '{ productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; varianceReason: undefined; }[]' is not assignable to type 'CreateReceivingVoucherItemInput[]'.
+      Type '{ productId: string; orderedQuantity: number; receivedQuantity: number; unitPrice: number; varianceReason: undefined; }' is missing the following properties from type 'CreateReceivingVoucherItemInput': poItemId, uom
+scripts/verify-user-filter.ts(20,9): error TS2322: Type '{ id: string; createdAt: Date; branchId: string | null; status: string; updatedAt: Date; phone: string | null; email: string; passwordHash: string; firstName: string; lastName: string; ... 5 more ...; branchLockEnabled: boolean; }' is not assignable to type '{ Branch: { name: string; id: string; createdAt: Date; status: string; updatedAt: Date; code: string; location: string; manager: string; phone: string; } | null; Role: { RolePermission: ({ ...; } & { ...; })[]; } & { ...; }; } & { ...; }'.
+  Type '{ id: string; createdAt: Date; branchId: string | null; status: string; updatedAt: Date; phone: string | null; email: string; passwordHash: string; firstName: string; lastName: string; ... 5 more ...; branchLockEnabled: boolean; }' is missing the following properties from type '{ Branch: { name: string; id: string; createdAt: Date; status: string; updatedAt: Date; code: string; location: string; manager: string; phone: string; } | null; Role: { RolePermission: ({ ...; } & { ...; })[]; } & { ...; }; }': Branch, Role
+scripts/verify-user-filter.ts(21,13): error TS2322: Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is not assignable to type '(Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput) | (Without<...> & UserCreateInput)'.
+  Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is not assignable to type 'Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput'.
+    Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; }' is missing the following properties from type 'UserUncheckedCreateInput': id, updatedAt
+scripts/verify-user-filter.ts(30,51): error TS18047: 'admin' is possibly 'null'.
+services/pos.service.ts(317,12): error TS2554: Expected 1 arguments, but got 2.
+services/receiving-voucher.service.ts(498,13): error TS2322: Type '"RV_CANCEL"' is not assignable to type 'ReferenceType | undefined'.
+services/reports/sales-agent-reports.service.ts(112,17): error TS2353: Object literal may only specify known properties, and 'Customer' does not exist in type 'POSSaleSelect<DefaultArgs>'.
+services/role.service.ts(192,36): error TS2551: Property 'deleteByRoleId' does not exist on type 'RolePermissionRepository'. Did you mean 'deleteAllByRole'?
+services/role.service.ts(196,38): error TS2554: Expected 2 arguments, but got 1.
+services/role.service.ts(228,43): error TS2551: Property 'findByRoleId' does not exist on type 'RolePermissionRepository'. Did you mean 'findByRole'?
+tests/e2e/registration.spec.ts(85,7): error TS2322: Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; emailVerified: false; }' is not assignable to type '(Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput) | (Without<...> & UserCreateInput)'.
+  Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; emailVerified: false; }' is not assignable to type 'Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput'.
+    Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; emailVerified: false; }' is missing the following properties from type 'UserUncheckedCreateInput': id, updatedAt
+tests/helpers/auth-test-helpers.ts(4,10): error TS2459: Module '"./test-db-utils"' declares 'prisma' locally, but it is not exported.
+tests/helpers/test-base.ts(2,64): error TS2305: Module '"./test-db-utils"' has no exported member 'resetTestDatabase'.
+tests/helpers/test-base.ts(18,5): error TS2353: Object literal may only specify known properties, and 'inventoryBatches' does not exist in type 'TestDataIds'.
+tests/helpers/test-db-utils.ts(95,8): error TS2339: Property 'password' does not exist on type '{ id: string; createdAt: Date; branchId: string | null; status: string; updatedAt: Date; phone: string | null; email: string; passwordHash: string; firstName: string; lastName: string; ... 5 more ...; branchLockEnabled: boolean; }'.
+tests/integration/api/ap.test.ts(153,25): error TS2345: Argument of type 'number' is not assignable to parameter of type 'string'.
+error: script "type-check" exited with code 1
