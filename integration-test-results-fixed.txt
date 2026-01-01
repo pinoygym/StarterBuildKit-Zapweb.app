@@ -1,0 +1,635 @@
+﻿
+> inventory-pro@0.1.0 test:integration
+> vitest run tests/integration
+
+
+[1m[46m RUN [49m[22m [36mv4.0.8 [39m[90mC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test[39m
+
+ [31mΓ¥»[39m tests/integration/api/warehouses.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 126[2mms[22m[39m
+[31m     [31m├ù[31m lists warehouses[39m[32m 124[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/pos.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 151[2mms[22m[39m
+[31m     [31m├ù[31m processes a cash sale[39m[32m 149[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/products-uom.test.ts [2m([22m[2m1 test[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 155[2mms[22m[39m
+[31m     [31m├ù[31m updates product alternate UOMs[39m[32m 154[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/inventory.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[32m 172[2mms[22m[39m
+[31m     [31m├ù[31m lists inventory[39m[32m 136[2mms[22m[39m
+[31m     [31m├ù[31m stock levels endpoint[39m[32m 34[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/products.test.ts [2m([22m[2m6 tests[22m[2m | [22m[31m5 failed[39m[2m)[22m[33m 1153[2mms[22m[39m
+[31m       [31m├ù[31m should create a new product[39m[32m 183[2mms[22m[39m
+[31m       [31m├ù[31m should return 400 for invalid product data[39m[32m 13[2mms[22m[39m
+[31m       [31m├ù[31m should return list of products[39m[32m 13[2mms[22m[39m
+[31m       [31m├ù[31m should filter products by category[39m[32m 16[2mms[22m[39m
+       [32mΓ£ô[39m should return a product by ID[32m 0[2mms[22m[39m
+[31m       [31m├ù[31m should return 404 for non-existent product[39m[32m 14[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/purchase-orders.test.ts [2m([22m[2m9 tests[22m[2m | [22m[31m5 failed[39m[2m)[22m[33m 1962[2mms[22m[39m
+[31m       [31m├ù[31m should create a new purchase order[39m[32m 180[2mms[22m[39m
+[31m       [31m├ù[31m should return 400 for invalid PO data[39m[32m 19[2mms[22m[39m
+[31m       [31m├ù[31m should return list of purchase orders[39m[32m 18[2mms[22m[39m
+[31m       [31m├ù[31m should filter purchase orders by status[39m[32m 16[2mms[22m[39m
+       [32mΓ£ô[39m should return a purchase order by ID[32m 0[2mms[22m[39m
+[31m       [31m├ù[31m should return 404 for non-existent PO[39m[32m 9[2mms[22m[39m
+       [32mΓ£ô[39m should update purchase order[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should update status to ordered[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should cancel purchase order[32m 0[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/registration.test.ts [2m([22m[2m10 tests[22m[2m | [22m[31m10 failed[39m[2m)[22m[33m 1971[2mms[22m[39m
+[31m       [31m├ù[31m should successfully register a new user with valid data[39m[32m 205[2mms[22m[39m
+[31m       [31m├ù[31m should reject registration with duplicate email[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should reject registration with short password[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should reject registration with invalid email format[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should reject registration with missing required fields[39m[32m 71[2mms[22m[39m
+[31m       [31m├ù[31m should reject registration with invalid role ID[39m[32m 69[2mms[22m[39m
+[31m       [31m├ù[31m should hash password before storing in database[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should create audit log entry for registration[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should not include updatedAt field in user creation (regression test)[39m[32m 70[2mms[22m[39m
+[31m       [31m├ù[31m should work with correct Cashier role ID (regression test)[39m[32m 70[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/auth.test.ts [2m([22m[2m2 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 2422[2mms[22m[39m
+     [33m[2mΓ£ô[22m[39m invalid login returns 401 [33m 2406[2mms[22m[39m
+[31m     [31m├ù[31m valid login returns 200 and me returns 200 with cookie[39m[32m 14[2mms[22m[39m
+ [31mΓ¥»[39m tests/integration/api/receiving-voucher-uom.test.ts [2m([22m[2m5 tests[22m[2m | [22m[31m5 failed[39m[2m)[22m[33m 7326[2mms[22m[39m
+[31m       [31m├ù[31m should successfully create receiving voucher with case to bottle conversion[39m[33m 756[2mms[22m[39m
+[31m       [31m├ù[31m should handle partial case receipt (0.5 case = 5 bottles)[39m[33m 423[2mms[22m[39m
+[31m       [31m├ù[31m should work with pack UOM conversion[39m[33m 423[2mms[22m[39m
+[31m       [31m├ù[31m should fail with invalid UOM configuration[39m[33m 570[2mms[22m[39m
+[31m       [31m├ù[31m should prevent the original UOM conversion bug[39m[33m 424[2mms[22m[39m
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Suites 1 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/api-regression.test.ts[2m [ tests/integration/api/api-regression.test.ts ][22m
+[31m[1mError[22m: Cannot find module '../schemas/api-response-schemas' imported from 'C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/integration/api/api-regression.test.ts'[39m
+[36m [2mΓ¥»[22m tests/integration/api/api-regression.test.ts:[2m3:1[22m[39m
+    [90m  1| [39m
+    [90m  2| [39m[35mimport[39m { prisma } [35mfrom[39m [32m'@/lib/prisma'[39m[33m;[39m
+    [90m  3| [39m[35mimport[39m {
+    [90m   | [39m[31m^[39m
+    [90m  4| [39m    [33mPurchaseOrderSchema[39m[33m,[39m
+    [90m  5| [39m    [33mReceivingVoucherSchema[39m[33m,[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/32]ΓÄ»[22m[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 31 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/auth.test.ts[2m > [22mAuth API[2m > [22mvalid login returns 200 and me returns 200 with cookie
+[31m[1mAssertionError[22m: expected [ 200, 201 ] to include 401[39m
+[36m [2mΓ¥»[22m tests/integration/api/auth.test.ts:[2m18:24[22m[39m
+    [90m 16| [39mit('valid login returns 200 and me returns 200 with cookie', async () ΓÇª
+    [90m 17| [39m    const r = await fetch(`${BASE_URL}/api/dev/seed`, { method: 'POST'ΓÇª
+    [90m 18| [39m    [34mexpect[39m([[34m200[39m[33m,[39m [34m201[39m])[33m.[39m[34mtoContain[39m(r[33m.[39mstatus)
+    [90m   | [39m                       [31m^[39m
+    [90m 19| [39m
+    [90m 20| [39m    [35mconst[39m login [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/login`[39m[33m,[39m {
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/inventory.test.ts[2m > [22mInventory API[2m > [22mlists inventory
+[31m[1mAssertionError[22m: expected [ 200, 201 ] to include 401[39m
+[36m [2mΓ¥»[22m tests/integration/api/inventory.test.ts:[2m7:24[22m[39m
+    [90m  5| [39m  [34mit[39m([32m'lists inventory'[39m[33m,[39m [35masync[39m () [33m=>[39m {
+    [90m  6| [39m    const seed = await fetch(`${BASE_URL}/api/dev/seed`, { method: 'POΓÇª
+    [90m  7| [39m    [34mexpect[39m([[34m200[39m[33m,[39m [34m201[39m])[33m.[39m[34mtoContain[39m(seed[33m.[39mstatus)
+    [90m   | [39m                       [31m^[39m
+    [90m  8| [39m
+    [90m  9| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/inventory`[39m)
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[3/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/inventory.test.ts[2m > [22mInventory API[2m > [22mstock levels endpoint
+[31m[1mAssertionError[22m: expected 401 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/inventory.test.ts:[2m19:22[22m[39m
+    [90m 17| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/inventory/stock-levels`[39m)
+    [90m 18| [39m    [35mconst[39m body [33m=[39m [35mawait[39m r[33m.[39m[34mjson[39m()
+    [90m 19| [39m    [34mexpect[39m(r[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)
+    [90m   | [39m                     [31m^[39m
+    [90m 20| [39m    [34mexpect[39m(body[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)
+    [90m 21| [39m    [34mexpect[39m([33mArray[39m[33m.[39m[34misArray[39m(body[33m.[39mdata))[33m.[39m[34mtoBe[39m([35mtrue[39m)
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[4/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/pos.test.ts[2m > [22mPOS Sales API[2m > [22mprocesses a cash sale
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading 'products')[39m
+[36m [2mΓ¥»[22m tests/integration/api/pos.test.ts:[2m8:32[22m[39m
+    [90m  6| [39m    const seedRes = await fetch(`${BASE_URL}/api/dev/seed`, { method: ΓÇª
+    [90m  7| [39m    [35mconst[39m seed [33m=[39m [35mawait[39m seedRes[33m.[39m[34mjson[39m()
+    [90m  8| [39m    [35mconst[39m products [33m=[39m seed[33m.[39mdata[33m.[39mproducts
+    [90m   | [39m                               [31m^[39m
+    [90m  9| [39m    const water = products.find((p: any) => p.name.includes('Absolute'ΓÇª
+    [90m 10| [39m    [35mconst[39m warehouse [33m=[39m seed[33m.[39mdata[33m.[39mwarehouses[[34m0[39m]
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[5/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products-uom.test.ts[2m > [22mProducts UOM[2m > [22mupdates product alternate UOMs
+[31m[1mAssertionError[22m: expected undefined to be truthy[39m
+
+[32m- Expected:[39m 
+true
+
+[31m+ Received:[39m 
+undefined
+
+[36m [2mΓ¥»[22m tests/integration/api/products-uom.test.ts:[2m9:23[22m[39m
+    [90m  7| [39m    [35mconst[39m seedBody [33m=[39m [35mawait[39m seed[33m.[39m[34mjson[39m()[33m.[39m[35mcatch[39m(() [33m=>[39m ({}))
+    [90m  8| [39m    const water = seedBody?.data?.products?.find((p: any) => p?.name?.ΓÇª
+    [90m  9| [39m    [34mexpect[39m(water[33m?.[39mid)[33m.[39m[34mtoBeTruthy[39m()
+    [90m   | [39m                      [31m^[39m
+    [90m 10| [39m
+    [90m 11| [39m    [35mconst[39m payload [33m=[39m {
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[6/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests[2m > [22mPOST /api/products[2m > [22mshould create a new product
+[31m[1mAssertionError[22m: expected 401 to be 201 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 201[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/products.test.ts:[2m44:31[22m[39m
+    [90m 42| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 43| [39m
+    [90m 44| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m201[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 45| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 46| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mname)[33m.[39m[34mtoBe[39m(newProduct[33m.[39mname)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[7/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests[2m > [22mPOST /api/products[2m > [22mshould return 400 for invalid product data
+[31m[1mAssertionError[22m: expected 401 to be 400 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/products.test.ts:[2m66:31[22m[39m
+    [90m 64| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 65| [39m
+    [90m 66| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m400[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 67| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m 68| [39m    })[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[8/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests[2m > [22mGET /api/products[2m > [22mshould return list of products
+[31m[1mAssertionError[22m: expected 401 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/products.test.ts:[2m76:31[22m[39m
+    [90m 74| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 75| [39m
+    [90m 76| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 77| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 78| [39m      [34mexpect[39m([33mArray[39m[33m.[39m[34misArray[39m(data[33m.[39mdata))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[9/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests[2m > [22mGET /api/products[2m > [22mshould filter products by category
+[31m[1mAssertionError[22m: expected 401 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/products.test.ts:[2m85:31[22m[39m
+    [90m 83| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 84| [39m
+    [90m 85| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 86| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 87| [39m      
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[10/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests[2m > [22mGET /api/products/:id[2m > [22mshould return 404 for non-existent product
+[31m[1mAssertionError[22m: expected 401 to be 404 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 404[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/products.test.ts:[2m110:31[22m[39m
+    [90m108| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m109| [39m
+    [90m110| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m404[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m111| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m112| [39m    })[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[11/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mPOST /api/purchase-orders[2m > [22mshould create a new 
+purchase order
+[31m[1mAssertionError[22m: expected 401 to be 201 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 201[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/purchase-orders.test.ts:[2m68:31[22m[39m
+    [90m 66| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 67| [39m
+    [90m 68| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m201[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 69| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 70| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mstatus)[33m.[39m[34mtoBe[39m([32m'draft'[39m)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[12/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mPOST /api/purchase-orders[2m > [22mshould return 400 for 
+invalid PO data
+[31m[1mAssertionError[22m: expected 401 to be 400 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/purchase-orders.test.ts:[2m90:31[22m[39m
+    [90m 88| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 89| [39m
+    [90m 90| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m400[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m 91| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m 92| [39m    })[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[13/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mGET /api/purchase-orders[2m > [22mshould return list of 
+purchase orders
+[31m[1mAssertionError[22m: expected 401 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/purchase-orders.test.ts:[2m100:31[22m[39m
+    [90m 98| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 99| [39m
+    [90m100| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m101| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m102| [39m      [34mexpect[39m([33mArray[39m[33m.[39m[34misArray[39m(data[33m.[39mdata))[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[14/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mGET /api/purchase-orders[2m > [22mshould filter purchase 
+orders by status
+[31m[1mAssertionError[22m: expected 401 to be 200 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/purchase-orders.test.ts:[2m109:31[22m[39m
+    [90m107| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m108| [39m
+    [90m109| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m110| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m111| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[15/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mGET /api/purchase-orders/:id[2m > [22mshould return 404 for 
+non-existent PO
+[31m[1mAssertionError[22m: expected 401 to be 404 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 404[39m
+[31m+ 401[39m
+
+[36m [2mΓ¥»[22m tests/integration/api/purchase-orders.test.ts:[2m134:31[22m[39m
+    [90m132| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m133| [39m
+    [90m134| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m404[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m135| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m136| [39m    })[33m;[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[16/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests[2m > [22mPOST /api/receiving-vouchers - UOM 
+Conversion[2m > [22mshould successfully create receiving voucher with case to bottle conversion
+[31m[1mTypeError[22m: Failed to parse URL from //api/receiving-vouchers[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m156:24[22m[39m
+    [90m154| [39m      }[33m;[39m
+    [90m155| [39m
+    [90m156| [39m      const response = await fetch(`${BASE_URL}/api/receiving-vouchersΓÇª
+    [90m   | [39m                       [31m^[39m
+    [90m157| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m158| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m156:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/receiving-vouchers' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[17/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests[2m > [22mPOST /api/receiving-vouchers - UOM 
+Conversion[2m > [22mshould handle partial case receipt (0.5 case = 5 bottles)
+[31m[1mTypeError[22m: Failed to parse URL from //api/receiving-vouchers[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m194:24[22m[39m
+    [90m192| [39m      }[33m;[39m
+    [90m193| [39m
+    [90m194| [39m      const response = await fetch(`${BASE_URL}/api/receiving-vouchersΓÇª
+    [90m   | [39m                       [31m^[39m
+    [90m195| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m196| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m194:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/receiving-vouchers' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[18/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests[2m > [22mPOST /api/receiving-vouchers - UOM 
+Conversion[2m > [22mshould work with pack UOM conversion
+[31m[1mTypeError[22m: Failed to parse URL from //api/receiving-vouchers[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m230:24[22m[39m
+    [90m228| [39m      }[33m;[39m
+    [90m229| [39m
+    [90m230| [39m      const response = await fetch(`${BASE_URL}/api/receiving-vouchersΓÇª
+    [90m   | [39m                       [31m^[39m
+    [90m231| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m232| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m230:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/receiving-vouchers' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[19/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests[2m > [22mPOST /api/receiving-vouchers - UOM 
+Conversion[2m > [22mshould fail with invalid UOM configuration
+[31m[1mTypeError[22m: Failed to parse URL from //api/receiving-vouchers[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m269:24[22m[39m
+    [90m267| [39m      }[33m;[39m
+    [90m268| [39m
+    [90m269| [39m      const response = await fetch(`${BASE_URL}/api/receiving-vouchersΓÇª
+    [90m   | [39m                       [31m^[39m
+    [90m270| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m271| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m269:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/receiving-vouchers' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[20/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests[2m > [22mRegression Tests[2m > [22mshould prevent 
+the original UOM conversion bug
+[31m[1mTypeError[22m: Failed to parse URL from //api/receiving-vouchers[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m321:24[22m[39m
+    [90m319| [39m      }[33m;[39m
+    [90m320| [39m
+    [90m321| [39m      const response = await fetch(`${BASE_URL}/api/receiving-vouchersΓÇª
+    [90m   | [39m                       [31m^[39m
+    [90m322| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m323| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m321:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/receiving-vouchers' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[21/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould successfully register a 
+new user with valid data
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m49:24[22m[39m
+    [90m 47| [39m      }[33m;[39m
+    [90m 48| [39m
+    [90m 49| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m 50| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m 51| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m49:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould reject registration with 
+duplicate email
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m92:29[22m[39m
+    [90m 90| [39m
+    [90m 91| [39m      [90m// First registration - should succeed[39m
+    [90m 92| [39m      const firstResponse = await fetch(`${BASE_URL}/api/auth/registerΓÇª
+    [90m   | [39m                            [31m^[39m
+    [90m 93| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m 94| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m92:35[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[23/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould reject registration with 
+short password
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m126:24[22m[39m
+    [90m124| [39m      }[33m;[39m
+    [90m125| [39m
+    [90m126| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m127| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m128| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m126:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[24/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould reject registration with 
+invalid email format
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m148:24[22m[39m
+    [90m146| [39m      }[33m;[39m
+    [90m147| [39m
+    [90m148| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m149| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m150| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m148:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[25/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould reject registration with 
+missing required fields
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m168:24[22m[39m
+    [90m166| [39m      }[33m;[39m
+    [90m167| [39m
+    [90m168| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m169| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m170| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m168:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[26/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould reject registration with 
+invalid role ID
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m190:24[22m[39m
+    [90m188| [39m      }[33m;[39m
+    [90m189| [39m
+    [90m190| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m191| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m192| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m190:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[27/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould hash password before 
+storing in database
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m214:24[22m[39m
+    [90m212| [39m      }[33m;[39m
+    [90m213| [39m
+    [90m214| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m215| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m216| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m214:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[28/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mPOST /api/auth/register[2m > [22mshould create audit log entry 
+for registration
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m247:24[22m[39m
+    [90m245| [39m      }[33m;[39m
+    [90m246| [39m
+    [90m247| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m248| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m249| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m247:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[29/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mRegression Tests - Bug Fixes[2m > [22mshould not include 
+updatedAt field in user creation (regression test)
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+
+[2m Test Files [22m [1m[31m10 failed[39m[22m[90m (10)[39m
+[2m      Tests [22m [1m[31m31 failed[39m[22m[2m | [22m[1m[32m6 passed[39m[22m[90m (37)[39m
+[2m   Start at [22m 11:10:59
+[2m   Duration [22m 8.20s[2m (transform 756ms, setup 0ms, collect 1.17s, tests 15.44s, environment 2ms, prepare 181ms)[22m
+
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m294:24[22m[39m
+    [90m292| [39m      }[33m;[39m
+    [90m293| [39m
+    [90m294| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m295| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m296| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m294:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[30/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/registration.test.ts[2m > [22mRegistration API Integration Tests[2m > [22mRegression Tests - Bug Fixes[2m > [22mshould work with correct 
+Cashier role ID (regression test)
+[31m[1mTypeError[22m: Failed to parse URL from //api/auth/register[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m332:24[22m[39m
+    [90m330| [39m      }[33m;[39m
+    [90m331| [39m
+    [90m332| [39m      [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/auth/register`[39m[33m,[39m {
+    [90m   | [39m                       [31m^[39m
+    [90m333| [39m        method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m334| [39m        headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+
+[31m[1mCaused by: TypeError[22m: Invalid URL[39m
+[36m [2mΓ¥»[22m tests/integration/api/registration.test.ts:[2m332:30[22m[39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ code: 'ERR_INVALID_URL', input: '//api/auth/register' }[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[31/32]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/warehouses.test.ts[2m > [22mWarehouses API[2m > [22mlists warehouses
+[31m[1mAssertionError[22m: expected [ 200, 201 ] to include 401[39m
+[36m [2mΓ¥»[22m tests/integration/api/warehouses.test.ts:[2m7:24[22m[39m
+    [90m  5| [39m  [34mit[39m([32m'lists warehouses'[39m[33m,[39m [35masync[39m () [33m=>[39m {
+    [90m  6| [39m    const seed = await fetch(`${BASE_URL}/api/dev/seed`, { method: 'POΓÇª
+    [90m  7| [39m    [34mexpect[39m([[34m200[39m[33m,[39m [34m201[39m])[33m.[39m[34mtoContain[39m(seed[33m.[39mstatus)
+    [90m   | [39m                       [31m^[39m
+    [90m  8| [39m
+    [90m  9| [39m    [35mconst[39m r [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39m[33mBASE_URL[39m[36m}[39m[32m/api/warehouses`[39m)
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[32/32]ΓÄ»[22m[39m
+

@@ -1,0 +1,68 @@
+﻿
+Running 3 tests using 2 workers
+
+  Γ£ô  1 [setup] ΓÇ║ tests\e2e\auth.setup.ts:5:6 ΓÇ║ authenticate (15.1s)
+Clicking Checkout
+Clicked Checkout
+Clicking Cash
+  Γ£ÿ  2 [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process (11.0s)
+Clicking Checkout
+Clicked Checkout
+Clicking Cash
+  Γ£ÿ  3 [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process (12.9s)
+
+
+  1) [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Cash' }) resolved to 2 elements:
+        1) <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 px-4 h-auto py-3 flex flex-col items-center gap-2">ΓÇª</button> aka getByRole('button', { name: 'Cash', exact: true })
+        2) <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 h-auto py-3 flex flex-col items-center gap-2">ΓÇª</button> aka getByRole('button', { name: 'GCash' })
+
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Cash' })[22m
+
+
+      101 |     // Select payment method
+      102 |     console.log('Clicking Cash');
+    > 103 |     await page.getByRole('button', { name: 'Cash' }).click();
+          |                                                      ^
+      104 |     console.log('Clicked Cash');
+      105 |
+      106 |     // Enter payment amount
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\pos.spec.ts:103:54
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\pos-POS-System-should-complete-checkout-process-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\pos-POS-System-should-complete-checkout-process-chromium\error-context.md
+
+  2) [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: locator.click: Error: strict mode violation: getByRole('button', { name: 'Cash' }) resolved to 2 elements:
+        1) <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 bg-primary text-primary-foreground shadow hover:bg-primary/90 px-4 h-auto py-3 flex flex-col items-center gap-2">ΓÇª</button> aka getByRole('button', { name: 'Cash', exact: true })
+        2) <button class="justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground px-4 h-auto py-3 flex flex-col items-center gap-2">ΓÇª</button> aka getByRole('button', { name: 'GCash' })
+
+    Call log:
+    [2m  - waiting for getByRole('button', { name: 'Cash' })[22m
+
+
+      101 |     // Select payment method
+      102 |     console.log('Clicking Cash');
+    > 103 |     await page.getByRole('button', { name: 'Cash' }).click();
+          |                                                      ^
+      104 |     console.log('Clicked Cash');
+      105 |
+      106 |     // Enter payment amount
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\pos.spec.ts:103:54
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\pos-POS-System-should-complete-checkout-process-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\pos-POS-System-should-complete-checkout-process-firefox\error-context.md
+
+  2 failed
+    [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  1 passed (31.5s)
