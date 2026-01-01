@@ -31,6 +31,7 @@ import { Warehouse } from '@prisma/client';
 import { Branch } from '@prisma/client';
 import { ProductWithUOMs } from '@/types/product.types';
 import { ProductSearchCombobox } from '@/components/shared/product-search-combobox';
+import { SupplierSearchCombobox } from '@/components/shared/supplier-search-combobox';
 
 interface PurchaseOrderFormProps {
   purchaseOrder?: PurchaseOrderWithDetails | null;
@@ -56,9 +57,15 @@ export function PurchaseOrderForm({
   const isEditing = !!purchaseOrder && !isCopy;
   const [averageCosts, setAverageCosts] = useState<Record<string, Record<string, number>>>({});
   const [additionalProducts, setAdditionalProducts] = useState<ProductWithUOMs[]>([]);
+  const [selectedSupplierObject, setSelectedSupplierObject] = useState<Supplier | undefined>(
+    purchaseOrder?.Supplier
+  );
+  const [additionalSuppliers, setAdditionalSuppliers] = useState<Supplier[]>([]);
 
   // Merge initial products with additionally fetched products
   const allProducts = [...products, ...additionalProducts];
+  // Merge initial suppliers with additionally fetched suppliers
+  const allSuppliers = [...suppliers, ...additionalSuppliers];
 
   const form = useForm<PurchaseOrderFormData>({
     resolver: zodResolver(purchaseOrderSchema),
@@ -222,20 +229,20 @@ export function PurchaseOrderForm({
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel>Supplier *</FormLabel>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select supplier" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {suppliers.filter(s => s.status === 'active').map((supplier) => (
-                          <SelectItem key={supplier.id} value={supplier.id}>
-                            {supplier.companyName}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                    <FormControl>
+                      <SupplierSearchCombobox
+                        suppliers={suppliers}
+                        value={field.value}
+                        onValueChange={(val) => {
+                          field.onChange(val);
+                          // If clearing value, also clear selected object
+                          if (!val) setSelectedSupplierObject(undefined);
+                        }}
+                        onSelect={(supplier) => setSelectedSupplierObject(supplier)}
+                        selectedSupplier={selectedSupplierObject || suppliers.find(s => s.id === field.value)}
+                        placeholder="Search supplier..."
+                      />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}

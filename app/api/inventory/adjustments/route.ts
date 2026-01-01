@@ -54,7 +54,13 @@ export async function GET(request: NextRequest) {
             { status: 200 }
         );
     } catch (error) {
-        console.error('Error fetching adjustments:', error);
+        console.error('===== ERROR FETCHING ADJUSTMENTS =====');
+        console.error('Error:', error);
+        if (error instanceof Error) {
+            console.error('Message:', error.message);
+            console.error('Stack:', error.stack);
+        }
+        console.error('========================================');
 
         if (error instanceof AppError) {
             return NextResponse.json(

@@ -5,6 +5,7 @@ import { auditLogRepository } from '@/repositories/audit-log.repository';
 import { sessionRepository } from '@/repositories/session.repository';
 import { AuditAction, AuditResource } from '@/types/audit.types';
 import { Prisma } from '@prisma/client';
+import { NotFoundError, ConflictError, ForbiddenError } from '@/lib/errors';
 
 export class RoleService {
   /**
@@ -47,7 +48,7 @@ export class RoleService {
     // Check if name already exists
     const existing = await roleRepository.findByName(data.name);
     if (existing) {
-      throw new Error('Role name already exists');
+      throw new ConflictError('Role name already exists', { name: data.name });
     }
 
     const createData: Prisma.RoleCreateInput = {
@@ -88,19 +89,19 @@ export class RoleService {
   ) {
     const existingRole = await roleRepository.findById(id);
     if (!existingRole) {
-      throw new Error('Role not found');
+      throw new NotFoundError('Role', id);
     }
 
     // Prevent updating system roles' names
     if (existingRole.isSystem && data.name && data.name !== existingRole.name) {
-      throw new Error('System role names cannot be changed');
+      throw new ForbiddenError('System role names cannot be changed');
     }
 
     // Check if name is being changed and if it's already taken
     if (data.name && data.name !== existingRole.name) {
       const nameExists = await roleRepository.findByName(data.name);
       if (nameExists) {
-        throw new Error('Role name already exists');
+        throw new ConflictError('Role name already exists', { name: data.name });
       }
     }
 
@@ -138,18 +139,21 @@ export class RoleService {
   ) {
     const role = await roleRepository.findById(id);
     if (!role) {
-      throw new Error('Role not found');
+      throw new NotFoundError('Role', id);
     }
 
     // Prevent deleting system roles
     if (role.isSystem) {
-      throw new Error('System roles cannot be deleted');
+      throw new ForbiddenError('System roles cannot be deleted');
     }
 
     // Check if any users have this role
     const users = await roleRepository.findUsersWithRole(id);
     if (users.length > 0) {
-      throw new Error(`Cannot delete role. ${users.length} user(s) have this role assigned.`);
+      throw new ConflictError(
+        `Cannot delete role. ${users.length} user(s) have this role assigned.`,
+        { userCount: users.length, roleId: id }
+      );
     }
 
     await roleRepository.delete(id);
@@ -180,12 +184,12 @@ export class RoleService {
   ) {
     const role = await roleRepository.findById(roleId);
     if (!role) {
-      throw new Error('Role not found');
+      throw new NotFoundError('Role', roleId);
     }
 
     // Prevent modifying system role permissions
     if (role.isSystem) {
-      throw new Error('System role permissions cannot be modified');
+      throw new ForbiddenError('System role permissions cannot be modified');
     }
 
     // Remove existing permissions

@@ -46,3 +46,4 @@ describe('Warehouses API', () => {
     expect(Array.isArray(body.data)).toBe(true);
   }, 20000);
 });
+

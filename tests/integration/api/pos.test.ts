@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeAll } from 'vitest'
 import { BASE_URL } from '../config'
 
+// Note: Database reset is not used here since we're using the main database
+
 describe('POS Sales API', () => {
   let token: string
   let headers: any
@@ -120,3 +122,4 @@ describe('POS Sales API', () => {
     expect(finalStock).toBe(initialStock - 5)
   }, 20000)
 })
+

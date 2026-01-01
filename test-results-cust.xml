@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="6" failures="1" errors="0" time="1.5724577">
+    <testsuite name="tests/integration/api/customer-search.test.ts" timestamp="2025-12-30T04:33:12.990Z" hostname="DESKTOP-HQV3RB6" tests="6" failures="1" errors="0" skipped="5" time="1.5724577">
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests &gt; should find customer by single keyword &quot;UniqueName&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests &gt; should find customer by exact phrase &quot;SearchTest One&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests &gt; should find customer by partial multi-keyword &quot;Alpha One&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests &gt; should find customer by mixed case keywords &quot;uniqueNAME beta&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests &gt; should NOT find customer if one keyword matches and another does not &quot;Alpha Gamma&quot;" time="0">
+            <skipped/>
+        </testcase>
+        <testcase classname="tests/integration/api/customer-search.test.ts" name="Customer Search Integration Tests" time="0.7193875">
+            <failure message="Unexpected token &apos;&lt;&apos;, &quot;&lt;!DOCTYPE &quot;... is not valid JSON" type="SyntaxError">
+SyntaxError: Unexpected token &apos;&lt;&apos;, &quot;&lt;!DOCTYPE &quot;... is not valid JSON
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

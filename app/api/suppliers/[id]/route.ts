@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { supplierService } from '@/services/supplier.service';
 import { authService } from '@/services/auth.service';
 import { AppError } from '@/lib/errors';
+import { extractToken } from '@/lib/auth-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -42,7 +43,7 @@ export async function PUT(
 
     // Extract userId from token
     let userId = undefined;
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
     if (token) {
       try {
         const payload = authService.verifyToken(token);
@@ -82,7 +83,7 @@ export async function DELETE(
 
     // Extract userId from token
     let userId = undefined;
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
     if (token) {
       try {
         const payload = authService.verifyToken(token);

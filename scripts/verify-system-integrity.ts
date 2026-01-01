@@ -2,7 +2,6 @@
  * System Integrity Verification Script
  * Comprehensive checks for application health and security
  */
-export { };
 
 const API_BASE = 'http://localhost:3000';
 

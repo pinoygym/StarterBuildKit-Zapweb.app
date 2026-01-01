@@ -4,15 +4,13 @@ import { useState, useEffect } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Button } from '@/components/ui/button';
-import { Plus, Package, DollarSign, CreditCard, Ruler, Store, User } from 'lucide-react';
+import { Plus, Package, DollarSign, CreditCard, Ruler, Store, User, ShieldAlert } from 'lucide-react';
 import { DataMaintenanceTable } from '@/components/data-maintenance/data-maintenance-table';
 import { DataMaintenanceDialog } from '@/components/data-maintenance/data-maintenance-dialog';
-import {
-  ReferenceDataType,
-  ReferenceDataBase,
-  REFERENCE_DATA_CONFIGS,
-} from '@/types/data-maintenance.types';
+import { ReferenceDataType, ReferenceDataBase, REFERENCE_DATA_CONFIGS } from '@/types/data-maintenance.types';
 import { toast } from 'sonner';
+import { useAuth } from '@/contexts/auth.context';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
 const ICON_MAP: Record<string, any> = {
   Package,
@@ -24,6 +22,7 @@ const ICON_MAP: Record<string, any> = {
 };
 
 export default function DataMaintenancePage() {
+  const { isSuperMegaAdmin, isLoading: authLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<ReferenceDataType>('product-categories');
   const [data, setData] = useState<Record<ReferenceDataType, any[]>>({
     'product-categories': [],
@@ -41,6 +40,18 @@ export default function DataMaintenancePage() {
     'expense-vendors': false,
     'sales-agents': false,
   });
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="container mx-auto py-6 space-y-6">
+        <div className="h-8 w-64 bg-muted animate-pulse rounded" />
+        <div className="h-10 w-full bg-muted animate-pulse rounded" />
+        <div className="h-96 bg-muted animate-pulse rounded" />
+      </div>
+    );
+  }
+
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<ReferenceDataBase | null>(null);
 

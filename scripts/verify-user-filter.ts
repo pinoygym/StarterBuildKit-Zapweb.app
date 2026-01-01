@@ -26,8 +26,8 @@ async function main() {
                 roleId: role.id,
                 status: 'ACTIVE',
             } as any
-        }) as any;
-        console.log(`Created test user with ID: ${admin?.id}`);
+        });
+        console.log(`Created test user with ID: ${admin.id}`);
     } else {
         console.log(`User ${adminEmail} exists.`);
     }

@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input';
 import { NumberInput } from '@/components/ui/number-input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
-import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Separator } from '@/components/ui/separator';
 import { toast } from '@/hooks/use-toast';
 import {
@@ -21,7 +21,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
-import { Loader2, Trash2, Database, AlertTriangle, BarChart3, Settings as SettingsIcon, Save, Shield, TestTube, RefreshCw, Play } from 'lucide-react';
+import { Loader2, Trash2, Database, AlertTriangle, BarChart3, Settings as SettingsIcon, Save, Shield, TestTube, RefreshCw, Play, CheckCircle, ClipboardCheck } from 'lucide-react';
 import { DatabaseStats } from '@/types/settings.types';
 import { BackupRestoreCard } from '@/components/settings/backup-restore-card';
 import { useAuth } from '@/contexts/auth.context';
@@ -57,9 +57,10 @@ interface CompanySettings {
 }
 
 export default function SettingsPage() {
-  const { user, isSuperMegaAdmin } = useAuth();
+  const { user, isSuperMegaAdmin, isLoading: authLoading } = useAuth();
 
   const [isClearing, setIsClearing] = useState(false);
+  const [isResettingInventory, setIsResettingInventory] = useState(false);
   const [isLoadingStats, setIsLoadingStats] = useState(false);
   const [stats, setStats] = useState<DatabaseStats | null>(null);
 
@@ -71,13 +72,80 @@ export default function SettingsPage() {
   const [isCleaningCustomers, setIsCleaningCustomers] = useState(false);
   const [isRunningSelenium, setIsRunningSelenium] = useState(false);
   const [seleniumOutput, setSeleniumOutput] = useState<string | null>(null);
-  const [isRunningEthel, setIsRunningEthel] = useState(false);
-  const [ethelOutput, setEthelOutput] = useState<string | null>(null);
+  const [isPostingAdjustments, setIsPostingAdjustments] = useState(false);
+  const [isAuditing, setIsAuditing] = useState(false);
+  const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [auditResults, setAuditResults] = useState<{
+    totalChecked: number;
+    discrepanciesFound: number;
+    discrepancies: Array<{
+      productId: string;
+      productName: string;
+      warehouseId: string;
+      warehouseName: string;
+      systemQuantity: number;
+      calculatedQuantity: number;
+      variance: number;
+    }>;
+    allItems?: Array<{
+      productId: string;
+      productName: string;
+      warehouseId: string;
+      warehouseName: string;
+      baseUOM: string;
+      systemQuantity: number;
+      calculatedQuantity: number;
+      variance: number;
+      status: 'PASS' | 'FAIL';
+      movementCount: number;
+      movements: Array<{
+        id: string;
+        type: string;
+        quantity: number;
+        reason: string | null;
+        referenceType: string | null;
+        referenceId: string | null;
+        createdAt: string;
+        quantityChange: number;
+        runningBalance: number;
+      }>;
+    }>;
+  } | null>(null);
+
+  // Schema Management State
+  const [isComparingSchema, setIsComparingSchema] = useState(false);
+  const [isDeployingSchema, setIsDeployingSchema] = useState(false);
+  const [schemaOutput, setSchemaOutput] = useState<string | null>(null);
 
   // Company Settings State
   const [isLoadingSettings, setIsLoadingSettings] = useState(true);
   const [isSavingSettings, setIsSavingSettings] = useState(false);
   const [settings, setSettings] = useState<CompanySettings | null>(null);
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="container mx-auto py-6 space-y-6">
+        <div className="h-8 w-64 bg-muted animate-pulse rounded" />
+        <div className="h-96 bg-muted animate-pulse rounded" />
+      </div>
+    );
+  }
+
+  // Check if user is super admin
+  if (!isSuperMegaAdmin()) {
+    return (
+      <div className="container mx-auto py-6 space-y-6">
+        <Alert variant="destructive">
+          <Shield className="h-4 w-4" />
+          <AlertTitle>Access Denied</AlertTitle>
+          <AlertDescription>
+            You do not have permission to view settings. This module is restricted to Super Admins only.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   const handleClearDatabase = async () => {
     setIsClearing(true);
@@ -278,6 +346,39 @@ export default function SettingsPage() {
     }
   };
 
+  const handleResetInventory = async () => {
+    setIsResettingInventory(true);
+    try {
+      const response = await fetch('/api/settings/database/reset-inventory', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        toast({
+          title: 'Inventory Reset',
+          description: data.data.message,
+        });
+        loadDatabaseStats();
+      } else {
+        toast({
+          title: 'Error',
+          description: data.error || 'Failed to reset inventory',
+          variant: 'destructive',
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to reset inventory',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsResettingInventory(false);
+    }
+  };
+
   const handleDeleteTransactions = async () => {
     setIsDeletingTransactions(true);
     try {
@@ -389,50 +490,163 @@ export default function SettingsPage() {
     }
   };
 
-  const handleRunEthelTests = async () => {
-    setIsRunningEthel(true);
-    setEthelOutput(null);
+  const handlePostAllAdjustments = async () => {
+    setIsPostingAdjustments(true);
     try {
-      toast({
-        title: 'Running Ethel Suite',
-        description: 'Comprehensive Test Suite is running. This may take up to 5 minutes...',
-      });
-
-      const response = await fetch('/api/settings/run-ethel-tests', {
+      const response = await fetch('/api/settings/database/post-all-adjustments', {
         method: 'POST',
       });
 
       const data = await response.json();
 
-      if (data.data?.output) {
-        setEthelOutput(data.data.output);
-      } else if (data.data?.errors) {
-        setEthelOutput(data.data.errors);
-      }
-
       if (data.success) {
         toast({
-          title: 'Test Suite Completed',
-          description: data.data.message || 'All tests passed.',
+          title: 'Bulk Post Completed',
+          description: data.data.message,
         });
+        loadDatabaseStats();
       } else {
         toast({
-          title: 'Test Suite Failed',
-          description: data.error || 'Some tests failed. Review the logs.',
+          title: 'Error',
+          description: data.error || 'Failed to post adjustments',
           variant: 'destructive',
         });
       }
     } catch (error: any) {
       toast({
         title: 'Error',
-        description: error.message || 'Failed to run Ethel tests',
+        description: error.message || 'Failed to post adjustments',
         variant: 'destructive',
       });
-      setEthelOutput(error.message);
     } finally {
-      setIsRunningEthel(false);
+      setIsPostingAdjustments(false);
     }
   };
+
+  const handleAuditInventory = async () => {
+    setIsAuditing(true);
+    setAuditResults(null);
+    try {
+      const response = await fetch('/api/settings/database/audit-inventory', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setAuditResults(data.data);
+        if (data.data.discrepanciesFound === 0) {
+          toast({
+            title: 'Audit Passed',
+            description: `Checked ${data.data.totalChecked} products. No discrepancies found.`,
+          });
+        } else {
+          toast({
+            title: 'Audit Failed',
+            description: `Found ${data.data.discrepanciesFound} discrepancies.`,
+            variant: 'destructive',
+          });
+        }
+      } else {
+        toast({
+          title: 'Error',
+          description: data.error || 'Failed to audit inventory',
+          variant: 'destructive',
+        });
+      }
+    } catch (error: any) {
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to audit inventory',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsAuditing(false);
+    }
+  };
+
+  const handleCompareSchemas = async () => {
+    setIsComparingSchema(true);
+    setSchemaOutput(null);
+    try {
+      toast({
+        title: 'Comparing Schemas',
+        description: 'Running schema comparison. This may take a moment...',
+      });
+
+      const response = await fetch('/api/settings/schema/compare', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSchemaOutput(data.data.output);
+        toast({
+          title: 'Comparison Complete',
+          description: 'Schema comparison finished. Check the output logs.',
+        });
+      } else {
+        setSchemaOutput(data.details || data.error);
+        toast({
+          title: 'Comparison Failed',
+          description: data.error || 'Failed to compare schemas',
+          variant: 'destructive',
+        });
+      }
+    } catch (error: any) {
+      setSchemaOutput(error.message);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to compare schemas',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsComparingSchema(false);
+    }
+  };
+
+  const handleDeploySchema = async () => {
+    setIsDeployingSchema(true);
+    setSchemaOutput(null);
+    try {
+      toast({
+        title: 'Deploying Schema',
+        description: 'Deploying migrations to production. This may take a few minutes...',
+      });
+
+      const response = await fetch('/api/settings/schema/deploy', {
+        method: 'POST',
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setSchemaOutput(data.data.output);
+        toast({
+          title: 'Deployment Successful',
+          description: 'Schema changes have been deployed to production.',
+        });
+      } else {
+        setSchemaOutput(data.details || data.error);
+        toast({
+          title: 'Deployment Failed',
+          description: data.error || 'Failed to deploy schema changes',
+          variant: 'destructive',
+        });
+      }
+    } catch (error: any) {
+      setSchemaOutput(error.message);
+      toast({
+        title: 'Error',
+        description: error.message || 'Failed to deploy schema changes',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsDeployingSchema(false);
+    }
+  };
+
 
   useEffect(() => {
     loadCompanySettings();
@@ -637,6 +851,281 @@ export default function SettingsPage() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          <div className="flex items-center justify-between p-4 border rounded-lg bg-muted/40 mb-6">
+            <div className="space-y-0.5">
+              <div className="flex items-center gap-2">
+                <ClipboardCheck className="h-4 w-4 text-primary" />
+                <h3 className="font-semibold text-base">Inventory Audit</h3>
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Verify stock consistency by comparing inventory records with stock movement history
+              </p>
+            </div>
+            <Button
+              variant="default"
+              onClick={handleAuditInventory}
+              disabled={isAuditing}
+              className="min-w-[140px]"
+            >
+              {isAuditing ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Auditing...
+                </>
+              ) : (
+                <>
+                  <ClipboardCheck className="mr-2 h-4 w-4" />
+                  Audit All Products
+                </>
+              )}
+            </Button>
+          </div>
+
+          {auditResults && (
+            <div className="space-y-4 mb-6">
+              {/* Audit Summary */}
+              <div className={`border rounded-lg overflow-hidden ${auditResults.discrepanciesFound > 0
+                ? 'border-destructive/50'
+                : 'border-green-500/50'
+                }`}>
+                <div className={`p-4 font-semibold flex items-center justify-between ${auditResults.discrepanciesFound > 0
+                  ? 'bg-destructive/10 text-destructive'
+                  : 'bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-400'
+                  }`}>
+                  <div className="flex items-center gap-2">
+                    {auditResults.discrepanciesFound > 0 ? (
+                      <AlertTriangle className="h-5 w-5" />
+                    ) : (
+                      <CheckCircle className="h-5 w-5" />
+                    )}
+                    <span>
+                      {auditResults.discrepanciesFound > 0
+                        ? `Audit Failed - ${auditResults.discrepanciesFound} Issue${auditResults.discrepanciesFound > 1 ? 's' : ''} Found`
+                        : 'Audit Passed - All Items Verified'
+                      }
+                    </span>
+                  </div>
+                  <div className="text-sm font-normal">
+                    {auditResults.totalChecked} product{auditResults.totalChecked !== 1 ? 's' : ''} checked
+                  </div>
+                </div>
+
+                {/* Summary Stats */}
+                <div className="grid grid-cols-3 gap-4 p-4 bg-muted/30">
+                  <div className="text-center">
+                    <div className="text-2xl font-bold">{auditResults.totalChecked}</div>
+                    <div className="text-xs text-muted-foreground">Total Checked</div>
+                  </div>
+                  <div className="text-center">
+                    <div className="text-2xl font-bold text-green-600 dark:text-green-400">
+                      {auditResults.totalChecked - auditResults.discrepanciesFound}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Passed</div>
+                  </div>
+                  <div className="text-center">
+                    <div className={`text-2xl font-bold ${auditResults.discrepanciesFound > 0
+                      ? 'text-destructive'
+                      : 'text-green-600 dark:text-green-400'
+                      }`}>
+                      {auditResults.discrepanciesFound}
+                    </div>
+                    <div className="text-xs text-muted-foreground">Issues</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Discrepancies Table */}
+              {auditResults.discrepanciesFound > 0 && (
+                <div className="border border-destructive/50 rounded-lg overflow-hidden">
+                  <div className="bg-destructive/10 p-3 font-semibold text-destructive">
+                    Issue Details
+                  </div>
+                  <div className="max-h-96 overflow-y-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-muted text-muted-foreground sticky top-0">
+                        <tr>
+                          <th className="p-3 text-left font-medium">Product</th>
+                          <th className="p-3 text-left font-medium">Warehouse</th>
+                          <th className="p-3 text-right font-medium">System Qty</th>
+                          <th className="p-3 text-right font-medium">Calculated</th>
+                          <th className="p-3 text-right font-medium">Variance</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y">
+                        {auditResults.discrepancies.map((item, idx) => (
+                          <tr key={`${item.productId}-${item.warehouseId}-${idx}`} className="hover:bg-muted/50">
+                            <td className="p-3 font-medium">{item.productName}</td>
+                            <td className="p-3 text-muted-foreground">{item.warehouseName}</td>
+                            <td className="p-3 text-right">{item.systemQuantity}</td>
+                            <td className="p-3 text-right">{item.calculatedQuantity}</td>
+                            <td className="p-3 text-right font-bold text-destructive">
+                              {item.variance > 0 ? `+${item.variance}` : item.variance}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {/* Detailed All Items Report */}
+              {auditResults.allItems && auditResults.allItems.length > 0 && (
+                <div className="border rounded-lg overflow-hidden">
+                  <div className="bg-muted p-3 font-semibold flex items-center justify-between">
+                    <span>Detailed Audit Report - All Items Checked</span>
+                    <span className="text-sm font-normal text-muted-foreground">
+                      Click any row to see movement history
+                    </span>
+                  </div>
+                  <div className="max-h-[600px] overflow-y-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-muted/50 sticky top-0">
+                        <tr>
+                          <th className="p-3 text-left font-medium w-8"></th>
+                          <th className="p-3 text-left font-medium">Product</th>
+                          <th className="p-3 text-left font-medium">Warehouse</th>
+                          <th className="p-3 text-center font-medium">Status</th>
+                          <th className="p-3 text-right font-medium">System Qty</th>
+                          <th className="p-3 text-right font-medium">Calculated</th>
+                          <th className="p-3 text-right font-medium">Variance</th>
+                          <th className="p-3 text-center font-medium">Movements</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y">
+                        {auditResults.allItems.map((item, idx) => {
+                          const itemKey = `${item.productId}-${item.warehouseId}`;
+                          const isExpanded = expandedItems.has(itemKey);
+
+                          return (
+                            <>
+                              <tr
+                                key={itemKey}
+                                className={`cursor-pointer hover:bg-muted/50 ${item.status === 'FAIL' ? 'bg-destructive/5' : ''
+                                  }`}
+                                onClick={() => {
+                                  const newExpanded = new Set(expandedItems);
+                                  if (isExpanded) {
+                                    newExpanded.delete(itemKey);
+                                  } else {
+                                    newExpanded.add(itemKey);
+                                  }
+                                  setExpandedItems(newExpanded);
+                                }}
+                              >
+                                <td className="p-3 text-center">
+                                  {isExpanded ? '▼' : '▶'}
+                                </td>
+                                <td className="p-3 font-medium">{item.productName}</td>
+                                <td className="p-3 text-muted-foreground">{item.warehouseName}</td>
+                                <td className="p-3 text-center">
+                                  {item.status === 'PASS' ? (
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400 text-xs font-semibold">
+                                      <CheckCircle className="h-3 w-3" />
+                                      PASS
+                                    </span>
+                                  ) : (
+                                    <span className="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-destructive/20 text-destructive text-xs font-semibold">
+                                      <AlertTriangle className="h-3 w-3" />
+                                      FAIL
+                                    </span>
+                                  )}
+                                </td>
+                                <td className="p-3 text-right">{item.systemQuantity} {item.baseUOM}</td>
+                                <td className="p-3 text-right">{item.calculatedQuantity} {item.baseUOM}</td>
+                                <td className={`p-3 text-right font-semibold ${item.status === 'FAIL' ? 'text-destructive' : 'text-green-600 dark:text-green-400'
+                                  }`}>
+                                  {item.variance > 0 ? `+${item.variance}` : item.variance === 0 ? '0' : item.variance}
+                                </td>
+                                <td className="p-3 text-center text-muted-foreground">{item.movementCount}</td>
+                              </tr>
+
+                              {isExpanded && (
+                                <tr key={`${itemKey}-details`}>
+                                  <td colSpan={8} className="p-0">
+                                    <div className="bg-muted/30 p-4">
+                                      <h4 className="font-semibold mb-3 flex items-center gap-2">
+                                        <BarChart3 className="h-4 w-4" />
+                                        Stock Movement History - {item.productName} @ {item.warehouseName}
+                                      </h4>
+                                      {item.movements.length === 0 ? (
+                                        <p className="text-sm text-muted-foreground italic">No movements recorded</p>
+                                      ) : (
+                                        <div className="overflow-x-auto">
+                                          <table className="w-full text-xs">
+                                            <thead className="bg-background">
+                                              <tr>
+                                                <th className="p-2 text-left font-medium">Date</th>
+                                                <th className="p-2 text-left font-medium">Type</th>
+                                                <th className="p-2 text-left font-medium">Reference</th>
+                                                <th className="p-2 text-left font-medium">Reason</th>
+                                                <th className="p-2 text-right font-medium">Qty</th>
+                                                <th className="p-2 text-right font-medium">Change</th>
+                                                <th className="p-2 text-right font-medium">Running Balance</th>
+                                              </tr>
+                                            </thead>
+                                            <tbody className="divide-y">
+                                              {item.movements.map((movement) => (
+                                                <tr key={movement.id} className="hover:bg-background/50">
+                                                  <td className="p-2 text-muted-foreground">
+                                                    {new Date(movement.createdAt).toLocaleString()}
+                                                  </td>
+                                                  <td className="p-2">
+                                                    <span className={`px-2 py-0.5 rounded text-xs font-semibold ${movement.type === 'IN'
+                                                      ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                                                      : movement.type === 'OUT'
+                                                        ? 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400'
+                                                        : 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400'
+                                                      }`}>
+                                                      {movement.type}
+                                                    </span>
+                                                  </td>
+                                                  <td className="p-2 text-muted-foreground font-mono text-xs">
+                                                    {movement.referenceType || 'N/A'}
+                                                    {movement.referenceId && ` #${movement.referenceId.substring(0, 8)}`}
+                                                  </td>
+                                                  <td className="p-2 text-muted-foreground">{movement.reason || '-'}</td>
+                                                  <td className="p-2 text-right">{movement.quantity}</td>
+                                                  <td className={`p-2 text-right font-semibold ${movement.quantityChange > 0
+                                                    ? 'text-green-600 dark:text-green-400'
+                                                    : 'text-red-600 dark:text-red-400'
+                                                    }`}>
+                                                    {movement.quantityChange > 0 ? '+' : ''}{movement.quantityChange}
+                                                  </td>
+                                                  <td className="p-2 text-right font-semibold">{movement.runningBalance}</td>
+                                                </tr>
+                                              ))}
+                                            </tbody>
+                                          </table>
+                                        </div>
+                                      )}
+                                      <div className="mt-3 p-3 bg-background rounded border">
+                                        <p className="text-sm">
+                                          <strong>Audit Calculation:</strong> Starting from 0, applied {item.movementCount} movement(s)
+                                          to reach calculated quantity of <strong>{item.calculatedQuantity} {item.baseUOM}</strong>.
+                                          System shows <strong>{item.systemQuantity} {item.baseUOM}</strong>.
+                                          {item.status === 'PASS' ? (
+                                            <span className="text-green-600 dark:text-green-400"> ✓ Quantities match!</span>
+                                          ) : (
+                                            <span className="text-destructive"> ✗ Variance of {item.variance} {item.baseUOM} detected.</span>
+                                          )}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  </td>
+                                </tr>
+                              )}
+                            </>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Database Statistics */}
           <div>
             <div className="flex items-center justify-between mb-4">
@@ -765,384 +1254,512 @@ export default function SettingsPage() {
         </CardContent>
       </Card>
 
-      {/* Admin Testing Tools Section - Only visible to Super Mega Admin */}
-      {isSuperMegaAdmin() && (
-        <Card className="border-orange-500 shadow-lg bg-orange-50/10 dark:bg-orange-950/10">
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <CardTitle className="flex items-center gap-2 text-orange-600 dark:text-orange-400">
-                <Shield className="h-5 w-5" />
-                Admin Testing Tools
-              </CardTitle>
-              <div className="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 text-xs font-bold rounded-full border border-orange-200 dark:border-orange-800 flex items-center gap-1">
-                <Shield className="h-3 w-3" />
-                SUPER MEGA ADMIN ONLY
-              </div>
-            </div>
-            <CardDescription>
-              Advanced tools for testing and data management. Use with extreme caution.
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {/* Delete Specific Table Data */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <Trash2 className="h-4 w-4 text-destructive" />
-                  Delete Specific Table Data
-                </h3>
-                <div className="space-y-2">
-                  <Label>Select Table to Clear</Label>
-                  <Select value={selectedTable} onValueChange={setSelectedTable}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select a table..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {DELETABLE_TABLES.map((table) => (
-                        <SelectItem key={table} value={table}>
-                          {table}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                  <p className="text-xs text-muted-foreground">
-                    This will delete ALL records from the selected table only.
-                  </p>
+
+
+      {/* Schema Synchronization Section - Super Admin Only */}
+      {
+        isSuperMegaAdmin() && (
+          <Card className="border-blue-500 shadow-lg bg-blue-50/10 dark:bg-blue-950/10">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                  <RefreshCw className="h-5 w-5" />
+                  Schema Synchronization
+                </CardTitle>
+                <div className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 text-xs font-bold rounded-full border border-blue-200 dark:border-blue-800 flex items-center gap-1">
+                  <Shield className="h-3 w-3" />
+                  SUPER MEGA ADMIN ONLY
                 </div>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="destructive"
-                      className="w-full"
-                      disabled={!selectedTable || isDeletingTable}
-                    >
-                      {isDeletingTable && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                      Delete {selectedTable} Data
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Confirm Table Deletion</AlertDialogTitle>
-                      <AlertDialogDescription>
-                        Are you sure you want to delete all records from <strong>{selectedTable}</strong>?
-                        <br /><br />
-                        This action cannot be undone.
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction onClick={handleDeleteTable} className="bg-destructive text-destructive-foreground">
-                        Yes, Delete Data
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
               </div>
-
-              {/* Delete All Transactions */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <Trash2 className="h-4 w-4 text-orange-500" />
-                  Delete All Transactions
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Delete all transactional data (Sales, Purchases, Inventory, Financials) but keep master data.
-                </p>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="destructive"
-                      className="w-full bg-orange-600 hover:bg-orange-700"
-                      disabled={isDeletingTransactions}
-                    >
-                      {isDeletingTransactions ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Deleting...
-                        </>
-                      ) : (
-                        <>
-                          <Trash2 className="mr-2 h-4 w-4" />
-                          Delete Transactions
-                        </>
-                      )}
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Delete All Transactions?</AlertDialogTitle>
-                      <AlertDialogDescription asChild>
-                        <div className="text-sm text-muted-foreground">
-                          This will permanently delete:
-                          <ul className="list-disc pl-6 mt-2 space-y-1 mb-2">
-                            <li>All Sales & POS data</li>
-                            <li>All Purchase Orders & Receiving Vouchers</li>
-                            <li>All Inventory Movements & Stock Levels</li>
-                            <li>All Financial Records (AR, AP, Expenses)</li>
-                          </ul>
-                          <strong>Master data (Products, Customers, Suppliers, Users) will be PRESERVED.</strong>
-                          <br /><br />
-                          This action cannot be undone.
-                        </div>
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleDeleteTransactions}
-                        className="bg-orange-600 hover:bg-orange-700"
-                      >
-                        Yes, Delete Transactions
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-
-              {/* Seed Test Data */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <TestTube className="h-4 w-4 text-blue-500" />
-                  Seed Test Data
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Populate the database with sample data for testing purposes. This includes:
-                </p>
-                <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                  <li>Test Branch & Warehouse</li>
-                  <li>Sample Products & Inventory</li>
-                  <li>Test Customers & Suppliers</li>
-                  <li>Sample Transactions (PO, SO)</li>
-                </ul>
-                <Button
-                  onClick={handleSeedTestData}
-                  disabled={isSeeding}
-                  className="w-full bg-blue-600 hover:bg-blue-700"
-                >
-                  {isSeeding ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Seeding Data...
-                    </>
-                  ) : (
-                    <>
-                      <RefreshCw className="mr-2 h-4 w-4" />
-                      Generate Test Data
-                    </>
-                  )}
-                </Button>
-              </div>
-
-              {/* Clean Up Test Customers */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <Trash2 className="h-4 w-4 text-red-500" />
-                  Clean Up Test Customers
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Delete all customers named "Test Customer" and their related data (Sales Orders, AR, etc.).
-                </p>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <Button
-                      variant="destructive"
-                      className="w-full bg-red-600 hover:bg-red-700"
-                      disabled={isCleaningCustomers}
-                    >
-                      {isCleaningCustomers ? (
-                        <>
-                          <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                          Cleaning...
-                        </>
-                      ) : (
-                        <>
-                          <Trash2 className="mr-2 h-4 w-4" />
-                          Clean Up Test Customers
-                        </>
-                      )}
-                    </Button>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent>
-                    <AlertDialogHeader>
-                      <AlertDialogTitle>Clean Up Test Customers?</AlertDialogTitle>
-                      <AlertDialogDescription asChild>
-                        <div className="text-sm text-muted-foreground">
-                          This will permanently delete:
-                          <ul className="list-disc pl-6 mt-2 space-y-1 mb-2">
-                            <li>Customers named "Test Customer"</li>
-                            <li>Related Sales Orders & Items</li>
-                            <li>Related Accounts Receivable records</li>
-                          </ul>
-                          <strong>POS Receipts and Promotion Usage will be unlinked but preserved.</strong>
-                          <br /><br />
-                          This action cannot be undone.
-                        </div>
-                      </AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
-                      <AlertDialogAction
-                        onClick={handleCleanupTestCustomers}
-                        className="bg-red-600 hover:bg-red-700"
-                      >
-                        Yes, Clean Up
-                      </AlertDialogAction>
-                    </AlertDialogFooter>
-                  </AlertDialogContent>
-                </AlertDialog>
-              </div>
-
-              {/* Run Selenium Tests */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <Play className="h-4 w-4 text-green-500" />
-                  System Health Check (Selenium)
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Run comprehensive E2E CRUD tests using Selenium WebDriver. Verifies:
-                </p>
-                <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                  <li>User Authentication & Management</li>
-                  <li>Product Inventory Operations</li>
-                  <li>Sales Order Processing</li>
-                  <li>Inventory Visibility</li>
-                </ul>
-                <Button
-                  onClick={handleRunSeleniumTests}
-                  disabled={isRunningSelenium}
-                  className="w-full bg-green-600 hover:bg-green-700"
-                >
-                  {isRunningSelenium ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Running Diagnostics...
-                    </>
-                  ) : (
-                    <>
-                      <Play className="mr-2 h-4 w-4" />
-                      Run Health Check
-                    </>
-                  )}
-                </Button>
-
-                {seleniumOutput && (
-                  <div className="mt-4">
-                    <Label>Test Output Logs</Label>
-                    <div className="bg-black text-green-400 p-3 rounded-md text-xs font-mono h-64 overflow-y-auto whitespace-pre-wrap mt-2 border border-green-900">
-                      {seleniumOutput}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Run Ethel Tests */}
-              <div className="space-y-4 p-4 border rounded-lg bg-background">
-                <h3 className="font-semibold flex items-center gap-2">
-                  <TestTube className="h-4 w-4 text-purple-500" />
-                  Ethel.8-v.cc Test Suite
-                </h3>
-                <p className="text-sm text-muted-foreground">
-                  Run comprehensive validation for Ethel.8-v.cc functionality (Login, PO, POS, Mobile).
-                </p>
-                <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                  <li>Full PO Workflow & Inventory Check</li>
-                  <li>POS Checkout & Payment</li>
-                  <li>Mobile Responsive Design Verification</li>
-                  <li>Global Search & User Profile</li>
-                </ul>
-                <Button
-                  onClick={handleRunEthelTests}
-                  disabled={isRunningEthel}
-                  className="w-full bg-purple-600 hover:bg-purple-700"
-                >
-                  {isRunningEthel ? (
-                    <>
-                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Running Test Suite...
-                    </>
-                  ) : (
-                    <>
-                      <Play className="mr-2 h-4 w-4" />
-                      Run Ethel Suite
-                    </>
-                  )}
-                </Button>
-
-                {ethelOutput && (
-                  <div className="mt-4">
-                    <Label>Test Output Logs</Label>
-                    <div className="bg-black text-purple-400 p-3 rounded-md text-xs font-mono h-64 overflow-y-auto whitespace-pre-wrap mt-2 border border-purple-900">
-                      {ethelOutput}
-                    </div>
-                  </div>
-                )}
-              </div>
-
-              {/* Compare Neon DB Schemas - Only for cybergada@gmail.com */}
-              {user?.email === 'cybergada@gmail.com' && (
-                <div className="space-y-4 p-4 border rounded-lg bg-gradient-to-br from-cyan-50 to-blue-50 dark:from-cyan-950/20 dark:to-blue-950/20 border-cyan-300 dark:border-cyan-700">
-                  <div className="flex items-center justify-between">
-                    <h3 className="font-semibold flex items-center gap-2">
-                      <Database className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
-                      Compare Neon DB Schemas
-                    </h3>
-                    <div className="px-2 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-700 dark:text-cyan-300 text-xs font-bold rounded-full border border-cyan-200 dark:border-cyan-800">
-                      CYBERGADA ONLY
-                    </div>
-                  </div>
+              <CardDescription>
+                Compare Development and Production schemas and deploy changes.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Compare Schemas */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Database className="h-4 w-4 text-blue-500" />
+                    Compare Schemas
+                  </h3>
                   <p className="text-sm text-muted-foreground">
-                    Compare schema between Development and Production Neon database branches.
+                    Check for differences between the local Development database and the remote Production database.
                   </p>
-                  <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
-                    <li>Development: ep-noisy-mountain-a18wvzwi</li>
-                    <li>Production: ep-blue-mouse-a128nyc9</li>
-                    <li>Validates tables, columns, indexes, and foreign keys</li>
-                    <li>Generates detailed JSON report</li>
-                  </ul>
                   <Button
-                    onClick={() => {
-                      toast({
-                        title: 'Schema Comparison',
-                        description: 'Running comparison script... Check the report file when complete.',
-                      });
-                      // This would trigger the comparison script
-                      fetch('/api/settings/compare-neon-schemas', {
-                        method: 'POST',
-                      })
-                        .then(res => res.json())
-                        .then(data => {
-                          if (data.success) {
-                            toast({
-                              title: 'Comparison Complete',
-                              description: data.data.message || 'Schema comparison completed successfully.',
-                            });
-                          } else {
-                            toast({
-                              title: 'Comparison Failed',
-                              description: data.error || 'Failed to compare schemas.',
-                              variant: 'destructive',
-                            });
-                          }
-                        })
-                        .catch(error => {
-                          toast({
-                            title: 'Error',
-                            description: error.message || 'Failed to run comparison.',
-                            variant: 'destructive',
-                          });
-                        });
-                    }}
-                    className="w-full bg-cyan-600 hover:bg-cyan-700"
+                    onClick={handleCompareSchemas}
+                    disabled={isComparingSchema || isDeployingSchema}
+                    className="w-full"
+                    variant="outline"
                   >
-                    <Database className="mr-2 h-4 w-4" />
-                    Compare DB Schemas
+                    {isComparingSchema ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Comparing...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Run Comparison
+                      </>
+                    )}
                   </Button>
                 </div>
+
+                {/* Update Production */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Database className="h-4 w-4 text-green-500" />
+                    Update Production Schema
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Deploy pending migrations to the Production database. <strong>This is a critical operation.</strong>
+                  </p>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="default"
+                        className="w-full bg-green-600 hover:bg-green-700"
+                        disabled={isComparingSchema || isDeployingSchema}
+                      >
+                        {isDeployingSchema ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Deploying...
+                          </>
+                        ) : (
+                          <>
+                            <Save className="mr-2 h-4 w-4" />
+                            Deploy to Production
+                          </>
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Deploy to Production?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This will apply all pending database migrations to the <strong>Production</strong> database.
+                          <br /><br />
+                          <strong>Ensure you have a backup before proceeding.</strong>
+                          <br /><br />
+                          Are you sure you want to continue?
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handleDeploySchema}
+                          className="bg-green-600 hover:bg-green-700"
+                        >
+                          Yes, Deploy Migrations
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              </div>
+
+              {/* Output Log */}
+              {schemaOutput && (
+                <div className="mt-4">
+                  <Label>Operation Output</Label>
+                  <div className="bg-black text-green-400 p-3 rounded-md text-xs font-mono h-96 overflow-y-auto whitespace-pre-wrap mt-2 border border-green-900 shadow-inner">
+                    {schemaOutput}
+                  </div>
+                </div>
               )}
-            </div>
-          </CardContent>
-        </Card>
-      )}
-    </div>
+            </CardContent>
+          </Card>
+        )
+      }
+
+      {/* Admin Testing Tools Section - Only visible to Super Mega Admin */}
+      {
+        isSuperMegaAdmin() && (
+          <Card className="border-orange-500 shadow-lg bg-orange-50/10 dark:bg-orange-950/10">
+            <CardHeader>
+              <div className="flex items-center justify-between">
+                <CardTitle className="flex items-center gap-2 text-orange-600 dark:text-orange-400">
+                  <Shield className="h-5 w-5" />
+                  Admin Testing Tools
+                </CardTitle>
+                <div className="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-700 dark:text-orange-300 text-xs font-bold rounded-full border border-orange-200 dark:border-orange-800 flex items-center gap-1">
+                  <Shield className="h-3 w-3" />
+                  SUPER MEGA ADMIN ONLY
+                </div>
+              </div>
+              <CardDescription>
+                Advanced tools for testing and data management. Use with extreme caution.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Delete Specific Table Data */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Trash2 className="h-4 w-4 text-destructive" />
+                    Delete Specific Table Data
+                  </h3>
+                  <div className="space-y-2">
+                    <Label>Select Table to Clear</Label>
+                    <Select value={selectedTable} onValueChange={setSelectedTable}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select a table..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {DELETABLE_TABLES.map((table) => (
+                          <SelectItem key={table} value={table}>
+                            {table}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                    <p className="text-xs text-muted-foreground">
+                      This will delete ALL records from the selected table only.
+                    </p>
+                  </div>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="destructive"
+                        className="w-full"
+                        disabled={!selectedTable || isDeletingTable}
+                      >
+                        {isDeletingTable && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                        Delete {selectedTable} Data
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Confirm Table Deletion</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Are you sure you want to delete all records from <strong>{selectedTable}</strong>?
+                          <br /><br />
+                          This action cannot be undone.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={handleDeleteTable} className="bg-destructive text-destructive-foreground">
+                          Yes, Delete Data
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+
+                {/* Delete All Transactions */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Trash2 className="h-4 w-4 text-orange-500" />
+                    Delete All Transactions
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Delete all transactional data (Sales, Purchases, Inventory, Financials) but keep master data.
+                  </p>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="destructive"
+                        className="w-full bg-orange-600 hover:bg-orange-700"
+                        disabled={isDeletingTransactions}
+                      >
+                        {isDeletingTransactions ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Deleting...
+                          </>
+                        ) : (
+                          <>
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Delete Transactions
+                          </>
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Delete All Transactions?</AlertDialogTitle>
+                        <AlertDialogDescription asChild>
+                          <div className="text-sm text-muted-foreground">
+                            This will permanently delete:
+                            <ul className="list-disc pl-6 mt-2 space-y-1 mb-2">
+                              <li>All Sales & POS data</li>
+                              <li>All Purchase Orders & Receiving Vouchers</li>
+                              <li>All Inventory Movements & Stock Levels</li>
+                              <li>All Financial Records (AR, AP, Expenses)</li>
+                            </ul>
+                            <strong>Master data (Products, Customers, Suppliers, Users) will be PRESERVED.</strong>
+                            <br /><br />
+                            This action cannot be undone.
+                          </div>
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handleDeleteTransactions}
+                          className="bg-orange-600 hover:bg-orange-700"
+                        >
+                          Yes, Delete Transactions
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+
+                {/* Reset Inventory from Adjustments */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <RefreshCw className="h-4 w-4 text-orange-500" />
+                    Reset Inventory (Keep Adjustments)
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Clear all inventory counts and stock movement history derived from adjustments.
+                    <strong>Adjustment records are preserved</strong> but their effect on stock is cleared.
+                    All products will start with 0 stock.
+                  </p>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="destructive"
+                        className="w-full bg-orange-600 hover:bg-orange-700"
+                        disabled={isResettingInventory}
+                      >
+                        {isResettingInventory ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Resetting...
+                          </>
+                        ) : (
+                          <>
+                            <RefreshCw className="mr-2 h-4 w-4" />
+                            Clear Stock & History
+                          </>
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Reset Inventory from Adjustments?</AlertDialogTitle>
+                        <AlertDialogDescription asChild>
+                          <div className="text-sm text-muted-foreground">
+                            This will:
+                            <ul className="list-disc pl-6 mt-2 space-y-1 mb-2">
+                              <li><strong>Delete</strong> all Stock Movements from adjustments</li>
+                              <li><strong>Reset</strong> all Inventory quantities to 0</li>
+                              <li><strong>Preserve</strong> all Inventory Adjustment records</li>
+                            </ul>
+                            Your products will have 0 stock, and the transaction history will be cleared of past adjustments.
+                            <br /><br />
+                            This action cannot be undone.
+                          </div>
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handleResetInventory}
+                          className="bg-orange-600 hover:bg-orange-700"
+                        >
+                          Yes, Reset Inventory
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+
+                {/* Seed Test Data */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <TestTube className="h-4 w-4 text-blue-500" />
+                    Seed Test Data
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Populate the database with sample data for testing purposes. This includes:
+                  </p>
+                  <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
+                    <li>Test Branch & Warehouse</li>
+                    <li>Sample Products & Inventory</li>
+                    <li>Test Customers & Suppliers</li>
+                    <li>Sample Transactions (PO, SO)</li>
+                  </ul>
+                  <Button
+                    onClick={handleSeedTestData}
+                    disabled={isSeeding}
+                    className="w-full bg-blue-600 hover:bg-blue-700"
+                  >
+                    {isSeeding ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Seeding Data...
+                      </>
+                    ) : (
+                      <>
+                        <RefreshCw className="mr-2 h-4 w-4" />
+                        Generate Test Data
+                      </>
+                    )}
+                  </Button>
+                </div>
+
+                {/* Clean Up Test Customers */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Trash2 className="h-4 w-4 text-red-500" />
+                    Clean Up Test Customers
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Delete all customers named "Test Customer" and their related data (Sales Orders, AR, etc.).
+                  </p>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="destructive"
+                        className="w-full bg-red-600 hover:bg-red-700"
+                        disabled={isCleaningCustomers}
+                      >
+                        {isCleaningCustomers ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Cleaning...
+                          </>
+                        ) : (
+                          <>
+                            <Trash2 className="mr-2 h-4 w-4" />
+                            Clean Up Test Customers
+                          </>
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Clean Up Test Customers?</AlertDialogTitle>
+                        <AlertDialogDescription asChild>
+                          <div className="text-sm text-muted-foreground">
+                            This will permanently delete:
+                            <ul className="list-disc pl-6 mt-2 space-y-1 mb-2">
+                              <li>Customers named "Test Customer"</li>
+                              <li>Related Sales Orders & Items</li>
+                              <li>Related Accounts Receivable records</li>
+                            </ul>
+                            <strong>POS Receipts and Promotion Usage will be unlinked but preserved.</strong>
+                            <br /><br />
+                            This action cannot be undone.
+                          </div>
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handleCleanupTestCustomers}
+                          className="bg-red-600 hover:bg-red-700"
+                        >
+                          Yes, Clean Up
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+
+                {/* Run Selenium Tests */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <Play className="h-4 w-4 text-green-500" />
+                    System Health Check (Selenium)
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Run comprehensive E2E CRUD tests using Selenium WebDriver. Verifies:
+                  </p>
+                  <ul className="text-sm text-muted-foreground list-disc pl-5 space-y-1">
+                    <li>User Authentication & Management</li>
+                    <li>Product Inventory Operations</li>
+                    <li>Sales Order Processing</li>
+                    <li>Inventory Visibility</li>
+                  </ul>
+                  <Button
+                    onClick={handleRunSeleniumTests}
+                    disabled={isRunningSelenium}
+                    className="w-full bg-green-600 hover:bg-green-700"
+                  >
+                    {isRunningSelenium ? (
+                      <>
+                        <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                        Running Diagnostics...
+                      </>
+                    ) : (
+                      <>
+                        <Play className="mr-2 h-4 w-4" />
+                        Run Health Check
+                      </>
+                    )}
+                  </Button>
+
+                  {seleniumOutput && (
+                    <div className="mt-4">
+                      <Label>Test Output Logs</Label>
+                      <div className="bg-black text-green-400 p-3 rounded-md text-xs font-mono h-64 overflow-y-auto whitespace-pre-wrap mt-2 border border-green-900">
+                        {seleniumOutput}
+                      </div>
+                    </div>
+                  )}
+                </div>
+
+                {/* Post All Draft Adjustments */}
+                <div className="space-y-4 p-4 border rounded-lg bg-background">
+                  <h3 className="font-semibold flex items-center gap-2">
+                    <CheckCircle className="h-4 w-4 text-green-500" />
+                    Post All Draft Adjustments
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    Bulk post all inventory adjustments that are currently in <strong>DRAFT</strong> status.
+                  </p>
+                  <AlertDialog>
+                    <AlertDialogTrigger asChild>
+                      <Button
+                        variant="default"
+                        className="w-full bg-green-600 hover:bg-green-700"
+                        disabled={isPostingAdjustments}
+                      >
+                        {isPostingAdjustments ? (
+                          <>
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                            Posting...
+                          </>
+                        ) : (
+                          <>
+                            <CheckCircle className="mr-2 h-4 w-4" />
+                            Post All Drafts
+                          </>
+                        )}
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>Post All Draft Adjustments?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                          This will process all draft adjustments and update inventory levels.
+                          This action cannot be undone and will create stock movements for each item.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction
+                          onClick={handlePostAllAdjustments}
+                          className="bg-green-600 hover:bg-green-700"
+                        >
+                          Yes, Post All
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        )
+      }
+    </div >
   );
 }

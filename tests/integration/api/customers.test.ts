@@ -1,6 +1,9 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { BASE_URL } from '../config';
 
+// Note: Database reset is not used here since we're using the main database
+// Tests clean up their own data in afterAll
+
 describe('Customers API Integration Tests', () => {
     let token: string;
     let headers: any;
@@ -38,7 +41,9 @@ describe('Customers API Integration Tests', () => {
     describe('POST /api/customers', () => {
         it('should create a new customer', async () => {
             const timestamp = Date.now();
+            const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
             const newCustomer = {
+                customerCode: `TEST-${timestamp}-${randomSuffix}`,
                 companyName: `Integration Test Co ${timestamp}`,
                 contactPerson: 'John Integrator',
                 phone: '09170000000',
@@ -55,6 +60,9 @@ describe('Customers API Integration Tests', () => {
             });
 
             const data = await response.json();
+            if (response.status !== 201) {
+                throw new Error(`Failed to create customer (Status ${response.status}): ${JSON.stringify(data, null, 2)}`);
+            }
             expect(response.status).toBe(201);
             expect(data.success).toBe(true);
             expect(data.data.companyName).toBe(newCustomer.companyName);
@@ -63,7 +71,9 @@ describe('Customers API Integration Tests', () => {
 
         it('should create a new customer with empty email', async () => {
             const timestamp = Date.now();
+            const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
             const newCustomer = {
+                customerCode: `TEST-${timestamp}-${randomSuffix}`,
                 companyName: `Integration Test Co No Email ${timestamp}`,
                 contactPerson: 'John No Email',
                 phone: '09171111111',
@@ -80,7 +90,9 @@ describe('Customers API Integration Tests', () => {
             });
 
             const data = await response.json();
-            if (!data.success) console.error(data);
+            if (response.status !== 201) {
+                throw new Error(`Failed to create customer (Status ${response.status}): ${JSON.stringify(data, null, 2)}`);
+            }
             expect(response.status).toBe(201);
             expect(data.success).toBe(true);
             expect(data.data.email).toBe('');
@@ -103,7 +115,12 @@ describe('Customers API Integration Tests', () => {
                 headers,
                 body: JSON.stringify(invalidCustomer),
             });
+            const data = await response.json();
+            if (response.status === 500) {
+                console.log('500 Error Response:', JSON.stringify(data, null, 2));
+            }
             expect(response.status).toBe(400);
+            expect(data.error).toBeDefined();
         });
     });
 
@@ -185,3 +202,4 @@ describe('Customers API Integration Tests', () => {
         });
     });
 });
+

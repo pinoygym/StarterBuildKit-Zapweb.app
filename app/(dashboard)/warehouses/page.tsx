@@ -61,9 +61,9 @@ export default function WarehousesPage() {
 
   const handleSave = async (id: string | undefined, data: any) => {
     if (id) {
-      await updateWarehouseMutation.mutateAsync({ id, data });
+      return await updateWarehouseMutation.mutateAsync({ id, data });
     } else {
-      await createWarehouseMutation.mutateAsync(data);
+      return await createWarehouseMutation.mutateAsync(data);
     }
   };
 

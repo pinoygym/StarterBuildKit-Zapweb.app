@@ -31,9 +31,10 @@ test.describe('Finance Module', () => {
         });
 
         test('should open add expense dialog', async ({ page }) => {
-            await page.getByRole('button', { name: 'Add Expense' }).click();
-            await expect(page.getByRole('dialog')).toBeVisible();
-            await expect(page.getByRole('heading', { name: 'Add Expense' })).toBeVisible();
+            await page.waitForLoadState('domcontentloaded');
+            await page.getByRole('button', { name: 'Add Expense' }).first().click();
+            await expect(page.getByRole('dialog')).toBeVisible({ timeout: 5000 });
+            await expect(page.getByRole('heading', { name: 'Create Expense' })).toBeVisible();
         });
     });
 });

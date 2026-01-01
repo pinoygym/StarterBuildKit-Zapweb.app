@@ -23,6 +23,8 @@ export interface CreateAdjustmentInput {
 }
 
 export interface UpdateAdjustmentInput {
+    warehouseId?: string;
+    branchId?: string;
     reason?: string;
     referenceNumber?: string;
     adjustmentDate?: Date;
@@ -36,6 +38,11 @@ export interface InventoryAdjustmentWithRelations extends InventoryAdjustment {
             id: string;
             name: string;
             baseUOM: string;
+            productUOMs?: {
+                id: string;
+                name: string;
+                conversionFactor: number;
+            }[];
         }
     })[];
     Warehouse: {

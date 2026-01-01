@@ -1,6 +1,6 @@
 // @vitest-environment node
 
-import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
+import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
 import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 import { createTestUser, createTestBranch, createTestCustomer } from '@/tests/helpers/test-db-utils';
@@ -127,24 +127,29 @@ describe('Accounts Receivable API Integration Tests', () => {
 
   describe('POST /api/ar/payment - Record Payment', () => {
     beforeEach(async () => {
-      // Create AR record for payment tests
+      // Create AR record via API (not Prisma directly) to ensure consistency
       const dueDate = new Date();
       dueDate.setDate(dueDate.getDate() + 30);
 
-      testAR = await prisma.accountsReceivable.create({
-        data: {
-          id: randomUUID(),
-          branchId: testBranch.id,
-          customerId: testCustomer.id,
-          customerName: testCustomer.contactPerson,
-          totalAmount: 1000,
-          paidAmount: 0,
-          balance: 1000,
-          dueDate,
-          status: 'pending',
-          updatedAt: new Date(),
-        },
+      const arData = {
+        branchId: testBranch.id,
+        customerId: testCustomer.id,
+        customerName: testCustomer.contactPerson,
+        totalAmount: 1000,
+        dueDate: dueDate.toISOString(),
+      };
+
+      const response = await fetch(`${BASE_URL}/api/ar`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(arData),
       });
+
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(`Failed to create AR for payment test: ${JSON.stringify(data)}`);
+      }
+      testAR = data.data;
     });
 
     it('should record full payment and update status to paid', async () => {
@@ -163,6 +168,10 @@ describe('Accounts Receivable API Integration Tests', () => {
       });
 
       const data = await response.json();
+
+      if (response.status !== 200) {
+        console.error('AR Payment Error Response:', JSON.stringify(data, null, 2));
+      }
 
       expect(response.status).toBe(200);
       expect(data.success).toBe(true);
@@ -543,3 +552,4 @@ describe('Accounts Receivable API Integration Tests', () => {
     });
   });
 });
+

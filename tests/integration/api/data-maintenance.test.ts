@@ -82,8 +82,12 @@ describe('Data Maintenance API Support (Product Categories)', () => {
         it('should return 400 for existing name', async () => {
             if (!testCategoryId) throw new Error('Previous test failed, cannot run this one');
 
-            const category = await prisma.productCategory.findUnique({ where: { id: testCategoryId } });
-            if (!category) throw new Error('Test category not found');
+            // Fetch category via API instead of Prisma to avoid DB mismatch
+            const getRes = await fetch(`${BASE_URL}/api/data-maintenance/product-categories/${testCategoryId}`, { headers });
+            const getData = await getRes.json();
+
+            if (!getData.success) throw new Error('Failed to fetch category via API');
+            const category = getData.data;
 
             const duplicateCategory = {
                 name: category.name, // Same name
@@ -104,8 +108,10 @@ describe('Data Maintenance API Support (Product Categories)', () => {
         it('should return 400 for existing code', async () => {
             if (!testCategoryId) throw new Error('Previous test failed, cannot run this one');
 
-            const category = await prisma.productCategory.findUnique({ where: { id: testCategoryId } });
-            if (!category) throw new Error('Test category not found');
+            // Fetch category via API
+            const getRes = await fetch(`${BASE_URL}/api/data-maintenance/product-categories/${testCategoryId}`, { headers });
+            const getData = await getRes.json();
+            const category = getData.data;
 
             const duplicateCategory = {
                 name: `New Name ${Date.now()}`,
@@ -246,3 +252,4 @@ describe('Data Maintenance API Support (Product Categories)', () => {
         });
     });
 });
+

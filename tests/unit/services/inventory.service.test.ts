@@ -10,12 +10,14 @@ const mockTransactionClient = {
         findUnique: vi.fn(),
         upsert: vi.fn(),
         update: vi.fn(),
+        findMany: vi.fn(),
     },
     product: {
         update: vi.fn(),
     },
     stockMovement: {
         create: vi.fn(),
+        createMany: vi.fn(),
     },
     purchaseOrderItem: {
         update: vi.fn(),
@@ -67,6 +69,7 @@ vi.mock('@/lib/prisma', () => ({
         },
         product: {
             update: vi.fn(),
+            findMany: vi.fn(),
         },
         purchaseOrder: {
             findUnique: vi.fn(),
@@ -109,7 +112,7 @@ describe('InventoryService', () => {
             const uom = 'Piece';
             const product = { id: productId, baseUOM: 'Piece', alternateUOMs: [] };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
+            (productService.getProductById as any).mockResolvedValue(product as any);
 
             const result = await service.convertToBaseUOM(productId, quantity, uom);
 
@@ -126,7 +129,7 @@ describe('InventoryService', () => {
                 alternateUOMs: [{ name: 'Box', conversionFactor: 10 }],
             };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
+            (productService.getProductById as any).mockResolvedValue(product as any);
 
             const result = await service.convertToBaseUOM(productId, quantity, uom);
 
@@ -137,7 +140,7 @@ describe('InventoryService', () => {
             const productId = 'product-1';
             const product = { id: productId, baseUOM: 'Piece', alternateUOMs: [] };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
+            (productService.getProductById as any).mockResolvedValue(product as any);
 
             await expect(service.convertToBaseUOM(productId, 1, 'Unknown')).rejects.toThrow('UOM \'Unknown\' not found');
         });
@@ -153,7 +156,7 @@ describe('InventoryService', () => {
             const newUnitCost = 66; // This is the new cost for the incoming stock
 
             // Mock initial product state
-            vi.mocked(productService.getProductById).mockResolvedValue({
+            (productService.getProductById as any).mockResolvedValue({
                 id: initialProductId,
                 name: 'Coca Cola LTR',
                 baseUOM: 'LTR',
@@ -169,7 +172,7 @@ describe('InventoryService', () => {
             } as any);
 
             // Mock total stock across all warehouses for inventoryRepository
-            vi.mocked(inventoryRepository.getTotalStockByProduct).mockResolvedValue(initialQuantity);
+            (inventoryRepository.getTotalStockByProduct as any).mockResolvedValue(initialQuantity);
 
             // Mock the product update call within the transaction client
             mockTransactionClient.product.update.mockResolvedValueOnce({});
@@ -215,11 +218,11 @@ describe('InventoryService', () => {
             };
             const product = { id: 'product-1', baseUOM: 'Piece', alternateUOMs: [], averageCostPrice: 0 };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
+            (productService.getProductById as any).mockResolvedValue(product as any);
             // Mock inventory findUnique for the transaction client
             mockTransactionClient.inventory.findUnique.mockResolvedValueOnce({ quantity: 50 } as any);
             // Mock inventoryRepository.getTotalStockByProduct for the service call
-            vi.mocked(inventoryRepository.getTotalStockByProduct).mockResolvedValue(50);
+            (inventoryRepository.getTotalStockByProduct as any).mockResolvedValue(50);
             // Mock other prisma calls within the transaction client
             mockTransactionClient.inventory.upsert.mockResolvedValueOnce({ quantity: 60 } as any);
             mockTransactionClient.stockMovement.create.mockResolvedValueOnce({});
@@ -235,6 +238,8 @@ describe('InventoryService', () => {
                 data: expect.objectContaining({
                     type: 'IN',
                     quantity: 10,
+                    uom: 'Piece',
+                    conversionFactor: 1,
                 })
             }));
         });
@@ -250,8 +255,8 @@ describe('InventoryService', () => {
             };
             const product = { id: 'product-1', baseUOM: 'Piece', alternateUOMs: [] };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
-            vi.mocked(inventoryRepository.findInventory).mockResolvedValue({ quantity: 10 } as any); // Used by getCurrentStockLevel
+            (productService.getProductById as any).mockResolvedValue(product as any);
+            (inventoryRepository.findInventory as any).mockResolvedValue({ quantity: 10 } as any); // Used by getCurrentStockLevel
             mockTransactionClient.inventory.update.mockResolvedValueOnce({ quantity: 5 } as any);
             mockTransactionClient.stockMovement.create.mockResolvedValueOnce({});
 
@@ -263,6 +268,8 @@ describe('InventoryService', () => {
                 data: expect.objectContaining({
                     type: 'OUT',
                     quantity: 5,
+                    uom: 'Piece',
+                    conversionFactor: 1,
                 })
             }));
         });
@@ -276,8 +283,8 @@ describe('InventoryService', () => {
             };
             const product = { id: 'product-1', baseUOM: 'Piece', alternateUOMs: [], name: 'Product 1' };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
-            vi.mocked(inventoryRepository.findInventory).mockResolvedValue({ quantity: 10 } as any);
+            (productService.getProductById as any).mockResolvedValue(product as any);
+            (inventoryRepository.findInventory as any).mockResolvedValue({ quantity: 10 } as any);
 
             await expect(service.deductStock(input as any)).rejects.toThrow();
         });
@@ -294,8 +301,8 @@ describe('InventoryService', () => {
             };
             const product = { id: 'product-1', baseUOM: 'Piece', alternateUOMs: [] };
 
-            vi.mocked(productService.getProductById).mockResolvedValue(product as any);
-            vi.mocked(inventoryRepository.findInventory).mockResolvedValue({ quantity: 10 } as any); // For source stock check
+            (productService.getProductById as any).mockResolvedValue(product as any);
+            (inventoryRepository.findInventory as any).mockResolvedValue({ quantity: 10 } as any); // For source stock check
 
             // Mock prisma calls within the transaction client for transferStock
             mockTransactionClient.inventory.update.mockResolvedValueOnce({}); // Deduct from source
@@ -309,6 +316,70 @@ describe('InventoryService', () => {
             expect(mockTransactionClient.inventory.update).toHaveBeenCalled(); // Deduct from source
             expect(mockTransactionClient.inventory.upsert).toHaveBeenCalled(); // Add to destination
             expect(mockTransactionClient.stockMovement.create).toHaveBeenCalledTimes(2); // OUT and IN
+            expect(mockTransactionClient.stockMovement.create).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.objectContaining({
+                    type: 'OUT',
+                    quantity: 5,
+                    uom: 'Piece',
+                    conversionFactor: 1,
+                })
+            }));
+            expect(mockTransactionClient.stockMovement.create).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.objectContaining({
+                    type: 'IN',
+                    quantity: 5,
+                    uom: 'Piece',
+                    conversionFactor: 1,
+                })
+            }));
+        });
+    });
+
+    describe('adjustStockBatch', () => {
+        it('should use provided transaction client', async () => {
+            const input = {
+                warehouseId: 'warehouse-1',
+                items: [{
+                    productId: 'product-1',
+                    quantity: 10,
+                    uom: 'Piece',
+                    adjustmentType: 'ABSOLUTE' as const
+                }]
+            };
+
+            const product = {
+                id: 'product-1',
+                baseUOM: 'Piece',
+                alternateUOMs: [],
+                productUOMs: []
+            };
+
+            // Mock product fetch for optimization 1 (happens outside tx)
+            (prisma.product.findMany as any).mockResolvedValue([product] as any);
+
+            // Mock tx calls
+            mockTransactionClient.inventory.findMany.mockResolvedValue([]);
+            mockTransactionClient.inventory.upsert.mockResolvedValue({});
+            mockTransactionClient.stockMovement.createMany.mockResolvedValue({});
+
+            await service.adjustStockBatch(input, mockTransactionClient as any);
+
+            // Verify transaction client methods were used instead of global prisma
+            expect(mockTransactionClient.inventory.findMany).toHaveBeenCalled();
+            expect(mockTransactionClient.inventory.upsert).toHaveBeenCalled();
+            expect(mockTransactionClient.stockMovement.createMany).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.arrayContaining([
+                    expect.objectContaining({
+                        productId: 'product-1',
+                        quantity: 10,
+                        uom: 'Piece',
+                        conversionFactor: 1
+                    })
+                ])
+            }));
+
+            // Verify global transaction was NOT called (since we passed one)
+            expect(prisma.$transaction).not.toHaveBeenCalled();
         });
     });
 });

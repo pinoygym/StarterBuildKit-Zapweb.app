@@ -5,6 +5,7 @@ import { userRepository } from '@/repositories/user.repository';
 import { auditLogRepository } from '@/repositories/audit-log.repository';
 import { CreateUserInput, UpdateUserInput, UserFilters, UserStatus } from '@/types/user.types';
 import { AuditAction, AuditResource } from '@/types/audit.types';
+import { NotFoundError, ConflictError } from '@/lib/errors';
 
 export class UserService {
   /**
@@ -40,7 +41,7 @@ export class UserService {
     // Check if email already exists
     const existingUser = await userRepository.findByEmail(data.email);
     if (existingUser) {
-      throw new Error('Email already exists');
+      throw new ConflictError('Email already exists', { email: data.email });
     }
 
     // Hash password
@@ -93,14 +94,14 @@ export class UserService {
   ) {
     const existingUser = await userRepository.findById(id);
     if (!existingUser) {
-      throw new Error('User not found');
+      throw new NotFoundError('User', id);
     }
 
     // Check if email is being changed and if it's already taken
     if (data.email && data.email !== existingUser.email) {
       const emailExists = await userRepository.findByEmail(data.email);
       if (emailExists) {
-        throw new Error('Email already exists');
+        throw new ConflictError('Email already exists', { email: data.email });
       }
     }
 
@@ -152,7 +153,7 @@ export class UserService {
   ) {
     const user = await userRepository.findById(id);
     if (!user) {
-      throw new Error('User not found');
+      throw new NotFoundError('User', id);
     }
 
     // Soft delete by setting status to INACTIVE

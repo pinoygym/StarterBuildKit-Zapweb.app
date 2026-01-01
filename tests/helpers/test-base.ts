@@ -20,7 +20,6 @@ export class DatabaseTestBase {
     expenses: [],
     ar: [],
     ap: [],
-
   };
 
   async setup() {

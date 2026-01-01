@@ -77,7 +77,7 @@ echo ""
 echo "📋 Step 6: Preparing to deploy migrations..."
 echo -e "${YELLOW}⚠️  About to deploy migrations to PRODUCTION${NC}"
 echo ""
-echo "Production Database: ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech"
+echo "Production Database: ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech"
 echo ""
 read -p "Are you sure you want to continue? (yes/no): " FINAL_CONFIRM
 if [ "$FINAL_CONFIRM" != "yes" ]; then
@@ -88,7 +88,7 @@ echo ""
 
 # Step 7: Deploy migrations to production
 echo "📋 Step 7: Deploying migrations to production..."
-export DATABASE_URL="postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+export DATABASE_URL="postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
 npx prisma migrate deploy
 
 if [ $? -eq 0 ]; then

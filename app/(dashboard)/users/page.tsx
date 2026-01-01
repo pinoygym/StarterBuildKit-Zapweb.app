@@ -8,17 +8,54 @@ import { UserDialog } from '@/components/users/user-dialog';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, ShieldAlert } from 'lucide-react';
 import { TableSkeleton } from '@/components/shared/loading-skeleton';
+import { useAuth } from '@/contexts/auth.context';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+import { PaginationControls } from '@/components/shared/pagination-controls';
+
 
 export default function UsersPage() {
+  const { isSuperMegaAdmin, isLoading: authLoading } = useAuth();
   const [page, setPage] = useState(1);
   const [filters, setFilters] = useState<UserFilters>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<UserWithRelations | null>(null);
 
-  const { data, isLoading } = useUsers(filters, page, 20);
+  const { data, isLoading } = useUsers(filters, page, 25);
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="space-y-6">
+        <PageHeader
+          title="Users"
+          description="Manage system users and their roles"
+        />
+        <TableSkeleton rows={10} />
+      </div>
+    );
+  }
+
+  // Check if user is super admin
+  if (!isSuperMegaAdmin()) {
+    return (
+      <div className="space-y-6">
+        <PageHeader
+          title="Users"
+          description="Manage system users and their roles"
+        />
+        <Alert variant="destructive">
+          <ShieldAlert className="h-4 w-4" />
+          <AlertTitle>Access Denied</AlertTitle>
+          <AlertDescription>
+            You do not have permission to view users. This page is restricted to Super Admins only.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   const handleSearch = (value: string) => {
     setSearchTerm(value);
@@ -70,29 +107,15 @@ export default function UsersPage() {
           />
 
           {data && data.totalPages > 1 && (
-            <div className="flex items-center justify-between">
-              <p className="text-sm text-muted-foreground">
-                Showing {((page - 1) * 20) + 1} to {Math.min(page * 20, data.total)} of {data.total} users
-              </p>
-              <div className="flex gap-2">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage(page - 1)}
-                  disabled={page === 1}
-                >
-                  Previous
-                </Button>
-                <Button
-                  variant="outline"
-                  size="sm"
-                  onClick={() => setPage(page + 1)}
-                  disabled={page === data.totalPages}
-                >
-                  Next
-                </Button>
-              </div>
-            </div>
+            <PaginationControls
+              page={page}
+              limit={25}
+              totalCount={data.total}
+              onPageChange={setPage}
+              onLimitChange={() => { }} // limit is fixed at 25
+              loading={isLoading}
+              itemName="users"
+            />
           )}
         </>
       )}

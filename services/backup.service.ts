@@ -1,390 +1,383 @@
 import { prisma } from '@/lib/prisma';
 import { Prisma } from '@prisma/client';
 
+function logDebug(msg: string) {
+    const timestamp = new Date().toISOString();
+    console.log(`[${timestamp}] ${msg}`);
+}
+
 export interface BackupData {
     version: string;
     timestamp: string;
     data: {
-        branches: any[];
-        warehouses: any[];
-        roles: any[];
-        permissions: any[];
-        rolePermissions: any[];
-        users: any[];
-        userBranchAccess: any[];
-        productCategories: any[];
-        unitOfMeasures: any[];
-        expenseCategories: any[];
-        expenseVendors: any[];
-        paymentMethods: any[];
-        suppliers: any[];
-        customers: any[];
-        salesAgents: any[];
-        products: any[];
-        productUOMs: any[];
-        inventory: any[];
-        stockMovements: any[];
-        purchaseOrders: any[];
-        purchaseOrderItems: any[];
-        receivingVouchers: any[];
-        receivingVoucherItems: any[];
-        salesOrders: any[];
-        salesOrderItems: any[];
-        posSales: any[];
-        posSaleItems: any[];
-        posReceipts: any[];
-        promotionUsages: any[];
-        customerPurchaseHistories: any[];
-        accountsPayables: any[];
-        apPayments: any[];
-        accountsReceivables: any[];
-        arPayments: any[];
-        expenses: any[];
-        employeePerformances: any[];
-        dailySalesSummaries: any[];
-        auditLogs: any[];
-        sessions: any[];
-        passwordResetTokens: any[];
-        reportExports: any[];
-        reportTemplates: any[];
-        companySettings: any[];
-    };
+        // Core
+        user?: any[];
+        role?: any[];
+        permission?: any[];
+        rolePermission?: any[];
+        session?: any[];
+        passwordResetToken?: any[];
+
+        // Organization
+        branch?: any[];
+        warehouse?: any[];
+        userBranchAccess?: any[];
+        companySettings?: any[];
+
+        // Master Data
+        customer?: any[];
+        supplier?: any[];
+        salesAgent?: any[];
+        product?: any[];
+        productCategory?: any[];
+        productUOM?: any[];
+        unitOfMeasure?: any[];
+        paymentMethod?: any[];
+        expenseCategory?: any[];
+        expenseVendor?: any[];
+
+        // Inventory
+        inventory?: any[];
+        stockMovement?: any[];
+        inventoryAdjustment?: any[];
+        inventoryAdjustmentItem?: any[];
+        inventoryTransfer?: any[];
+        inventoryTransferItem?: any[];
+
+        // Purchasing
+        purchaseOrder?: any[];
+        purchaseOrderItem?: any[];
+        receivingVoucher?: any[];
+        receivingVoucherItem?: any[];
+        accountsPayable?: any[];
+        aPPayment?: any[];
+
+        // Sales
+        salesOrder?: any[];
+        salesOrderItem?: any[];
+        pOSSale?: any[];
+        pOSSaleItem?: any[];
+        pOSReceipt?: any[];
+        promotionUsage?: any[];
+        customerPurchaseHistory?: any[];
+        dailySalesSummary?: any[];
+        accountsReceivable?: any[];
+        aRPayment?: any[];
+        employeePerformance?: any[];
+
+        // Financials
+        expense?: any[];
+        fundSource?: any[];
+        fundTransaction?: any[];
+        fundTransfer?: any[];
+
+        // Services / Jobs
+        jobOrder?: any[];
+        jobComment?: any[];
+        jobImage?: any[];
+        jobPerformed?: any[];
+        partsReplacement?: any[];
+
+        // Others
+        auditLog?: any[];
+        reportExport?: any[];
+        reportTemplate?: any[];
+        roadmapItem?: any[];
+        roadmapComment?: any[];
+        approvalRequest?: any[];
+        notification?: any[];
+    } & Record<string, any[]>; // Allow dynamic access
+}
+
+export interface BackupDataWithMetadata extends BackupData {
+    _filename: string;
+    _reason: string;
 }
 
 export class BackupService {
     static async createBackup(): Promise<BackupData> {
-        const [
-            branches,
-            warehouses,
-            roles,
-            permissions,
-            rolePermissions,
-            users,
-            userBranchAccess,
-            productCategories,
-            unitOfMeasures,
-            expenseCategories,
-            expenseVendors,
-            paymentMethods,
-            suppliers,
-            customers,
-            salesAgents,
-            products,
-            productUOMs,
-            inventory,
-            stockMovements,
-            purchaseOrders,
-            purchaseOrderItems,
-            receivingVouchers,
-            receivingVoucherItems,
-            salesOrders,
-            salesOrderItems,
-            posSales,
-            posSaleItems,
-            posReceipts,
-            promotionUsages,
-            customerPurchaseHistories,
-            accountsPayables,
-            apPayments,
-            accountsReceivables,
-            arPayments,
-            expenses,
-            employeePerformances,
-            dailySalesSummaries,
-            auditLogs,
-            sessions,
-            passwordResetTokens,
-            reportExports,
-            reportTemplates,
-            companySettings,
-        ] = await Promise.all([
-            prisma.branch.findMany(),
-            prisma.warehouse.findMany(),
-            prisma.role.findMany(),
-            prisma.permission.findMany(),
-            prisma.rolePermission.findMany(),
-            prisma.user.findMany(),
-            prisma.userBranchAccess.findMany(),
-            prisma.productCategory.findMany(),
-            prisma.unitOfMeasure.findMany(),
-            prisma.expenseCategory.findMany(),
-            prisma.expenseVendor.findMany(),
-            prisma.paymentMethod.findMany(),
-            prisma.supplier.findMany(),
-            prisma.customer.findMany(),
-            prisma.salesAgent.findMany(),
-            prisma.product.findMany(),
-            prisma.productUOM.findMany(),
-            prisma.inventory.findMany(),
-            prisma.stockMovement.findMany(),
-            prisma.purchaseOrder.findMany(),
-            prisma.purchaseOrderItem.findMany(),
-            prisma.receivingVoucher.findMany(),
-            prisma.receivingVoucherItem.findMany(),
-            prisma.salesOrder.findMany(),
-            prisma.salesOrderItem.findMany(),
-            prisma.pOSSale.findMany(),
-            prisma.pOSSaleItem.findMany(),
-            prisma.pOSReceipt.findMany(),
-            prisma.promotionUsage.findMany(),
-            prisma.customerPurchaseHistory.findMany(),
-            prisma.accountsPayable.findMany(),
-            prisma.aPPayment.findMany(),
-            prisma.accountsReceivable.findMany(),
-            prisma.aRPayment.findMany(),
-            prisma.expense.findMany(),
-            prisma.employeePerformance.findMany(),
-            prisma.dailySalesSummary.findMany(),
-            prisma.auditLog.findMany(),
-            prisma.session.findMany(),
-            prisma.passwordResetToken.findMany(),
-            prisma.reportExport.findMany(),
-            prisma.reportTemplate.findMany(),
-            prisma.companySettings.findMany(),
-        ]);
+        // Define all models to backup in order
+        // Note: Order here determines the order in the backup file object, but keys are what matters
+        const models = [
+            'user', 'role', 'permission', 'rolePermission', 'session', 'passwordResetToken',
+            'branch', 'warehouse', 'userBranchAccess', 'companySettings',
+            'customer', 'supplier', 'salesAgent',
+            'productCategory', 'unitOfMeasure', 'paymentMethod', 'expenseCategory', 'expenseVendor',
+            'product', 'productUOM',
+            'inventory', 'stockMovement',
+            'inventoryAdjustment', 'inventoryAdjustmentItem',
+            'inventoryTransfer', 'inventoryTransferItem',
+            'purchaseOrder', 'purchaseOrderItem', 'receivingVoucher', 'receivingVoucherItem',
+            'accountsPayable', 'aPPayment',
+            'salesOrder', 'salesOrderItem',
+            'pOSSale', 'pOSSaleItem', 'pOSReceipt', 'promotionUsage',
+            'customerPurchaseHistory', 'dailySalesSummary',
+            'accountsReceivable', 'aRPayment', 'employeePerformance',
+            'expense',
+            'fundSource', 'fundTransaction', 'fundTransfer',
+            'jobOrder', 'jobComment', 'jobImage', 'jobPerformed', 'partsReplacement',
+            'auditLog', 'reportExport', 'reportTemplate',
+            'roadmapItem', 'roadmapComment',
+            'approvalRequest', 'notification'
+        ];
+
+        const data: Record<string, any[]> = {};
+
+        // Fetch all data in parallel
+        await Promise.all(models.map(async (model) => {
+            try {
+                // @ts-ignore - Dynamic access to prisma models
+                data[model] = await prisma[model].findMany();
+            } catch (error) {
+                console.error(`[BackupService] Failed to fetch data for model ${model}:`, error);
+                data[model] = [];
+            }
+        }));
 
         return {
-            version: '1.0',
+            version: '2.0',
             timestamp: new Date().toISOString(),
-            data: {
-                branches,
-                warehouses,
-                roles,
-                permissions,
-                rolePermissions,
-                users,
-                userBranchAccess,
-                productCategories,
-                unitOfMeasures,
-                expenseCategories,
-                expenseVendors,
-                paymentMethods,
-                suppliers,
-                customers,
-                salesAgents,
-                products,
-                productUOMs,
-                inventory,
-                stockMovements,
-                purchaseOrders,
-                purchaseOrderItems,
-                receivingVouchers,
-                receivingVoucherItems,
-                salesOrders,
-                salesOrderItems,
-                posSales,
-                posSaleItems,
-                posReceipts,
-                promotionUsages,
-                customerPurchaseHistories,
-                accountsPayables,
-                apPayments,
-                accountsReceivables,
-                arPayments,
-                expenses,
-                employeePerformances,
-                dailySalesSummaries,
-                auditLogs,
-                sessions,
-                passwordResetTokens,
-                reportExports,
-                reportTemplates,
-                companySettings,
-            },
+            data: data
+        };
+    }
+
+    /**
+     * Create a backup with metadata including filename and reason
+     * @param reason - The reason for creating this backup (e.g., "before_adjustment_post", "before_database_clear")
+     * @returns Backup data with metadata
+     */
+    static async createBackupWithMetadata(reason: string): Promise<BackupDataWithMetadata> {
+        const backup = await this.createBackup();
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const sanitizedReason = reason.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
+        // Get company name for filename
+        const companySettings = await prisma.companySettings.findFirst();
+        const companyName = companySettings?.companyName || 'backup';
+        const sanitizedCompanyName = companyName.replace(/[^a-zA-Z0-9]/g, '_').toLowerCase();
+
+        return {
+            ...backup,
+            _filename: `${sanitizedCompanyName}_${sanitizedReason}_${timestamp}.json`,
+            _reason: reason
         };
     }
 
     static async restoreBackup(backup: BackupData): Promise<void> {
-        const { data } = backup;
-        console.log('Starting restore backup process...');
+        logDebug(`Starting restore backup process... version: ${backup.version}`);
+
+        // Normalize data keys if coming from older version (plural to singular)
+        const normalizedBackup = this.normalizeBackupData(backup);
+        const { data } = normalizedBackup;
+        logDebug(`Normalized data keys: ${Object.keys(data).join(', ')}`);
 
         try {
             await prisma.$transaction(async (tx) => {
-                console.log('Deleting existing data...');
+                console.log('[BackupService] Transaction started');
+                console.log('[BackupService] Deleting existing data...');
+
                 // 1. Delete all data in reverse dependency order
-                await tx.companySettings.deleteMany();
-                await tx.reportTemplate.deleteMany();
-                await tx.reportExport.deleteMany();
-                await tx.passwordResetToken.deleteMany();
-                await tx.session.deleteMany();
-                await tx.auditLog.deleteMany();
-                await tx.dailySalesSummary.deleteMany();
-                await tx.employeePerformance.deleteMany();
-                await tx.expense.deleteMany();
-                await tx.aRPayment.deleteMany();
-                await tx.accountsReceivable.deleteMany();
-                await tx.aPPayment.deleteMany();
-                await tx.accountsPayable.deleteMany();
-                await tx.customerPurchaseHistory.deleteMany();
-                await tx.promotionUsage.deleteMany();
-                await tx.pOSReceipt.deleteMany();
-                await tx.pOSSaleItem.deleteMany();
-                await tx.pOSSale.deleteMany();
-                await tx.salesOrderItem.deleteMany();
-                await tx.salesOrder.deleteMany();
-                await tx.receivingVoucherItem.deleteMany();
-                await tx.receivingVoucher.deleteMany();
-                await tx.purchaseOrderItem.deleteMany();
-                await tx.purchaseOrder.deleteMany();
-                await tx.stockMovement.deleteMany();
-                await tx.inventory.deleteMany();
-                await tx.productUOM.deleteMany();
-                await tx.product.deleteMany();
-                await tx.salesAgent.deleteMany();
-                await tx.customer.deleteMany();
-                await tx.supplier.deleteMany();
-                await tx.paymentMethod.deleteMany();
-                await tx.expenseVendor.deleteMany();
-                await tx.expenseCategory.deleteMany();
-                await tx.unitOfMeasure.deleteMany();
-                await tx.productCategory.deleteMany();
-                await tx.userBranchAccess.deleteMany();
-                await tx.user.deleteMany();
-                await tx.rolePermission.deleteMany();
-                await tx.permission.deleteMany();
-                await tx.role.deleteMany();
-                await tx.warehouse.deleteMany();
-                await tx.branch.deleteMany();
-                console.log('Deletion complete.');
+                // This order is critical to avoid foreign key constraint violations
+                const deleteOrder = [
+                    // Financial / Funds (Depend on many)
+                    'fundTransfer', 'fundTransaction', 'aPPayment', 'aRPayment', 'expense',
+
+                    // Sales / POS / AR (Depend on Orders, Customers, Products, Branches)
+                    'customerPurchaseHistory', 'promotionUsage', 'pOSReceipt', 'pOSSaleItem', 'pOSSale',
+                    'salesOrderItem', 'salesOrder', 'accountsReceivable', 'dailySalesSummary', 'employeePerformance',
+
+                    // Purchasing / AP / Inventory (Depend on PO, Suppliers, Warehouses)
+                    'receivingVoucherItem', 'receivingVoucher', 'purchaseOrderItem', 'purchaseOrder', 'accountsPayable',
+                    'stockMovement', 'inventory',
+                    'inventoryAdjustmentItem', 'inventoryAdjustment',
+                    'inventoryTransferItem', 'inventoryTransfer',
+
+                    // Jobs / Services
+                    'jobImage', 'jobComment', 'jobPerformed', 'partsReplacement', 'jobOrder',
+
+                    // Product Related (Leafs of transaction data, but roots for movement)
+                    'productUOM', 'product',
+
+                    // Master Data (Depend on reference data)
+                    'salesAgent', 'customer', 'supplier', 'expenseVendor', 'fundSource',
+                    'userBranchAccess', 'passwordResetToken', 'session', 'auditLog', 'notification', 'approvalRequest',
+                    'roadmapComment', 'roadmapItem', 'reportExport', 'reportTemplate',
+
+                    // Base Reference Data (Roots)
+                    'productCategory', 'unitOfMeasure', 'paymentMethod', 'expenseCategory',
+                    'user', 'warehouse', 'branch', 'rolePermission', 'permission', 'role', 'companySettings'
+                ];
+
+                for (const model of deleteOrder) {
+                    try {
+                        // @ts-ignore
+                        await tx[model].deleteMany();
+                        console.log(`[BackupService] ✓ Deleted ${model}`);
+                    } catch (error) {
+                        console.warn(`[BackupService] Failed to delete ${model} (might not exist or already empty):`, error);
+                        // Re-throwing is safer for data integrity
+                        if (error instanceof Error) {
+                            throw new Error(`Failed to delete existing data for ${model}: ${error.message}`);
+                        }
+                        throw error;
+                    }
+                }
+
+                console.log('[BackupService] Deletion phase complete.');
 
                 // 2. Insert data in dependency order
-                console.log('Restoring branches...');
-                if (data.branches?.length) await tx.branch.createMany({ data: data.branches });
+                // This is loosely the reverse of deleteOrder
+                const insertOrder = [
+                    'role', 'permission', 'rolePermission', 'branch', 'warehouse', 'user', 'companySettings',
+                    'productCategory', 'unitOfMeasure', 'paymentMethod', 'expenseCategory',
+                    'userBranchAccess', 'fundSource', 'expenseVendor', 'supplier', 'customer', 'salesAgent',
+                    'product', 'productUOM',
+                    'jobOrder', 'partsReplacement', 'jobPerformed', 'jobComment', 'jobImage',
+                    'inventory', 'stockMovement',
+                    'inventoryAdjustment', 'inventoryAdjustmentItem',
+                    'inventoryTransfer', 'inventoryTransferItem',
+                    'purchaseOrder', 'purchaseOrderItem', 'receivingVoucher', 'receivingVoucherItem', 'accountsPayable',
+                    'salesOrder', 'salesOrderItem', 'pOSSale', 'pOSSaleItem', 'pOSReceipt', 'promotionUsage',
+                    'accountsReceivable',
+                    'aPPayment', 'aRPayment', 'expense', 'fundTransaction', 'fundTransfer',
+                    'dailySalesSummary', 'employeePerformance', 'customerPurchaseHistory',
+                    'auditLog', 'session', 'passwordResetToken', 'notification', 'approvalRequest',
+                    'roadmapItem', 'roadmapComment', 'reportTemplate', 'reportExport'
+                ];
 
-                console.log('Restoring warehouses...');
-                if (data.warehouses?.length) await tx.warehouse.createMany({ data: data.warehouses });
+                console.log('[BackupService] Starting data restoration...');
 
-                console.log('Restoring roles...');
-                if (data.roles?.length) await tx.role.createMany({ data: data.roles });
+                for (const model of insertOrder) {
+                    const modelData = data[model];
+                    if (modelData && Array.isArray(modelData) && modelData.length > 0) {
+                        try {
+                            // Chunk createMany to avoid parameter limits in PostgreSQL
+                            const CHUNK_SIZE = 100;
+                            for (let i = 0; i < modelData.length; i += CHUNK_SIZE) {
+                                const chunk = modelData.slice(i, i + CHUNK_SIZE);
+                                // @ts-ignore
+                                await tx[model].createMany({ data: chunk });
+                            }
+                            logDebug(`✓ Restored ${model}`);
+                        } catch (error) {
+                            logDebug(`Failed to restore ${model}: ${error}`);
+                            if (error instanceof Error) {
+                                throw new Error(`Failed to restore data for ${model}: ${error.message}`);
+                            }
+                            throw error;
+                        }
+                    } else if (modelData) {
+                        logDebug(`Skipping ${model} - empty array or null`);
+                    }
+                }
 
-                console.log('Restoring permissions...');
-                if (data.permissions?.length) await tx.permission.createMany({ data: data.permissions });
-
-                console.log('Restoring rolePermissions...');
-                if (data.rolePermissions?.length) await tx.rolePermission.createMany({ data: data.rolePermissions });
-
-                console.log('Restoring users...');
-                if (data.users?.length) await tx.user.createMany({ data: data.users });
-
-                console.log('Restoring userBranchAccess...');
-                if (data.userBranchAccess?.length) await tx.userBranchAccess.createMany({ data: data.userBranchAccess });
-
-                console.log('Restoring productCategories...');
-                if (data.productCategories?.length) await tx.productCategory.createMany({ data: data.productCategories });
-
-                console.log('Restoring unitOfMeasures...');
-                if (data.unitOfMeasures?.length) await tx.unitOfMeasure.createMany({ data: data.unitOfMeasures });
-
-                console.log('Restoring expenseCategories...');
-                if (data.expenseCategories?.length) await tx.expenseCategory.createMany({ data: data.expenseCategories });
-
-                console.log('Restoring expenseVendors...');
-                if (data.expenseVendors?.length) await tx.expenseVendor.createMany({ data: data.expenseVendors });
-
-                console.log('Restoring paymentMethods...');
-                if (data.paymentMethods?.length) await tx.paymentMethod.createMany({ data: data.paymentMethods });
-
-                console.log('Restoring suppliers...');
-                if (data.suppliers?.length) await tx.supplier.createMany({ data: data.suppliers });
-
-                console.log('Restoring customers...');
-                if (data.customers?.length) await tx.customer.createMany({ data: data.customers });
-
-                console.log('Restoring salesAgents...');
-                if (data.salesAgents?.length) await tx.salesAgent.createMany({ data: data.salesAgents });
-
-                console.log('Restoring products...');
-                if (data.products?.length) await tx.product.createMany({ data: data.products });
-
-                console.log('Restoring productUOMs...');
-                if (data.productUOMs?.length) await tx.productUOM.createMany({ data: data.productUOMs });
-
-                console.log('Restoring inventory...');
-                if (data.inventory?.length) await tx.inventory.createMany({ data: data.inventory });
-
-                console.log('Restoring stockMovements...');
-                if (data.stockMovements?.length) await tx.stockMovement.createMany({ data: data.stockMovements });
-
-                console.log('Restoring purchaseOrders...');
-                if (data.purchaseOrders?.length) await tx.purchaseOrder.createMany({ data: data.purchaseOrders });
-
-                console.log('Restoring purchaseOrderItems...');
-                if (data.purchaseOrderItems?.length) await tx.purchaseOrderItem.createMany({ data: data.purchaseOrderItems });
-
-                console.log('Restoring receivingVouchers...');
-                if (data.receivingVouchers?.length) await tx.receivingVoucher.createMany({ data: data.receivingVouchers });
-
-                console.log('Restoring receivingVoucherItems...');
-                if (data.receivingVoucherItems?.length) await tx.receivingVoucherItem.createMany({ data: data.receivingVoucherItems });
-
-                console.log('Restoring salesOrders...');
-                if (data.salesOrders?.length) await tx.salesOrder.createMany({ data: data.salesOrders });
-
-                console.log('Restoring salesOrderItems...');
-                if (data.salesOrderItems?.length) await tx.salesOrderItem.createMany({ data: data.salesOrderItems });
-
-                console.log('Restoring posSales...');
-                if (data.posSales?.length) await tx.pOSSale.createMany({ data: data.posSales });
-
-                console.log('Restoring posSaleItems...');
-                if (data.posSaleItems?.length) await tx.pOSSaleItem.createMany({ data: data.posSaleItems });
-
-                console.log('Restoring posReceipts...');
-                if (data.posReceipts?.length) await tx.pOSReceipt.createMany({ data: data.posReceipts });
-
-                console.log('Restoring promotionUsages...');
-                if (data.promotionUsages?.length) await tx.promotionUsage.createMany({ data: data.promotionUsages });
-
-                console.log('Restoring customerPurchaseHistories...');
-                if (data.customerPurchaseHistories?.length) await tx.customerPurchaseHistory.createMany({ data: data.customerPurchaseHistories });
-
-                console.log('Restoring accountsPayables...');
-                if (data.accountsPayables?.length) await tx.accountsPayable.createMany({ data: data.accountsPayables });
-
-                console.log('Restoring apPayments...');
-                if (data.apPayments?.length) await tx.aPPayment.createMany({ data: data.apPayments });
-
-                console.log('Restoring accountsReceivables...');
-                if (data.accountsReceivables?.length) await tx.accountsReceivable.createMany({ data: data.accountsReceivables });
-
-                console.log('Restoring arPayments...');
-                if (data.arPayments?.length) await tx.aRPayment.createMany({ data: data.arPayments });
-
-                console.log('Restoring expenses...');
-                if (data.expenses?.length) await tx.expense.createMany({ data: data.expenses });
-
-                console.log('Restoring employeePerformances...');
-                if (data.employeePerformances?.length) await tx.employeePerformance.createMany({ data: data.employeePerformances });
-
-                console.log('Restoring dailySalesSummaries...');
-                if (data.dailySalesSummaries?.length) await tx.dailySalesSummary.createMany({ data: data.dailySalesSummaries });
-
-                console.log('Restoring auditLogs...');
-                if (data.auditLogs?.length) await tx.auditLog.createMany({ data: data.auditLogs });
-
-                console.log('Restoring sessions...');
-                if (data.sessions?.length) await tx.session.createMany({ data: data.sessions });
-
-                console.log('Restoring passwordResetTokens...');
-                if (data.passwordResetTokens?.length) await tx.passwordResetToken.createMany({ data: data.passwordResetTokens });
-
-                console.log('Restoring reportExports...');
-                if (data.reportExports?.length) await tx.reportExport.createMany({ data: data.reportExports });
-
-                console.log('Restoring reportTemplates...');
-                if (data.reportTemplates?.length) await tx.reportTemplate.createMany({ data: data.reportTemplates });
-
-                console.log('Restoring companySettings...');
-                if (data.companySettings?.length) await tx.companySettings.createMany({ data: data.companySettings });
-
-                console.log('Restore completed successfully.');
+                logDebug('Data restoration complete.');
             }, {
                 maxWait: 20000, // 20s
-                timeout: 120000, // 120s - increased timeout
+                timeout: 120000, // 120s
             });
+
+            console.log('[BackupService] Restore completed successfully.');
         } catch (error) {
-            console.error('Restore failed:', error);
+            console.error('[BackupService] Transaction failed:', error);
+            if (error instanceof Error) {
+                throw new Error(`Restore failed: ${error.message}`);
+            }
             throw error;
         }
     }
+
+    /**
+     * Normalizes backup data from older versions to the current version
+     * @param backup - The raw backup data
+     * @returns Normalized backup data
+     */
+    static normalizeBackupData(backup: BackupData): BackupData {
+        if (backup.version === '2.0') {
+            return backup;
+        }
+
+        console.log(`[BackupService] Normalizing backup data from version ${backup.version} to 2.0...`);
+
+        // Mapping for v1.1 plural keys to v2.0 singular keys
+        const keyMap: Record<string, string> = {
+            'users': 'user',
+            'roles': 'role',
+            'permissions': 'permission',
+            'rolePermissions': 'rolePermission',
+            'sessions': 'session',
+            'passwordResetTokens': 'passwordResetToken',
+            'branches': 'branch',
+            'warehouses': 'warehouse',
+            'customers': 'customer',
+            'suppliers': 'supplier',
+            'salesAgents': 'salesAgent',
+            'products': 'product',
+            'productCategories': 'productCategory',
+            'productUOMs': 'productUOM',
+            'unitOfMeasures': 'unitOfMeasure',
+            'paymentMethods': 'paymentMethod',
+            'expenseCategories': 'expenseCategory',
+            'expenseVendors': 'expenseVendor',
+            'stockMovements': 'stockMovement',
+            'inventoryAdjustments': 'inventoryAdjustment',
+            'inventoryAdjustmentItems': 'inventoryAdjustmentItem',
+            'inventoryTransfers': 'inventoryTransfer',
+            'inventoryTransferItems': 'inventoryTransferItem',
+            'purchaseOrders': 'purchaseOrder',
+            'purchaseOrderItems': 'purchaseOrderItem',
+            'receivingVouchers': 'receivingVoucher',
+            'receivingVoucherItems': 'receivingVoucherItem',
+            'accountsPayables': 'accountsPayable',
+            'aPPayments': 'aPPayment',
+            'apPayments': 'aPPayment',
+            'salesOrders': 'salesOrder',
+            'salesOrderItems': 'salesOrderItem',
+            'pOSSales': 'pOSSale',
+            'posSales': 'pOSSale',
+            'pOSSaleItems': 'pOSSaleItem',
+            'posSaleItems': 'pOSSaleItem',
+            'pOSReceipts': 'pOSReceipt',
+            'posReceipts': 'pOSReceipt',
+            'promotionUsages': 'promotionUsage',
+            'customerPurchaseHistories': 'customerPurchaseHistory',
+            'dailySalesSummaries': 'dailySalesSummary',
+            'accountsReceivables': 'accountsReceivable',
+            'aRPayments': 'aRPayment',
+            'arPayments': 'aRPayment',
+            'employeePerformances': 'employeePerformance',
+            'expenses': 'expense',
+            'fundSources': 'fundSource',
+            'fundTransactions': 'fundTransaction',
+            'fundTransfers': 'fundTransfer',
+            'jobOrders': 'jobOrder',
+            'jobComments': 'jobComment',
+            'jobImages': 'jobImage',
+            'jobPerformeds': 'jobPerformed',
+            'partsReplacements': 'partsReplacement',
+            'auditLogs': 'auditLog',
+            'reportExports': 'reportExport',
+            'reportTemplates': 'reportTemplate',
+            'roadmapItems': 'roadmapItem',
+            'roadmapComments': 'roadmapComment',
+            'approvalRequests': 'approvalRequest',
+            'notifications': 'notification',
+        };
+
+        const normalizedData: Record<string, any[]> = {};
+        const oldData = backup.data;
+
+        for (const [key, value] of Object.entries(oldData)) {
+            const newKey = keyMap[key] || key;
+            normalizedData[newKey] = value;
+        }
+
+        return {
+            ...backup,
+            version: '2.0',
+            data: normalizedData
+        };
+    }
+
+
 }

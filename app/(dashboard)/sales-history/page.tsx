@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { NumberInput } from '@/components/ui/number-input';
 import { Label } from '@/components/ui/label';
+import { PaginationControls } from '@/components/shared/pagination-controls';
 import {
   Select,
   SelectContent,
@@ -35,7 +36,7 @@ export default function SalesHistoryPage() {
   const [filters, setFilters] = useState<SalesHistoryFilters>({
     preset: DatePreset.TODAY,
     page: 1,
-    limit: 50,
+    limit: 25,
   });
   const [salesData, setSalesData] = useState<SalesHistoryResponse | null>(null);
   const [analytics, setAnalytics] = useState<SalesAnalytics | null>(null);
@@ -416,34 +417,16 @@ export default function SalesHistoryPage() {
 
                 {/* Pagination */}
                 {salesData.pagination.totalPages > 1 && (
-                  <div className="flex items-center justify-between mt-4">
-                    <div className="text-sm text-muted-foreground">
-                      Page {salesData.pagination.page} of {salesData.pagination.totalPages}
-                    </div>
-                    <div className="flex gap-2">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        disabled={salesData.pagination.page === 1}
-                        onClick={() =>
-                          setFilters({ ...filters, page: salesData.pagination.page - 1 })
-                        }
-                      >
-                        Previous
-                      </Button>
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        disabled={
-                          salesData.pagination.page === salesData.pagination.totalPages
-                        }
-                        onClick={() =>
-                          setFilters({ ...filters, page: salesData.pagination.page + 1 })
-                        }
-                      >
-                        Next
-                      </Button>
-                    </div>
+                  <div className="mt-4">
+                    <PaginationControls
+                      page={salesData.pagination.page}
+                      limit={filters.limit || 25}
+                      totalCount={salesData.pagination.total}
+                      onPageChange={(newPage) => setFilters({ ...filters, page: newPage })}
+                      onLimitChange={(newLimit) => setFilters({ ...filters, limit: newLimit, page: 1 })}
+                      loading={isLoading}
+                      itemName="transactions"
+                    />
                   </div>
                 )}
               </>

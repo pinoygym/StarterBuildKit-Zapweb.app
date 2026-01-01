@@ -31,9 +31,7 @@ async function main() {
                 orderedQuantity: Number(item.quantity),
                 receivedQuantity: Number(item.quantity), // Receive full amount
                 unitPrice: Number(item.unitPrice),
-                varianceReason: undefined,
-                poItemId: item.id,
-                uom: item.uom
+                varianceReason: undefined
             }))
         };
 

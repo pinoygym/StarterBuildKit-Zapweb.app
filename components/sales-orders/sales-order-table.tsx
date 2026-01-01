@@ -173,7 +173,7 @@ export function SalesOrderTable({
                         </DropdownMenuItem>
                         <DropdownMenuItem onClick={() => handlePrintDeliveryNote(order)}>
                           <Truck className="h-4 w-4 mr-2" />
-                          Print Delivery Note
+                          Print Delivery Receipt
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem>

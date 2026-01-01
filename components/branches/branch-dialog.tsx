@@ -84,38 +84,11 @@ export function BranchDialog({
 
   const onSubmit = async (data: BranchFormData) => {
     try {
-      const result = await onSave(branch?.id, data);
-
-      if (result.success) {
-        toast({
-          title: 'Success',
-          description: `Branch ${isEditing ? 'updated' : 'created'} successfully`,
-        });
-        onOpenChange(false);
-        form.reset();
-      } else {
-        // Handle validation errors
-        if (result.fields) {
-          Object.entries(result.fields).forEach(([field, message]) => {
-            form.setError(field as any, {
-              type: 'manual',
-              message: message as string,
-            });
-          });
-        }
-        
-        toast({
-          title: 'Error',
-          description: result.error || `Failed to ${isEditing ? 'update' : 'create'} branch`,
-          variant: 'destructive',
-        });
-      }
+      await onSave(branch?.id, data);
+      onOpenChange(false);
+      form.reset();
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: `Failed to ${isEditing ? 'update' : 'create'} branch`,
-        variant: 'destructive',
-      });
+      console.error(error);
     }
   };
 
@@ -240,8 +213,8 @@ export function BranchDialog({
                 {form.formState.isSubmitting
                   ? 'Saving...'
                   : isEditing
-                  ? 'Update'
-                  : 'Create'}
+                    ? 'Update'
+                    : 'Create'}
               </Button>
             </DialogFooter>
           </form>

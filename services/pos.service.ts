@@ -218,6 +218,8 @@ export class POSService {
         reason: `POS Sale ${data.receiptNumber}`,
         referenceId: data.receiptNumber,
         referenceType: 'POS',
+        uom: item.uom,
+        conversionFactor: baseQuantity / item.quantity,
       });
 
       const originalPrice = item.originalPrice || item.unitPrice;
@@ -292,6 +294,8 @@ export class POSService {
       // Mark Sales Order as Converted
       if (data.convertedFromOrderId) {
         await salesOrderService.markAsConverted(data.convertedFromOrderId, sale.id, tx);
+      } else if (data.convertedFromOrderIds && data.convertedFromOrderIds.length > 0) {
+        await salesOrderService.markMultipleAsConverted(data.convertedFromOrderIds, sale.id, tx);
       }
 
       // Create AR Record for Credit Sales

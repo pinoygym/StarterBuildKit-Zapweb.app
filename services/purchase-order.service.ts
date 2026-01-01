@@ -151,13 +151,22 @@ export class PurchaseOrderService {
     const poNumber = await this.generatePONumber();
 
     // Create purchase order
-    return await purchaseOrderRepository.create({
-      ...data,
-      poNumber,
-      totalAmount,
-      status: 'draft',
-      createdById: userId,
-    });
+    try {
+      const po = await purchaseOrderRepository.create({
+        ...data,
+        poNumber,
+        totalAmount,
+        status: 'draft',
+        createdById: userId,
+      });
+      return po;
+    } catch (error) {
+      console.error('Error in purchaseOrderService.createPurchaseOrder:', error);
+      if (error instanceof Error) {
+        console.error('Stack:', error.stack);
+      }
+      throw error;
+    }
   }
 
   /**

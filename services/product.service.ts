@@ -129,6 +129,40 @@ export class ProductService {
       }
     }
 
+    // Calculate changes for audit log
+    const changes: Array<{ field: string; oldValue: any; newValue: any }> = [];
+
+    // Compare basic fields
+    const fieldsToTrack = ['name', 'description', 'category', 'basePrice', 'baseUOM', 'minStockLevel', 'shelfLifeDays', 'status'] as const;
+
+    fieldsToTrack.forEach(field => {
+      if (data[field] !== undefined && data[field] !== existingProduct[field]) {
+        changes.push({
+          field,
+          oldValue: existingProduct[field],
+          newValue: data[field]
+        });
+      }
+    });
+
+    // Check for UOM changes (simplified check)
+    if (data.alternateUOMs) {
+      // Ideally we would do a deep comparison, but for now just logging that they changed is likely sufficient if we don't want to overcomplicate
+      // Or we can try to find added/removed/updated UOMs.
+      // For this iteration, let's just log if the count changed or if we replaced them.
+      // Since the update implementation replaces all UOMs, we can just log the change.
+      const oldUOMs = existingProduct.alternateUOMs.map(u => `${u.name} (${u.conversionFactor}x @ ${u.sellingPrice})`).join(', ');
+      const newUOMs = data.alternateUOMs.map(u => `${u.name} (${u.conversionFactor}x @ ${u.sellingPrice})`).join(', ');
+
+      if (oldUOMs !== newUOMs) {
+        changes.push({
+          field: 'alternateUOMs',
+          oldValue: oldUOMs,
+          newValue: newUOMs
+        });
+      }
+    }
+
     const product = await productRepository.update(id, { ...validationResult.data, updatedById: userId });
 
     // Log the action
@@ -137,7 +171,11 @@ export class ProductService {
       action: 'UPDATE',
       resource: 'PRODUCT',
       resourceId: id,
-      details: { changedFields: Object.keys(data) }
+      details: {
+        changes,
+        productName: product.name,
+        supplierName: existingProduct.Supplier?.companyName
+      }
     });
 
     return product;

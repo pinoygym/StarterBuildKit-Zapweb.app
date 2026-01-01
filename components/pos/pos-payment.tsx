@@ -28,7 +28,7 @@ interface POSPaymentProps {
   cart: CartItem[];
   branchId: string;
   warehouseId: string;
-  convertedFromOrderId?: string;
+  convertedFromOrderIds?: string[];
   onComplete: (sale: any) => void;
   onCancel: () => void;
 }
@@ -50,7 +50,7 @@ export function POSPayment({
   cart,
   branchId,
   warehouseId,
-  convertedFromOrderId,
+  convertedFromOrderIds,
   onComplete,
   onCancel,
 }: POSPaymentProps) {
@@ -172,7 +172,8 @@ export function POSPayment({
         amountReceived: selectedMethod === 'cash' ? parseFloat(amountReceived) : undefined,
         partialPayment: selectedMethod === 'credit' && partialPayment ? parseFloat(partialPayment) : undefined,
         change: selectedMethod === 'cash' ? change : undefined,
-        convertedFromOrderId,
+        convertedFromOrderId: convertedFromOrderIds && convertedFromOrderIds.length === 1 ? convertedFromOrderIds[0] : undefined,
+        convertedFromOrderIds: convertedFromOrderIds && convertedFromOrderIds.length > 1 ? convertedFromOrderIds : undefined,
         items: cart.map((item) => ({
           productId: item.productId,
           quantity: item.quantity,

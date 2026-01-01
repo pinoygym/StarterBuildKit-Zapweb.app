@@ -15,16 +15,6 @@ timeout /t 3 /nobreak >nul
 echo   Done!
 echo.
 
-REM Step 1.5: Generate Prisma Client
-echo Step 1.5: Generating Prisma Client...
-call bunx prisma generate
-if %ERRORLEVEL% NEQ 0 (
-    echo [FAILED] Prisma generate failed!
-    exit /b 1
-)
-echo   Done!
-echo.
-
 REM Step 2: Run Unit Tests
 echo ========================================
 echo Step 2: Running Unit Tests...
@@ -47,13 +37,14 @@ echo ========================================
 echo Step 3: Running Integration Tests...
 echo ========================================
 echo.
-echo Starting integration test server on port 3001...
+echo Starting test server on port 3001...
+set NODE_ENV=test
 start /B "" cmd /c "bunx next dev -p 3001 2>nul >nul"
 echo Waiting for server to start...
-timeout /t 25 /nobreak >nul
+timeout /t 20 /nobreak >nul
 
 REM Check if server is running
-powershell -Command "try { $r = Invoke-WebRequest -Uri 'http://localhost:3001' -TimeoutSec 5 -ErrorAction SilentlyContinue -UseBasicParsing; if ($r.StatusCode -eq 200) { Write-Host 'Server is ready!' } else { Write-Host 'Server returned status ' $r.StatusCode } } catch { Write-Host 'Server may still be starting...' }"
+powershell -Command "try { $r = Invoke-WebRequest -Uri 'http://localhost:3001' -TimeoutSec 5 -ErrorAction SilentlyContinue -UseBasicParsing; Write-Host 'Server is ready!' } catch { Write-Host 'Server may still be starting...' }"
 
 set BASE_URL=http://127.0.0.1:3001
 call bun run test:integration
@@ -68,7 +59,7 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 REM Stop test server
-echo Stopping integration test server...
+echo Stopping test server...
 powershell -Command "Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"
 timeout /t 2 /nobreak >nul
 
@@ -78,16 +69,7 @@ echo ========================================
 echo Step 4: Running E2E Tests...
 echo ========================================
 echo.
-echo Starting E2E test server on port 3000...
-start /B "" cmd /c "bun run dev 2>nul >nul"
-echo Waiting for server to start...
-timeout /t 30 /nobreak >nul
-
-REM Check if server is running
-powershell -Command "try { $r = Invoke-WebRequest -Uri 'http://localhost:3000' -TimeoutSec 5 -ErrorAction SilentlyContinue -UseBasicParsing; if ($r.StatusCode -eq 200) { Write-Host 'E2E Server is ready!' } else { Write-Host 'E2E Server returned status ' $r.StatusCode } } catch { Write-Host 'E2E Server may still be starting...' }"
-
-set SKIP_WEBSERVER=1
-set BASE_URL=http://127.0.0.1:3000
+REM E2E tests will start their own server via Playwright config
 call bun run test:e2e
 if %ERRORLEVEL% NEQ 0 (
     echo.
@@ -99,10 +81,14 @@ if %ERRORLEVEL% NEQ 0 (
     set E2E_FAILED=0
 )
 
-REM Stop E2E test server
-echo Stopping E2E test server...
-powershell -Command "Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"
-timeout /t 2 /nobreak >nul
+REM Step 5: Restart dev server
+echo.
+echo ========================================
+echo Step 5: Restarting dev server...
+echo ========================================
+echo.
+start "" cmd /c "bun run dev"
+echo Dev server started!
 
 REM Summary
 echo.

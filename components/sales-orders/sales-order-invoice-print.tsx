@@ -38,7 +38,7 @@ export function SalesOrderInvoicePrint({
       <!DOCTYPE html>
       <html>
         <head>
-          <title>${documentType === 'invoice' ? 'Invoice' : 'Delivery Note'} - ${salesOrder.orderNumber}</title>
+          <title>${documentType === 'invoice' ? 'Invoice' : 'Delivery Receipt'} - ${salesOrder.orderNumber}</title>
           <style>
             * {
               margin: 0;
@@ -431,7 +431,7 @@ export function SalesOrderInvoicePrint({
         <div className="flex gap-2 no-print">
           <Button variant="outline" onClick={handlePrint} className="flex-1">
             <Printer className="h-4 w-4 mr-2" />
-            Print {documentType === 'invoice' ? 'Invoice' : 'Delivery Note'}
+            Print {documentType === 'invoice' ? 'Invoice' : 'Delivery Receipt'}
           </Button>
           <Button onClick={onClose} className="flex-1">
             Close

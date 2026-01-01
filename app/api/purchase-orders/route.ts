@@ -3,6 +3,7 @@ import { purchaseOrderService } from '@/services/purchase-order.service';
 import { authService } from '@/services/auth.service';
 import { AppError } from '@/lib/errors';
 import { PurchaseOrderFilters } from '@/types/purchase-order.types';
+import { extractToken } from '@/lib/auth-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,6 +18,7 @@ export async function GET(request: NextRequest) {
       branchId: searchParams.get('branchId') || undefined,
       supplierId: searchParams.get('supplierId') || undefined,
       warehouseId: searchParams.get('warehouseId') || undefined,
+      search: searchParams.get('search') || undefined,
       startDate: searchParams.get('startDate') ? new Date(searchParams.get('startDate')!) : undefined,
       endDate: searchParams.get('endDate') ? new Date(searchParams.get('endDate')!) : undefined,
     };
@@ -54,7 +56,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Authenticate User for Auditing
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
     let userId: string | undefined;
     if (token) {
       const payload = authService.verifyToken(token);

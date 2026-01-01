@@ -9,7 +9,7 @@ import {
     TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { formatDate } from '@/lib/utils';
+import { formatDateTime } from '@/lib/utils';
 import { AuditLogWithUser } from '@/types/audit.types';
 
 interface AuditLogTableProps {
@@ -50,7 +50,7 @@ export function AuditLogTable({ logs }: AuditLogTableProps) {
                         logs.map((log) => (
                             <TableRow key={log.id}>
                                 <TableCell className="text-sm whitespace-nowrap">
-                                    {formatDate(log.createdAt)}
+                                    {formatDateTime(log.createdAt)}
                                 </TableCell>
                                 <TableCell>
                                     {log.User ? (
@@ -80,7 +80,51 @@ export function AuditLogTable({ logs }: AuditLogTableProps) {
                                     {log.resourceId || '-'}
                                 </TableCell>
                                 <TableCell className="max-w-xs truncate text-xs">
-                                    {log.details ? JSON.stringify(log.details) : '-'}
+                                    {(() => {
+                                        if (!log.details) return '-';
+
+                                        const details = log.details as any;
+
+                                        // Check if this is our enhanced product audit log
+                                        if (details.changes && Array.isArray(details.changes)) {
+                                            return (
+                                                <div className="flex flex-col gap-1 text-xs">
+                                                    {details.productName && (
+                                                        <span className="font-semibold">
+                                                            Product: {details.productName}
+                                                        </span>
+                                                    )}
+                                                    {details.supplierName && (
+                                                        <span className="text-muted-foreground">
+                                                            Supplier: {details.supplierName}
+                                                        </span>
+                                                    )}
+                                                    <div className="mt-1 space-y-1">
+                                                        {details.changes.map((change: any, idx: number) => (
+                                                            <div key={idx} className="flex flex-col">
+                                                                <span className="font-medium">{change.field}:</span>
+                                                                <div className="pl-2 border-l-2 border-muted flex flex-col text-[10px]">
+                                                                    <span className="text-destructive line-through opacity-70">
+                                                                        {String(change.oldValue)}
+                                                                    </span>
+                                                                    <span className="text-green-600">
+                                                                        {String(change.newValue)}
+                                                                    </span>
+                                                                </div>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                </div>
+                                            );
+                                        }
+
+                                        // Default JSON rendering with truncation
+                                        return (
+                                            <span title={JSON.stringify(details, null, 2)}>
+                                                {JSON.stringify(details)}
+                                            </span>
+                                        );
+                                    })()}
                                 </TableCell>
                             </TableRow>
                         ))

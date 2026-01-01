@@ -1,14 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
-
-async function seedReferenceData() {
+export async function seedReferenceData(prisma: PrismaClient) {
   console.log('🌱 Seeding reference data...');
 
   // Product Categories
   console.log('  → Seeding product categories...');
   const productCategories = [
-    { name: 'Carbonated Drinks', code: 'CARB', description: 'Soft drinks with carbonation', displayOrder: 1, isSystemDefined: true },
+    { name: 'Carbonated', code: 'CARB', description: 'Soft drinks with carbonation', displayOrder: 1, isSystemDefined: true },
     { name: 'Juices', code: 'JUICE', description: 'Fruit and vegetable juices', displayOrder: 2, isSystemDefined: true },
     { name: 'Energy Drinks', code: 'ENERGY', description: 'Energy and sports drinks', displayOrder: 3, isSystemDefined: true },
     { name: 'Water', code: 'WATER', description: 'Bottled water and mineral water', displayOrder: 4, isSystemDefined: true },
@@ -187,12 +185,3 @@ async function seedReferenceData() {
 
   console.log('✅ Reference data seeding completed!');
 }
-
-seedReferenceData()
-  .catch((error) => {
-    console.error('❌ Error seeding reference data:', error);
-    process.exit(1);
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });

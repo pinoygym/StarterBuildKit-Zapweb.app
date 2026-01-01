@@ -9,7 +9,7 @@ describe('Inventory Adjustments API Routes', () => {
     let authToken: string;
     let testWarehouseId: string;
     let testBranchId: string;
-    let testAdjustmentId: string | undefined;
+    let testAdjustmentId: string;
 
     beforeAll(async () => {
         // Get or create test branch
@@ -95,3 +95,4 @@ describe('Inventory Adjustments API Routes', () => {
         });
     });
 });
+

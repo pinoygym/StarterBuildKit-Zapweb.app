@@ -8,7 +8,7 @@ try {
     console.log(content.slice(0, 500));
     console.log('--- UTF-16LE END ---');
 } catch (e) {
-    console.log('Error reading as utf16le', (e as Error).message);
+    console.log('Error reading as utf16le', e.message);
 }
 
 try {
@@ -18,5 +18,5 @@ try {
     console.log(content.slice(0, 500));
     console.log('--- UTF-8 END ---');
 } catch (e) {
-    console.log('Error reading as utf8', (e as Error).message);
+    console.log('Error reading as utf8', e.message);
 }

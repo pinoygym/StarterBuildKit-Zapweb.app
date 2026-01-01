@@ -14,9 +14,26 @@ export async function GET(request: NextRequest) {
             return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
         }
 
+        // Verify token
         const payload = authService.verifyToken(token);
         if (!payload?.userId) {
             return NextResponse.json({ success: false, error: 'Invalid token' }, { status: 401 });
+        }
+
+        // Check user existence and role
+        const { userService } = await import('@/services/user.service');
+        const currentUser = await userService.getUserById(payload.userId);
+
+        if (!currentUser) {
+            return NextResponse.json({ success: false, error: 'User not found' }, { status: 401 });
+        }
+
+        // Check if user is super admin
+        if (!currentUser.isSuperMegaAdmin) {
+            return NextResponse.json(
+                { success: false, error: 'Access denied. This resource is restricted to Super Admins only.' },
+                { status: 403 }
+            );
         }
 
         // Role check - only Super Admin and Branch Manager can view audit logs

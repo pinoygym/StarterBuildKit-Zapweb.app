@@ -40,6 +40,12 @@ export async function GET(request: NextRequest) {
 
     // Get current user to check if they are Super Mega Admin
     const currentUser = await userService.getUserById(payload.userId);
+    if (!currentUser || !currentUser.isSuperMegaAdmin) {
+      return NextResponse.json(
+        { success: false, message: 'Forbidden: Super Admin access required' },
+        { status: 403 }
+      );
+    }
     const isSuperMegaAdmin = currentUser?.isSuperMegaAdmin || false;
 
     const excludeEmail = currentUser?.email !== 'cybergada@gmail.com' ? 'cybergada@gmail.com' : undefined;
@@ -86,6 +92,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, message: 'Invalid session' },
         { status: 401 }
+      );
+    }
+
+    // Get current user to check if they are Super Mega Admin
+    const currentUser = await userService.getUserById(payload.userId);
+    if (!currentUser || !currentUser.isSuperMegaAdmin) {
+      return NextResponse.json(
+        { success: false, message: 'Forbidden: Super Admin access required' },
+        { status: 403 }
       );
     }
 

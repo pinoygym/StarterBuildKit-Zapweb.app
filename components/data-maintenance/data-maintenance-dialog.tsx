@@ -77,8 +77,10 @@ export function DataMaintenanceDialog<T extends ReferenceDataBase>({
       if (!result.success) {
         if (result.errors) {
           setErrors(result.errors);
+        } else {
+          setErrors({ general: [result.error || 'Operation failed'] });
         }
-        throw new Error(result.error || 'Operation failed');
+        return; // Don't throw, just stop
       }
 
       toast.success(isEditing ? `${config.singularTitle} updated successfully` : `${config.singularTitle} created successfully`);
@@ -102,8 +104,11 @@ export function DataMaintenanceDialog<T extends ReferenceDataBase>({
 
       onSuccess();
       handleClose();
-    } catch (error: any) {
-      toast.error(error.message || 'An error occurred');
+    } catch (err: any) {
+      console.error('Error submitting form:', err);
+      const errorMessage = err.message || 'An error occurred';
+      setErrors({ general: [errorMessage] });
+      toast.error(errorMessage);
     } finally {
       setSubmitting(false);
     }
@@ -248,7 +253,7 @@ export function DataMaintenanceDialog<T extends ReferenceDataBase>({
           </DialogDescription>
         </DialogHeader>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4" noValidate>
           {config.fields.map(renderField)}
 
           {!config.hasVendorFields && (

@@ -623,7 +623,7 @@ export class DashboardService {
         take: limit,
       }),
       prisma.inventoryAdjustment.findMany({
-        where: { ...(branchId ? { Warehouse: { branchId } } : {}) },
+        where: { ...(branchId ? { branchId } : {}) },
         orderBy: { createdAt: 'desc' },
         take: limit,
       }),

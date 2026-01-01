@@ -5,9 +5,8 @@ import { inventoryService } from '@/services/inventory.service';
 import { NotFoundError, ValidationError } from '@/lib/errors';
 
 // Mock dependencies
-vi.mock('@/lib/prisma', () => ({
-    prisma: {
-        $transaction: vi.fn((callback) => callback(prisma)),
+vi.mock('@/lib/prisma', () => {
+    const mockPrisma = {
         inventoryAdjustment: {
             create: vi.fn(),
             update: vi.fn(),
@@ -21,12 +20,30 @@ vi.mock('@/lib/prisma', () => ({
         inventory: {
             findMany: vi.fn(),
         },
-    },
-}));
+        product: {
+            findMany: vi.fn(),
+        },
+        unitOfMeasure: {
+            findMany: vi.fn(),
+        },
+        $transaction: vi.fn(),
+    };
+
+    mockPrisma.$transaction.mockImplementation((callback) => callback(mockPrisma));
+
+    return { prisma: mockPrisma };
+});
 
 vi.mock('@/services/inventory.service', () => ({
     inventoryService: {
         adjustStockBatch: vi.fn(),
+        convertToBaseUOM: vi.fn((productId, quantity, uom) => Promise.resolve(quantity)),
+    },
+}));
+
+vi.mock('@/services/audit.service', () => ({
+    auditService: {
+        log: vi.fn(),
     },
 }));
 
@@ -65,11 +82,23 @@ describe('InventoryAdjustmentService', () => {
             const expectedAdjustmentNumber = 'ADJ-20240101-0001';
 
             (prisma.inventoryAdjustment.count as any).mockResolvedValue(mockCount);
+            (prisma.product.findMany as any).mockResolvedValue([
+                { id: 'prod-1', baseUOM: 'PCS', productUOMs: [] }
+            ]);
             (prisma.inventoryAdjustment.create as any).mockResolvedValue({
                 id: 'adj-1',
                 adjustmentNumber: expectedAdjustmentNumber,
                 ...createInput,
                 status: 'DRAFT',
+                items: createInput.items.map(item => ({
+                    ...item,
+                    Product: {
+                        id: item.productId,
+                        name: 'Test Product',
+                        baseUOM: item.uom,
+                        productUOMs: []
+                    }
+                }))
             } as any);
 
             const result = await inventoryAdjustmentService.create(createInput, mockUserId);
@@ -101,6 +130,14 @@ describe('InventoryAdjustmentService', () => {
             (prisma.inventoryAdjustment.update as any).mockResolvedValue({
                 ...existingAdjustment,
                 ...updateInput,
+                items: [{
+                    Product: {
+                        id: 'p1',
+                        name: 'Test Product',
+                        baseUOM: 'PCS',
+                        productUOMs: []
+                    }
+                }]
             } as any);
 
             const result = await inventoryAdjustmentService.update('adj-1', updateInput);
@@ -110,6 +147,35 @@ describe('InventoryAdjustmentService', () => {
                 data: expect.objectContaining(updateInput),
             }));
             expect(result.reason).toBe(updateInput.reason);
+        });
+
+        it('should update warehouse and branch for a draft adjustment', async () => {
+            const existingAdjustment = {
+                id: 'adj-1',
+                status: 'DRAFT',
+                warehouseId: 'old-w',
+                branchId: 'old-b'
+            };
+            const updateInput = {
+                warehouseId: 'new-w',
+                branchId: 'new-b'
+            };
+
+            (prisma.inventoryAdjustment.findUnique as any).mockResolvedValue(existingAdjustment as any);
+            (prisma.inventoryAdjustment.update as any).mockResolvedValue({
+                ...existingAdjustment,
+                ...updateInput,
+                items: []
+            } as any);
+
+            const result = await inventoryAdjustmentService.update('adj-1', updateInput);
+
+            expect(prisma.inventoryAdjustment.update).toHaveBeenCalledWith(expect.objectContaining({
+                where: { id: 'adj-1' },
+                data: expect.objectContaining(updateInput),
+            }));
+            expect(result.warehouseId).toBe(updateInput.warehouseId);
+            expect(result.branchId).toBe(updateInput.branchId);
         });
 
         it('should throw ValidationError if updating non-draft adjustment', async () => {
@@ -162,7 +228,15 @@ describe('InventoryAdjustmentService', () => {
             (prisma.inventoryAdjustment.update as any).mockImplementation(({ data }: any) => ({
                 ...draftAdjustment,
                 ...data,
-                items: draftAdjustment.items // Simplified
+                items: draftAdjustment.items.map(item => ({
+                    ...item,
+                    Product: {
+                        id: item.productId,
+                        name: 'Test Product',
+                        baseUOM: item.uom,
+                        productUOMs: []
+                    }
+                }))
             }));
 
             await inventoryAdjustmentService.post('adj-1', mockUserId);
@@ -181,14 +255,17 @@ describe('InventoryAdjustmentService', () => {
             }));
 
             // Verify stock update via inventory service
-            expect(inventoryService.adjustStockBatch).toHaveBeenCalledWith(expect.objectContaining({
-                warehouseId: draftAdjustment.warehouseId,
-                referenceNumber: draftAdjustment.adjustmentNumber,
-                items: expect.arrayContaining([
-                    expect.objectContaining({ productId: 'p1', quantity: 10, adjustmentType: 'RELATIVE' }),
-                    expect.objectContaining({ productId: 'p2', quantity: 100, adjustmentType: 'ABSOLUTE' })
-                ])
-            }));
+            expect(inventoryService.adjustStockBatch).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    warehouseId: draftAdjustment.warehouseId,
+                    referenceNumber: draftAdjustment.adjustmentNumber,
+                    items: expect.arrayContaining([
+                        expect.objectContaining({ productId: 'p1', quantity: 10, adjustmentType: 'RELATIVE' }),
+                        expect.objectContaining({ productId: 'p2', quantity: 100, adjustmentType: 'ABSOLUTE' })
+                    ])
+                }),
+                expect.anything() // Transaction client parameter
+            );
 
             // Verify status update to POSTED
             expect(prisma.inventoryAdjustment.update).toHaveBeenCalledWith(expect.objectContaining({
@@ -200,7 +277,8 @@ describe('InventoryAdjustmentService', () => {
         it('should throw error if posting non-draft adjustment', async () => {
             (prisma.inventoryAdjustment.findUnique as any).mockResolvedValue({
                 id: 'adj-1',
-                status: 'POSTED'
+                status: 'POSTED',
+                items: [{ productId: 'p1', quantity: 1, uom: 'PCS', type: 'RELATIVE' }]
             } as any);
 
             await expect(inventoryAdjustmentService.post('adj-1', mockUserId))
@@ -222,7 +300,17 @@ describe('InventoryAdjustmentService', () => {
 
     describe('findById', () => {
         it('should return adjustment if found', async () => {
-            const mockAdj = { id: 'adj-1' };
+            const mockAdj = {
+                id: 'adj-1',
+                items: [{
+                    Product: {
+                        id: 'p1',
+                        name: 'Test Product',
+                        baseUOM: 'PCS',
+                        productUOMs: []
+                    }
+                }]
+            };
             (prisma.inventoryAdjustment.findUnique as any).mockResolvedValue(mockAdj as any);
 
             const result = await inventoryAdjustmentService.findById('adj-1');
@@ -249,9 +337,20 @@ describe('InventoryAdjustmentService', () => {
             (prisma.inventoryAdjustment.findUnique as any).mockResolvedValue(original as any);
             // Mock transaction/create for the new one (simplified, assuming create internals mocked)
             (prisma.inventoryAdjustment.count as any).mockResolvedValue(1);
+            (prisma.product.findMany as any).mockResolvedValue([
+                { id: 'p1', baseUOM: 'PCS', productUOMs: [] }
+            ]);
             (prisma.inventoryAdjustment.create as any).mockResolvedValue({
                 id: 'adj-2',
-                status: 'DRAFT'
+                status: 'DRAFT',
+                items: [{
+                    Product: {
+                        id: 'p1',
+                        name: 'Test Product',
+                        baseUOM: 'PCS',
+                        productUOMs: []
+                    }
+                }]
             } as any);
 
             await inventoryAdjustmentService.copy('adj-1', mockUserId);
@@ -278,19 +377,31 @@ describe('InventoryAdjustmentService', () => {
                 warehouseId: 'w1',
                 branchId: 'b1',
                 items: [
-                    { productId: 'p1', quantity: 10, uom: 'PCS', type: 'RELATIVE' },
+                    {
+                        productId: 'p1',
+                        quantity: 10,
+                        uom: 'PCS',
+                        type: 'RELATIVE',
+                        Product: { id: 'p1', baseUOM: 'PCS' }
+                    },
                     {
                         productId: 'p2',
                         quantity: 150,
                         uom: 'PCS',
                         type: 'ABSOLUTE',
                         systemQuantity: 100,
-                        actualQuantity: 150
+                        actualQuantity: 150,
+                        Product: { id: 'p2', baseUOM: 'PCS' }
                     }
                 ]
             };
 
-            const reversalDraft = { id: 'adj-reversal', status: 'DRAFT', warehouseId: 'w1', items: [] };
+            const reversalDraft = {
+                id: 'adj-reversal',
+                status: 'DRAFT',
+                warehouseId: 'w1',
+                items: [{ productId: 'p1', quantity: 1, uom: 'PCS', type: 'RELATIVE' }]
+            };
 
             (prisma.inventoryAdjustment.findUnique as any).mockImplementation(({ where }: any) => {
                 if (where.id === 'adj-1') return Promise.resolve(original);
@@ -298,6 +409,10 @@ describe('InventoryAdjustmentService', () => {
                 return Promise.resolve(null);
             });
             (prisma.inventoryAdjustment.count as any).mockResolvedValue(2);
+            (prisma.product.findMany as any).mockResolvedValue([
+                { id: 'p1', baseUOM: 'PCS', productUOMs: [] },
+                { id: 'p2', baseUOM: 'PCS', productUOMs: [] }
+            ]);
             (prisma.inventoryAdjustment.create as any).mockResolvedValue(reversalDraft as any);
 
             // Mock post() call - since it's the same service, we can spy on it or just mock the prisma for it

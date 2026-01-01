@@ -1,9 +1,9 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
-import { resetTestDatabase, createTestUser, createAuthHeaders } from '@/tests/helpers/test-db-utils';
+import { resetTestDatabase, createTestUser, createAuthHeaders, createTestCustomer, createTestBranch } from '@/tests/helpers/test-db-utils';
 import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 
-const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:3000';
+import { BASE_URL } from '../config';
 
 describe('AR Payments Report API', () => {
     let authHeaders: Record<string, string>;
@@ -13,23 +13,27 @@ describe('AR Payments Report API', () => {
 
     beforeAll(async () => {
         await resetTestDatabase();
-        const user = await createTestUser();
-        authHeaders = await createAuthHeaders(user.email, 'password123');
-        testBranchId = user.branchId;
+        const branch = await createTestBranch();
+        testBranchId = branch.id;
+
+        const user = await createTestUser({
+            // Ensure user is associated with this branch if your logic requires it, 
+            // otherwise just creating the user is enough for authHeaders.
+            // If User model doesn't have branchId, we don't pass it here.
+        });
+
+        // If your auth logic checks for branch access, you might need to create UserBranchAccess here.
+        // For now, assuming Super Admin (default role) has access to all or we just need a valid branchId for the records.
+
+        authHeaders = await createAuthHeaders(user.email, user.password);
 
         // Create test customer
-        const customer = await prisma.customer.create({
-            data: {
-                id: randomUUID(),
-                customerCode: `C-${Date.now()}`,
-                companyName: 'Test Customer',
-                contactPerson: 'Test Person', // Needed?
-                email: 'test@customer.com',
-                phone: '1234567890',
-                address: '123 Test St',
-                updatedAt: new Date(),
-
-            },
+        const customer = await createTestCustomer({
+            companyName: 'Test Customer Company',
+            contactPerson: 'Test Customer',
+            email: 'test@customer.com',
+            phone: '1234567890',
+            address: '123 Test St',
         });
         testCustomerId = customer.id;
 
@@ -39,7 +43,7 @@ describe('AR Payments Report API', () => {
                 id: randomUUID(),
                 branchId: testBranchId,
                 customerId: testCustomerId,
-                customerName: customer.companyName || 'Test Customer',
+                customerName: customer.companyName || customer.contactPerson,
                 salesOrderId: 'SO-TEST-001',
                 totalAmount: 5000,
                 paidAmount: 0,
@@ -284,3 +288,4 @@ describe('AR Payments Report API', () => {
         });
     });
 });
+

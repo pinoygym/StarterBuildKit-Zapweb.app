@@ -1,6 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { POSService } from '@/services/pos.service';
 import { posRepository } from '@/repositories/pos.repository';
+import { inventoryService } from '@/services/inventory.service';
+import { companySettingsService } from '@/services/company-settings.service';
+import { prisma } from '@/lib/prisma';
 
 // Mock dependencies
 vi.mock('@/repositories/pos.repository', () => ({
@@ -161,6 +164,56 @@ describe('POSService', () => {
             const result = await service.generateReceiptNumber();
 
             expect(result).toMatch(/^RCP-\d{8}-0003$/);
+        });
+    });
+
+    describe('processSale', () => {
+        const createInput = {
+            warehouseId: 'w1',
+            branchId: 'b1',
+            paymentMethod: 'cash' as const,
+            amountReceived: 100,
+            items: [
+                {
+                    productId: 'p1',
+                    quantity: 2,
+                    uom: 'Box',
+                    unitPrice: 50,
+                },
+            ],
+        };
+
+        it('should process sale and record stock movements with UOM tracking', async () => {
+            const mockProduct = {
+                id: 'p1',
+                name: 'Product 1',
+                baseUOM: 'Piece',
+                averageCostPrice: 30,
+                productUOMs: [
+                    { name: 'Box', conversionFactor: 10, sellingPrice: 50 }
+                ],
+                Inventory: [{ warehouseId: 'w1', quantity: 100 }]
+            };
+
+            vi.mocked(prisma.product.findMany).mockResolvedValue([mockProduct] as any);
+            vi.mocked(inventoryService.convertToBaseUOM).mockResolvedValue(20);
+            vi.mocked(posRepository.create).mockResolvedValue({ id: 'sale-1', ...createInput } as any);
+            vi.mocked(companySettingsService.getSettings).mockResolvedValue({} as any);
+
+            await service.processSale(createInput);
+
+            expect(mockTx.inventory.update).toHaveBeenCalled();
+            expect(mockTx.stockMovement.createMany).toHaveBeenCalledWith(expect.objectContaining({
+                data: expect.arrayContaining([
+                    expect.objectContaining({
+                        productId: 'p1',
+                        type: 'OUT',
+                        quantity: 20,
+                        uom: 'Box',
+                        conversionFactor: 10
+                    })
+                ])
+            }));
         });
     });
 });

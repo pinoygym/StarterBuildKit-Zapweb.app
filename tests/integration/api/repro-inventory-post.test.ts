@@ -1,8 +1,10 @@
+
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 import { createTestUser, createTestBranch, createTestWarehouse, createTestProduct } from '@/tests/helpers/test-db-utils';
-import { BASE_URL } from '../config';
+
+const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:3000';
 
 describe('Inventory Post 500 Error Reproduction', () => {
     let testUser: any;
@@ -49,7 +51,7 @@ describe('Inventory Post 500 Error Reproduction', () => {
 
             headers = {
                 'Content-Type': 'application/json',
-                'Cookie': cookie || `auth - token=${token} `, // Fallback if set-cookie missing, try manual construction
+                'Cookie': cookie || `auth-token=${token}`, // Fallback if set-cookie missing, try manual construction
             };
             console.log('Login successful');
         } catch (error) {
@@ -214,3 +216,4 @@ describe('Inventory Post 500 Error Reproduction', () => {
         }
     });
 });
+

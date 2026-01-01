@@ -2,54 +2,38 @@
 
 import { useRouter } from 'next/navigation';
 import { PageHeader } from '@/components/shared/page-header';
-import { TransferSlipForm } from '@/components/inventory/transfer-slip-form';
+import { TransferSlipForm, TransferFormData } from '@/components/inventory/transfer-slip-form';
 import { useWarehouses } from '@/hooks/use-warehouses';
 import { useProducts } from '@/hooks/use-products';
 import { TableSkeleton } from '@/components/shared/loading-skeleton';
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
+import { useCreateInventoryTransfer, usePostInventoryTransfer } from '@/hooks/use-inventory-transfers';
 
 export function NewTransferContent() {
     const router = useRouter();
     const { data: warehouses, isLoading: warehousesLoading } = useWarehouses();
     const { products, loading: productsLoading } = useProducts();
+    const { mutateAsync: createTransfer } = useCreateInventoryTransfer();
+    const { mutateAsync: postTransfer } = usePostInventoryTransfer();
 
-    const handleSubmit = async (data: any) => {
+    const handleSubmit = async (data: TransferFormData, isPost: boolean) => {
         try {
-            const response = await fetch('/api/inventory/transfer/batch', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data),
-            });
+            const transfer = await createTransfer(data);
 
-            const result = await response.json();
-
-            if (result.success) {
-                toast({
-                    title: 'Success',
-                    description: 'Stock transfer completed successfully',
-                });
-                router.push('/inventory');
-                return true;
-            } else {
-                toast({
-                    title: 'Error',
-                    description: result.error || 'Failed to transfer stock',
-                    variant: 'destructive',
-                });
-                return false;
+            if (isPost && transfer.id) {
+                await postTransfer(transfer.id);
             }
-        } catch (error) {
-            toast({
-                title: 'Error',
-                description: 'An unexpected error occurred',
-                variant: 'destructive',
-            });
+
+            router.push('/inventory/transfers');
+            return true;
+        } catch (error: any) {
+            // Error handled by hook toast
             return false;
         }
     };
 
     const handleCancel = () => {
-        router.push('/inventory');
+        router.push('/inventory/transfers');
     };
 
     if (warehousesLoading || productsLoading) {
@@ -72,6 +56,7 @@ export function NewTransferContent() {
                 breadcrumbs={[
                     { label: 'Dashboard', href: '/dashboard' },
                     { label: 'Inventory', href: '/inventory' },
+                    { label: 'Transfers', href: '/inventory/transfers' },
                     { label: 'New Transfer' },
                 ]}
             />

@@ -75,7 +75,16 @@ export default function ARPaymentsReportPage() {
             return;
         }
 
-        const headers = ['Payment Date', 'Reference Number', 'Customer', 'Branch', 'Branch Code', 'Payment Method', 'Amount'];
+        const headers = [
+            'Payment Date',
+            'Reference Number',
+            'Customer',
+            'Branch',
+            'Branch Code',
+            'Payment Method',
+            'Amount',
+        ];
+
         const data = reportData.payments.map((payment) => [
             format(new Date(payment.paymentDate), 'yyyy-MM-dd'),
             payment.referenceNumber || '-',
@@ -87,22 +96,10 @@ export default function ARPaymentsReportPage() {
         ]);
 
         exportData(
+            { headers, data },
             {
-                headers,
-                data,
-                title: 'AR Payments Received Report'
-            },
-            {
-                format: 'csv',
+                format: 'csv' as ExportFormat,
                 filename: `AR-Payments-Report-${format(new Date(), 'yyyy-MM-dd')}`,
-                filters: {
-                    fromDate: fromDate ? format(fromDate, 'yyyy-MM-dd') : undefined,
-                    toDate: toDate ? format(toDate, 'yyyy-MM-dd') : undefined,
-                    branchId: branchId || undefined,
-                    customerName: customerName || undefined,
-                    paymentMethod: paymentMethod || undefined,
-                    referenceNumber: referenceNumber || undefined,
-                }
             }
         );
 

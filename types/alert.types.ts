@@ -1,52 +1,33 @@
-import { Product, Warehouse } from '@prisma/client';
+import { Notification } from '@prisma/client';
 
-export type AlertType = 'low_stock' | 'expiring_soon' | 'expired';
-export type AlertSeverity = 'warning' | 'critical';
+export type AlertType = 'LOW_STOCK' | 'EXPIRY' | 'SYSTEM' | 'APPROVAL' | 'PAYMENT_DUE' | 'low_stock' | 'expiring_soon' | 'expired';
 
-export interface Alert {
+export interface Alert extends Partial<Notification> {
   id: string;
-  type: AlertType;
-  severity: AlertSeverity;
-  productId: string;
+  type: AlertType | string;
+  severity: 'critical' | 'warning' | 'info' | string;
   productName: string;
-  warehouseId: string;
   warehouseName: string;
-  branchId: string;
   details: string;
-  currentStock?: number;
-  minStockLevel?: number;
-  shortageAmount?: number;
-  expiryDate?: Date;
-  daysUntilExpiry?: number;
-  batchNumber?: string;
-  batchId?: string;
+  productId: string;
+  warehouseId: string;
+  createdAt: string | Date;
 }
 
-export interface AlertCounts {
-  lowStock: number;
-  expiringSoon: number;
-  expired: number;
-  total: number;
+export interface CreateAlertInput {
+  type: AlertType;
+  title: string;
+  message: string;
+  link?: string;
+  userId?: string; // Optional: if null, system-wide or admin alert (logic depends on consumers)
 }
 
 export interface AlertFilters {
-  branchId?: string;
+  isRead?: boolean;
   type?: AlertType;
-  severity?: AlertSeverity;
+  branchId?: string;
   warehouseId?: string;
-}
-
-export interface LowStockAlert {
-  product: Product;
-  warehouse: Warehouse;
-  currentStock: number;
-  minStockLevel: number;
-  shortageAmount: number;
-}
-
-export interface ExpiringAlert {
-  batch: any; // Batch tracking disabled in current schema
-  product: Product;
-  warehouse: Warehouse;
-  daysUntilExpiry: number;
+  severity?: string;
+  userId?: string;
+  limit?: number;
 }

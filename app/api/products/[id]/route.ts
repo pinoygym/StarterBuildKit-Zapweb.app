@@ -3,6 +3,7 @@ import { productService } from '@/services/product.service';
 import { authService } from '@/services/auth.service';
 import { userService } from '@/services/user.service';
 import { AppError } from '@/lib/errors';
+import { extractToken } from '@/lib/auth-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -50,7 +51,7 @@ export async function PUT(
 
     // Extract userId from token
     let userId = undefined;
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
     if (token) {
       try {
         const payload = authService.verifyToken(token);
@@ -96,7 +97,7 @@ export async function DELETE(
     // Get user from token for logging and role-based logic
     let userRole = undefined;
     let userId = undefined;
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
 
     if (token) {
       try {

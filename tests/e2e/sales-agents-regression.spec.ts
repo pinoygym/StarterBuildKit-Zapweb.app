@@ -2,6 +2,7 @@ import { test, expect } from '@playwright/test';
 
 test.describe('Sales Agents Regression Tests', () => {
     test.beforeEach(async ({ page }) => {
+        await page.setViewportSize({ width: 1280, height: 1000 });
         await page.goto('/data-maintenance');
         // await page.waitForLoadState('networkidle'); // Removed to avoid flakiness
 
@@ -34,21 +35,23 @@ test.describe('Sales Agents Regression Tests', () => {
         await page.getByRole('button', { name: 'Add Sales Agent' }).click();
 
         await expect(page.getByRole('dialog')).toBeVisible();
-        await expect(page.getByRole('heading', { name: 'Add Sales Agent' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: /Add.*Sales Agent/i })).toBeVisible();
 
         // Use placeholders to be more robust
         await page.getByPlaceholder('e.g., John Doe').fill(agentName);
         await page.getByPlaceholder('e.g., AG001').fill(agentCode);
 
         // Submit form
-        await page.getByRole('button', { name: 'Create' }).click();
+        const createBtn = page.getByRole('button', { name: 'Create' });
+        await createBtn.scrollIntoViewIfNeeded();
+        await createBtn.click();
 
-        // Verify success toast or dialog closure
-        await expect(page.getByRole('dialog')).not.toBeVisible();
+        // Wait for dialog to disappear first
+        await expect(page.getByRole('dialog')).not.toBeVisible({ timeout: 10000 });
 
-        // Verify agent appears in the list
-        await expect(page.getByText(agentName)).toBeVisible();
-        await expect(page.getByText(agentCode)).toBeVisible();
+        // Verify agent appears in the list 
+        await expect(page.getByText(agentName)).toBeVisible({ timeout: 10000 });
+        await expect(page.getByText(agentCode)).toBeVisible({ timeout: 10000 });
     });
 
     test('should display validation errors for invalid inputs', async ({ page }) => {

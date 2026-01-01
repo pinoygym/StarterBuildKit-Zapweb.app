@@ -31,6 +31,8 @@ vi.mock('@/services/product.service', () => ({
 vi.mock('@/repositories/inventory.repository', () => ({
     inventoryRepository: {
         getTotalStockByProduct: vi.fn(),
+        findInventory: vi.fn(),
+        findAllMovements: vi.fn(),
     },
 }));
 

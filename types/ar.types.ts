@@ -55,6 +55,8 @@ export interface RecordARPaymentInput {
   paymentMethod: string;
   referenceNumber?: string;
   paymentDate: Date;
+  fundSourceId?: string;
+  createdById?: string;
 }
 
 export interface ARFilters {
@@ -78,6 +80,8 @@ export interface RecordBatchPaymentInput {
   referenceNumber?: string;
   paymentDate: Date;
   allocations: BatchPaymentAllocation[];
+  fundSourceId?: string;
+  createdById?: string;
 }
 
 export interface ARPaymentReportFilters {

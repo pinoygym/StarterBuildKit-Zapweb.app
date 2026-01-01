@@ -49,8 +49,7 @@ async function checkDatabase() {
         console.log('');
         console.log('✅ Database exists and is accessible in your Neon account');
 
-    } catch (err: unknown) {
-        const error = err as Error;
+    } catch (error) {
         console.error('❌ Connection failed!');
         console.error('');
         console.error('Error:', error.message);

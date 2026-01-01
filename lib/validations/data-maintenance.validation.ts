@@ -58,9 +58,9 @@ export const updateExpenseVendorSchema = createExpenseVendorSchema.partial();
 
 // Sales Agent
 export const createSalesAgentSchema = z.object({
-  name: z.string().min(1, 'Agent name is required').max(100, 'Name must be 100 characters or less'),
+  name: z.string({ required_error: 'Agent name is required' }).min(1, 'Agent name is required').max(100, 'Name must be 100 characters or less'),
   code: z
-    .string()
+    .string({ required_error: 'Code is required' })
     .min(1, 'Code is required')
     .max(20, 'Code must be 20 characters or less')
     .regex(/^[a-zA-Z0-9_-]+$/, 'Code must contain only letters, numbers, underscores, and hyphens'),

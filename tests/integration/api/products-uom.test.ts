@@ -63,3 +63,4 @@ describe('Products UOM', () => {
     expect(body.data?.alternateUOMs?.length).toBeGreaterThanOrEqual(2)
   }, 20000)
 })
+

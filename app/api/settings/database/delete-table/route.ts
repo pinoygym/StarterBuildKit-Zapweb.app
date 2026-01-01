@@ -86,6 +86,20 @@ export async function POST(request: NextRequest) {
         const modelName = tableName.charAt(0).toLowerCase() + tableName.slice(1);
         const countBefore = await (prisma as any)[modelName].count();
 
+        // Special handling for tables with dependencies
+        if (tableName === 'Product') {
+            // Delete dependent records first to avoid foreign key constraints
+            // We verify if the models exist on prisma before deleting to be safe
+            if ((prisma as any).pOSSaleItem) await (prisma as any).pOSSaleItem.deleteMany({});
+            if ((prisma as any).salesOrderItem) await (prisma as any).salesOrderItem.deleteMany({});
+            if ((prisma as any).purchaseOrderItem) await (prisma as any).purchaseOrderItem.deleteMany({});
+            if ((prisma as any).receivingVoucherItem) await (prisma as any).receivingVoucherItem.deleteMany({});
+            if ((prisma as any).inventoryAdjustmentItem) await (prisma as any).inventoryAdjustmentItem.deleteMany({});
+            if ((prisma as any).stockMovement) await (prisma as any).stockMovement.deleteMany({});
+            if ((prisma as any).inventory) await (prisma as any).inventory.deleteMany({});
+            if ((prisma as any).productUOM) await (prisma as any).productUOM.deleteMany({});
+        }
+
         // Delete all records from the specified table
         await (prisma as any)[modelName].deleteMany({});
 

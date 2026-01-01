@@ -34,6 +34,7 @@ export interface CreatePOSSaleInput {
   partialPayment?: number; // Partial payment amount for credit sales
   change?: number; // Calculated for cash
   convertedFromOrderId?: string; // Sales order ID if converted
+  convertedFromOrderIds?: string[]; // Multiple Sales order IDs if converted bulk
   items: POSSaleItemInput[];
 }
 

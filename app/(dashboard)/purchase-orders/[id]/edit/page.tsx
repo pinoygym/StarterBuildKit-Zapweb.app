@@ -52,12 +52,8 @@ export default function EditPurchaseOrderPage({ params }: EditPurchaseOrderPageP
   };
 
   const handleSubmit = async (data: PurchaseOrderFormData) => {
-    try {
-      await updatePurchaseOrder({ id: purchaseOrderId, data });
-      router.push('/purchase-orders');
-    } catch (error) {
-      console.error('Failed to update PO:', error);
-    }
+    await updatePurchaseOrder({ id: purchaseOrderId, data });
+    router.push('/purchase-orders');
   };
 
   const handleCancel = () => {

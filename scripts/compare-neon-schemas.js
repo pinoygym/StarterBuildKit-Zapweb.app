@@ -2,7 +2,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 
 const PROD_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
-const DEV_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-billowing-violet-a18bhn59-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const DEV_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
 
 async function getSchema(connectionString, label) {
     const client = new Client({ connectionString });
@@ -200,8 +200,8 @@ function compareSchemas(devSchema, prodSchema) {
 
 async function main() {
     console.log('🔍 DEEP Comparing Neon Database Schemas...\n');
-    console.log('📊 Development DB: [New] ep-billowing-violet-a18bhn59');
-    console.log('📊 Production DB: [New] ep-floral-silence-a1jm7mgz');
+    console.log(`📊 Development DB: ${DEV_URL.split('@')[1].split('/')[0]}`);
+    console.log(`📊 Production DB: ${PROD_URL.split('@')[1].split('/')[0]}`);
 
     try {
         const devSchema = await getSchema(DEV_URL, 'DEVELOPMENT');

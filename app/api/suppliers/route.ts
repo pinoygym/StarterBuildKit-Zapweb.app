@@ -3,6 +3,7 @@ import { supplierService } from '@/services/supplier.service';
 import { authService } from '@/services/auth.service';
 import { AppError } from '@/lib/errors';
 import { SupplierFilters } from '@/types/supplier.types';
+import { extractToken } from '@/lib/auth-utils';
 
 export const dynamic = 'force-dynamic';
 
@@ -30,16 +31,6 @@ export async function GET(request: NextRequest) {
 
     const suppliers = await supplierService.getAllSuppliers(filters, { skip, limit });
 
-    // Serialize a sample supplier to check for BigInt issues
-    if (suppliers.length > 0) {
-      try {
-        JSON.stringify(suppliers[0]);
-      } catch (jsonError) {
-        console.error('[API] JSON Serialization Error on supplier sample:', jsonError);
-        throw new Error(`JSON Serialization failed: ${(jsonError as Error).message}`);
-      }
-    }
-
     // Get total count for pagination metadata
     const totalCount = await supplierService.getSupplierCount(filters);
     const totalPages = Math.ceil(totalCount / limit);
@@ -56,24 +47,25 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    console.log('[API] Sending success response for /api/suppliers');
-    return response;
-  } catch (error: any) {
-    console.error('Error fetching suppliers:', error);
-    console.error('Error details:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    });
+    // Add Cache-Control headers
+    // Cache-Control removed to ensure real-time updates for supplier list
+    // response.headers.set('Cache-Control', 'public, max-age=60, stale-while-revalidate=120');
 
-    // FORCE EXPOSE ERROR DETAILS FOR DEBUGGING
+    return response;
+  } catch (error) {
+    console.error('Error fetching suppliers:', error);
+
+    if (error instanceof AppError) {
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: error.statusCode }
+      );
+    }
+
     return NextResponse.json(
       {
         success: false,
         error: 'Failed to fetch suppliers',
-        debug_message: error.message,
-        debug_stack: error.stack,
-        debug_name: error.name,
         details: error instanceof Error ? error.message : String(error),
       },
       { status: 500 }
@@ -88,7 +80,7 @@ export async function POST(request: NextRequest) {
 
     // Extract userId from token
     let userId = undefined;
-    const token = request.cookies.get('auth-token')?.value;
+    const token = extractToken(request);
     if (token) {
       try {
         const payload = authService.verifyToken(token);

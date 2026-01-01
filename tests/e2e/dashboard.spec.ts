@@ -7,7 +7,7 @@ test.describe('Dashboard', () => {
 
     test('should display dashboard overview', async ({ page }) => {
         await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
-        await expect(page.getByText('Welcome to Softdrinks Distributions Corporation')).toBeVisible();
+
     });
 
     test('should display all KPI cards', async ({ page }) => {

@@ -65,7 +65,7 @@ async function selectOption(driver: WebDriver, label: string, optionText?: strin
     try {
         // 1. Login
         log('1. Logging in...');
-        await driver.get('http://localhost:3000/login');
+        await driver.get('http://localhost:3001/login');
 
         await fill(driver, By.id('email'), 'cybergada@gmail.com');
         await fill(driver, By.id('password'), 'Qweasd145698@');
@@ -88,7 +88,7 @@ async function selectOption(driver: WebDriver, label: string, optionText?: strin
 
         // 3. Create Purchase Order using CARTON UOM
         log(`3. Creating Purchase Order with ${caseQuantity} ${caseUOM}s...`);
-        await driver.get('http://localhost:3000/purchase-orders/new');
+        await driver.get('http://localhost:3001/purchase-orders/new');
 
         // Wait for page to fully load by checking for the form
         await driver.wait(until.elementLocated(By.xpath("//label[contains(text(), 'Supplier')]")), 15000);
@@ -152,7 +152,7 @@ async function selectOption(driver: WebDriver, label: string, optionText?: strin
         await fill(driver, By.xpath("//label[contains(text(), 'Unit Price')]/..//input"), '960');
         await click(driver, By.xpath("//button[contains(text(), 'Create Purchase Order')]"));
 
-        await driver.wait(until.urlIs('http://localhost:3000/purchase-orders'), 15000);
+        await driver.wait(until.urlIs('http://localhost:3001/purchase-orders'), 15000);
         log('   Purchase Order created.');
 
         // 4. View Details, Submit, and Receive
@@ -196,7 +196,7 @@ async function selectOption(driver: WebDriver, label: string, optionText?: strin
         log('5. Verifying Inventory...');
         log(`   Expected: ${expectedBottles} bottles (${caseQuantity} cases × ${conversionFactor})`);
         await driver.sleep(2000); // Wait for backend processing
-        await driver.get('http://localhost:3000/inventory');
+        await driver.get('http://localhost:3001/inventory');
 
         const productFilterTrigger = await driver.wait(until.elementLocated(By.xpath("//button[@role='combobox']//span[contains(text(), 'All Products')] | //button[@role='combobox'][.//span[contains(text(), 'All Products')]] | //div[contains(@class, 'flex')]//button[@role='combobox']")), 10000);
         await driver.executeScript("arguments[0].click();", productFilterTrigger);

@@ -88,38 +88,12 @@ export function SupplierDialog({
 
   const onSubmit = async (data: SupplierFormData) => {
     try {
-      const result = await onSave(supplier?.id, data);
-
-      if (result.success) {
-        toast({
-          title: 'Success',
-          description: `Supplier ${isEditing ? 'updated' : 'created'} successfully`,
-        });
-        onOpenChange(false);
-        form.reset();
-      } else {
-        // Handle validation errors
-        if (result.fields) {
-          Object.entries(result.fields).forEach(([field, message]) => {
-            form.setError(field as any, {
-              type: 'manual',
-              message: message as string,
-            });
-          });
-        }
-
-        toast({
-          title: 'Error',
-          description: result.error || `Failed to ${isEditing ? 'update' : 'create'} supplier`,
-          variant: 'destructive',
-        });
-      }
-    } catch (error) {
-      toast({
-        title: 'Error',
-        description: `Failed to ${isEditing ? 'update' : 'create'} supplier`,
-        variant: 'destructive',
-      });
+      await onSave(supplier?.id, data);
+      onOpenChange(false);
+      form.reset();
+    } catch (error: any) {
+      console.error(error);
+      toast.error(error.message || 'An error occurred while saving the supplier');
     }
   };
 

@@ -1,7 +1,6 @@
 import 'dotenv/config';
 import { prisma } from '@/lib/prisma';
 import { userRepository } from '@/repositories/user.repository';
-import { randomUUID } from 'crypto';
 
 async function main() {
     console.log('--- Case Sensitivity Test ---');
@@ -18,14 +17,12 @@ async function main() {
 
     await prisma.user.create({
         data: {
-            id: randomUUID(),
             email: email,
             passwordHash: 'temp',
             firstName: 'Mixed',
             lastName: 'Case',
             roleId: role.id,
-            status: 'ACTIVE',
-            updatedAt: new Date()
+            status: 'ACTIVE'
         }
     });
     console.log(`Created user: ${email}`);

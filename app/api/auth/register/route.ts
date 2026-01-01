@@ -9,8 +9,12 @@ export async function POST(request: NextRequest) {
   try {
     const body: RegisterInput = await request.json();
 
-
-    // Validate required fields
+    try {
+      const fs = await import('fs');
+      const dbUrl = process.env.DATABASE_URL || 'NOT SET';
+      const host = dbUrl.split('@')[1]?.split('/')[0] || 'unknown';
+      fs.appendFileSync('auth_debug.log', `[${new Date().toISOString()}] REGISTER ATTEMPT: ${JSON.stringify(body, null, 2)} | DB HOST: ${host}\n`);
+    } catch (e) { /* ignore */ }
     if (!body.email || !body.password || !body.firstName || !body.lastName) {
       return NextResponse.json(
         { success: false, message: 'Email, password, first name, and last name are required' },
@@ -42,6 +46,11 @@ export async function POST(request: NextRequest) {
     // Attempt registration
 
     const result = await authService.registerUser(body, ipAddress, userAgent);
+
+    try {
+      const fs = await import('fs');
+      fs.appendFileSync('auth_debug.log', `[${new Date().toISOString()}] REGISTER RESULT: ${JSON.stringify(result, null, 2)}\n\n`);
+    } catch (e) { /* ignore */ }
 
     if (!result.success) {
       return NextResponse.json(result, { status: 400 });

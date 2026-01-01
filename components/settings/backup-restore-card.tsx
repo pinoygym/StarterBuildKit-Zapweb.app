@@ -33,12 +33,31 @@ export function BackupRestoreCard() {
                 throw new Error(errorData.error || 'Failed to create backup');
             }
 
-            const blob = await response.blob();
+            // Parse JSON to get backup data and filename
+            const backupData = await response.json();
+
+            // Extract filename from response (set by API)
+            let filename = backupData._filename || '';
+
+            // Remove the _filename property from the export data
+            delete backupData._filename;
+
+            // Fallback if no filename
+            if (!filename) {
+                const now = new Date();
+                const dateTime = now.toISOString()
+                    .replace('T', '_')
+                    .replace(/:/g, '-')
+                    .split('.')[0];
+                filename = `backup_${dateTime}.json`;
+            }
+
+            // Create blob from clean backup data
+            const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            const date = new Date().toISOString().split('T')[0];
-            a.download = `backup-${date}.json`;
+            a.download = filename;
             document.body.appendChild(a);
             a.click();
             window.URL.revokeObjectURL(url);

@@ -49,9 +49,9 @@ export default function BranchesPage() {
 
   const handleSave = async (id: string | undefined, data: any) => {
     if (id) {
-      await updateBranchMutation.mutateAsync({ id, data });
+      return await updateBranchMutation.mutateAsync({ id, data });
     } else {
-      await createBranchMutation.mutateAsync(data);
+      return await createBranchMutation.mutateAsync(data);
     }
   };
 

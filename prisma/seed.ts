@@ -11,6 +11,7 @@ import { seedAdminUser } from './seeds/admin-user.seed';
 import { seedUsers } from './seeds/users.seed';
 import { seedFromProdData } from './seeds/prod-seed';
 import { seedImageProducts } from './seeds/image-products.seed';
+import { seedReferenceData } from './seeds/reference-data.seed';
 
 const connectionString = process.env.DATABASE_URL;
 const pool = new Pool({ connectionString });
@@ -24,6 +25,9 @@ async function main() {
     await seedFromProdData(prisma);
     return;
   }
+
+  // Seed reference data (categories, payment methods, etc.)
+  await seedReferenceData(prisma);
 
   // Seed authentication data
   await seedPermissions(prisma);

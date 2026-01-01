@@ -9,10 +9,14 @@ import { PermissionsDialog } from '@/components/roles/permissions-dialog';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Plus, Search } from 'lucide-react';
+import { Plus, Search, ShieldAlert } from 'lucide-react';
 import { TableSkeleton } from '@/components/shared/loading-skeleton';
+import { useAuth } from '@/contexts/auth.context';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
+
 
 export default function RolesPage() {
+  const { isSuperMegaAdmin, isLoading: authLoading } = useAuth();
   const [searchTerm, setSearchTerm] = useState('');
   const [dialogOpen, setDialogOpen] = useState(false);
   const [permissionsDialogOpen, setPermissionsDialogOpen] = useState(false);
@@ -20,6 +24,38 @@ export default function RolesPage() {
   const [selectedRoleForPermissions, setSelectedRoleForPermissions] = useState<RoleWithPermissions | null>(null);
 
   const { data, isLoading } = useRoles({ search: searchTerm || undefined });
+
+  // Show loading state while checking authentication
+  if (authLoading) {
+    return (
+      <div className="space-y-6">
+        <PageHeader
+          title="Roles"
+          description="Manage user roles and permissions"
+        />
+        <TableSkeleton rows={10} />
+      </div>
+    );
+  }
+
+  // Check if user is super admin
+  if (!isSuperMegaAdmin()) {
+    return (
+      <div className="space-y-6">
+        <PageHeader
+          title="Roles"
+          description="Manage user roles and permissions"
+        />
+        <Alert variant="destructive">
+          <ShieldAlert className="h-4 w-4" />
+          <AlertTitle>Access Denied</AlertTitle>
+          <AlertDescription>
+            You do not have permission to view roles. This page is restricted to Super Admins only.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   const roles = data?.roles || [];
 

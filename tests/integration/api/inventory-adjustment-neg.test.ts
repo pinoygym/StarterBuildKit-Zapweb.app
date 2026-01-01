@@ -92,6 +92,16 @@ describe('Inventory Adjustment Negative Post API', () => {
         if (testAdjustmentId) {
             await prisma.inventoryAdjustment.delete({ where: { id: testAdjustmentId } }).catch(() => { });
         }
+        if (testProductId && testWarehouseId) {
+            await prisma.inventory.deleteMany({
+                where: {
+                    OR: [
+                        { productId: testProductId },
+                        { warehouseId: testWarehouseId }
+                    ]
+                }
+            }).catch(() => { });
+        }
         if (testProductId) {
             await prisma.product.delete({ where: { id: testProductId } }).catch(() => { });
         }
@@ -151,3 +161,4 @@ describe('Inventory Adjustment Negative Post API', () => {
         expect(Number(inventory?.quantity)).toBe(40);
     });
 });
+

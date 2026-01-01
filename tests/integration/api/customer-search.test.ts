@@ -1,4 +1,5 @@
 
+// @vitest-environment node
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { BASE_URL } from '../config';
 
@@ -25,12 +26,14 @@ describe('Customer Search Integration Tests', () => {
             'Authorization': `Bearer ${token}`,
         };
 
-        // Create Test Customer 1
+        // Create Test Customer 1 with explicit random customerCode
         const timestamp = Date.now();
+        const randomSuffix = Math.random().toString(36).substring(2, 8).toUpperCase();
         const res1 = await fetch(`${BASE_URL}/api/customers`, {
             method: 'POST',
             headers,
             body: JSON.stringify({
+                customerCode: `TEST-${timestamp}-${randomSuffix}-1`,
                 companyName: `SearchTest One ${timestamp}`,
                 contactPerson: 'UniqueName Alpha',
                 phone: '09171111111',
@@ -38,16 +41,22 @@ describe('Customer Search Integration Tests', () => {
                 status: 'active',
                 customerType: 'regular',
                 creditLimit: 1000,
+                paymentTerms: 'Net 30',
             }),
         });
         const data1 = await res1.json();
+        if (!res1.ok || !data1.success) {
+            console.error('Failed to create test customer 1:', JSON.stringify(data1, null, 2));
+            throw new Error(`Customer 1 creation failed: ${data1.error || 'Unknown error'}`);
+        }
         customer1Id = data1.data.id;
 
-        // Create Test Customer 2
+        // Create Test Customer 2 with explicit random customerCode
         const res2 = await fetch(`${BASE_URL}/api/customers`, {
             method: 'POST',
             headers,
             body: JSON.stringify({
+                customerCode: `TEST-${timestamp}-${randomSuffix}-2`,
                 companyName: `SearchTest Two ${timestamp}`,
                 contactPerson: 'UniqueName Beta',
                 phone: '09172222222',
@@ -55,11 +64,17 @@ describe('Customer Search Integration Tests', () => {
                 status: 'active',
                 customerType: 'wholesale',
                 creditLimit: 2000,
+                paymentTerms: 'Net 30',
             }),
         });
         const data2 = await res2.json();
+        if (!res2.ok || !data2.success) {
+            console.error('Failed to create test customer 2:', JSON.stringify(data2, null, 2));
+            throw new Error(`Customer 2 creation failed: ${data2.error || 'Unknown error'}`);
+        }
         customer2Id = data2.data.id;
     });
+
 
     afterAll(async () => {
         const ids = [customer1Id, customer2Id];
@@ -123,3 +138,4 @@ describe('Customer Search Integration Tests', () => {
         expect(found).toBeUndefined();
     });
 });
+

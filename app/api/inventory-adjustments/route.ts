@@ -22,8 +22,8 @@ export async function GET(request: NextRequest) {
             dateTo: searchParams.get('dateTo') ? new Date(searchParams.get('dateTo')!) : undefined,
         };
 
-        const adjustments = await inventoryAdjustmentService.findAll(filters);
-        return NextResponse.json({ success: true, data: adjustments });
+        const result = await inventoryAdjustmentService.findAll(filters);
+        return NextResponse.json({ success: true, ...result });
     } catch (error: any) {
         console.error('Error fetching adjustments:', error);
         return NextResponse.json({ success: false, error: 'Failed to fetch adjustments' }, { status: 500 });

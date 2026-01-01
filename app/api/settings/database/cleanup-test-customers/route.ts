@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { settingsService } from '@/services/settings.service';
 import { AppError } from '@/lib/errors';
+import { BackupService } from '@/services/backup.service';
 
 export const dynamic = 'force-dynamic';
 export const revalidate = 0;
@@ -9,8 +10,15 @@ export const fetchCache = 'force-no-store';
 // POST /api/settings/database/cleanup-test-customers - Clean up test customers
 export async function POST() {
     try {
+        // Create backup before cleaning up test customers
+        console.log('[Cleanup Test Customers] Creating backup before cleanup...');
+        const backup = await BackupService.createBackupWithMetadata('before_cleanup_test_customers');
+        console.log(`[Cleanup Test Customers] Backup created: ${backup._filename}`);
+
         const result = await settingsService.cleanupTestCustomers();
-        return NextResponse.json({ success: true, data: result });
+
+        // Return both the result and the backup
+        return NextResponse.json({ success: true, data: result, backup: backup });
     } catch (error) {
         console.error('Error cleaning up test customers:', error);
 

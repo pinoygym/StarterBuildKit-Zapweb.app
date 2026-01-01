@@ -1,6 +1,9 @@
+// @vitest-environment node
+
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
+
 import { BASE_URL } from '../config';
 
 describe('Adjustments API Routes', () => {
@@ -9,8 +12,12 @@ describe('Adjustments API Routes', () => {
     let testProductId: string;
     let testReferenceId: string;
     let testBranchId: string;
+    let testAdjustmentId: string;
 
     beforeAll(async () => {
+        // Ensure database is seeded
+        await fetch(`${BASE_URL}/api/dev/seed`, { method: 'POST' });
+
         // Get or create test branch
         let branch = await prisma.branch.findFirst();
         if (!branch) {
@@ -59,7 +66,48 @@ describe('Adjustments API Routes', () => {
 
         testReferenceId = `TEST-${randomUUID()}`;
 
-        // Create test adjustment
+        // Get auth token and userId
+        const loginResponse = await fetch(`${BASE_URL}/api/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email: 'cybergada@gmail.com',
+                password: 'Qweasd145698@',
+            }),
+        });
+
+        let userId: string;
+        if (loginResponse.ok) {
+            const loginData = await loginResponse.json();
+            userId = loginData.user.id;
+
+            const cookies = loginResponse.headers.get('set-cookie');
+            if (cookies) {
+                const tokenMatch = cookies.match(/auth-token=([^;]+)/);
+                if (tokenMatch) {
+                    authToken = tokenMatch[1];
+                }
+            }
+        } else {
+            throw new Error('Failed to login for test setup');
+        }
+
+        // Create test InventoryAdjustment (used by list endpoint)
+        testAdjustmentId = randomUUID();
+        await prisma.inventoryAdjustment.create({
+            data: {
+                id: testAdjustmentId,
+                adjustmentNumber: `ADJ-${randomUUID().substring(0, 8)}`,
+                warehouseId: testWarehouseId,
+                branchId: testBranchId,
+                reason: 'Test API adjustment',
+                status: 'POSTED',
+                referenceNumber: testReferenceId,
+                createdById: userId,
+            },
+        });
+
+        // Create test stock movements (used by detail endpoint)
         await prisma.stockMovement.createMany({
             data: [
                 {
@@ -71,6 +119,7 @@ describe('Adjustments API Routes', () => {
                     referenceId: testReferenceId,
                     quantity: 10,
                     reason: 'Test API adjustment',
+                    createdAt: new Date()
                 },
                 {
                     id: randomUUID(),
@@ -81,36 +130,19 @@ describe('Adjustments API Routes', () => {
                     referenceId: testReferenceId,
                     quantity: 5,
                     reason: 'Test API adjustment',
+                    createdAt: new Date()
                 },
             ],
         });
-
-        // Get auth token (assuming you have a test user)
-        // This is a placeholder - adjust based on your auth setup
-        const loginResponse = await fetch(`${BASE_URL}/api/auth/login`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                email: 'cybergada@gmail.com',
-                password: 'Qweasd145698@',
-            }),
-        });
-
-        if (loginResponse.ok) {
-            const cookies = loginResponse.headers.get('set-cookie');
-            if (cookies) {
-                const tokenMatch = cookies.match(/auth-token=([^;]+)/);
-                if (tokenMatch) {
-                    authToken = tokenMatch[1];
-                }
-            }
-        }
     });
 
     afterAll(async () => {
         // Clean up test data
         await prisma.stockMovement.deleteMany({
             where: { referenceId: testReferenceId },
+        });
+        await prisma.inventoryAdjustment.deleteMany({
+            where: { referenceNumber: testReferenceId },
         });
         await prisma.product.delete({ where: { id: testProductId } });
         await prisma.warehouse.delete({ where: { id: testWarehouseId } });
@@ -157,8 +189,9 @@ describe('Adjustments API Routes', () => {
         });
 
         it('should filter by search query', async () => {
+            // Note: API expects 'searchQuery', not 'search'
             const response = await fetch(
-                `${BASE_URL}/api/inventory/adjustments?search=${testReferenceId}`,
+                `${BASE_URL}/api/inventory/adjustments?searchQuery=${testReferenceId}`,
                 {
                     headers: {
                         Cookie: `auth-token=${authToken}`,
@@ -170,6 +203,8 @@ describe('Adjustments API Routes', () => {
             const data = await response.json();
             expect(data.success).toBe(true);
 
+            // The API returns adjustment slips grouped by referenceId
+            // Each slip has a referenceNumber field (not referenceId)
             if (data.data.length > 0) {
                 const adjustment = data.data.find((a: any) => a.referenceNumber === testReferenceId);
                 expect(adjustment).toBeDefined();
@@ -213,7 +248,7 @@ describe('Adjustments API Routes', () => {
             expect(response.status).toBe(200);
             const data = await response.json();
             expect(data.success).toBe(true);
-            expect(data.data.referenceId).toBe(testReferenceId);
+            expect(data.data.referenceNumber).toBe(testReferenceId);
             expect(data.data.totalItems).toBe(2);
             expect(data.data.items).toHaveLength(2);
             expect(data.data.warehouseId).toBe(testWarehouseId);
@@ -237,3 +272,4 @@ describe('Adjustments API Routes', () => {
         });
     });
 });
+

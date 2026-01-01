@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { roleService } from '@/services/role.service';
 import { authService } from '@/services/auth.service';
 import { userHasPermission } from '@/middleware/permission.middleware';
+import { userService } from '@/services/user.service';
 
 export const dynamic = 'force-dynamic';
 
@@ -25,6 +26,15 @@ export async function GET(request: NextRequest) {
       return NextResponse.json(
         { success: false, message: 'Invalid session' },
         { status: 401 }
+      );
+    }
+
+    // Check for super admin
+    const currentUser = await userService.getUserById(payload.userId);
+    if (!currentUser?.isSuperMegaAdmin) {
+      return NextResponse.json(
+        { success: false, message: 'Forbidden: Super Admin access required' },
+        { status: 403 }
       );
     }
 
@@ -79,6 +89,15 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { success: false, message: 'Invalid session' },
         { status: 401 }
+      );
+    }
+
+    // Check for super admin
+    const currentUser = await userService.getUserById(payload.userId);
+    if (!currentUser?.isSuperMegaAdmin) {
+      return NextResponse.json(
+        { success: false, message: 'Forbidden: Super Admin access required' },
+        { status: 403 }
       );
     }
 

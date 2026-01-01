@@ -73,7 +73,7 @@ export async function generateFreeTTS(scriptPath: string, outputPath: string) {
     // Generate audio
     console.log('🎙️  Synthesizing speech...');
 
-    await (EdgeTTS as any).ttsToFile(outputPath, fullText, voice, {
+    await EdgeTTS.ttsToFile(outputPath, fullText, voice, {
       rate: '0%', // Normal speed
       pitch: '+0Hz', // Normal pitch
     });

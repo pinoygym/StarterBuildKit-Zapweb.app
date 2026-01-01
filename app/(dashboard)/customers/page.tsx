@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Plus, Search, Filter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PaginationControls } from '@/components/shared/pagination-controls';
 import {
   Select,
   SelectContent,
@@ -31,7 +32,7 @@ export default function CustomersPage() {
   const [filters, setFilters] = useState<CustomerFilters>({});
   const [searchTerm, setSearchTerm] = useState('');
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(25);
 
   const activeFilters = { ...filters, page, limit, search: searchTerm || undefined };
   const { data: customers = [], pagination, isLoading } = useCustomers(activeFilters);
@@ -185,52 +186,16 @@ export default function CustomersPage() {
 
           {/* Pagination Controls */}
           {pagination && (
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-              <div className="text-sm text-muted-foreground order-2 sm:order-1">
-                Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.totalCount)} of {pagination.totalCount} customers
-              </div>
-
-              <div className="flex items-center gap-2 order-1 sm:order-2">
-                <div className="flex items-center gap-2 mr-2">
-                  <span className="text-sm text-muted-foreground hidden sm:inline">Rows per page</span>
-                  <Select
-                    value={limit.toString()}
-                    onValueChange={handleLimitChange}
-                  >
-                    <SelectTrigger className="w-[70px] h-8">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="25">25</SelectItem>
-                      <SelectItem value="50">50</SelectItem>
-                      <SelectItem value="100">100</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex gap-1">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={page <= 1 || isLoading}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => p + 1)}
-                    disabled={!pagination.hasMore || isLoading}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <PaginationControls
+              page={page}
+              limit={limit}
+              totalCount={pagination.totalCount}
+              onPageChange={setPage}
+              onLimitChange={handleLimitChange}
+              loading={isLoading}
+              itemName="customers"
+              hasMore={pagination.hasMore}
+            />
           )}
         </div>
       )}

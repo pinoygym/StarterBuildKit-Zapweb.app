@@ -36,7 +36,7 @@ async function runTest(iteration: number): Promise<boolean> {
     });
 }
 
-async function runSeleniumTests() {
+async function runAllTests() {
     const startTime = Date.now();
 
     console.log(`\n${'█'.repeat(80)}`);
@@ -74,4 +74,4 @@ async function runSeleniumTests() {
     }
 }
 
-runSeleniumTests();
+runAllTests();

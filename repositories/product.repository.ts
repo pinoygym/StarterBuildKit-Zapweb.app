@@ -29,6 +29,12 @@ export class ProductRepository {
         where,
         include: {
           productUOMs: true,
+          Supplier: {
+            select: {
+              id: true,
+              companyName: true,
+            }
+          }
         },
         orderBy: { name: 'asc' },
         skip: pagination?.skip,
@@ -38,6 +44,7 @@ export class ProductRepository {
       return products.map(product => ({
         ...product,
         alternateUOMs: product.productUOMs,
+        Supplier: product.Supplier ? { id: product.Supplier.id, companyName: product.Supplier.companyName } : null,
       }));
     }, 'ProductRepository.findAll');
   }
@@ -72,6 +79,12 @@ export class ProductRepository {
         where: { id },
         include: {
           productUOMs: true,
+          Supplier: {
+            select: {
+              id: true,
+              companyName: true,
+            }
+          }
         },
       });
 
@@ -80,6 +93,7 @@ export class ProductRepository {
       return {
         ...product,
         alternateUOMs: product.productUOMs,
+        Supplier: product.Supplier ? { id: product.Supplier.id, companyName: product.Supplier.companyName } : null,
       };
     }, 'ProductRepository.findById');
   }

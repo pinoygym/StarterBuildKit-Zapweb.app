@@ -7,8 +7,9 @@ export class AuditLogRepository {
   /**
    * Create audit log entry
    */
-  async create(data: CreateAuditLogInput) {
-    return prisma.auditLog.create({
+  async create(data: CreateAuditLogInput, tx?: Prisma.TransactionClient) {
+    const db = tx || prisma;
+    return db.auditLog.create({
       data: {
         id: randomUUID(),
         userId: data.userId,

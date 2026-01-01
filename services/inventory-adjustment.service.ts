@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma';
+import { randomUUID } from 'crypto';
 import { inventoryService } from '@/services/inventory.service';
 import {
     CreateAdjustmentInput,
@@ -31,15 +32,71 @@ export class InventoryAdjustmentService {
     }
 
     /**
+    * Validate that no product is duplicated in items
+    */
+    private validateNoDuplicateProducts(items: { productId: string }[]): void {
+        const productIds = items.map(item => item.productId);
+        const uniqueProductIds = new Set(productIds);
+
+        if (productIds.length !== uniqueProductIds.size) {
+            // Find which products are duplicated
+            const duplicates = productIds.filter((id, index) =>
+                productIds.indexOf(id) !== index
+            );
+            const uniqueDuplicates = [...new Set(duplicates)];
+
+            throw new ValidationError(
+                `The following product(s) appear more than once in this adjustment: ${uniqueDuplicates.join(', ')}. Each product can only be added once per adjustment slip.`
+            );
+        }
+    }
+
+    /**
+     * Validate that all UOMs are valid for their respective products
+     */
+    private async validateUOMs(items: { productId: string, uom: string }[], tx?: Prisma.TransactionClient): Promise<void> {
+        const client = tx || prisma;
+        const productIds = [...new Set(items.map(i => i.productId))];
+        const products = await client.product.findMany({
+            where: { id: { in: productIds } },
+            include: { productUOMs: true }
+        });
+
+        const productMap = new Map(products.map(p => [p.id, p]));
+
+        for (const item of items) {
+            const product = productMap.get(item.productId);
+            if (!product) continue; // Will be caught by DB constraints if product doesn't exist
+
+            const uomName = item.uom.toLowerCase();
+            const isValid =
+                product.baseUOM.toLowerCase() === uomName ||
+                product.productUOMs.some(u => u.name.toLowerCase() === uomName);
+
+            if (!isValid) {
+                const available = [product.baseUOM, ...product.productUOMs.map(u => u.name)].join(', ');
+                throw new ValidationError(
+                    `UOM "${item.uom}" is not valid for product "${product.name}". Available UOMs: ${available}`
+                );
+            }
+        }
+    }
+
+    /**
      * Create a new draft adjustment
      */
     async create(data: CreateAdjustmentInput, userId: string): Promise<InventoryAdjustmentWithRelations> {
+        // Validate no duplicate products
+        this.validateNoDuplicateProducts(data.items);
+        // Validate UOMs
+        await this.validateUOMs(data.items);
+
         return await prisma.$transaction(async (tx) => {
             const adjustmentNumber = await this.generateAdjustmentNumber(tx);
 
             const adjustment = await tx.inventoryAdjustment.create({
                 data: {
-                    id: crypto.randomUUID(),
+                    id: randomUUID(),
                     adjustmentNumber,
                     warehouseId: data.warehouseId,
                     branchId: data.branchId,
@@ -50,7 +107,7 @@ export class InventoryAdjustmentService {
                     createdById: userId,
                     items: {
                         create: data.items.map(item => ({
-                            id: crypto.randomUUID(),
+                            id: randomUUID(),
                             productId: item.productId,
                             quantity: item.quantity,
                             uom: item.uom,
@@ -62,12 +119,13 @@ export class InventoryAdjustmentService {
                 },
                 include: {
                     items: {
+                        orderBy: { createdAt: 'asc' },
                         include: {
                             Product: {
                                 select: {
                                     id: true,
                                     name: true,
-                                    baseUOM: true,
+                                    baseUOM: true
                                 }
                             }
                         }
@@ -82,10 +140,6 @@ export class InventoryAdjustmentService {
                         select: { id: true, firstName: true, lastName: true }
                     },
                     PostedBy: {
-                        select: { id: true, firstName: true, lastName: true }
-                    },
-                    // @ts-ignore
-                    UpdatedBy: {
                         select: { id: true, firstName: true, lastName: true }
                     }
                 }
@@ -123,6 +177,8 @@ export class InventoryAdjustmentService {
 
         // Prepare update data
         const updateData: Prisma.InventoryAdjustmentUncheckedUpdateInput = {
+            ...(data.warehouseId && { warehouseId: data.warehouseId }),
+            ...(data.branchId && { branchId: data.branchId }),
             ...(data.reason && { reason: data.reason }),
             ...(data.referenceNumber !== undefined && { referenceNumber: data.referenceNumber }),
             ...(data.adjustmentDate && { adjustmentDate: data.adjustmentDate || undefined }),
@@ -132,11 +188,14 @@ export class InventoryAdjustmentService {
         };
 
         if (data.items) {
+            // Validate no duplicate products
+            this.validateNoDuplicateProducts(data.items);
+            await this.validateUOMs(data.items);
             // Replace items logic
             updateData.items = {
                 deleteMany: {}, // Delete all existing for this adjustment
                 create: data.items.map(item => ({
-                    id: crypto.randomUUID(),
+                    id: randomUUID(),
                     productId: item.productId,
                     quantity: item.quantity,
                     uom: item.uom,
@@ -152,12 +211,13 @@ export class InventoryAdjustmentService {
             data: updateData,
             include: {
                 items: {
+                    orderBy: { createdAt: 'asc' },
                     include: {
                         Product: {
                             select: {
                                 id: true,
                                 name: true,
-                                baseUOM: true,
+                                baseUOM: true
                             }
                         }
                     }
@@ -172,10 +232,6 @@ export class InventoryAdjustmentService {
                     select: { id: true, firstName: true, lastName: true }
                 },
                 PostedBy: {
-                    select: { id: true, firstName: true, lastName: true }
-                },
-                // @ts-ignore
-                UpdatedBy: {
                     select: { id: true, firstName: true, lastName: true }
                 }
             }
@@ -198,124 +254,144 @@ export class InventoryAdjustmentService {
      */
     async post(id: string, userId: string): Promise<InventoryAdjustmentWithRelations> {
         return await prisma.$transaction(async (tx) => {
-            const adjustment = await tx.inventoryAdjustment.findUnique({
-                where: { id },
-                include: { items: true }
-            });
+            try {
+                const adjustment = await tx.inventoryAdjustment.findUnique({
+                    where: { id },
+                    include: { items: true }
+                });
 
-            if (!adjustment) {
-                throw new NotFoundError('Inventory adjustment not found');
-            }
-
-            if (adjustment.status !== 'DRAFT') {
-                throw new ValidationError('Only draft adjustments can be posted');
-            }
-
-            // Batch fetch current inventory levels
-            const productIds = adjustment.items.map(i => i.productId);
-            const inventoryRecords = await tx.inventory.findMany({
-                where: {
-                    warehouseId: adjustment.warehouseId,
-                    productId: { in: productIds }
-                }
-            });
-            const inventoryMap = new Map(inventoryRecords.map(inv => [inv.productId, Number(inv.quantity)]));
-
-            // Record system quantities and actual quantities for all items
-            for (const item of adjustment.items) {
-                const currentStock = inventoryMap.get(item.productId) || 0;
-
-                let actualQuantity: number;
-                if (item.type === 'ABSOLUTE') {
-                    // For absolute, item.quantity IS the target actual quantity
-                    actualQuantity = item.quantity;
-                } else {
-                    // For relative, item.quantity is the change
-                    actualQuantity = currentStock + item.quantity;
+                if (!adjustment) {
+                    throw new NotFoundError('Inventory adjustment not found');
                 }
 
-                await tx.inventoryAdjustmentItem.update({
-                    where: { id: item.id },
-                    data: {
-                        systemQuantity: currentStock,
-                        actualQuantity: actualQuantity
+                if (adjustment.items.length === 0) {
+                    throw new ValidationError('Adjustment has no items');
+                }
+
+                if (adjustment.status !== 'DRAFT') {
+                    throw new ValidationError('Only draft adjustments can be posted');
+                }
+
+                // Batch fetch current inventory levels
+                const productIds = adjustment.items.map(i => i.productId);
+                const inventoryRecords = await tx.inventory.findMany({
+                    where: {
+                        warehouseId: adjustment.warehouseId,
+                        productId: { in: productIds }
                     }
                 });
-            }
+                const inventoryMap = new Map(inventoryRecords.map(inv => [inv.productId, Number(inv.quantity)]));
 
-            // Refresh adjustment data to get updated items
-            const refreshedAdjustment = await tx.inventoryAdjustment.findUnique({
-                where: { id },
-                include: { items: true }
-            });
+                // Record system quantities and actual quantities for all items in parallel
+                await Promise.all(adjustment.items.map(async (item) => {
+                    const currentStock = inventoryMap.get(item.productId) || 0;
 
-            if (!refreshedAdjustment) throw new NotFoundError('Adjustment not found after update');
+                    // Convert item.quantity to base stock units for accurate snapshotting
+                    const baseQuantityChange = await inventoryService.convertToBaseUOM(
+                        item.productId,
+                        item.quantity,
+                        item.uom
+                    );
 
-            const stockItems = refreshedAdjustment.items.map(item => ({
-                productId: item.productId,
-                quantity: item.quantity,
-                uom: item.uom,
-                adjustmentType: item.type as 'RELATIVE' | 'ABSOLUTE'
-            }));
+                    let actualQuantity: number;
+                    if (item.type === 'ABSOLUTE') {
+                        // For absolute, the Converted baseQuantityChange IS the target actual quantity
+                        actualQuantity = baseQuantityChange;
+                    } else {
+                        // For relative, the Converted baseQuantityChange is the change
+                        actualQuantity = currentStock + baseQuantityChange;
+                    }
 
-            await inventoryService.adjustStockBatch({
-                warehouseId: refreshedAdjustment.warehouseId,
-                reason: refreshedAdjustment.reason,
-                adjustmentDate: refreshedAdjustment.adjustmentDate,
-                referenceNumber: refreshedAdjustment.adjustmentNumber, // Link StockMovement to this Adjustment Number
-                items: stockItems
-            });
+                    return tx.inventoryAdjustmentItem.update({
+                        where: { id: item.id },
+                        data: {
+                            systemQuantity: currentStock,
+                            actualQuantity: actualQuantity
+                        }
+                    });
+                }));
 
-            // Mark as posted
-            const updated = await tx.inventoryAdjustment.update({
-                where: { id },
-                data: {
-                    status: 'POSTED',
-                    postedById: userId,
-                    updatedAt: new Date()
-                },
-                include: {
-                    items: {
-                        include: {
-                            Product: {
-                                select: {
-                                    id: true,
-                                    name: true,
-                                    baseUOM: true,
+                // Refresh adjustment data to get updated items
+                const refreshedAdjustment = await tx.inventoryAdjustment.findUnique({
+                    where: { id },
+                    include: { items: true }
+                });
+
+                if (!refreshedAdjustment) throw new NotFoundError('Adjustment not found after update');
+
+                const stockItems = refreshedAdjustment.items.map(item => ({
+                    productId: item.productId,
+                    quantity: item.quantity,
+                    uom: item.uom,
+                    adjustmentType: item.type as 'RELATIVE' | 'ABSOLUTE'
+                }));
+
+                await inventoryService.adjustStockBatch({
+                    warehouseId: refreshedAdjustment.warehouseId,
+                    reason: refreshedAdjustment.reason,
+                    adjustmentDate: refreshedAdjustment.adjustmentDate,
+                    referenceNumber: refreshedAdjustment.adjustmentNumber, // Link StockMovement to this Adjustment Number
+                    items: stockItems
+                }, tx);
+
+                // Mark as posted
+                const updated = await tx.inventoryAdjustment.update({
+                    where: { id },
+                    data: {
+                        status: 'POSTED',
+                        postedById: userId,
+                        updatedAt: new Date()
+                    },
+                    include: {
+                        items: {
+                            orderBy: { createdAt: 'asc' },
+                            include: {
+                                Product: {
+                                    select: {
+                                        id: true,
+                                        name: true,
+                                        baseUOM: true
+                                    }
                                 }
                             }
+                        },
+                        Warehouse: {
+                            select: { id: true, name: true }
+                        },
+                        Branch: {
+                            select: { id: true, name: true }
+                        },
+                        CreatedBy: {
+                            select: { id: true, firstName: true, lastName: true }
+                        },
+                        PostedBy: {
+                            select: { id: true, firstName: true, lastName: true }
                         }
-                    },
-                    Warehouse: {
-                        select: { id: true, name: true }
-                    },
-                    Branch: {
-                        select: { id: true, name: true }
-                    },
-                    CreatedBy: {
-                        select: { id: true, firstName: true, lastName: true }
-                    },
-                    PostedBy: {
-                        select: { id: true, firstName: true, lastName: true }
-                    },
-                    // @ts-ignore
-                    UpdatedBy: {
-                        select: { id: true, firstName: true, lastName: true }
                     }
+                });
+
+                // Log post
+                await auditService.log({
+                    userId,
+                    action: 'POST',
+                    resource: 'INVENTORY_ADJUSTMENT',
+                    resourceId: id,
+                    details: { adjustmentNumber: updated.adjustmentNumber }
+                }, tx);
+
+                return updated as unknown as InventoryAdjustmentWithRelations;
+            } catch (error) {
+                console.error('===== INVENTORY ADJUSTMENT POST ERROR =====');
+                console.error('Adjustment ID:', id);
+                console.error('User ID:', userId);
+                console.error('Error:', error);
+                if (error instanceof Error) {
+                    console.error('Stack:', error.stack);
                 }
-            });
-
-            // Log post
-            await auditService.log({
-                userId,
-                action: 'POST',
-                resource: 'INVENTORY_ADJUSTMENT',
-                resourceId: id,
-                details: { adjustmentNumber: updated.adjustmentNumber }
-            });
-
-            return updated as unknown as InventoryAdjustmentWithRelations;
-        });
+                console.error('============================================');
+                throw error;
+            }
+        }, { maxWait: 5000, timeout: 60000 });
     }
 
     /**
@@ -353,15 +429,14 @@ export class InventoryAdjustmentService {
                 Branch: { select: { id: true, name: true } },
                 CreatedBy: { select: { id: true, firstName: true, lastName: true } },
                 PostedBy: { select: { id: true, firstName: true, lastName: true } },
-                // @ts-ignore
-                UpdatedBy: { select: { id: true, firstName: true, lastName: true } },
                 items: {
+                    orderBy: { createdAt: 'asc' },
                     include: {
                         Product: {
                             select: {
                                 id: true,
                                 name: true,
-                                baseUOM: true,
+                                baseUOM: true
                             }
                         }
                     }
@@ -375,7 +450,7 @@ export class InventoryAdjustmentService {
         });
 
         return {
-            data: data as unknown as InventoryAdjustmentWithRelations[],
+            data: (data || []) as unknown as InventoryAdjustmentWithRelations[],
             meta: {
                 total,
                 page,
@@ -390,12 +465,20 @@ export class InventoryAdjustmentService {
             where: { id },
             include: {
                 items: {
+                    orderBy: { createdAt: 'asc' },
                     include: {
                         Product: {
                             select: {
                                 id: true,
                                 name: true,
                                 baseUOM: true,
+                                productUOMs: {
+                                    select: {
+                                        id: true,
+                                        name: true,
+                                        conversionFactor: true
+                                    }
+                                }
                             }
                         }
                     }
@@ -410,10 +493,6 @@ export class InventoryAdjustmentService {
                     select: { id: true, firstName: true, lastName: true }
                 },
                 PostedBy: {
-                    select: { id: true, firstName: true, lastName: true }
-                },
-                // @ts-ignore
-                UpdatedBy: {
                     select: { id: true, firstName: true, lastName: true }
                 }
             }
@@ -472,27 +551,29 @@ export class InventoryAdjustmentService {
         }
 
         const reversalItems = original.items.map(item => {
-            let reverseQuantity = 0;
-            let type: 'RELATIVE' | 'ABSOLUTE' = 'RELATIVE';
-
             if (item.type === 'RELATIVE') {
-                reverseQuantity = -item.quantity;
+                return {
+                    productId: item.productId,
+                    quantity: -item.quantity,
+                    uom: item.uom,
+                    type: 'RELATIVE' as const
+                };
             } else {
                 // Reversal of ABSOLUTE uses recorded system and actual quantities
+                // These are already in BASE units (refer to post() method lines 303-310)
                 const system = item.systemQuantity || 0;
-                const actual = item.actualQuantity || item.quantity;
-                const delta = actual - system;
+                const actual = item.actualQuantity || 0;
+                const deltaBase = actual - system;
 
-                // Reversal is negative of delta
-                reverseQuantity = -delta;
+                // For ABSOLUTE, we must reverse the delta in BASE units
+                // to avoid miscalculations if the original used an alternate UOM.
+                return {
+                    productId: item.productId,
+                    quantity: -deltaBase,
+                    uom: item.Product.baseUOM,
+                    type: 'RELATIVE' as const
+                };
             }
-
-            return {
-                productId: item.productId,
-                quantity: reverseQuantity,
-                uom: item.uom,
-                type: type
-            };
         });
 
         const input: CreateAdjustmentInput = {

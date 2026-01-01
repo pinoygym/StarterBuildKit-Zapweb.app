@@ -49,6 +49,10 @@ export type ProductWithUOMs = Product & {
     firstName: string;
     lastName: string;
   };
+  Supplier?: {
+    id: string;
+    companyName: string;
+  } | null;
 };
 
 export interface ProductFilters {

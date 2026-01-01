@@ -85,38 +85,12 @@ export function WarehouseDialog({
 
   const onSubmit = async (data: WarehouseFormData) => {
     try {
-      const result = await onSave(warehouse?.id, data);
-
-      if (result.success) {
-        toast({
-          title: 'Success',
-          description: `Warehouse ${isEditing ? 'updated' : 'created'} successfully`,
-        });
-        onOpenChange(false);
-        form.reset();
-      } else {
-        // Handle validation errors
-        if (result.fields) {
-          Object.entries(result.fields).forEach(([field, message]) => {
-            form.setError(field as any, {
-              type: 'manual',
-              message: message as string,
-            });
-          });
-        }
-
-        toast({
-          title: 'Error',
-          description: result.error || `Failed to ${isEditing ? 'update' : 'create'} warehouse`,
-          variant: 'destructive',
-        });
-      }
+      await onSave(warehouse?.id, data);
+      onOpenChange(false);
+      form.reset();
     } catch (error) {
-      toast({
-        title: 'Error',
-        description: `Failed to ${isEditing ? 'update' : 'create'} warehouse`,
-        variant: 'destructive',
-      });
+      // Error handling and toasts are managed by the mutation hook
+      console.error(error);
     }
   };
 

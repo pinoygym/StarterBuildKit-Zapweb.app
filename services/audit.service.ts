@@ -70,9 +70,9 @@ export class AuditService {
     details?: any;
     ipAddress?: string;
     userAgent?: string;
-  }) {
+  }, tx?: any) {
     try {
-      return await auditLogRepository.create(params);
+      return await auditLogRepository.create(params, tx);
     } catch (error) {
       console.error('AuditService.log error:', error);
       // Fail silently to not disrupt main business logic

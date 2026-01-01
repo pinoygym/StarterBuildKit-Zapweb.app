@@ -140,21 +140,17 @@ describe('Reset Password Form (React 19)', () => {
     });
 
     it('shows error for invalid token', async () => {
-        // Mock API response for token validation (if component does it)
-        // or just ensure the component's assumption is met.
-        // Assuming component calls an API to validate/reset.
-        (global.fetch as any).mockResolvedValueOnce({
-            ok: false,
-            status: 400,
-            json: async () => ({ success: false, message: 'Invalid reset link' }),
-        });
+        // Override mock to simulate missing token
+        const useSearchParamsMock = vi.fn(() => ({
+            get: vi.fn(() => null),
+        }));
+        const navigationMock = await import('next/navigation');
+        (navigationMock as any).useSearchParams = useSearchParamsMock;
 
-        // The component should handle missing token internally
         const ResetPasswordPage = (await import('@/app/(auth)/reset-password/page')).default;
 
         render(<ResetPasswordPage />);
 
-        // Wait for error
         await waitFor(() => {
             expect(screen.getByText(/invalid reset link/i)).toBeInTheDocument();
         });

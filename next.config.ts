@@ -3,6 +3,7 @@ import type { NextConfig } from "next";
 // Trigger rebuild
 
 const nextConfig: NextConfig = {
+  distDir: process.env.IS_PLAYWRIGHT === 'true' ? '.next-test' : '.next',
 
   typescript: {
     ignoreBuildErrors: true,

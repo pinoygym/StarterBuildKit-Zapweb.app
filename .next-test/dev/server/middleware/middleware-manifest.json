@@ -1,0 +1,31 @@
+{
+  "sorted_middleware": [],
+  "middleware": {
+    "/": {
+      "files": [
+        "server/edge/chunks/Documents_GitHub_buenasv2_0dd0d815._.js",
+        "server/edge/chunks/[root-of-the-server]__b4d5d5ca._.js",
+        "server/edge/chunks/turbopack-Documents_GitHub_buenasv2_edge-wrapper_a33b0a8f.js"
+      ],
+      "name": "middleware",
+      "page": "/",
+      "matchers": [
+        {
+          "regexp": "/:nextData(_next/data/[^/]{1,})?/((?!_next/static|_next/image|favicon.ico|public).*){(\\\\.json)}?",
+          "originalSource": "/((?!_next/static|_next/image|favicon.ico|public).*)"
+        }
+      ],
+      "wasm": [],
+      "assets": [],
+      "env": {
+        "__NEXT_BUILD_ID": "development",
+        "NEXT_SERVER_ACTIONS_ENCRYPTION_KEY": "/XgTqc42YE0dUTAy9zwcou0XOzWgtZ2aln4bxO/Pac4=",
+        "__NEXT_PREVIEW_MODE_ID": "c6b8f045a040b26164e7821436b22966",
+        "__NEXT_PREVIEW_MODE_ENCRYPTION_KEY": "6e1b51b8b36b910cf5e3f6f1cbd92becfa1180d37958722c3f2c4bf0531d0a44",
+        "__NEXT_PREVIEW_MODE_SIGNING_KEY": "2f7336be826c150971f51680b19966181bafc60a22fb6e21719ded3d88492093"
+      }
+    }
+  },
+  "instrumentation": null,
+  "functions": {}
+}

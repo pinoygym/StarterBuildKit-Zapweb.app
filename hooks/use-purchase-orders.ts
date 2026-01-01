@@ -20,6 +20,7 @@ export function usePurchaseOrders(filters?: PurchaseOrderFilters) {
       if (filters?.branchId) queryParams.append('branchId', filters.branchId);
       if (filters?.supplierId) queryParams.append('supplierId', filters.supplierId);
       if (filters?.warehouseId) queryParams.append('warehouseId', filters.warehouseId);
+      if (filters?.search) queryParams.append('search', filters.search);
       if (filters?.startDate) queryParams.append('startDate', filters.startDate.toISOString());
       if (filters?.endDate) queryParams.append('endDate', filters.endDate.toISOString());
 

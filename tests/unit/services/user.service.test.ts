@@ -38,22 +38,17 @@ describe('UserService', () => {
   describe('getAllUsers', () => {
     it('should return all users with pagination', async () => {
       const mockUsers = [{ id: '1', email: 'user1@test.com' }, { id: '2', email: 'user2@test.com' }];
-      vi.mocked(userRepository.findAll).mockResolvedValue({ data: mockUsers, total: 2, page: 1, limit: 20, totalPages: 1 } as any);
+      vi.mocked(userRepository.findAll).mockResolvedValue(mockUsers as any);
 
       const result = await service.getAllUsers();
 
-      // Assuming service returns the raw paginated response or we need to adjust expectation
-      // Given the TS error, the repo returns an object. 
-      // If service simply returns repo result (common), then result is that object.
-      // So expect(result.data).toEqual(mockUsers) would be correct.
-      // But I will just fix the mock value for now to make TS happy.
-      expect(result.data).toEqual(mockUsers);
+      expect(result).toEqual(mockUsers);
       expect(userRepository.findAll).toHaveBeenCalledWith(undefined, 1, 20);
     });
 
     it('should apply filters', async () => {
       const filters = { status: 'ACTIVE' };
-      vi.mocked(userRepository.findAll).mockResolvedValue({ data: [], total: 0, page: 2, limit: 50, totalPages: 0 } as any);
+      vi.mocked(userRepository.findAll).mockResolvedValue([]);
 
       await service.getAllUsers(filters as any, 2, 50);
 
@@ -100,7 +95,7 @@ describe('UserService', () => {
     it('should throw error if user not found', async () => {
       vi.mocked(userRepository.findById).mockResolvedValue(null);
 
-      await expect(service.updateUser('1', {}, 'admin-id')).rejects.toThrow('User not found');
+      await expect(service.updateUser('1', {}, 'admin-id')).rejects.toThrow("User with identifier '1' not found");
     });
 
     it('should throw error if email already exists', async () => {
@@ -128,7 +123,7 @@ describe('UserService', () => {
     it('should throw error if user not found', async () => {
       vi.mocked(userRepository.findById).mockResolvedValue(null);
 
-      await expect(service.deleteUser('1', 'admin-id')).rejects.toThrow('User not found');
+      await expect(service.deleteUser('1', 'admin-id')).rejects.toThrow("User with identifier '1' not found");
     });
   });
 

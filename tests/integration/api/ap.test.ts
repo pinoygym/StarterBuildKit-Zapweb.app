@@ -1,7 +1,7 @@
+
 // @vitest-environment node
 
-import { describe, it, expect, beforeAll, afterAll, beforeEach, afterEach } from 'vitest';
-import { BASE_URL } from '../config';
+import { describe, it, expect, beforeAll, afterAll, beforeEach } from 'vitest';
 import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 import {
@@ -11,6 +11,8 @@ import {
   cleanupTestData,
   TestDataIds,
 } from '@/tests/helpers/test-db-utils';
+
+import { BASE_URL } from '../config';
 
 describe('Accounts Payable API Integration Tests', () => {
   let testUser: any;
@@ -68,7 +70,7 @@ describe('Accounts Payable API Integration Tests', () => {
         dueDate: dueDate.toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap`, {
+      const response = await fetch(`${BASE_URL}/api/ap`, {
         method: 'POST',
         headers,
         body: JSON.stringify(apData),
@@ -104,7 +106,7 @@ describe('Accounts Payable API Integration Tests', () => {
         dueDate: dueDate.toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap`, {
+      const response = await fetch(`${BASE_URL}/api/ap`, {
         method: 'POST',
         headers,
         body: JSON.stringify(apData),
@@ -130,7 +132,7 @@ describe('Accounts Payable API Integration Tests', () => {
     });
 
     it('should validate required fields', async () => {
-      const response = await fetch(`${BASE_URL} /api/ap`, {
+      const response = await fetch(`${BASE_URL}/api/ap`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -173,7 +175,7 @@ describe('Accounts Payable API Integration Tests', () => {
         paymentDate: new Date().toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify(paymentData),
@@ -204,7 +206,7 @@ describe('Accounts Payable API Integration Tests', () => {
         paymentDate: new Date().toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify(paymentData),
@@ -221,7 +223,7 @@ describe('Accounts Payable API Integration Tests', () => {
 
     it('should handle multiple partial payments', async () => {
       // First payment
-      await fetch(`${BASE_URL} /api/ap / payment`, {
+      await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -233,7 +235,7 @@ describe('Accounts Payable API Integration Tests', () => {
       });
 
       // Second payment
-      await fetch(`${BASE_URL} /api/ap / payment`, {
+      await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -245,7 +247,7 @@ describe('Accounts Payable API Integration Tests', () => {
       });
 
       // Third payment (final)
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -282,7 +284,7 @@ describe('Accounts Payable API Integration Tests', () => {
         paymentDate: new Date().toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify(paymentData),
@@ -302,7 +304,7 @@ describe('Accounts Payable API Integration Tests', () => {
         paymentDate: new Date().toISOString(),
       };
 
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify(paymentData),
@@ -314,7 +316,7 @@ describe('Accounts Payable API Integration Tests', () => {
     });
 
     it('should validate required payment fields', async () => {
-      const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+      const response = await fetch(`${BASE_URL}/api/ap/payment`, {
         method: 'POST',
         headers,
         body: JSON.stringify({
@@ -345,7 +347,7 @@ describe('Accounts Payable API Integration Tests', () => {
           },
         });
 
-        const response = await fetch(`${BASE_URL} /api/ap / payment`, {
+        const response = await fetch(`${BASE_URL}/api/ap/payment`, {
           method: 'POST',
           headers,
           body: JSON.stringify({
@@ -450,7 +452,7 @@ describe('Accounts Payable API Integration Tests', () => {
 
     it('should calculate aging buckets correctly', async () => {
       const response = await fetch(
-        `${BASE_URL} /api/ap / aging - report ? branchId = ${testBranch.id} `,
+        `${BASE_URL}/api/ap/aging-report?branchId=${testBranch.id}`,
         { headers }
       );
 
@@ -483,7 +485,7 @@ describe('Accounts Payable API Integration Tests', () => {
 
     it('should calculate total outstanding correctly', async () => {
       const response = await fetch(
-        `${BASE_URL} /api/ap / aging - report ? branchId = ${testBranch.id} `,
+        `${BASE_URL}/api/ap/aging-report?branchId=${testBranch.id}`,
         { headers }
       );
 
@@ -550,7 +552,7 @@ describe('Accounts Payable API Integration Tests', () => {
     });
 
     it('should fetch all AP records', async () => {
-      const response = await fetch(`${BASE_URL} /api/ap`, { headers });
+      const response = await fetch(`${BASE_URL}/api/ap`, { headers });
       const data = await response.json();
 
       expect(response.status).toBe(200);
@@ -559,7 +561,7 @@ describe('Accounts Payable API Integration Tests', () => {
     });
 
     it('should filter by status', async () => {
-      const response = await fetch(`${BASE_URL} /api/ap ? status = pending`, {
+      const response = await fetch(`${BASE_URL}/api/ap?status=pending`, {
         headers,
       });
       const data = await response.json();
@@ -571,7 +573,7 @@ describe('Accounts Payable API Integration Tests', () => {
 
     it('should filter by branch', async () => {
       const response = await fetch(
-        `${BASE_URL} /api/ap ? branchId = ${testBranch.id} `,
+        `${BASE_URL}/api/ap?branchId=${testBranch.id}`,
         { headers }
       );
       const data = await response.json();
@@ -585,7 +587,7 @@ describe('Accounts Payable API Integration Tests', () => {
 
     it('should filter by supplier', async () => {
       const response = await fetch(
-        `${BASE_URL} /api/ap ? supplierId = ${testSupplier.id} `,
+        `${BASE_URL}/api/ap?supplierId=${testSupplier.id}`,
         { headers }
       );
       const data = await response.json();
@@ -598,3 +600,4 @@ describe('Accounts Payable API Integration Tests', () => {
     });
   });
 });
+

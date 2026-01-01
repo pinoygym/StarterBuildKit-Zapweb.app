@@ -48,7 +48,8 @@ if ($schemaComparisonOutput -match "SCHEMA MISMATCH") {
         Write-Host "Deployment aborted" -ForegroundColor Yellow
         exit 1
     }
-} else {
+}
+else {
     Write-Host "✅ Schemas are in sync" -ForegroundColor Green
 }
 Write-Host ""
@@ -70,7 +71,7 @@ Write-Host ""
 Write-Host "📋 Step 6: Preparing to deploy migrations..." -ForegroundColor Yellow
 Write-Host "⚠️  About to deploy migrations to PRODUCTION" -ForegroundColor Yellow
 Write-Host ""
-Write-Host "Production Database: ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech"
+Write-Host "Production Database: ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech"
 Write-Host ""
 $finalConfirm = Read-Host "Are you sure you want to continue? (yes/no)"
 if ($finalConfirm -ne "yes") {
@@ -81,12 +82,13 @@ Write-Host ""
 
 # Step 7: Deploy migrations to production
 Write-Host "📋 Step 7: Deploying migrations to production..." -ForegroundColor Yellow
-$env:DATABASE_URL = "postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require"
+$env:DATABASE_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
 npx prisma migrate deploy
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Migrations deployed successfully!" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "❌ Migration deployment failed!" -ForegroundColor Red
     exit 1
 }
@@ -108,7 +110,8 @@ npm run build
 
 if ($LASTEXITCODE -eq 0) {
     Write-Host "✅ Application built successfully!" -ForegroundColor Green
-} else {
+}
+else {
     Write-Host "❌ Build failed!" -ForegroundColor Red
     exit 1
 }

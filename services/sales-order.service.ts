@@ -277,7 +277,20 @@ export class SalesOrderService {
       throw new NotFoundError('Sales Order');
     }
 
+    if (salesOrder.salesOrderStatus === 'converted') {
+      throw new ValidationError(`Sales Order ${salesOrder.orderNumber} is already converted to a sale`);
+    }
+
     return await salesOrderRepository.markAsConverted(id, convertedToSaleId, tx);
+  }
+
+  /**
+   * Mark multiple sales orders as converted to a POS sale
+   */
+  async markMultipleAsConverted(ids: string[], convertedToSaleId: string, tx?: any): Promise<void> {
+    for (const id of ids) {
+      await this.markAsConverted(id, convertedToSaleId, tx);
+    }
   }
 
   /**

@@ -37,17 +37,6 @@ export async function GET(request: NextRequest) {
       { skip, limit }
     );
 
-
-    // Serialize a sample customer to check for BigInt issues
-    if (customers.length > 0) {
-      try {
-        JSON.stringify(customers[0]);
-      } catch (jsonError) {
-        console.error('[API] JSON Serialization Error on customer sample:', jsonError);
-        throw new Error(`JSON Serialization failed: ${(jsonError as Error).message}`);
-      }
-    }
-
     // Get total count for pagination metadata
     const totalCount = await customerService.getCustomerCount(
       Object.keys(filters).length > 0 ? filters : undefined
@@ -66,25 +55,23 @@ export async function GET(request: NextRequest) {
       }
     });
 
-    console.log('[API] Sending success response for /api/customers');
-    return response;
-  } catch (error: any) {
-    console.error('Error fetching customers:', error);
-    console.error('Error details:', {
-      message: error.message,
-      stack: error.stack,
-      name: error.name
-    });
+    // Add Cache-Control headers for customer data (2 minutes cache)
+    // Cache-Control removed to ensure real-time updates for customers list
+    // response.headers.set('Cache-Control', 'public, max-age=120, stale-while-revalidate=240');
 
-    // FORCE EXPOSE ERROR DETAILS FOR DEBUGGING
+    return response;
+  } catch (error) {
+    console.error('Error fetching customers:', error);
+
+    if (error instanceof AppError) {
+      return NextResponse.json(
+        { success: false, error: error.message },
+        { status: error.statusCode }
+      );
+    }
+
     return NextResponse.json(
-      {
-        success: false,
-        error: 'Failed to fetch customers',
-        debug_message: error.message,
-        debug_stack: error.stack,
-        debug_name: error.name
-      },
+      { success: false, error: 'Failed to fetch customers' },
       { status: 500 }
     );
   }
@@ -112,6 +99,9 @@ export async function POST(request: NextRequest) {
       status: body.status,
     };
 
+    console.log('POST /api/customers body:', body);
+    console.log('POST /api/customers customerData:', customerData);
+
     // Extract userId from token
     let userId = undefined;
     const token = request.cookies.get('auth-token')?.value;
@@ -132,16 +122,28 @@ export async function POST(request: NextRequest) {
     }, { status: 201 });
   } catch (error) {
     console.error('Error creating customer:', error);
+    if (error instanceof AppError) {
+      console.error('AppError details:', JSON.stringify(error, null, 2));
+    }
 
     if (error instanceof AppError) {
       return NextResponse.json(
-        { success: false, error: error.message, fields: (error as any).fields },
+        {
+          success: false,
+          error: error.message,
+          fields: (error as any).fields,
+        },
         { status: error.statusCode }
       );
     }
 
     return NextResponse.json(
-      { success: false, error: 'Failed to create customer' },
+      {
+        success: false,
+        error: 'Failed to create customer',
+        details: error instanceof Error ? error.message : String(error),
+        stack: error instanceof Error ? error.stack : undefined
+      },
       { status: 500 }
     );
   }

@@ -28,6 +28,7 @@ import {
   PackageCheck,
   ClipboardEdit,
   Milestone,
+  Wallet,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -41,6 +42,7 @@ const navigation = [
   { name: 'Products', href: '/products', icon: Package },
   { name: 'Inventory', href: '/inventory', icon: BoxIcon },
   { name: 'Adjustments', href: '/inventory/adjustments', icon: ClipboardEdit },
+  { name: 'Stock Transfers', href: '/inventory/transfers', icon: Milestone },
   { name: 'Warehouses', href: '/warehouses', icon: Warehouse },
   { name: 'Branches', href: '/branches', icon: Building2 },
   { name: 'Customers', href: '/customers', icon: Users },
@@ -51,16 +53,17 @@ const navigation = [
   { name: 'POS', href: '/pos', icon: Store },
   { name: 'Sales History', href: '/sales-history', icon: History },
   { name: 'AR/AP', href: '/ar-ap', icon: CreditCard },
+  { name: 'Fund Sources', href: '/fund-sources', icon: Wallet },
   { name: 'Expenses', href: '/expenses', icon: Receipt },
   { name: 'Alerts', href: '/alerts', icon: AlertCircle },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
+  { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
   { name: 'Roadmap', href: '/roadmap', icon: Milestone },
 ];
 
 const settingsNavigation = [
   { name: 'Users', href: '/users', icon: UserCog },
   { name: 'Roles', href: '/roles', icon: Shield },
-  { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
   { name: 'Audit Logs', href: '/settings/audit-logs', icon: History },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
@@ -69,7 +72,7 @@ const settingsNavigation = [
 export function Sidebar({ counts }: { counts?: Record<string, number> }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, logout } = useAuth();
+  const { user, logout, isSuperMegaAdmin } = useAuth();
   const { companyName } = useCompanyName();
 
   const handleLogout = async () => {
@@ -188,29 +191,31 @@ export function Sidebar({ counts }: { counts?: Record<string, number> }) {
           <Separator className="my-3" />
           <div className="pt-2">
             <p className="px-3 text-xs font-semibold text-muted-foreground mb-2">Settings</p>
-            {settingsNavigation.map((item) => {
-              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-              const Icon = item.icon;
+            {settingsNavigation
+              .filter(() => isSuperMegaAdmin())
+              .map((item) => {
+                const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+                const Icon = item.icon;
 
-              return (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={cn(
-                    'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                    'min-h-[44px]',
-                    isActive
-                      ? 'bg-primary text-primary-foreground shadow-sm'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  )}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  <span className="truncate">{item.name}</span>
-                </Link>
-              );
-            })}
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className={cn(
+                      'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                      'min-h-[44px]',
+                      isActive
+                        ? 'bg-primary text-primary-foreground shadow-sm'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    )}
+                    aria-current={isActive ? 'page' : undefined}
+                  >
+                    <Icon className="h-5 w-5 flex-shrink-0" />
+                    <span className="truncate">{item.name}</span>
+                  </Link>
+                );
+              })}
           </div>
         </nav>
 

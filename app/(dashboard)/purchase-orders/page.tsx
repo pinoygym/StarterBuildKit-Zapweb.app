@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { Plus, FileText } from 'lucide-react';
+import { Plus, FileText, Search } from 'lucide-react';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -23,12 +24,14 @@ export default function PurchaseOrdersPage() {
   const router = useRouter();
   const [statusFilter, setStatusFilter] = useState<PurchaseOrderStatus | 'all'>('all');
   const [branchFilter, setBranchFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   const { data: branches } = useBranches();
 
   const filters = {
     status: statusFilter !== 'all' ? statusFilter : undefined,
     branchId: branchFilter !== 'all' ? branchFilter : undefined,
+    search: searchQuery || undefined,
   };
 
   const { data: purchaseOrders, isLoading } = usePurchaseOrders(filters);
@@ -86,6 +89,16 @@ export default function PurchaseOrdersPage() {
 
       {/* Filters */}
       <div className="mb-6 flex flex-col sm:flex-row gap-4">
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search by supplier name or PO #..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
+
         <Select
           value={statusFilter}
           onValueChange={(value) => setStatusFilter(value as PurchaseOrderStatus | 'all')}

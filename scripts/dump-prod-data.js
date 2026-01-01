@@ -2,7 +2,7 @@ const { Client } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-const PROD_URL = 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const PROD_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
 
 const OUTPUT_DIR = path.join(__dirname, '../prisma/seeds/prod-data');
 

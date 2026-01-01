@@ -6,6 +6,7 @@ import { Search, Filter, Plus } from 'lucide-react';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PaginationControls } from '@/components/shared/pagination-controls';
 import {
     Select,
     SelectContent,
@@ -28,7 +29,7 @@ export default function AdjustmentsPage() {
     const [warehouseFilter, setWarehouseFilter] = useState<string>('all');
     const [statusFilter, setStatusFilter] = useState<string>('all');
     const [page, setPage] = useState(1);
-    const [limit, setLimit] = useState<string>('10');
+    const [limit, setLimit] = useState(25);
 
     const { data: warehouses } = useWarehouses();
 
@@ -37,7 +38,7 @@ export default function AdjustmentsPage() {
         status: statusFilter !== 'all' ? statusFilter as AdjustmentStatus : undefined,
         searchQuery: searchQuery || undefined,
         page,
-        limit: limit === 'all' ? 0 : parseInt(limit),
+        limit,
     });
 
     const adjustments = response?.data || [];
@@ -170,54 +171,22 @@ export default function AdjustmentsPage() {
                     <AdjustmentsTable adjustments={adjustments} loading={isLoading} />
 
                     {/* Pagination Controls */}
-                    <div className="flex items-center justify-between mt-4">
-                        <div className="flex items-center gap-2">
-                            <span className="text-sm text-muted-foreground">Rows per page:</span>
-                            <Select
-                                value={limit}
-                                onValueChange={(val) => {
-                                    setLimit(val);
+                    {meta && (
+                        <div className="mt-4">
+                            <PaginationControls
+                                page={page}
+                                limit={limit}
+                                totalCount={meta.total}
+                                onPageChange={handlePageChange}
+                                onLimitChange={(newLimit) => {
+                                    setLimit(newLimit);
                                     setPage(1);
                                 }}
-                            >
-                                <SelectTrigger className="w-[100px]">
-                                    <SelectValue />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="10">10</SelectItem>
-                                    <SelectItem value="20">20</SelectItem>
-                                    <SelectItem value="50">50</SelectItem>
-                                    <SelectItem value="all">Show All</SelectItem>
-                                </SelectContent>
-                            </Select>
+                                loading={isLoading}
+                                itemName="adjustments"
+                            />
                         </div>
-
-                        {meta && limit !== 'all' && (
-                            <div className="flex items-center gap-4">
-                                <span className="text-sm text-muted-foreground">
-                                    Page {meta.page} of {meta.totalPages}
-                                </span>
-                                <div className="flex gap-2">
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handlePageChange(page - 1)}
-                                        disabled={page <= 1}
-                                    >
-                                        Previous
-                                    </Button>
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => handlePageChange(page + 1)}
-                                        disabled={page >= meta.totalPages}
-                                    >
-                                        Next
-                                    </Button>
-                                </div>
-                            </div>
-                        )}
-                    </div>
+                    )}
                 </>
             )}
         </div>

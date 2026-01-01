@@ -10,35 +10,37 @@ const { exec } = require('child_process');
 const util = require('util');
 const execPromise = util.promisify(exec);
 
-// Database configurations
+// Database configurations - using environment variables
+require('dotenv').config();
+
 const databases = {
-    development: {
-        name: 'Development (ep-noisy-mountain)',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-noisy-mountain-a18wvzwi'
-    },
-    production: {
-        name: 'Production (ep-blue-mouse)',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-blue-mouse-a128nyc9'
-    },
-    vercel: {
-        name: 'Vercel Deployment',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-noisy-mountain-a18wvzwi'
-    }
+  development: {
+    name: 'Development (ep-spring-pond)',
+    url: process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+    branch: 'ep-spring-pond-a1stve3k'
+  },
+  production: {
+    name: 'Production (ep-floral-silence)',
+    url: 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+    branch: 'ep-floral-silence-a1jm7mgz'
+  },
+  vercel: {
+    name: 'Vercel Deployment',
+    url: process.env.DATABASE_URL || 'Check Vercel environment variables',
+    branch: 'Check Vercel configuration'
+  }
 };
 
 const ADMIN_EMAIL = 'cybergada@gmail.com';
 
 async function checkDatabase(dbConfig) {
-    console.log(`\n${'='.repeat(80)}`);
-    console.log(`Checking: ${dbConfig.name}`);
-    console.log(`Branch: ${dbConfig.branch}`);
-    console.log(`${'='.repeat(80)}\n`);
+  console.log(`\n${'='.repeat(80)}`);
+  console.log(`Checking: ${dbConfig.name}`);
+  console.log(`Branch: ${dbConfig.branch}`);
+  console.log(`${'='.repeat(80)}\n`);
 
-    // Create a temporary script that will use the specific DATABASE_URL
-    const checkScript = `
+  // Create a temporary script that will use the specific DATABASE_URL
+  const checkScript = `
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
@@ -111,94 +113,94 @@ async function check() {
 check();
   `;
 
-    try {
-        const { stdout, stderr } = await execPromise(`node -e "${checkScript.replace(/"/g, '\\"')}"`, {
-            env: { ...process.env, DATABASE_URL: dbConfig.url }
-        });
+  try {
+    const { stdout, stderr } = await execPromise(`node -e "${checkScript.replace(/"/g, '\\"')}"`, {
+      env: { ...process.env, DATABASE_URL: dbConfig.url }
+    });
 
-        console.log(stdout);
+    console.log(stdout);
 
-        // Extract JSON result from output
-        const jsonMatch = stdout.match(/\{.*\}/);
-        if (jsonMatch) {
-            return JSON.parse(jsonMatch[0]);
-        }
-
-        return { success: false };
-    } catch (error) {
-        console.error(error.message);
-        return { success: false, error: error.message };
+    // Extract JSON result from output
+    const jsonMatch = stdout.match(/\{.*\}/);
+    if (jsonMatch) {
+      return JSON.parse(jsonMatch[0]);
     }
+
+    return { success: false };
+  } catch (error) {
+    console.error(error.message);
+    return { success: false, error: error.message };
+  }
 }
 
 async function main() {
-    console.log('\n🔍 VERIFYING PRODUCTION DATABASE CONFIGURATION\n');
-    console.log('This script will check:');
-    console.log('1. Which database Vercel is using');
-    console.log('2. If admin user exists in each database');
-    console.log('3. Database statistics\n');
+  console.log('\n🔍 VERIFYING PRODUCTION DATABASE CONFIGURATION\n');
+  console.log('This script will check:');
+  console.log('1. Which database Vercel is using');
+  console.log('2. If admin user exists in each database');
+  console.log('3. Database statistics\n');
 
-    const results = {};
+  const results = {};
 
-    // Check Development database
-    results.development = await checkDatabase(databases.development);
+  // Check Development database
+  results.development = await checkDatabase(databases.development);
 
-    // Check Production database
-    results.production = await checkDatabase(databases.production);
+  // Check Production database
+  results.production = await checkDatabase(databases.production);
 
-    // Summary
-    console.log('\n' + '='.repeat(80));
-    console.log('SUMMARY');
-    console.log('='.repeat(80) + '\n');
+  // Summary
+  console.log('\n' + '='.repeat(80));
+  console.log('SUMMARY');
+  console.log('='.repeat(80) + '\n');
 
-    console.log('🔍 VERCEL CONFIGURATION:');
-    console.log(`   Vercel is using: ${databases.vercel.name}`);
-    console.log(`   Branch: ${databases.vercel.branch}`);
+  console.log('🔍 VERCEL CONFIGURATION:');
+  console.log(`   Vercel is using: ${databases.vercel.name}`);
+  console.log(`   Branch: ${databases.vercel.branch}`);
 
-    if (databases.vercel.branch === databases.development.branch) {
-        console.log('   ⚠️  WARNING: Vercel is using the DEVELOPMENT database!');
-    } else if (databases.vercel.branch === databases.production.branch) {
-        console.log('   ✅ Vercel is using the PRODUCTION database');
-    }
+  if (databases.vercel.branch === databases.development.branch) {
+    console.log('   ⚠️  WARNING: Vercel is using the DEVELOPMENT database!');
+  } else if (databases.vercel.branch === databases.production.branch) {
+    console.log('   ✅ Vercel is using the PRODUCTION database');
+  }
 
-    console.log('\n📊 ADMIN USER STATUS:');
-    console.log(`   Development: ${results.development?.hasAdmin ? '✅ Found' : '❌ Not Found'}`);
-    console.log(`   Production: ${results.production?.hasAdmin ? '✅ Found' : '❌ Not Found'}`);
+  console.log('\n📊 ADMIN USER STATUS:');
+  console.log(`   Development: ${results.development?.hasAdmin ? '✅ Found' : '❌ Not Found'}`);
+  console.log(`   Production: ${results.production?.hasAdmin ? '✅ Found' : '❌ Not Found'}`);
 
-    console.log('\n📊 DATABASE STATISTICS:');
-    console.log('\n   Development:');
-    if (results.development?.stats) {
-        console.log(`     - Users: ${results.development.stats.users}`);
-        console.log(`     - Roles: ${results.development.stats.roles}`);
-        console.log(`     - Branches: ${results.development.stats.branches}`);
-        console.log(`     - Products: ${results.development.stats.products}`);
-    }
+  console.log('\n📊 DATABASE STATISTICS:');
+  console.log('\n   Development:');
+  if (results.development?.stats) {
+    console.log(`     - Users: ${results.development.stats.users}`);
+    console.log(`     - Roles: ${results.development.stats.roles}`);
+    console.log(`     - Branches: ${results.development.stats.branches}`);
+    console.log(`     - Products: ${results.development.stats.products}`);
+  }
 
-    console.log('\n   Production:');
-    if (results.production?.stats) {
-        console.log(`     - Users: ${results.production.stats.users}`);
-        console.log(`     - Roles: ${results.production.stats.roles}`);
-        console.log(`     - Branches: ${results.production.stats.branches}`);
-        console.log(`     - Products: ${results.production.stats.products}`);
-    }
+  console.log('\n   Production:');
+  if (results.production?.stats) {
+    console.log(`     - Users: ${results.production.stats.users}`);
+    console.log(`     - Roles: ${results.production.stats.roles}`);
+    console.log(`     - Branches: ${results.production.stats.branches}`);
+    console.log(`     - Products: ${results.production.stats.products}`);
+  }
 
-    // Recommendations
-    console.log('\n💡 RECOMMENDATIONS:');
+  // Recommendations
+  console.log('\n💡 RECOMMENDATIONS:');
 
-    if (!results.production?.hasAdmin && results.development?.hasAdmin) {
-        console.log('   ⚠️  Production database is missing the admin user');
-        console.log('   → Run: node scripts/seed-production.js');
-    }
+  if (!results.production?.hasAdmin && results.development?.hasAdmin) {
+    console.log('   ⚠️  Production database is missing the admin user');
+    console.log('   → Run: node scripts/seed-production.js');
+  }
 
-    if (databases.vercel.branch === databases.development.branch) {
-        console.log('   ⚠️  Vercel is pointing to development database');
-        console.log('   → Update DATABASE_URL in Vercel to use production branch');
-        console.log('   → Production URL: ' + databases.production.url);
-    }
+  if (databases.vercel.branch === databases.development.branch) {
+    console.log('   ⚠️  Vercel is pointing to development database');
+    console.log('   → Update DATABASE_URL in Vercel to use production branch');
+    console.log('   → Production URL: ' + databases.production.url);
+  }
 
-    console.log('\n' + '='.repeat(80) + '\n');
+  console.log('\n' + '='.repeat(80) + '\n');
 }
 
 main()
-    .catch(console.error)
-    .finally(() => process.exit(0));
+  .catch(console.error)
+  .finally(() => process.exit(0));

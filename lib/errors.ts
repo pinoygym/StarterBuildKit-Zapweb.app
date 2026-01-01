@@ -135,6 +135,20 @@ export class ForbiddenError extends AppError {
  * Transforms Prisma errors into user-friendly AppErrors
  */
 export function handlePrismaError(error: unknown, context?: string): AppError {
+  // Log the original error for debugging
+  console.error('===== PRISMA ERROR =====');
+  console.error('Context:', context);
+  console.error('Error:', error);
+  if (error instanceof Error) {
+    console.error('Message:', error.message);
+    console.error('Stack:', error.stack);
+  }
+  if (error instanceof Prisma.PrismaClientKnownRequestError) {
+    console.error('Prisma Code:', error.code);
+    console.error('Prisma Meta:', error.meta);
+  }
+  console.error('========================');
+
   // Prisma Client Known Request Error (e.g., unique constraint, foreign key)
   if (error instanceof Prisma.PrismaClientKnownRequestError) {
     switch (error.code) {
@@ -177,7 +191,7 @@ export function handlePrismaError(error: unknown, context?: string): AppError {
       }
       default: {
         return new DatabaseError(
-          'Database operation failed',
+          `Database operation failed: ${error.code} - ${error.message}`,
           { code: error.code, meta: error.meta }
         );
       }
@@ -186,7 +200,7 @@ export function handlePrismaError(error: unknown, context?: string): AppError {
 
   // Prisma Client Validation Error (e.g., invalid query)
   if (error instanceof Prisma.PrismaClientValidationError) {
-    return new ValidationError('Invalid data provided to database');
+    return new ValidationError(`Invalid data provided to database: ${error.message}`);
   }
 
   // Prisma Client Initialization Error

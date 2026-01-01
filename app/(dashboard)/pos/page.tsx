@@ -260,10 +260,9 @@ export default function POSPage() {
 
       // Check if this is a bulk conversion (order number starts with BULK-)
       if (order.orderNumber.startsWith('BULK-')) {
-        // Extract order IDs from the bulk order number
-        const orderNumbers = order.orderNumber.replace('BULK-', '').split(',');
-        // We need to fetch the actual order IDs - for now, we'll just not set a single convertedFromOrderId
-        setConvertingOrderIds([]);
+        // Extract order IDs from the special 'id' field which contains comma-separated IDs
+        const ids = order.id.replace('BULK-', '').split(',');
+        setConvertingOrderIds(ids);
       } else {
         // Single order conversion
         setConvertingOrderIds([order.id]);
@@ -412,7 +411,7 @@ export default function POSPage() {
                 cart={cart}
                 branchId={selectedBranch.id}
                 warehouseId={selectedWarehouse}
-                convertedFromOrderId={convertingOrderIds.length === 1 ? convertingOrderIds[0] : undefined}
+                convertedFromOrderIds={convertingOrderIds}
                 onComplete={handlePaymentComplete}
                 onCancel={() => setShowPayment(false)}
               />

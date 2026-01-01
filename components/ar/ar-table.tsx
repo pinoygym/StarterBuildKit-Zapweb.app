@@ -1,145 +1,175 @@
 'use client';
 
 import { useState } from 'react';
-import { ARWithPayments } from '@/types/ar.types';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { DollarSign, Eye, Calendar } from 'lucide-react';
-import { format } from 'date-fns';
+import { Input } from '@/components/ui/input';
+import { MoreHorizontal, DollarSign, FileText } from 'lucide-react';
+import { formatCurrency, formatDate } from '@/lib/utils';
+import { ARStatusBadge } from './ar-status-badge';
+import { PaymentDialog } from './payment-dialog';
 
-interface ARTableProps {
-  records: ARWithPayments[];
-  onRecordPayment: (record: ARWithPayments) => void;
-  onViewDetails?: (record: ARWithPayments) => void;
+interface ARRecord {
+  id: string;
+  customerName: string;
+  totalAmount: number;
+  paidAmount: number;
+  balance: number;
+  status: string;
+  dueDate: Date;
+  updatedAt: Date;
+  Branch: {
+    name: string;
+  };
 }
 
-const formatCurrency = (amount: number) => {
-  return new Intl.NumberFormat('en-PH', {
-    style: 'currency',
-    currency: 'PHP',
-  }).format(amount);
-};
+interface ARTableProps {
+  data?: ARRecord[];
+  records?: ARRecord[]; // Alias for data
+  limit?: number;
+  fundSources?: any[]; // Passed down to dialog
+  onRecordPayment?: (record: ARRecord) => void;
+}
 
-const getStatusBadge = (status: string) => {
-  const variants: Record<string, { variant: any; label: string }> = {
-    pending: { variant: 'secondary', label: 'Pending' },
-    partial: { variant: 'default', label: 'Partial' },
-    paid: { variant: 'default', label: 'Paid' },
-  };
-  const config = variants[status] || { variant: 'secondary', label: status };
-  return (
-    <Badge variant={config.variant} className={status === 'paid' ? 'bg-green-600' : ''}>
-      {config.label}
-    </Badge>
+export function ARTable({
+  data = [],
+  records,
+  limit = 10,
+  fundSources = [],
+  onRecordPayment
+}: ARTableProps) {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [selectedAR, setSelectedAR] = useState<ARRecord | null>(null);
+  const [isPaymentOpen, setIsPaymentOpen] = useState(false);
+
+  // Harmonize data/records props
+  const displayData = records || data || [];
+
+  // Simple client-side filtering logic for now (can upgrade to server-side later)
+  const filteredData = displayData.filter((record) =>
+    (record.customerName?.toLowerCase() || '').includes(searchTerm.toLowerCase()) ||
+    (record.Branch?.name?.toLowerCase() || record.branch?.name?.toLowerCase() || '').includes(searchTerm.toLowerCase())
   );
-};
 
-const isOverdue = (dueDate: Date, status: string) => {
-  return status !== 'paid' && new Date(dueDate) < new Date();
-};
+  const handlePaymentClick = (ar: ARRecord) => {
+    if (onRecordPayment) {
+      onRecordPayment(ar);
+    } else {
+      setSelectedAR(ar);
+      setIsPaymentOpen(true);
+    }
+  };
 
-export function ARTable({ records, onRecordPayment, onViewDetails }: ARTableProps) {
-  if (records.length === 0) {
-    return (
-      <div className="text-center py-8 text-muted-foreground">
-        <DollarSign className="h-12 w-12 mx-auto mb-4 opacity-50" />
-        <p>No receivable records found</p>
-      </div>
-    );
-  }
+  const onPaymentSuccess = () => {
+    // Refresh data - in a real app this would trigger a router refresh
+    window.location.reload();
+  };
 
   return (
-    <div className="border rounded-lg">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Customer</TableHead>
-            <TableHead>Created Date</TableHead>
-            <TableHead>Due Date</TableHead>
-            <TableHead className="text-right">WHT</TableHead>
-            <TableHead className="text-right">Discount</TableHead>
-            <TableHead className="text-right">Rebates</TableHead>
-            <TableHead className="text-right">Exempt</TableHead>
-            <TableHead className="text-right">Total Amount</TableHead>
-            <TableHead className="text-right">Paid Amount</TableHead>
-            <TableHead className="text-right">Balance</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead className="text-right">Actions</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {records.map((record) => {
-            const overdue = isOverdue(record.dueDate, record.status);
-            return (
-              <TableRow key={record.id} className={overdue ? 'bg-red-50/50' : ''}>
-                <TableCell className="font-medium">
-                  {record.customerName}
-                  {overdue && (
-                    <Badge variant="destructive" className="ml-2 text-xs">
-                      Overdue
-                    </Badge>
-                  )}
-                </TableCell>
-                <TableCell>
-                  {format(new Date(record.createdAt), 'MMM dd, yyyy')}
-                </TableCell>
-                <TableCell>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4 text-muted-foreground" />
-                    {format(new Date(record.dueDate), 'MMM dd, yyyy')}
-                  </div>
-                </TableCell>
-                <TableCell className="text-right text-xs text-muted-foreground">
-                  {Number(record.withholdingTax) > 0 ? formatCurrency(Number(record.withholdingTax)) : '-'}
-                </TableCell>
-                <TableCell className="text-right text-xs text-muted-foreground">
-                  {Number(record.salesDiscount) > 0 ? formatCurrency(Number(record.salesDiscount)) : '-'}
-                </TableCell>
-                <TableCell className="text-right text-xs text-muted-foreground">
-                  {Number(record.rebates) > 0 ? formatCurrency(Number(record.rebates)) : '-'}
-                </TableCell>
-                <TableCell className="text-right text-xs text-muted-foreground">
-                  {Number(record.taxExemption) > 0 ? formatCurrency(Number(record.taxExemption)) : '-'}
-                </TableCell>
-                <TableCell className="text-right font-semibold">
-                  {formatCurrency(Number(record.totalAmount))}
-                </TableCell>
-                <TableCell className="text-right">
-                  {formatCurrency(Number(record.paidAmount))}
-                </TableCell>
-                <TableCell className="text-right font-bold">
-                  {formatCurrency(Number(record.balance))}
-                </TableCell>
-                <TableCell>{getStatusBadge(record.status)}</TableCell>
-                <TableCell className="text-right">
-                  <div className="flex items-center justify-end gap-2">
-                    {record.status !== 'paid' && (
-                      <Button
-                        size="sm"
-                        variant="default"
-                        onClick={() => onRecordPayment(record)}
-                      >
-                        <DollarSign className="h-4 w-4 mr-2" />
-                        Record Payment
-                      </Button>
-                    )}
-                    {onViewDetails && (
-                      <Button
-                        size="sm"
-                        variant="outline"
-                        onClick={() => onViewDetails(record)}
-                      >
-                        <Eye className="h-4 w-4" />
-                      </Button>
-                    )}
-                  </div>
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <Input
+          placeholder="Filter customers..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="max-w-sm"
+        />
+      </div>
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Customer</TableHead>
+              <TableHead>Branch</TableHead>
+              <TableHead>Total Amount</TableHead>
+              <TableHead>Paid</TableHead>
+              <TableHead>Balance</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead>Due Date</TableHead>
+              <TableHead className="text-right">Actions</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredData.length === 0 ? (
+              <TableRow>
+                <TableCell colSpan={8} className="h-24 text-center">
+                  No results.
                 </TableCell>
               </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
+            ) : (
+              filteredData.map((record) => (
+                <TableRow key={record.id}>
+                  <TableCell className="font-medium">{record.customerName}</TableCell>
+                  <TableCell>{record.Branch?.name || record.branch?.name || 'N/A'}</TableCell>
+                  <TableCell>{formatCurrency(record.totalAmount)}</TableCell>
+                  <TableCell className="text-muted-foreground">
+                    {formatCurrency(record.paidAmount)}
+                  </TableCell>
+                  <TableCell className="font-bold text-primary">
+                    {formatCurrency(record.balance)}
+                  </TableCell>
+                  <TableCell>
+                    <ARStatusBadge status={record.status} />
+                  </TableCell>
+                  <TableCell>{formatDate(record.dueDate)}</TableCell>
+                  <TableCell className="text-right">
+                    <DropdownMenu>
+                      <DropdownMenuTrigger asChild>
+                        <Button variant="ghost" className="h-8 w-8 p-0">
+                          <span className="sr-only">Open menu</span>
+                          <MoreHorizontal className="h-4 w-4" />
+                        </Button>
+                      </DropdownMenuTrigger>
+                      <DropdownMenuContent align="end">
+                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem
+                          onClick={() => navigator.clipboard.writeText(record.id)}
+                        >
+                          Copy ID
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={() => handlePaymentClick(record)}>
+                          <DollarSign className="mr-2 h-4 w-4" />
+                          Record Payment
+                        </DropdownMenuItem>
+                        <DropdownMenuItem>
+                          <FileText className="mr-2 h-4 w-4" />
+                          View Details
+                        </DropdownMenuItem>
+                      </DropdownMenuContent>
+                    </DropdownMenu>
+                  </TableCell>
+                </TableRow>
+              ))
+            )}
+          </TableBody>
+        </Table>
+      </div>
+
+      {!onRecordPayment && (
+        <PaymentDialog
+          ar={selectedAR}
+          fundSources={fundSources}
+          open={isPaymentOpen}
+          onOpenChange={setIsPaymentOpen}
+          onPaymentSuccess={onPaymentSuccess}
+        />
+      )}
     </div>
   );
 }

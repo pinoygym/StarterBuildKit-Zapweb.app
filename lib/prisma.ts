@@ -1,9 +1,27 @@
+import dotenv from 'dotenv';
+const envState = `[${new Date().toISOString()}] NODE_ENV: ${process.env.NODE_ENV}, IS_PLAYWRIGHT: ${process.env.IS_PLAYWRIGHT}`;
+try {
+  const fs = require('fs');
+  fs.appendFileSync('prisma_debug.log', `${envState}\n`);
+} catch (e) { }
+
+if (process.env.NODE_ENV === 'test' || process.env.IS_PLAYWRIGHT === 'true') {
+  dotenv.config({ path: '.env.test', override: true });
+} else {
+  dotenv.config({ path: '.env.local' });
+}
+
+const dbUrlLog = `[${new Date().toISOString()}] DB URL HOST: ${process.env.DATABASE_URL?.split('@')[1]?.split('/')[0] || 'unknown'}`;
+try {
+  const fs = require('fs');
+  fs.appendFileSync('prisma_debug.log', `${dbUrlLog}\n\n`);
+} catch (e) { }
+
 import { PrismaClient, Prisma } from '@prisma/client';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { Pool } from 'pg';
 import { logger } from './logger';
 
-// Re-export Prisma namespace for use in services
 export { Prisma };
 
 // Prevent multiple instances of Prisma Client in development
@@ -19,9 +37,10 @@ const connectionString = process.env.DATABASE_URL?.includes('localhost')
 if (!connectionString) {
   logger.error('DATABASE_URL is not defined in lib/prisma.ts');
 } else {
-  logger.info('Initializing Prisma', {
-    databaseHost: connectionString.split('@')[1]?.split('/')[0]
-  });
+  const host = connectionString.split('@')[1]?.split('/')[0];
+  const dbName = connectionString.split('/').pop()?.split('?')[0];
+  logger.info(`Initializing Prisma with Host: ${host}, DB: ${dbName}`);
+  console.log(`[DEBUG] Prisma Source: ${process.env.NODE_ENV === 'test' ? '.env.test' : '.env.local'} | Host: ${host}`);
 }
 
 // Create PostgreSQL connection pool

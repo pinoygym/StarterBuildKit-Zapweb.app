@@ -139,17 +139,52 @@ export function usePostInventoryAdjustment() {
             const response = await fetch(`/api/inventory-adjustments/${id}/post`, {
                 method: 'POST',
             });
-            const result: InventoryAdjustmentResponse = await response.json();
-            if (!result.success) throw new Error(result.error || 'Failed to post adjustment');
+            const result: InventoryAdjustmentResponse & { details?: any; backup?: any } = await response.json();
+            if (!result.success) {
+                const error = new Error(result.error || 'Failed to post adjustment') as any;
+                error.details = result.details;
+                throw error;
+            }
+
+            // If backup was created, download it automatically
+            if (result.backup) {
+                try {
+                    const filename = result.backup._filename || `backup_${new Date().toISOString()}.json`;
+
+                    // Remove metadata fields before creating the backup file
+                    const { _filename, _reason, ...backupData } = result.backup;
+
+                    // Create blob and download
+                    const blob = new Blob([JSON.stringify(backupData, null, 2)], { type: 'application/json' });
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = filename;
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+
+                    console.log(`[Auto-Backup] Downloaded backup: ${filename}`);
+                } catch (backupError) {
+                    console.error('[Auto-Backup] Failed to download backup:', backupError);
+                    // Don't fail the entire operation if backup download fails
+                }
+            }
+
             return result.data;
         },
         onSuccess: (data) => {
             queryClient.invalidateQueries({ queryKey: ['inventory-adjustments'] });
             queryClient.invalidateQueries({ queryKey: ['inventory-adjustment', data.id] });
-            toast.success('Adjustment posted successfully');
+            toast.success('Adjustment posted successfully. Backup downloaded automatically.');
         },
-        onError: (error: Error) => {
-            toast.error(`Error posting adjustment: ${error.message}`);
+        onError: (error: any) => {
+            console.error('Full POST error:', error);
+            console.error('Error Message:', error.message);
+            const details = error.details ? `: ${JSON.stringify(error.details)}` : '';
+            toast.error(`Error posting adjustment: ${error.message}${details}`);
+            console.error('Post adjustment error details:', error.details);
         },
     });
 }

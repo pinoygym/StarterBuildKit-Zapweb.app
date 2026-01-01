@@ -39,7 +39,18 @@ export class PurchaseOrderRepository {
       }
     }
 
-    return prisma.purchaseOrder.findMany({
+    if (filters?.search) {
+      where.OR = [
+        { poNumber: { contains: filters.search, mode: 'insensitive' } },
+        {
+          Supplier: {
+            companyName: { contains: filters.search, mode: 'insensitive' },
+          },
+        },
+      ];
+    }
+
+    return await prisma.purchaseOrder.findMany({
       where,
       include: {
         Supplier: true,
@@ -63,14 +74,14 @@ export class PurchaseOrderRepository {
             lastName: true,
             email: true,
           },
-        } as any,
-      } as any,
+        },
+      },
       orderBy: { createdAt: 'desc' },
-    }) as unknown as Promise<PurchaseOrderWithDetails[]>;
+    });
   }
 
   async findById(id: string): Promise<PurchaseOrderWithDetails | null> {
-    return prisma.purchaseOrder.findUnique({
+    return await prisma.purchaseOrder.findUnique({
       where: { id },
       include: {
         Supplier: true,
@@ -94,9 +105,9 @@ export class PurchaseOrderRepository {
             lastName: true,
             email: true,
           },
-        } as any,
-      } as any,
-    }) as unknown as Promise<PurchaseOrderWithDetails | null>;
+        },
+      },
+    });
   }
 
   async findByPONumber(poNumber: string): Promise<PurchaseOrder | null> {
@@ -110,7 +121,7 @@ export class PurchaseOrderRepository {
   ): Promise<PurchaseOrderWithDetails> {
     const { items, supplierId, warehouseId, branchId, expectedDeliveryDate, notes, status, poNumber, totalAmount, createdById } = data;
 
-    return prisma.purchaseOrder.create({
+    return (await prisma.purchaseOrder.create({
       data: {
         id: randomUUID(),
         poNumber,
@@ -118,13 +129,13 @@ export class PurchaseOrderRepository {
         expectedDeliveryDate,
         notes,
         status,
-        CreatedBy: (createdById ? { connect: { id: createdById } } : undefined) as any,
+        createdById: createdById ?? null,
         updatedAt: new Date(),
-        Branch: { connect: { id: branchId } },
-        Warehouse: { connect: { id: warehouseId } },
-        Supplier: { connect: { id: supplierId } },
+        branchId: branchId,
+        warehouseId: warehouseId,
+        supplierId: supplierId,
         PurchaseOrderItem: {
-          create: items.map((item: any) => ({
+          create: items.map(item => ({
             id: randomUUID(),
             productId: item.productId,
             quantity: item.quantity,
@@ -133,7 +144,7 @@ export class PurchaseOrderRepository {
             subtotal: item.quantity * item.unitPrice,
           })),
         },
-      } as any,
+      },
       include: {
         Supplier: true,
         Warehouse: true,
@@ -156,9 +167,9 @@ export class PurchaseOrderRepository {
             lastName: true,
             email: true,
           },
-        } as any,
-      } as any,
-    }) as unknown as Promise<PurchaseOrderWithDetails>;
+        },
+      },
+    })) as unknown as PurchaseOrderWithDetails;
   }
 
   async update(
@@ -173,13 +184,13 @@ export class PurchaseOrderRepository {
         where: { poId: id },
       });
 
-      return prisma.purchaseOrder.update({
+      return await prisma.purchaseOrder.update({
         where: { id },
         data: {
           ...poData,
           updatedAt: new Date(),
           PurchaseOrderItem: {
-            create: items.map((item: any) => ({
+            create: items.map(item => ({
               id: randomUUID(),
               productId: item.productId,
               quantity: item.quantity,
@@ -204,20 +215,12 @@ export class PurchaseOrderRepository {
               },
             },
           },
-          CreatedBy: {
-            select: {
-              id: true,
-              firstName: true,
-              lastName: true,
-              email: true,
-            },
-          } as any,
-        } as any,
-      }) as unknown as Promise<PurchaseOrderWithDetails>;
+        },
+      });
     }
 
     // If no items provided, just update PO data
-    return prisma.purchaseOrder.update({
+    return await prisma.purchaseOrder.update({
       where: { id },
       data: { ...poData, updatedAt: new Date() },
       include: {
@@ -242,9 +245,9 @@ export class PurchaseOrderRepository {
             lastName: true,
             email: true,
           },
-        } as any,
-      } as any,
-    }) as unknown as Promise<PurchaseOrderWithDetails>;
+        },
+      },
+    });
   }
 
   async updateStatus(id: string, status: PurchaseOrderStatus): Promise<PurchaseOrder> {

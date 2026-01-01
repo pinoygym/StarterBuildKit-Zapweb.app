@@ -3,6 +3,7 @@ import { settingsService } from '@/services/settings.service';
 import { authService } from '@/services/auth.service';
 import { userService } from '@/services/user.service';
 import { AppError } from '@/lib/errors';
+import { BackupService } from '@/services/backup.service';
 
 export const dynamic = 'force-dynamic';
 
@@ -32,9 +33,16 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'Forbidden: Super Admin access required' }, { status: 403 });
     }
 
-    // 3. Perform Cleanup
+    // 3. Create backup before clearing
+    console.log('[Database Clear] Creating backup before clearing database...');
+    const backup = await BackupService.createBackupWithMetadata('before_database_clear');
+    console.log(`[Database Clear] Backup created: ${backup._filename}`);
+
+    // 4. Perform Cleanup
     const result = await settingsService.clearDatabase();
-    return NextResponse.json({ success: true, data: result });
+
+    // Return both the result and the backup
+    return NextResponse.json({ success: true, data: result, backup: backup });
 
   } catch (error) {
     console.error('Error clearing database:', error);

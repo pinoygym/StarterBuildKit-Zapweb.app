@@ -43,6 +43,7 @@ export const posSaleSchema = z
     partialPayment: z.number().optional(),
     change: z.number().optional(),
     convertedFromOrderId: idSchema.optional(),
+    convertedFromOrderIds: z.array(idSchema).optional(),
     items: z.array(posSaleItemSchema).min(1, 'At least one item is required'),
   })
   .superRefine((data, ctx) => {

@@ -61,4 +61,5 @@ export interface PurchaseOrderFilters {
   warehouseId?: string;
   startDate?: Date;
   endDate?: Date;
+  search?: string;
 }

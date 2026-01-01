@@ -2,8 +2,8 @@ import { PrismaClient } from '@prisma/client';
 import { Pool } from 'pg';
 import { PrismaPg } from '@prisma/adapter-pg';
 
-const PROD_DB_URL = 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
-const DEV_DB_URL = 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const PROD_DB_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
+const DEV_DB_URL = 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require';
 
 // 1. Instantiate Prod Client (Target)
 const poolProd = new Pool({ connectionString: PROD_DB_URL });
@@ -22,10 +22,10 @@ async function main() {
     // Check Counts
     const devUserCount = await prismaDev.user.count();
     console.log(`Source (DEV) Users: ${devUserCount}`);
-    
+
     if (devUserCount === 0) {
-        console.log('No users in Dev to sync.');
-        return;
+      console.log('No users in Dev to sync.');
+      return;
     }
 
     // 1. Sync Roles (Dependencies for User)
@@ -37,17 +37,17 @@ async function main() {
       await prismaProd.role.upsert({
         where: { id: role.id },
         update: {
-            name: role.name,
-            description: role.description,
-            isSystem: role.isSystem,
-            updatedAt: new Date(),
+          name: role.name,
+          description: role.description,
+          isSystem: role.isSystem,
+          updatedAt: new Date(),
         },
         create: {
-            id: role.id,
-            name: role.name,
-            description: role.description,
-            isSystem: role.isSystem,
-            updatedAt: new Date(),
+          id: role.id,
+          name: role.name,
+          description: role.description,
+          isSystem: role.isSystem,
+          updatedAt: new Date(),
         },
       });
     }
@@ -62,23 +62,23 @@ async function main() {
       await prismaProd.branch.upsert({
         where: { id: branch.id },
         update: {
-            name: branch.name,
-            code: branch.code,
-            location: branch.location,
-            manager: branch.manager,
-            phone: branch.phone,
-            status: branch.status,
-            updatedAt: new Date(),
+          name: branch.name,
+          code: branch.code,
+          location: branch.location,
+          manager: branch.manager,
+          phone: branch.phone,
+          status: branch.status,
+          updatedAt: new Date(),
         },
         create: {
-            id: branch.id,
-            name: branch.name,
-            code: branch.code,
-            location: branch.location,
-            manager: branch.manager,
-            phone: branch.phone,
-            status: branch.status,
-            updatedAt: new Date(),
+          id: branch.id,
+          name: branch.name,
+          code: branch.code,
+          location: branch.location,
+          manager: branch.manager,
+          phone: branch.phone,
+          status: branch.status,
+          updatedAt: new Date(),
         },
       });
     }
@@ -91,7 +91,7 @@ async function main() {
 
     for (const user of users) {
       console.log(`Syncing user to Prod: ${user.email}`);
-      
+
       await prismaProd.user.upsert({
         where: { id: user.id },
         update: {

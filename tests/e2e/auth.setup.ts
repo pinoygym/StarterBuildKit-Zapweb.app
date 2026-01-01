@@ -8,7 +8,8 @@ setup('authenticate', async ({ page }) => {
   // Seed data
   const seedRes = await page.request.post('/api/dev/seed', {
     headers: { 'Content-Type': 'application/json' },
-    data: {}
+    data: {},
+    timeout: 60000
   });
 
   if (!seedRes.ok()) {

@@ -1,13 +1,11 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
-
 import { useState } from 'react';
 import { Plus, Search, Package, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PaginationControls } from '@/components/shared/pagination-controls';
 import {
   Select,
   SelectContent,
@@ -21,10 +19,10 @@ import { useProductCategories } from '@/hooks/use-product-categories';
 import { TableSkeleton } from '@/components/shared/loading-skeleton';
 import { EmptyState } from '@/components/shared/empty-state';
 import { ProductCategory, ProductStatus, ProductWithUOMs } from '@/types/product.types';
-import dynamicImport from 'next/dynamic'; // Import dynamic as dynamicImport to avoid conflict
+import dynamic from 'next/dynamic'; // Import dynamic
 
 // Dynamically import ProductDialog for lazy loading
-const DynamicProductDialog = dynamicImport(() => import('@/components/products/product-dialog').then(mod => mod.ProductDialog), {
+const DynamicProductDialog = dynamic(() => import('@/components/products/product-dialog').then(mod => mod.ProductDialog), {
   ssr: false, // Ensure it's client-side rendered only
   loading: () => <p>Loading dialog...</p>, // Simple loading fallback
 });
@@ -34,7 +32,7 @@ export default function ProductsPage() {
   const [categoryFilter, setCategoryFilter] = useState<ProductCategory | 'all'>('all');
   const [statusFilter, setStatusFilter] = useState<ProductStatus | 'all'>('all');
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(25);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<ProductWithUOMs | null>(null);
 
@@ -182,52 +180,16 @@ export default function ProductsPage() {
 
           {/* Pagination Controls */}
           {pagination && (
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-              <div className="text-sm text-muted-foreground order-2 sm:order-1">
-                Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.totalCount)} of {pagination.totalCount} products
-              </div>
-
-              <div className="flex items-center gap-2 order-1 sm:order-2">
-                <div className="flex items-center gap-2 mr-2">
-                  <span className="text-sm text-muted-foreground hidden sm:inline">Rows per page</span>
-                  <Select
-                    value={limit.toString()}
-                    onValueChange={handleLimitChange}
-                  >
-                    <SelectTrigger className="w-[70px] h-8">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="25">25</SelectItem>
-                      <SelectItem value="50">50</SelectItem>
-                      <SelectItem value="100">100</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex gap-1">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={page <= 1 || loading}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => p + 1)}
-                    disabled={!pagination.hasMore || loading}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <PaginationControls
+              page={page}
+              limit={limit}
+              totalCount={pagination.totalCount}
+              onPageChange={setPage}
+              onLimitChange={setLimit}
+              loading={loading}
+              itemName="products"
+              hasMore={pagination.hasMore}
+            />
           )}
         </div>
       )}

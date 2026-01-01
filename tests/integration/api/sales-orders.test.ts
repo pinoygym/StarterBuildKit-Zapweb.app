@@ -1,4 +1,5 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
+import { createAndLoginUser, createTestBranch, createTestWarehouse, createTestCustomer, createTestProduct } from '../../helpers/test-db-utils';
 import { BASE_URL } from '../config';
 
 describe('Sales Orders API Integration Tests', () => {
@@ -11,59 +12,55 @@ describe('Sales Orders API Integration Tests', () => {
     let token: string;
     let headers: any;
 
+    let cleanup: () => Promise<void>;
+
     beforeAll(async () => {
         try {
-            // 1. Seed data
-            const seedRes = await fetch(`${BASE_URL}/api/dev/seed`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({}) })
-            const seed = await seedRes.json()
+            // 1. Create and login user
+            const auth = await createAndLoginUser(BASE_URL);
+            token = auth.token;
+            headers = auth.headers;
+            cleanup = auth.cleanup;
 
-            if (!seed.success) {
-                console.error('Seed failed:', JSON.stringify(seed, null, 2))
-                throw new Error('Seed failed')
-            }
-
-            // 2. Login to get token
-            const loginRes = await fetch(`${BASE_URL}/api/auth/login`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    email: 'cybergada@gmail.com',
-                    password: 'Qweasd145698@',
-                }),
-            })
-            const loginData = await loginRes.json()
-
-            if (!loginData.success) {
-                console.error('Login failed:', JSON.stringify(loginData, null, 2))
-                throw new Error('Login failed')
-            }
-
-            token = loginData.token
-            headers = {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
-            }
-
-            // Get Branch and Warehouse
+            // 2. Ensure Warehouse exists
             const warehousesRes = await fetch(`${BASE_URL}/api/warehouses`, { headers });
             const warehousesData = await warehousesRes.json();
-            const warehouse = warehousesData.data?.[0];
-            warehouseId = warehouse?.id;
-            branchId = warehouse?.branchId;
+            if (warehousesData.data && warehousesData.data.length > 0) {
+                const warehouse = warehousesData.data[0];
+                warehouseId = warehouse.id;
+                branchId = warehouse.branchId;
+            } else {
+                // Create if not exists
+                const branch = await createTestBranch();
+                const warehouse = await createTestWarehouse(branch.id);
+                warehouseId = warehouse.id;
+                branchId = branch.id;
+            }
 
-            // Get Customer
+            // 3. Ensure Customer exists
             const customersRes = await fetch(`${BASE_URL}/api/customers`, { headers });
             const customersData = await customersRes.json();
-            customerId = customersData.data?.[0]?.id;
+            if (customersData.data && customersData.data.length > 0) {
+                customerId = customersData.data[0].id;
+            } else {
+                const customer = await createTestCustomer();
+                customerId = customer.id;
+            }
 
-            // Get Product
+            // 4. Ensure Product exists
             const productsRes = await fetch(`${BASE_URL}/api/products`, { headers });
             const productsData = await productsRes.json();
-            const product = productsData.data?.[0];
-            productId = product?.id;
-            productUOM = product?.baseUOM || 'bottle';
+            if (productsData.data && productsData.data.length > 0) {
+                const product = productsData.data[0];
+                productId = product.id;
+                productUOM = product.baseUOM || 'PCS';
+            } else {
+                const product = await createTestProduct();
+                productId = product.id;
+                productUOM = product.baseUOM;
+            }
 
-            // Add stock to ensure sufficient inventory
+            // 5. Add stock to ensure sufficient inventory
             const adjustRes = await fetch(`${BASE_URL}/api/inventory/adjust`, {
                 method: 'POST',
                 headers,
@@ -99,6 +96,7 @@ describe('Sales Orders API Integration Tests', () => {
                 // Ignore cleanup errors
             }
         }
+        if (cleanup) await cleanup();
     });
 
     describe('POST /api/sales-orders', () => {
@@ -227,3 +225,4 @@ describe('Sales Orders API Integration Tests', () => {
         });
     });
 });
+

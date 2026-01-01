@@ -72,10 +72,14 @@ export interface AdjustmentSlipItem {
   productId: string;
   productName: string;
   quantity: number;
-  baseUOM: string;
+  baseUOM: string; // UOM used in the adjustment (misleading name for legacy compatibility)
+  actualBaseUOM?: string; // Product's actual base UOM
+  conversionFactor?: number;
+  conversionUOM?: string; // The UOM that the conversion factor refers to
   warehouseId: string;
   warehouseName: string;
   createdAt: Date;
+  systemQuantity?: number | null; // Prisma returns null, not undefined
 }
 
 export interface AdjustmentSlip {

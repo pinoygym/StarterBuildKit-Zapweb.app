@@ -5,20 +5,14 @@
 
 const API_BASE = 'http://localhost:3000';
 
-interface TestResult {
-    test: string;
-    message: string;
-    timestamp: string;
-}
-
 // Test results storage
-const results: { passed: TestResult[]; failed: TestResult[]; warnings: TestResult[] } = {
+const results = {
     passed: [],
     failed: [],
     warnings: []
 };
 
-function logResult(test: string, passed: boolean, message: string) {
+function logResult(test, passed, message) {
     const result = { test, message, timestamp: new Date().toISOString() };
     if (passed) {
         results.passed.push(result);
@@ -29,7 +23,7 @@ function logResult(test: string, passed: boolean, message: string) {
     }
 }
 
-function logWarning(test: string, message: string) {
+function logWarning(test, message) {
     results.warnings.push({ test, message, timestamp: new Date().toISOString() });
     console.warn(`⚠️  WARN: ${test} - ${message}`);
 }
@@ -63,8 +57,8 @@ async function testSecurityHeaders() {
                 logResult(`Security Header: ${header}`, false, 'Header not present');
             }
         }
-    } catch (error: unknown) {
-        logResult('Security Headers Test', false, `Error: ${(error as Error).message}`);
+    } catch (error) {
+        logResult('Security Headers Test', false, `Error: ${error.message}`);
     }
 }
 
@@ -125,8 +119,8 @@ async function testAuthenticationFlow() {
         } else {
             logResult('Authentication: Login', false, `HTTP ${loginResponse.status}: ${loginResponse.statusText}`);
         }
-    } catch (error: unknown) {
-        logResult('Authentication Flow Test', false, `Error: ${(error as Error).message}`);
+    } catch (error) {
+        logResult('Authentication Flow Test', false, `Error: ${error.message}`);
     }
 }
 
@@ -167,8 +161,8 @@ async function testDatabaseOperations() {
         } else {
             logResult('Database: Stats Retrieval', false, `HTTP ${statsResponse.status}`);
         }
-    } catch (error: unknown) {
-        logResult('Database Operations Test', false, `Error: ${(error as Error).message}`);
+    } catch (error) {
+        logResult('Database Operations Test', false, `Error: ${error.message}`);
     }
 }
 
@@ -181,8 +175,8 @@ async function testPasswordHashing() {
         // The bcrypt rounds are now 14 instead of 12
         logWarning('Password Hashing', 'Bcrypt rounds increased to 14 (cannot be directly tested via API)');
         logResult('Password Hashing: Configuration', true, 'Bcrypt rounds set to 14 in auth.service.ts');
-    } catch (error: unknown) {
-        logResult('Password Hashing Test', false, `Error: ${(error as Error).message}`);
+    } catch (error) {
+        logResult('Password Hashing Test', false, `Error: ${error.message}`);
     }
 }
 
@@ -196,13 +190,13 @@ async function testJWTSecretValidation() {
         // If we get here, the server started successfully
         logResult('JWT Secret: Validation', true, 'Server started successfully - JWT_SECRET meets minimum requirements (32+ chars)');
         logResult('JWT Secret: Length Check', true, `Current JWT_SECRET is ${process.env.JWT_SECRET?.length || 'unknown'} characters`);
-    } catch (error: unknown) {
-        logResult('JWT Secret: Validation', false, `Server not responding: ${(error as Error).message}`);
+    } catch (error) {
+        logResult('JWT Secret: Validation', false, `Server not responding: ${error.message}`);
     }
 }
 
 // Main test runner
-async function runSecurityTests() {
+async function runAllTests() {
     console.log('╔════════════════════════════════════════════════════════╗');
     console.log('║     Security Updates Test Suite                       ║');
     console.log('║     Testing all security fixes                         ║');
@@ -239,7 +233,7 @@ async function runSecurityTests() {
 }
 
 // Run tests
-runSecurityTests().catch((error: any) => {
+runAllTests().catch(error => {
     console.error('Fatal error running tests:', error);
     process.exit(1);
 });

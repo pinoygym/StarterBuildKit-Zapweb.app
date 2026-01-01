@@ -1,6 +1,8 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { BASE_URL } from '../config';
 
+// Note: Database reset is not used here since we're using the main database
+
 describe('Purchase Orders API Integration Tests', () => {
   let testPOId: string;
   let supplierId: string;
@@ -219,3 +221,4 @@ describe('Purchase Orders API Integration Tests', () => {
     });
   });
 });
+

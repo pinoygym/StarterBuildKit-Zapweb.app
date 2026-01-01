@@ -6,22 +6,24 @@
 const fs = require('fs');
 const path = require('path');
 
-// Database configurations
+// Database configurations - using environment variables
+require('dotenv').config();
+
 const databases = {
     development: {
-        name: 'Development (ep-noisy-mountain)',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-noisy-mountain-a18wvzwi'
+        name: 'Development (ep-spring-pond)',
+        url: process.env.DATABASE_URL || 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+        branch: 'ep-spring-pond-a1stve3k'
     },
     production: {
-        name: 'Production (ep-blue-mouse)',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-blue-mouse-a128nyc9'
+        name: 'Production (ep-floral-silence)',
+        url: 'postgresql://neondb_owner:npg_vhuqV32wAlIp@ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
+        branch: 'ep-floral-silence-a1jm7mgz'
     },
     vercel: {
         name: 'Vercel Deployment',
-        url: 'postgresql://neondb_owner:npg_mBh8RKAr9Nei@ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require',
-        branch: 'ep-noisy-mountain-a18wvzwi'
+        url: process.env.DATABASE_URL || 'Check Vercel environment variables',
+        branch: 'Check Vercel configuration'
     }
 };
 
@@ -34,17 +36,17 @@ console.log('📋 CONFIGURED DATABASES:\n');
 console.log('1️⃣  DEVELOPMENT DATABASE');
 console.log(`   Name: ${databases.development.name}`);
 console.log(`   Branch: ${databases.development.branch}`);
-console.log(`   Endpoint: ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech`);
+console.log(`   Endpoint: ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech`);
 
 console.log('\n2️⃣  PRODUCTION DATABASE');
 console.log(`   Name: ${databases.production.name}`);
 console.log(`   Branch: ${databases.production.branch}`);
-console.log(`   Endpoint: ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech`);
+console.log(`   Endpoint: ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech`);
 
 console.log('\n3️⃣  VERCEL DEPLOYMENT');
 console.log(`   Currently using: ${databases.vercel.name}`);
 console.log(`   Branch: ${databases.vercel.branch}`);
-console.log(`   Endpoint: ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech`);
+console.log(`   URL: ${databases.vercel.url}`);
 
 console.log('\n' + '='.repeat(80));
 console.log('ANALYSIS');
@@ -112,17 +114,17 @@ Generated: ${new Date().toISOString()}
 ### Development Database
 - **Name**: ${databases.development.name}
 - **Branch**: ${databases.development.branch}
-- **Endpoint**: ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech
+- **Endpoint**: ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech
 
 ### Production Database
 - **Name**: ${databases.production.name}
 - **Branch**: ${databases.production.branch}
-- **Endpoint**: ep-blue-mouse-a128nyc9-pooler.ap-southeast-1.aws.neon.tech
+- **Endpoint**: ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech
 
 ### Vercel Deployment
 - **Currently Using**: ${databases.vercel.name}
 - **Branch**: ${databases.vercel.branch}
-- **Endpoint**: ep-noisy-mountain-a18wvzwi-pooler.ap-southeast-1.aws.neon.tech
+- **URL**: ${databases.vercel.url}
 
 ## Issue Identified
 

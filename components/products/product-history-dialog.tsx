@@ -471,10 +471,10 @@ export function ProductHistoryDialog({
                                                     <TableCell className="whitespace-nowrap">
                                                         {format(new Date(movement.date), 'MMM dd, yyyy HH:mm')}
                                                     </TableCell>
-                                                    <TableCell>
+                                                    <TableCell className="whitespace-nowrap">
                                                         {movement.documentNumber ? (
                                                             <code className="text-xs bg-muted px-1.5 py-0.5 rounded">
-                                                                {movement.documentNumber.slice(0, 8)}...
+                                                                {movement.documentNumber}
                                                             </code>
                                                         ) : (
                                                             <span className="text-muted-foreground">-</span>

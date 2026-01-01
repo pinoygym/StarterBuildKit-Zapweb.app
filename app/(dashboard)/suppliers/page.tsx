@@ -1,13 +1,11 @@
 'use client';
 
-export const dynamic = 'force-dynamic';
-
-
 import { useState } from 'react';
 import { Plus, Search, Building2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { PageHeader } from '@/components/shared/page-header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { PaginationControls } from '@/components/shared/pagination-controls';
 import {
   Select,
   SelectContent,
@@ -27,7 +25,7 @@ export default function SuppliersPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<SupplierStatus | 'all'>('all');
   const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
+  const [limit, setLimit] = useState(25);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [editingSupplier, setEditingSupplier] = useState<Supplier | null>(null);
 
@@ -60,9 +58,9 @@ export default function SuppliersPage() {
 
   const handleSave = async (id: string | undefined, data: any) => {
     if (id) {
-      await updateSupplierMutation.mutateAsync({ id, data });
+      return await updateSupplierMutation.mutateAsync({ id, data });
     } else {
-      await createSupplierMutation.mutateAsync(data);
+      return await createSupplierMutation.mutateAsync(data);
     }
   };
 
@@ -157,55 +155,19 @@ export default function SuppliersPage() {
 
           {/* Pagination Controls */}
           {pagination && (
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2">
-              <div className="text-sm text-muted-foreground order-2 sm:order-1">
-                Showing {((pagination.page - 1) * pagination.limit) + 1} to {Math.min(pagination.page * pagination.limit, pagination.totalCount)} of {pagination.totalCount} suppliers
-              </div>
-
-              <div className="flex items-center gap-2 order-1 sm:order-2">
-                <div className="flex items-center gap-2 mr-2">
-                  <span className="text-sm text-muted-foreground hidden sm:inline">Rows per page</span>
-                  <Select
-                    value={limit.toString()}
-                    onValueChange={(value) => {
-                      setLimit(parseInt(value));
-                      setPage(1);
-                    }}
-                  >
-                    <SelectTrigger className="w-[70px] h-8">
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="10">10</SelectItem>
-                      <SelectItem value="25">25</SelectItem>
-                      <SelectItem value="50">50</SelectItem>
-                      <SelectItem value="100">100</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="flex gap-1">
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => Math.max(1, p - 1))}
-                    disabled={page <= 1 || loading}
-                  >
-                    <ChevronLeft className="h-4 w-4" />
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => setPage(p => p + 1)}
-                    disabled={!pagination.hasMore || loading}
-                  >
-                    <ChevronRight className="h-4 w-4" />
-                  </Button>
-                </div>
-              </div>
-            </div>
+            <PaginationControls
+              page={page}
+              limit={limit}
+              totalCount={pagination.totalCount}
+              onPageChange={setPage}
+              onLimitChange={(newLimit) => {
+                setLimit(newLimit);
+                setPage(1);
+              }}
+              loading={loading}
+              itemName="suppliers"
+              hasMore={pagination.hasMore}
+            />
           )}
         </div>
       )}

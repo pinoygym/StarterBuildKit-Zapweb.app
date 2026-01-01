@@ -2,6 +2,7 @@ import { apRepository } from '@/repositories/ap.repository';
 import { CreateAPInput, RecordAPPaymentInput, APFilters, APAgingReport, APAgingBucket, RecordBatchAPPaymentInput } from '@/types/ap.types';
 import { prisma, Prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
+import { fundSourceService } from '@/services/fund-source.service';
 
 export class APService {
   async createAP(data: CreateAPInput) {
@@ -53,6 +54,7 @@ export class APService {
     return await prisma.$transaction(async (tx) => {
       const ap = await tx.accountsPayable.findUnique({
         where: { id: data.apId },
+        include: { Supplier: true },
       });
 
       if (!ap) {
@@ -67,16 +69,47 @@ export class APService {
         throw new Error('Payment amount exceeds outstanding balance');
       }
 
+      // Validate fund source balance if specified
+      if (data.fundSourceId) {
+        const fundSource = await tx.fundSource.findUnique({
+          where: { id: data.fundSourceId },
+        });
+        if (!fundSource) {
+          throw new Error('Fund source not found');
+        }
+        if (fundSource.currentBalance < data.amount) {
+          throw new Error(`Insufficient fund source balance. Available: ₱${fundSource.currentBalance.toLocaleString()}`);
+        }
+      }
+
+      const paymentId = randomUUID();
+
       await tx.aPPayment.create({
         data: {
-          id: randomUUID(),
+          id: paymentId,
           AccountsPayable: { connect: { id: data.apId } },
           amount: data.amount,
           paymentMethod: data.paymentMethod,
           referenceNumber: data.referenceNumber,
           paymentDate: data.paymentDate,
+          // fundSourceId: data.fundSourceId || null,
         },
       });
+
+      /*
+      // Record fund source withdrawal if specified
+      if (data.fundSourceId && data.createdById) {
+        await fundSourceService.recordWithdrawal(
+          data.fundSourceId,
+          data.amount,
+          `AP Payment to ${ap.Supplier?.companyName || 'Supplier'}`,
+          data.createdById,
+          'AP_PAYMENT',
+          paymentId,
+          tx
+        );
+      }
+      */
 
       const newPaidAmount = new Prisma.Decimal(ap.paidAmount).plus(data.amount);
       const newBalance = new Prisma.Decimal(ap.totalAmount).minus(newPaidAmount);

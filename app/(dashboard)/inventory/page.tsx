@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 import { useState, useMemo } from 'react';
-import { Search, Package, ArrowRightLeft } from 'lucide-react';
+import { Search, Package, ArrowRightLeft, Plus, ClipboardEdit } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { PageHeader } from '@/components/shared/page-header';
 import {
@@ -108,12 +108,16 @@ export default function InventoryPage() {
         actions={
           <div className="flex gap-2">
             <Button onClick={() => router.push('/inventory/adjustments/new')} variant="outline">
-              <Package className="h-4 w-4 mr-2" />
-              New Adjustment Slip
+              <ClipboardEdit className="h-4 w-4 mr-2" />
+              New Adjustment
+            </Button>
+            <Button onClick={() => router.push('/inventory/transfers')} variant="outline">
+              <ArrowRightLeft className="h-4 w-4 mr-2" />
+              Transfer Slips
             </Button>
             <Button onClick={handleNewTransfer}>
-              <ArrowRightLeft className="h-4 w-4 mr-2" />
-              New Batch Transfer
+              <Plus className="h-4 w-4 mr-2" />
+              New Transfer
             </Button>
           </div>
         }

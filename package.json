@@ -7,9 +7,10 @@
   },
   "scripts": {
     "dev": "next dev -H 0.0.0.0 -p 3000",
+    "dev:test": "next dev . -p 3007",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint .",
+    "lint": "next lint",
     "type-check": "tsc --noEmit",
     "test": "vitest",
     "test:watch": "vitest --watch",
@@ -22,7 +23,7 @@
     "test:integration": "vitest run tests/integration --fileParallelism=false",
     "test:unit": "vitest run tests/unit",
     "test:all": "bun run test:unit && bun run test:integration && bun run test:e2e",
-    "test:full": "scripts\\run-full-tests.cmd",
+    "test:full": "scripts/run-full-tests.cmd",
     "postinstall": "prisma generate",
     "test:ethel": "vitest run tests/selenium/ethel-test-suite.test.ts --maxWorkers=1",
     "demo:seed": "tsx scripts/demo/seed-demo-data.ts",
@@ -40,7 +41,8 @@
     "db:check": "node scripts/pre-migration-checks.js",
     "db:compare": "node scripts/compare-neon-schemas.js",
     "db:deploy:prod": "powershell -ExecutionPolicy Bypass -File scripts/deploy-to-production.ps1",
-    "db:sync:verify": "npx prisma migrate status && node scripts/compare-neon-schemas.js"
+    "db:sync:verify": "npx prisma migrate status && node scripts/compare-neon-schemas.js",
+    "git:sync": "powershell -ExecutionPolicy Bypass -File scripts/auto_git_sync.ps1"
   },
   "dependencies": {
     "@ffmpeg-installer/ffmpeg": "^1.1.0",
@@ -69,7 +71,7 @@
     "@tanstack/react-query": "^5.90.9",
     "@tanstack/react-query-devtools": "^5.90.2",
     "@tanstack/react-query-next-experimental": "^5.91.0",
-    "@types/uuid": "^11.0.0",
+    "@types/uuid": "^10.0.0",
     "@vercel/speed-insights": "^1.2.0",
     "bcryptjs": "^3.0.3",
     "class-variance-authority": "^0.7.1",
@@ -132,6 +134,7 @@
     "ts-node": "^10.9.2",
     "tsx": "^4.20.6",
     "typescript": "^5",
+    "vercel": "^50.1.3",
     "vitest": "^4.0.8"
   }
 }

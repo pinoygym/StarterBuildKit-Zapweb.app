@@ -30,7 +30,6 @@ import { Calendar } from '@/components/ui/calendar';
 import { cn, formatCurrency } from '@/lib/utils';
 import { useSuppliers } from '@/hooks/use-suppliers';
 import { useAP } from '@/hooks/use-ap';
-import { APWithPayments } from '@/types/ap.types';
 import { Checkbox } from '@/components/ui/checkbox';
 import {
     Command,
@@ -146,8 +145,8 @@ export function APBatchPaymentForm({ onSubmit, onCancel }: BatchPaymentFormProps
         // Populate allocations from AP records
         if (apRecords && apRecords.length > 0) {
             const newAllocations = apRecords
-                .filter((ap: APWithPayments) => ap.status !== 'paid' && Number(ap.balance) > 0)
-                .map((ap: APWithPayments) => ({
+                .filter((ap: any) => ap.status !== 'paid' && Number(ap.balance) > 0)
+                .map((ap: any) => ({
                     apId: ap.id,
                     purchaseOrderId: ap.purchaseOrderId,
                     createdAt: new Date(ap.createdAt),

@@ -1,0 +1,1390 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="520" failures="5" errors="0" time="7.7527352">
+    <testsuite name="tests/unit/jwt-mock-test.test.ts" timestamp="2025-12-30T04:23:26.964Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.1844006">
+        <testcase classname="tests/unit/jwt-mock-test.test.ts" name="JWT Mocking Test &gt; should work with vi.spyOn" time="0.1809318">
+        </testcase>
+        <testcase classname="tests/unit/jwt-mock-test.test.ts" name="JWT Mocking Test &gt; should work with vi.mocked" time="0.0004256">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/adjustment-form.test.tsx" timestamp="2025-12-30T04:23:26.966Z" hostname="DESKTOP-HQV3RB6" tests="4" failures="0" errors="0" skipped="0" time="0.9278581">
+        <testcase classname="tests/unit/components/adjustment-form.test.tsx" name="AdjustmentForm &gt; renders the form correctly" time="0.3891405">
+        </testcase>
+        <testcase classname="tests/unit/components/adjustment-form.test.tsx" name="AdjustmentForm &gt; renders the Current Stock label (Regression Test for context error)" time="0.1928126">
+        </testcase>
+        <testcase classname="tests/unit/components/adjustment-form.test.tsx" name="AdjustmentForm &gt; renders Base UOM and Conversion columns" time="0.1736028">
+        </testcase>
+        <testcase classname="tests/unit/components/adjustment-form.test.tsx" name="AdjustmentForm &gt; displays Base UOM for products with alternate UOMs" time="0.169057">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/purchase-order-form.test.tsx" timestamp="2025-12-30T04:23:26.967Z" hostname="DESKTOP-HQV3RB6" tests="1" failures="0" errors="0" skipped="0" time="0.2824409">
+        <testcase classname="tests/unit/components/purchase-order-form.test.tsx" name="PurchaseOrderForm &gt; sets default expected delivery date to today" time="0.2798483">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/submit-button.test.tsx" timestamp="2025-12-30T04:23:26.968Z" hostname="DESKTOP-HQV3RB6" tests="9" failures="0" errors="0" skipped="0" time="0.2120407">
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; renders children when not pending" time="0.1275811">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; shows pending text when form is submitting" time="0.0187699">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; disables button when pending" time="0.0127451">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; shows spinner when pending and showSpinner is true" time="0.0112619">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; hides spinner when showSpinner is false" time="0.0045646">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; uses children as pending text if pendingText not provided" time="0.0091841">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; respects disabled prop even when not pending" time="0.0077434">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; passes through additional button props" time="0.0075572">
+        </testcase>
+        <testcase classname="tests/unit/components/submit-button.test.tsx" name="SubmitButton &gt; always renders as type=&quot;submit&quot;" time="0.0093777">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/contexts/auth-context.test.tsx" timestamp="2025-12-30T04:23:26.969Z" hostname="DESKTOP-HQV3RB6" tests="11" failures="0" errors="0" skipped="0" time="0.3119387">
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Initial Load - Unauthenticated State &gt; should handle 401 response gracefully without console errors" time="0.0540805">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Initial Load - Unauthenticated State &gt; should set user to null and permissions to empty on 401" time="0.0234158">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Initial Load - Unauthenticated State &gt; should handle network errors and log them" time="0.0395801">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Initial Load - Authenticated State &gt; should load user data when API returns 200" time="0.0082124">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Regression Tests - Bug Fixes &gt; should not log 401 errors on public pages (signup/login)" time="0.0143798">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Regression Tests - Bug Fixes &gt; should properly reset state on 401 response" time="0.015324">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Auth Actions &gt; should successfully login and refresh user" time="0.0142323">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Auth Actions &gt; should handle login failure" time="0.0238519">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Auth Actions &gt; should logout and redirect" time="0.0820679">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Permissions &gt; should check permissions correctly" time="0.0179269">
+        </testcase>
+        <testcase classname="tests/unit/contexts/auth-context.test.tsx" name="AuthContext &gt; Permissions &gt; should return true for SuperMegaAdmin regardless of permissions" time="0.0152236">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/contexts/branch-context.test.tsx" timestamp="2025-12-30T04:23:26.972Z" hostname="DESKTOP-HQV3RB6" tests="7" failures="0" errors="0" skipped="0" time="0.227802">
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Initial Load - Unauthenticated State &gt; should handle 401 response gracefully without console errors" time="0.0502268">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Initial Load - Unauthenticated State &gt; should set branches to empty array on 401" time="0.0160467">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Initial Load - Unauthenticated State &gt; should handle network errors and log them" time="0.0236508">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Initial Load - Authenticated State &gt; should load branches when API returns 200" time="0.0458394">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Initial Load - Authenticated State &gt; should restore selected branch from localStorage" time="0.0605176">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Regression Tests - Bug Fixes &gt; should not log 401 errors on public pages (signup/login)" time="0.0144535">
+        </testcase>
+        <testcase classname="tests/unit/contexts/branch-context.test.tsx" name="BranchContext &gt; Regression Tests - Bug Fixes &gt; should properly handle empty branch list on 401" time="0.013707">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/lib/uom-conversion.test.ts" timestamp="2025-12-30T04:23:26.973Z" hostname="DESKTOP-HQV3RB6" tests="25" failures="0" errors="0" skipped="0" time="0.0153468">
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; findUOMConversion &gt; should find exact UOM match" time="0.0023096">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; findUOMConversion &gt; should find case-insensitive exact match" time="0.0004276">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; findUOMConversion &gt; should find partial match when exact match fails" time="0.0004275">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; findUOMConversion &gt; should find UOM with descriptive name" time="0.0003352">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; findUOMConversion &gt; should return null when no match found" time="0.000316">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should return same quantity when UOMs are identical" time="0.0004571">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should convert case to bottles correctly" time="0.0003408">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should convert pack to bottles correctly" time="0.0002723">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should handle decimal quantities" time="0.0003901">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should fail when no conversion found" time="0.0005603">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should fail with invalid conversion factor" time="0.0002161">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; convertUOMQuantity &gt; should work with descriptive UOM names" time="0.0003455">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; validateUOMData &gt; should validate correct UOM data" time="0.0015814">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; validateUOMData &gt; should reject empty name" time="0.0006303">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; validateUOMData &gt; should reject invalid conversion factor" time="0.0004432">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; validateUOMData &gt; should reject negative conversion factor" time="0.0003434">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; validateUOMData &gt; should reject non-numeric conversion factor" time="0.0003185">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; calculateUnitCostInBaseUOM &gt; should calculate correct unit cost for case to bottle conversion" time="0.0003277">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; calculateUnitCostInBaseUOM &gt; should calculate correct unit cost for pack to bottle conversion" time="0.0002252">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; calculateUnitCostInBaseUOM &gt; should return same cost when no conversion needed" time="0.000199">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; calculateUnitCostInBaseUOM &gt; should fail when conversion fails" time="0.0003035">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; Regression Test Scenarios &gt; should handle the original bug case: case to bottle conversion" time="0.0002386">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; Regression Test Scenarios &gt; should handle partial UOM name matching" time="0.0002242">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; Regression Test Scenarios &gt; should maintain precision with decimal quantities" time="0.0001788">
+        </testcase>
+        <testcase classname="tests/unit/lib/uom-conversion.test.ts" name="UOM Conversion Utilities &gt; Regression Test Scenarios &gt; should validate all UOM data before processing" time="0.0003072">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/lib/utils.test.ts" timestamp="2025-12-30T04:23:26.977Z" hostname="DESKTOP-HQV3RB6" tests="11" failures="0" errors="0" skipped="0" time="0.1952253">
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatCurrency &gt; should format numbers as PHP currency" time="0.1637544">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatCurrency &gt; should handle string inputs" time="0.0004416">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatCurrency &gt; should handle invalid inputs gracefully" time="0.0002825">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatQuantity &gt; should format quantities with 2 decimal places and separators" time="0.0007154">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatQuantity &gt; should handle string inputs" time="0.000371">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatQuantity &gt; should handle invalid inputs" time="0.0001693">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatPercentage &gt; should format numbers as percentages" time="0.0003286">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatPercentage &gt; should handle string inputs" time="0.0001665">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatNumber &gt; should format numbers with separators and no decimals" time="0.000499">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatDate &gt; should format dates correctly (MMM dd, yyyy)" time="0.0241761">
+        </testcase>
+        <testcase classname="tests/unit/lib/utils.test.ts" name="Formatting Utilities &gt; formatDateTime &gt; should format date and time" time="0.0007937">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/repositories/customer.repository.test.ts" timestamp="2025-12-30T04:23:26.979Z" hostname="DESKTOP-HQV3RB6" tests="19" failures="0" errors="0" skipped="0" time="0.0188758">
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findAll &gt; should return all customers without filters" time="0.0040266">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findAll &gt; should apply pagination" time="0.0027637">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findAll &gt; should filter by status" time="0.0008215">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findAll &gt; should filter by search term" time="0.000659">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; count &gt; should count all customers" time="0.0005018">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; count &gt; should count with filters" time="0.0002325">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findById &gt; should return customer with relations" time="0.0004746">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findById &gt; should return null for non-existent customer" time="0.0003064">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findByCustomerCode &gt; should return customer by code" time="0.0008918">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findByEmail &gt; should return customer by email" time="0.000441">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; findActive &gt; should return only active customers" time="0.0006275">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; create &gt; should create customer with generated code" time="0.0010212">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; create &gt; should create customer with provided code" time="0.000297">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; update &gt; should update customer details" time="0.0007636">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; softDelete &gt; should soft delete by setting status to inactive" time="0.0005486">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; delete &gt; should hard delete customer" time="0.0004215">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; updateStatus &gt; should update customer status" time="0.0002963">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; getNextCustomerCode &gt; should generate first code if no customers exist" time="0.0002182">
+        </testcase>
+        <testcase classname="tests/unit/repositories/customer.repository.test.ts" name="CustomerRepository &gt; getNextCustomerCode &gt; should increment last customerCode" time="0.0002049">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/repositories/data-maintenance.repository.test.ts" timestamp="2025-12-30T04:23:26.981Z" hostname="DESKTOP-HQV3RB6" tests="23" failures="0" errors="0" skipped="0" time="0.0207501">
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findAll &gt; should return all sales agents ordered by displayOrder and name" time="0.0053402">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findAll &gt; should filter by status" time="0.0009074">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findAll &gt; should filter by search term (case-insensitive)" time="0.0007446">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findAll &gt; should filter by both status and search" time="0.000685">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findAll &gt; should return empty array if no agents found" time="0.0004969">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findById &gt; should return sales agent by id" time="0.0005352">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findById &gt; should return null if agent not found" time="0.0002969">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findByCode &gt; should return sales agent by code" time="0.0004943">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findByCode &gt; should return null if code not found" time="0.0003051">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findByName &gt; should return sales agent by name" time="0.000637">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; findByName &gt; should return null if name not found" time="0.0002481">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; create &gt; should create a sales agent" time="0.0006557">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; create &gt; should create agent with minimal required fields" time="0.0002789">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; update &gt; should update a sales agent" time="0.0006931">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; update &gt; should update partial fields" time="0.0002155">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; delete &gt; should delete a sales agent" time="0.0004109">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; count &gt; should count all sales agents" time="0.0006955">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; count &gt; should count with status filter" time="0.0003112">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; count &gt; should count with search filter" time="0.0003093">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; count &gt; should return 0 if no agents match filters" time="0.0001794">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; updateDisplayOrder &gt; should update display order for multiple agents using transaction" time="0.0020453">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; updateDisplayOrder &gt; should handle single display order update" time="0.0004772">
+        </testcase>
+        <testcase classname="tests/unit/repositories/data-maintenance.repository.test.ts" name="DataMaintenanceRepository - Sales Agents &gt; updateDisplayOrder &gt; should handle empty updates array" time="0.0003212">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/repositories/product.repository.test.ts" timestamp="2025-12-30T04:23:26.984Z" hostname="DESKTOP-HQV3RB6" tests="17" failures="0" errors="0" skipped="0" time="0.0208554">
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findAll &gt; should return all products without filters" time="0.0054284">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findAll &gt; should filter by category" time="0.0025495">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findAll &gt; should filter by status" time="0.0006339">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findAll &gt; should filter by search term" time="0.0007806">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findAll &gt; should apply pagination" time="0.0006962">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; count &gt; should count all products without filters" time="0.0007283">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; count &gt; should count with filters" time="0.0004961">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findById &gt; should return product with UOMs" time="0.0006682">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findById &gt; should return null for non-existent product" time="0.0003751">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findByName &gt; should return product by name" time="0.000901">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; findActive &gt; should return only active products" time="0.0008631">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; create &gt; should create product without alternate UOMs" time="0.0008843">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; create &gt; should create product with alternate UOMs" time="0.0003973">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; update &gt; should update product without changing UOMs" time="0.0005291">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; update &gt; should update product and replace UOMs" time="0.0004994">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; delete &gt; should soft delete by setting status to inactive" time="0.0004494">
+        </testcase>
+        <testcase classname="tests/unit/repositories/product.repository.test.ts" name="ProductRepository &gt; updateStatus &gt; should update product status" time="0.0003804">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/repositories/supplier.repository.test.ts" timestamp="2025-12-30T04:23:26.989Z" hostname="DESKTOP-HQV3RB6" tests="13" failures="0" errors="0" skipped="0" time="0.0176416">
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findAll &gt; should return all suppliers without filters" time="0.0033945">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findAll &gt; should apply pagination" time="0.0035317">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findAll &gt; should filter by search term" time="0.0006528">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; count &gt; should count all suppliers" time="0.0007124">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; count &gt; should count with search filter" time="0.0004196">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findById &gt; should return supplier by id" time="0.0004752">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findById &gt; should return null for non-existent supplier" time="0.0003514">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findByCompanyName &gt; should return supplier by email" time="0.0004148">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; findActive &gt; should return only active suppliers" time="0.0006672">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; create &gt; should create a new supplier" time="0.001057">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; update &gt; should update supplier details" time="0.0012869">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; delete &gt; should hard delete supplier" time="0.0005914">
+        </testcase>
+        <testcase classname="tests/unit/repositories/supplier.repository.test.ts" name="SupplierRepository &gt; updateStatus &gt; should update supplier status" time="0.0003552">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/alert.service.test.ts" timestamp="2025-12-30T04:23:26.991Z" hostname="DESKTOP-HQV3RB6" tests="3" failures="0" errors="0" skipped="0" time="0.0104842">
+        <testcase classname="tests/unit/services/alert.service.test.ts" name="AlertService &gt; creates an alert" time="0.0032141">
+        </testcase>
+        <testcase classname="tests/unit/services/alert.service.test.ts" name="AlertService &gt; checkLowStock &gt; detects low stock and creates alert" time="0.0040209">
+        </testcase>
+        <testcase classname="tests/unit/services/alert.service.test.ts" name="AlertService &gt; checkLowStock &gt; prevents duplicate alerts" time="0.0007735">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/ap.service.test.ts" timestamp="2025-12-30T04:23:26.992Z" hostname="DESKTOP-HQV3RB6" tests="11" failures="0" errors="0" skipped="0" time="0.0181839">
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; createAP &gt; should create AP record with correct initial values" time="0.0064471">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; createAP &gt; should create AP record with all discount and charge fields" time="0.00133">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; calculateDueDate &gt; should calculate Net 15 due date correctly" time="0.0004066">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; calculateDueDate &gt; should calculate Net 30 due date correctly" time="0.0003378">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; calculateDueDate &gt; should calculate Net 60 due date correctly" time="0.0003528">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; calculateDueDate &gt; should handle COD (Cash On Delivery)" time="0.0002285">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; recordPayment &gt; should record full payment and update status to paid" time="0.0014146">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; recordPayment &gt; should record partial payment and update status to partial" time="0.0007725">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; recordPayment &gt; should reject payment exceeding balance" time="0.0023571">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; recordPayment &gt; should reject zero or negative payment" time="0.0008472">
+        </testcase>
+        <testcase classname="tests/unit/services/ap.service.test.ts" name="APService &gt; recordPayment &gt; should throw error if AP record not found" time="0.0006546">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/approval.service.test.ts" timestamp="2025-12-30T04:23:26.994Z" hostname="DESKTOP-HQV3RB6" tests="4" failures="0" errors="0" skipped="0" time="0.0155463">
+        <testcase classname="tests/unit/services/approval.service.test.ts" name="ApprovalService &gt; createRequest &gt; should create a request and notify admins" time="0.0062095">
+        </testcase>
+        <testcase classname="tests/unit/services/approval.service.test.ts" name="ApprovalService &gt; approveRequest &gt; should approve request and execute inventory addition" time="0.0028496">
+        </testcase>
+        <testcase classname="tests/unit/services/approval.service.test.ts" name="ApprovalService &gt; approveRequest &gt; should throw error if request not pending" time="0.0023717">
+        </testcase>
+        <testcase classname="tests/unit/services/approval.service.test.ts" name="ApprovalService &gt; rejectRequest &gt; should reject request and notify user" time="0.001163">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/ar-payments-report.service.test.ts" timestamp="2025-12-30T04:23:26.994Z" hostname="DESKTOP-HQV3RB6" tests="12" failures="0" errors="0" skipped="0" time="0.0194813">
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should return all payments when no filters are provided" time="0.0068454">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by date range" time="0.0026623">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by payment method" time="0.0007271">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by reference number" time="0.0006793">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by branch" time="0.0006407">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by customer" time="0.0005349">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should filter by customer name" time="0.0005254">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should combine multiple filters" time="0.0008347">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should calculate summary statistics correctly" time="0.0014247">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should return empty report when no payments found" time="0.0008473">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should transform payment data correctly" time="0.0004957">
+        </testcase>
+        <testcase classname="tests/unit/services/ar-payments-report.service.test.ts" name="ARService - Payments Report &gt; getPaymentsReport &gt; should order payments by date descending" time="0.0006028">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/ar.service.test.ts" timestamp="2025-12-30T04:23:26.996Z" hostname="DESKTOP-HQV3RB6" tests="14" failures="0" errors="0" skipped="0" time="0.0227225">
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; createAR &gt; should create AR record with correct initial values" time="0.0060054">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordPayment &gt; should record full payment and update status to paid" time="0.0014798">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordPayment &gt; should record partial payment and update status to partial" time="0.0008059">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordPayment &gt; should reject payment exceeding balance" time="0.0025846">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordPayment &gt; should reject zero or negative payment" time="0.00085">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordPayment &gt; should throw error if AR record not found" time="0.0006079">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; getAgingReport &gt; should calculate aging buckets correctly" time="0.0026874">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; getAgingReport &gt; should handle multiple invoices for same customer" time="0.0005856">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; getAgingReport &gt; should handle empty records" time="0.0005735">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordBatchPayment &gt; should record batch payment across multiple AR records" time="0.0012155">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordBatchPayment &gt; should reject batch payment with mismatched total" time="0.0005426">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordBatchPayment &gt; should reject batch payment with empty allocations" time="0.0004077">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordBatchPayment &gt; should handle batch payment with withholding tax and discounts" time="0.0006288">
+        </testcase>
+        <testcase classname="tests/unit/services/ar.service.test.ts" name="ARService &gt; recordBatchPayment &gt; should rollback transaction if any allocation fails" time="0.0006151">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/auth.service.test.ts" timestamp="2025-12-30T04:23:26.998Z" hostname="DESKTOP-HQV3RB6" tests="12" failures="0" errors="0" skipped="0" time="0.0199319">
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; registerUser &gt; should successfully register a new user" time="0.0047858">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; registerUser &gt; should fail if email already exists" time="0.000782">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; registerUser &gt; should throw error if default role not found" time="0.0023806">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; login &gt; should successfully login with valid credentials" time="0.0039215">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; login &gt; should fail if user not found" time="0.000868">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; login &gt; should fail if password is valid" time="0.001188">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; login &gt; should fail if user is inactive" time="0.0003951">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; login &gt; should fail if email is not verified" time="0.0003506">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; logout &gt; should delete session and log logout" time="0.0007443">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; validateSession &gt; should return session if valid" time="0.0004798">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; validateSession &gt; should return null if session expired" time="0.0004482">
+        </testcase>
+        <testcase classname="tests/unit/services/auth.service.test.ts" name="AuthService &gt; validateSession &gt; should return null if user is inactive" time="0.0002457">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/backup.service.test.ts" timestamp="2025-12-30T04:23:27.000Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0182476">
+        <testcase classname="tests/unit/services/backup.service.test.ts" name="BackupService &gt; createBackup &gt; should collect data from all models and return backup object" time="0.0051502">
+        </testcase>
+        <testcase classname="tests/unit/services/backup.service.test.ts" name="BackupService &gt; restoreBackup &gt; should execute transaction with deleteMany and createMany calls" time="0.010747">
+            <system-out>
+[BackupService] Starting restore backup process...
+[BackupService] Backup version: 1.1
+[BackupService] Backup timestamp: 2025-12-30T04:23:21.371Z
+[BackupService] Transaction started
+[BackupService] Deleting existing data...
+
+[BackupService] ✓ Deleted fundTransfers
+
+[BackupService] ✓ Deleted fundTransactions
+
+[BackupService] ✓ Deleted notifications
+
+[BackupService] ✓ Deleted approvalRequests
+
+[BackupService] ✓ Deleted roadmapComments
+
+[BackupService] ✓ Deleted roadmapItems
+
+[BackupService] ✓ Deleted partsReplacements
+
+[BackupService] ✓ Deleted jobPerformed
+
+[BackupService] ✓ Deleted jobImages
+
+[BackupService] ✓ Deleted jobComments
+
+[BackupService] ✓ Deleted jobOrders
+
+[BackupService] ✓ Deleted inventoryAdjustmentItems
+
+[BackupService] ✓ Deleted inventoryAdjustments
+
+[BackupService] ✓ Deleted companySettings
+
+[BackupService] ✓ Deleted reportTemplates
+
+[BackupService] ✓ Deleted reportExports
+
+[BackupService] ✓ Deleted passwordResetTokens
+
+[BackupService] ✓ Deleted sessions
+
+[BackupService] ✓ Deleted auditLogs
+
+[BackupService] ✓ Deleted dailySalesSummaries
+
+[BackupService] ✓ Deleted employeePerformances
+
+[BackupService] ✓ Deleted expenses
+
+[BackupService] ✓ Deleted arPayments
+
+[BackupService] ✓ Deleted accountsReceivables
+
+[BackupService] ✓ Deleted apPayments
+
+[BackupService] ✓ Deleted accountsPayables
+
+[BackupService] ✓ Deleted customerPurchaseHistories
+
+[BackupService] ✓ Deleted promotionUsages
+
+[BackupService] ✓ Deleted posReceipts
+
+[BackupService] ✓ Deleted posSaleItems
+
+[BackupService] ✓ Deleted posSales
+
+[BackupService] ✓ Deleted salesOrderItems
+
+[BackupService] ✓ Deleted salesOrders
+
+[BackupService] ✓ Deleted receivingVoucherItems
+
+[BackupService] ✓ Deleted receivingVouchers
+
+[BackupService] ✓ Deleted purchaseOrderItems
+
+[BackupService] ✓ Deleted purchaseOrders
+
+[BackupService] ✓ Deleted stockMovements
+
+[BackupService] ✓ Deleted inventory
+
+[BackupService] ✓ Deleted productUOMs
+
+[BackupService] ✓ Deleted products
+
+[BackupService] ✓ Deleted salesAgents
+
+[BackupService] ✓ Deleted customers
+
+[BackupService] ✓ Deleted suppliers
+
+[BackupService] ✓ Deleted paymentMethods
+
+[BackupService] ✓ Deleted expenseVendors
+
+[BackupService] ✓ Deleted expenseCategories
+
+[BackupService] ✓ Deleted unitOfMeasures
+
+[BackupService] ✓ Deleted productCategories
+
+[BackupService] ✓ Deleted userBranchAccess
+
+[BackupService] ✓ Deleted users
+
+[BackupService] ✓ Deleted rolePermissions
+
+[BackupService] ✓ Deleted permissions
+
+[BackupService] ✓ Deleted roles
+
+[BackupService] ✓ Deleted warehouses
+
+[BackupService] ✓ Deleted branches
+[BackupService] Deletion phase complete.
+[BackupService] Starting data restoration...
+
+[BackupService] ✓ Restored 1 branches
+
+[BackupService] ✓ Restored 1 suppliers
+[BackupService] Data restoration complete.
+[BackupService] Restore completed successfully.
+
+            </system-out>
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/branch.service.test.ts" timestamp="2025-12-30T04:23:27.003Z" hostname="DESKTOP-HQV3RB6" tests="4" failures="0" errors="0" skipped="0" time="0.0142255">
+        <testcase classname="tests/unit/services/branch.service.test.ts" name="BranchService &gt; createBranch &gt; should create a branch successfully" time="0.0059457">
+        </testcase>
+        <testcase classname="tests/unit/services/branch.service.test.ts" name="BranchService &gt; createBranch &gt; should throw error if code exists" time="0.0028691">
+        </testcase>
+        <testcase classname="tests/unit/services/branch.service.test.ts" name="BranchService &gt; updateBranch &gt; should update branch successfully" time="0.0021062">
+        </testcase>
+        <testcase classname="tests/unit/services/branch.service.test.ts" name="BranchService &gt; updateBranch &gt; should throw if branch not found" time="0.0006544">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/company-settings.service.test.ts" timestamp="2025-12-30T04:23:27.004Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0060983">
+        <testcase classname="tests/unit/services/company-settings.service.test.ts" name="CompanySettingsService &gt; getSettings &gt; should return existing settings if found" time="0.0029079">
+            <system-out>
+[CompanySettingsService] Attempting to find existing settings...
+
+[CompanySettingsService] Found settings: YES
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/unit/services/company-settings.service.test.ts" name="CompanySettingsService &gt; getSettings &gt; should create default settings if none found" time="0.0009253">
+            <system-out>
+[CompanySettingsService] Attempting to find existing settings...
+
+[CompanySettingsService] Found settings: NO
+[CompanySettingsService] No settings found, creating default settings...
+
+[CompanySettingsService] Default settings created successfully
+
+            </system-out>
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/customer.service.test.ts" timestamp="2025-12-30T04:23:27.005Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="1.0055737">
+        <testcase classname="tests/unit/services/customer.service.test.ts" name="CustomerService &gt; createCustomer &gt; should create a customer successfully" time="0.8546816">
+        </testcase>
+        <testcase classname="tests/unit/services/customer.service.test.ts" name="CustomerService &gt; updateCustomer &gt; should update a customer successfully" time="0.0766643">
+        </testcase>
+        <testcase classname="tests/unit/services/customer.service.test.ts" name="CustomerService &gt; getCustomerById &gt; should return customer if found" time="0.0005037">
+        </testcase>
+        <testcase classname="tests/unit/services/customer.service.test.ts" name="CustomerService &gt; getCustomerById &gt; should throw NotFoundError if not found" time="0.0024112">
+        </testcase>
+        <testcase classname="tests/unit/services/customer.service.test.ts" name="CustomerService &gt; deleteCustomer &gt; should delete customer" time="0.0678342">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/dashboard.service.test.ts" timestamp="2025-12-30T04:23:27.006Z" hostname="DESKTOP-HQV3RB6" tests="3" failures="0" errors="0" skipped="0" time="0.0084307">
+        <testcase classname="tests/unit/services/dashboard.service.test.ts" name="DashboardService &gt; getKPIs &gt; should calculate KPIs correctly" time="0.0032538">
+        </testcase>
+        <testcase classname="tests/unit/services/dashboard.service.test.ts" name="DashboardService &gt; getTopSellingProducts &gt; should aggregate top selling products" time="0.0017187">
+        </testcase>
+        <testcase classname="tests/unit/services/dashboard.service.test.ts" name="DashboardService &gt; getLowStockProducts &gt; should identify low and critical stock" time="0.0009944">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/data-maintenance-all.test.ts" timestamp="2025-12-30T04:23:27.006Z" hostname="DESKTOP-HQV3RB6" tests="12" failures="0" errors="0" skipped="0" time="0.020035">
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: product-categories &gt; should create successfully with valid input" time="0.0079284">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: product-categories &gt; should update successfully" time="0.0013855">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: expense-categories &gt; should create successfully with valid input" time="0.0009015">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: expense-categories &gt; should update successfully" time="0.0007281">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: payment-methods &gt; should create successfully with valid input" time="0.0013818">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: payment-methods &gt; should update successfully" time="0.0006475">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: units-of-measure &gt; should create successfully with valid input" time="0.0005021">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: units-of-measure &gt; should update successfully" time="0.000428">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: expense-vendors &gt; should create successfully with valid input" time="0.000816">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: expense-vendors &gt; should update successfully" time="0.0009074">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: sales-agents &gt; should create successfully with valid input" time="0.0006187">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance-all.test.ts" name="DataMaintenanceService - All Types &gt; Type: sales-agents &gt; should update successfully" time="0.0006634">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/data-maintenance.service.test.ts" timestamp="2025-12-30T04:23:27.008Z" hostname="DESKTOP-HQV3RB6" tests="26" failures="0" errors="0" skipped="0" time="0.033636">
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; getAll &gt; should return all sales agents" time="0.00503">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; getAll &gt; should filter sales agents by status" time="0.0011578">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; getAll &gt; should search sales agents by name" time="0.0007201">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; getById &gt; should return sales agent if found" time="0.0005641">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; getById &gt; should throw NotFoundError if sales agent not found" time="0.0024699">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should create a sales agent successfully" time="0.0051752">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if name is missing" time="0.001976">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if code is missing" time="0.0005742">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if code format is invalid" time="0.0006285">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if email format is invalid" time="0.000979">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if phone format is invalid" time="0.0006283">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if name already exists" time="0.0007848">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should throw ValidationError if code already exists" time="0.0008154">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; create &gt; should accept optional fields" time="0.0003969">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; update &gt; should update a sales agent successfully" time="0.0011233">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; update &gt; should throw NotFoundError if agent does not exist" time="0.0009585">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; update &gt; should throw ValidationError if new name already exists" time="0.0008607">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; update &gt; should throw ValidationError if new code already exists" time="0.000704">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; update &gt; should allow updating with same name" time="0.0006042">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; delete &gt; should delete a sales agent successfully" time="0.000531">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; delete &gt; should throw NotFoundError if agent does not exist" time="0.0005099">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; toggleStatus &gt; should toggle status from active to inactive" time="0.0005643">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; toggleStatus &gt; should toggle status from inactive to active" time="0.000477">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; toggleStatus &gt; should throw NotFoundError if agent does not exist" time="0.0003604">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; updateDisplayOrder &gt; should update display order for multiple agents" time="0.0007902">
+        </testcase>
+        <testcase classname="tests/unit/services/data-maintenance.service.test.ts" name="DataMaintenanceService - Sales Agents &gt; updateDisplayOrder &gt; should throw NotFoundError if any agent does not exist" time="0.0005015">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/discount-expense.service.test.ts" timestamp="2025-12-30T04:23:27.012Z" hostname="DESKTOP-HQV3RB6" tests="3" failures="0" errors="0" skipped="0" time="0.0111005">
+        <testcase classname="tests/unit/services/discount-expense.service.test.ts" name="DiscountExpenseService &gt; should not create expense if total discount is 0" time="0.0024053">
+        </testcase>
+        <testcase classname="tests/unit/services/discount-expense.service.test.ts" name="DiscountExpenseService &gt; should create expense if discount &gt; 0 and category exists" time="0.0043924">
+        </testcase>
+        <testcase classname="tests/unit/services/discount-expense.service.test.ts" name="DiscountExpenseService &gt; should log warn and skip if category not found" time="0.0012327">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/expense.service.test.ts" timestamp="2025-12-30T04:23:27.013Z" hostname="DESKTOP-HQV3RB6" tests="3" failures="0" errors="0" skipped="0" time="0.0100921">
+        <testcase classname="tests/unit/services/expense.service.test.ts" name="ExpenseService &gt; createExpense &gt; should create expense successfully" time="0.0030627">
+        </testcase>
+        <testcase classname="tests/unit/services/expense.service.test.ts" name="ExpenseService &gt; createExpense &gt; should throw if amount &lt;= 0" time="0.0022831">
+        </testcase>
+        <testcase classname="tests/unit/services/expense.service.test.ts" name="ExpenseService &gt; updateExpense &gt; should update expense" time="0.0019832">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/fund-source.service.test.ts" timestamp="2025-12-30T04:23:27.014Z" hostname="DESKTOP-HQV3RB6" tests="4" failures="0" errors="0" skipped="0" time="0.0379872">
+        <testcase classname="tests/unit/services/fund-source.service.test.ts" name="FundSourceService &gt; createFundSource &gt; should throw if code exists" time="0.0035828">
+        </testcase>
+        <testcase classname="tests/unit/services/fund-source.service.test.ts" name="FundSourceService &gt; createFundSource &gt; should create fund source" time="0.0011417">
+        </testcase>
+        <testcase classname="tests/unit/services/fund-source.service.test.ts" name="FundSourceService &gt; recordDeposit &gt; should update balance and create transaction" time="0.0041995">
+        </testcase>
+        <testcase classname="tests/unit/services/fund-source.service.test.ts" name="FundSourceService &gt; recordWithdrawal &gt; should throw if insufficient balance" time="0.0263815">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/inventory-adjustment-types.test.ts" timestamp="2025-12-30T04:23:27.015Z" hostname="DESKTOP-HQV3RB6" tests="10" failures="0" errors="0" skipped="0" time="0.0262525">
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should correctly calculate actual quantity for positive RELATIVE adjustment" time="0.0104394">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should correctly calculate actual quantity for negative RELATIVE adjustment" time="0.0017691">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should handle RELATIVE adjustment when current stock is 0" time="0.0012907">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should correctly set actual quantity for ABSOLUTE adjustment (increase)" time="0.0017346">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should correctly set actual quantity for ABSOLUTE adjustment (decrease)" time="0.0011762">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should handle ABSOLUTE adjustment to 0 (clearing stock)" time="0.0009953">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should handle ABSOLUTE adjustment when no existing stock" time="0.0010526">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Mixed Adjustments (ABSOLUTE and RELATIVE in same slip) &gt; should correctly process both ABSOLUTE and RELATIVE adjustments together" time="0.0020283">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Edge Cases &gt; should handle ABSOLUTE adjustment with same value as current stock" time="0.0012159">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Edge Cases &gt; should handle RELATIVE adjustment of 0 (no change)" time="0.0012427">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/inventory-adjustments.service.test.ts" timestamp="2025-12-30T04:23:27.016Z" hostname="DESKTOP-HQV3RB6" tests="12" failures="5" errors="0" skipped="0" time="0.0393429">
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; create &gt; should create a draft adjustment successfully" time="0.0122555">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:90:61
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should update a draft adjustment" time="0.0071998">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should throw ValidationError if updating non-draft adjustment" time="0.001987">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should throw NotFoundError if adjustment does not exist" time="0.0009567">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; post &gt; should post an adjustment, update inventory records with system quantities, and update stock" time="0.0027805">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-1
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; post &gt; should throw error if posting non-draft adjustment" time="0.0044934">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-1
+User ID: user-123
+Error: TypeError: Cannot read properties of undefined (reading &apos;length&apos;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:265:38)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: Cannot read properties of undefined (reading &apos;length&apos;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:265:38)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="expected error to be instance of ValidationError" type="AssertionError">
+AssertionError: expected error to be instance of ValidationError
+
+- Expected: 
+[Function ValidationError]
+
++ Received: 
+TypeError {
+  &quot;message&quot;: &quot;Cannot read properties of undefined (reading &apos;length&apos;)&quot;,
+}
+
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:240:13
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findAll &gt; should return adjustments with filters" time="0.0012574">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findById &gt; should return adjustment if found" time="0.0007239">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findById &gt; should throw NotFoundError if not found" time="0.000722">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; copy &gt; should create a copy of an adjustment" time="0.0015279">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ InventoryAdjustmentService.copy services/inventory-adjustment.service.ts:527:33
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:309:13
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; reverse &gt; should create a reversal adjustment and automatically post it" time="0.0015273">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ InventoryAdjustmentService.reverse services/inventory-adjustment.service.ts:583:37
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:360:28
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; reverse &gt; should throw error if reversing non-posted adjustment" time="0.0008123">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/inventory-average-cost.test.ts" timestamp="2025-12-30T04:23:27.021Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="0.0117203">
+        <testcase classname="tests/unit/services/inventory-average-cost.test.ts" name="Inventory Service - Average Cost Calculation &gt; should calculate average cost correctly for first stock entry" time="0.0037753">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-average-cost.test.ts" name="Inventory Service - Average Cost Calculation &gt; should calculate weighted average cost for multiple purchases" time="0.001361">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-average-cost.test.ts" name="Inventory Service - Average Cost Calculation &gt; should convert UOM cost correctly when receiving in alternate UOM" time="0.0008177">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-average-cost.test.ts" name="Inventory Service - Average Cost Calculation &gt; should calculate weighted average with UOM conversion" time="0.0008614">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-average-cost.test.ts" name="Inventory Service - Average Cost Calculation &gt; should throw error for invalid unit cost" time="0.0023587">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/inventory.service.test.ts" timestamp="2025-12-30T04:23:27.022Z" hostname="DESKTOP-HQV3RB6" tests="9" failures="0" errors="0" skipped="0" time="0.0183166">
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; convertToBaseUOM &gt; should return quantity as is if UOM matches base UOM" time="0.0020997">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; convertToBaseUOM &gt; should convert quantity if UOM is alternate UOM" time="0.0004744">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; convertToBaseUOM &gt; should throw error if UOM not found" time="0.0019471">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; addStock &gt; should calculate and update weighted average cost correctly" time="0.0046152">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; addStock &gt; should add stock successfully" time="0.0014163">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; deductStock &gt; should deduct stock successfully" time="0.0011117">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; deductStock &gt; should throw error if insufficient stock" time="0.0006453">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; transferStock &gt; should transfer stock successfully" time="0.0012658">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory.service.test.ts" name="InventoryService &gt; adjustStockBatch &gt; should use provided transaction client" time="0.0018338">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/notification.service.test.ts" timestamp="2025-12-30T04:23:27.023Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0102939">
+        <testcase classname="tests/unit/services/notification.service.test.ts" name="NotificationService &gt; notifyUser &gt; should create notification" time="0.0057086">
+        </testcase>
+        <testcase classname="tests/unit/services/notification.service.test.ts" name="NotificationService &gt; notifyAdmins &gt; should find admins and bulk create notifications" time="0.0017542">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/permission.service.test.ts" timestamp="2025-12-30T04:23:27.024Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0025077">
+        <testcase classname="tests/unit/services/permission.service.test.ts" name="PermissionService &gt; userHasPermission &gt; should return true if user has permission" time="0.0010695">
+        </testcase>
+        <testcase classname="tests/unit/services/permission.service.test.ts" name="PermissionService &gt; userHasPermission &gt; should return false if user lacks permission" time="0.0001937">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/pos.service.test.ts" timestamp="2025-12-30T04:23:27.024Z" hostname="DESKTOP-HQV3RB6" tests="9" failures="0" errors="0" skipped="0" time="0.0171053">
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; generateReceiptNumber &gt; should generate receipt number successfully" time="0.0026049">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; getAllSales &gt; should return all sales" time="0.0012115">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; getSaleById &gt; should return sale by ID" time="0.0013003">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; getSaleById &gt; should throw NotFoundError if sale not found" time="0.0023098">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; getTodaySummary &gt; should return today summary" time="0.0004846">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; getTodaySummary &gt; should filter by branch" time="0.0004707">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; generateReceiptNumber &gt; should generate first receipt of the day" time="0.0003943">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; generateReceiptNumber &gt; should increment sequence number" time="0.0004754">
+        </testcase>
+        <testcase classname="tests/unit/services/pos.service.test.ts" name="POSService &gt; processSale &gt; should process sale and record stock movements with UOM tracking" time="0.0049045">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/product.service.test.ts" timestamp="2025-12-30T04:23:27.026Z" hostname="DESKTOP-HQV3RB6" tests="9" failures="0" errors="0" skipped="0" time="1.0774944">
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; createProduct &gt; should create a product successfully" time="0.8500234">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; createProduct &gt; should throw error if product name exists" time="0.0023152">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; createProduct &gt; should throw error if alternate UOM matches base UOM" time="0.0009839">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; updateProduct &gt; should update a product successfully" time="0.0759524">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; updateProduct &gt; should throw error if product not found" time="0.0007254">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; deleteProduct &gt; should delete inactive product" time="0.0699961">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; deleteProduct &gt; should throw error when deleting active product without role" time="0.0007283">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; deleteProduct &gt; should allow deleting active product if Super Admin" time="0.0708606">
+        </testcase>
+        <testcase classname="tests/unit/services/product.service.test.ts" name="ProductService &gt; getProductUOMs &gt; should return base and alternate UOMs" time="0.0016308">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/purchase-order.service.test.ts" timestamp="2025-12-30T04:23:27.027Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="0.0154446">
+        <testcase classname="tests/unit/services/purchase-order.service.test.ts" name="PurchaseOrderService &gt; createPurchaseOrder &gt; should create a purchase order successfully" time="0.0028819">
+        </testcase>
+        <testcase classname="tests/unit/services/purchase-order.service.test.ts" name="PurchaseOrderService &gt; createPurchaseOrder &gt; should throw error if supplier is inactive" time="0.0023763">
+        </testcase>
+        <testcase classname="tests/unit/services/purchase-order.service.test.ts" name="PurchaseOrderService &gt; updatePurchaseOrder &gt; should update purchase order successfully" time="0.0027238">
+        </testcase>
+        <testcase classname="tests/unit/services/purchase-order.service.test.ts" name="PurchaseOrderService &gt; updatePurchaseOrder &gt; should throw error for invalid status transition" time="0.0006571">
+        </testcase>
+        <testcase classname="tests/unit/services/purchase-order.service.test.ts" name="PurchaseOrderService &gt; receivePurchaseOrder &gt; should receive purchase order successfully" time="0.0040951">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/receiving-voucher.service.test.ts" timestamp="2025-12-30T04:23:27.028Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="0.0203815">
+        <testcase classname="tests/unit/services/receiving-voucher.service.test.ts" name="ReceivingVoucherService &gt; createReceivingVoucher &gt; should create a receiving voucher successfully" time="0.0101242">
+        </testcase>
+        <testcase classname="tests/unit/services/receiving-voucher.service.test.ts" name="ReceivingVoucherService &gt; createReceivingVoucher &gt; should create a receiving voucher with alternate UOM successfully" time="0.0013276">
+        </testcase>
+        <testcase classname="tests/unit/services/receiving-voucher.service.test.ts" name="ReceivingVoucherService &gt; createReceivingVoucher &gt; should throw error if PO not found" time="0.0025587">
+        </testcase>
+        <testcase classname="tests/unit/services/receiving-voucher.service.test.ts" name="ReceivingVoucherService &gt; cancelReceivingVoucher &gt; should cancel receiving voucher successfully" time="0.002706">
+        </testcase>
+        <testcase classname="tests/unit/services/receiving-voucher.service.test.ts" name="ReceivingVoucherService &gt; cancelReceivingVoucher &gt; should throw error if RV already cancelled" time="0.000804">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/report.service.test.ts" timestamp="2025-12-30T04:23:27.029Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0042328">
+        <testcase classname="tests/unit/services/report.service.test.ts" name="ReportService &gt; getStockLevelReport &gt; should classify stock status correctly" time="0.0014035">
+        </testcase>
+        <testcase classname="tests/unit/services/report.service.test.ts" name="ReportService &gt; getSalesReport &gt; should aggregate daily sales" time="0.0012791">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/sales-history.service.test.ts" timestamp="2025-12-30T04:23:27.029Z" hostname="DESKTOP-HQV3RB6" tests="1" failures="0" errors="0" skipped="0" time="0.0030497">
+        <testcase classname="tests/unit/services/sales-history.service.test.ts" name="SalesHistoryService &gt; getSalesHistory &gt; should return paginated results" time="0.0018385">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/sales-order.service.test.ts" timestamp="2025-12-30T04:23:27.029Z" hostname="DESKTOP-HQV3RB6" tests="2" failures="0" errors="0" skipped="0" time="0.0131702">
+        <testcase classname="tests/unit/services/sales-order.service.test.ts" name="SalesOrderService &gt; createSalesOrder &gt; should create a sales order successfully" time="0.0069918">
+        </testcase>
+        <testcase classname="tests/unit/services/sales-order.service.test.ts" name="SalesOrderService &gt; createSalesOrder &gt; should throw error if insufficient stock" time="0.0031454">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/settings.service.test.ts" timestamp="2025-12-30T04:23:27.030Z" hostname="DESKTOP-HQV3RB6" tests="1" failures="0" errors="0" skipped="0" time="0.0030905">
+        <testcase classname="tests/unit/services/settings.service.test.ts" name="SettingsService &gt; getDatabaseStats &gt; should return stats" time="0.001566">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/supplier.service.test.ts" timestamp="2025-12-30T04:23:27.030Z" hostname="DESKTOP-HQV3RB6" tests="17" failures="0" errors="0" skipped="0" time="0.9862494">
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getAllSuppliers &gt; should return all suppliers" time="0.0045655">
+            <system-out>
+[SupplierService] getAllSuppliers called with filters: [90mundefined[39m
+
+[SupplierService] Found 2 suppliers
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getAllSuppliers &gt; should apply filters and pagination" time="0.0016441">
+            <system-out>
+[SupplierService] getAllSuppliers called with filters: { status: [32m&apos;active&apos;[39m }
+
+[SupplierService] Found 0 suppliers
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getSupplierCount &gt; should return supplier count" time="0.0005479">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getSupplierById &gt; should return supplier by id" time="0.0004371">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getSupplierById &gt; should throw NotFoundError if supplier not found" time="0.0021995">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; getActiveSuppliers &gt; should return only active suppliers" time="0.0005466">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; searchSuppliers &gt; should return all suppliers if search term is empty" time="0.0005064">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; searchSuppliers &gt; should search by company name" time="0.0004107">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; updateSupplier &gt; should update supplier successfully" time="0.8879193">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; updateSupplier &gt; should throw error if company name already exists" time="0.0011392">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; updateSupplier &gt; should throw NotFoundError if supplier not found" time="0.000434">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; deleteSupplier &gt; should soft delete supplier" time="0.0795442">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; deleteSupplier &gt; should throw NotFoundError if supplier not found" time="0.0005485">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; toggleSupplierStatus &gt; should toggle active to inactive" time="0.0005273">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; toggleSupplierStatus &gt; should toggle inactive to active" time="0.0003199">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; validateSupplierActive &gt; should pass validation for active supplier" time="0.0005984">
+        </testcase>
+        <testcase classname="tests/unit/services/supplier.service.test.ts" name="SupplierService &gt; validateSupplierActive &gt; should throw error for inactive supplier" time="0.000488">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/user.service.test.ts" timestamp="2025-12-30T04:23:27.033Z" hostname="DESKTOP-HQV3RB6" tests="14" failures="0" errors="0" skipped="0" time="0.0165984">
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getAllUsers &gt; should return all users with pagination" time="0.0037633">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getAllUsers &gt; should apply filters" time="0.0010174">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getUserById &gt; should return user by id" time="0.0004685">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getUserByEmail &gt; should return user by email" time="0.0004248">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; updateUser &gt; should update user successfully" time="0.0009017">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; updateUser &gt; should throw error if user not found" time="0.0021839">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; updateUser &gt; should throw error if email already exists" time="0.0006657">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; deleteUser &gt; should soft delete user" time="0.0008403">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; deleteUser &gt; should throw error if user not found" time="0.0005136">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; activateUser &gt; should activate user" time="0.0005736">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; suspendUser &gt; should suspend user" time="0.0004752">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getUsersByRole &gt; should return users by role" time="0.0005717">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; getUsersByBranch &gt; should return users by branch" time="0.0004425">
+        </testcase>
+        <testcase classname="tests/unit/services/user.service.test.ts" name="UserService &gt; searchUsers &gt; should search users by term" time="0.0003984">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/services/warehouse.service.test.ts" timestamp="2025-12-30T04:23:27.035Z" hostname="DESKTOP-HQV3RB6" tests="21" failures="0" errors="0" skipped="0" time="0.0253039">
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; calculateUtilization &gt; should return 0 when maxCapacity is 0 or negative" time="0.0019247">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; calculateUtilization &gt; should calculate correct percentage" time="0.0005074">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; calculateUtilization &gt; should round to nearest integer" time="0.0003018">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getAlertLevel &gt; should return critical for &gt;= 80%" time="0.0003783">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getAlertLevel &gt; should return warning for &gt;= 60% and &lt; 80%" time="0.000336">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getAlertLevel &gt; should return normal for &lt; 60%" time="0.0002617">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; createWarehouse &gt; should create a warehouse successfully" time="0.0038448">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; createWarehouse &gt; should throw error if capacity is invalid" time="0.0030087">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getWarehouseById &gt; should return warehouse with details" time="0.0017666">
+            <system-out>
+[WarehouseService] getWarehouseById called with id: wh-1
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getWarehouseById &gt; should throw NotFoundError if warehouse does not exist" time="0.0013873">
+            <system-out>
+[WarehouseService] getWarehouseById called with id: non-existent
+
+[WarehouseService] Warehouse not found for id: non-existent
+
+            </system-out>
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getAllWarehouses &gt; should return all warehouses with utilization" time="0.0015148">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getWarehousesByBranch &gt; should return warehouses for branch with utilization" time="0.0007942">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; updateWarehouse &gt; should update warehouse successfully" time="0.0018399">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; updateWarehouse &gt; should throw error if attempting to reduce capacity below current stock" time="0.0006489">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; updateWarehouse &gt; should throw NotFoundError if warehouse not found" time="0.0004119">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; deleteWarehouse &gt; should delete warehouse successfully if empty" time="0.0003638">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; deleteWarehouse &gt; should throw error if warehouse has inventory" time="0.0003712">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; deleteWarehouse &gt; should throw NotFoundError if warehouse not found" time="0.0003342">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; getWarehouseAlerts &gt; should return only warehouses with &gt;= 60% utilization" time="0.0006754">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; validateCapacity &gt; should validate capacity successfully" time="0.0003059">
+        </testcase>
+        <testcase classname="tests/unit/services/warehouse.service.test.ts" name="WarehouseService &gt; validateCapacity &gt; should throw error if capacity exceeded" time="0.0004484">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/ap.validation.test.ts" timestamp="2025-12-30T04:23:27.039Z" hostname="DESKTOP-HQV3RB6" tests="18" failures="0" errors="0" skipped="0" time="0.0138012">
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should accept valid AP record" time="0.0037452">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should accept optional fields and validate balance" time="0.0005986">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should reject when balance does not equal totalAmount - paidAmount" time="0.0006941">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should reject missing required fields" time="0.0008715">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should reject negative totalAmount" time="0.0004212">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should reject negative balance" time="0.000357">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should accept valid status values" time="0.0003209">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; accountsPayableSchema &gt; should handle large amounts" time="0.0003363">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; updateAPSchema &gt; should accept partial updates" time="0.0003271">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; updateAPSchema &gt; should accept totalAmount update" time="0.0004732">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; updateAPSchema &gt; should accept status update" time="0.0002496">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; updateAPSchema &gt; should reject negative totalAmount" time="0.0001854">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should accept valid payment data" time="0.0003692">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should accept optional fields" time="0.0002138">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should accept all payment methods" time="0.0003916">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should reject negative payment amount" time="0.000217">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should reject zero payment amount" time="0.0002254">
+        </testcase>
+        <testcase classname="tests/unit/validations/ap.validation.test.ts" name="AP (Accounts Payable) Validation &gt; apPaymentSchema &gt; should require payment method" time="0.0003481">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/ar.validation.test.ts" timestamp="2025-12-30T04:23:27.041Z" hostname="DESKTOP-HQV3RB6" tests="18" failures="0" errors="0" skipped="0" time="0.0154049">
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should accept valid AR record" time="0.0041304">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should accept optional fields and validate balance" time="0.0007685">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should reject when balance does not equal totalAmount - paidAmount" time="0.0008904">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should reject missing required fields" time="0.0010024">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should reject negative totalAmount" time="0.0006045">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should reject negative balance" time="0.0004338">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should accept valid status values" time="0.0008711">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; accountsReceivableSchema &gt; should handle large amounts" time="0.000355">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; updateARSchema &gt; should accept partial updates" time="0.0003838">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; updateARSchema &gt; should accept totalAmount update" time="0.00027">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; updateARSchema &gt; should accept status update" time="0.0002018">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; updateARSchema &gt; should reject negative totalAmount" time="0.0002429">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should accept valid payment data" time="0.0002843">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should accept optional fields" time="0.0002467">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should accept all payment methods" time="0.0005099">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should reject negative payment amount" time="0.0002449">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should reject zero payment amount" time="0.0003306">
+        </testcase>
+        <testcase classname="tests/unit/validations/ar.validation.test.ts" name="AR (Accounts Receivable) Validation &gt; arPaymentSchema &gt; should require payment method" time="0.0003238">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/customer.validation.test.ts" timestamp="2025-12-30T04:23:27.044Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="0.0090997">
+        <testcase classname="tests/unit/validations/customer.validation.test.ts" name="Customer Validation Schema &gt; should validate complete valid input" time="0.0032419">
+        </testcase>
+        <testcase classname="tests/unit/validations/customer.validation.test.ts" name="Customer Validation Schema &gt; should accept new payment terms Net 3 and Net 7" time="0.0009576">
+        </testcase>
+        <testcase classname="tests/unit/validations/customer.validation.test.ts" name="Customer Validation Schema &gt; should validate optional fields" time="0.0003796">
+        </testcase>
+        <testcase classname="tests/unit/validations/customer.validation.test.ts" name="Customer Validation Schema &gt; should validate email format" time="0.0013589">
+        </testcase>
+        <testcase classname="tests/unit/validations/customer.validation.test.ts" name="Customer Validation Schema &gt; should validate credit limit non-negative" time="0.0005956">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/product.validation.test.ts" timestamp="2025-12-30T04:23:27.045Z" hostname="DESKTOP-HQV3RB6" tests="16" failures="0" errors="0" skipped="0" time="0.0136753">
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should accept valid product data" time="0.0044779">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should accept optional fields" time="0.0007302">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should reject missing required fields" time="0.0011488">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should reject negative base price" time="0.0005994">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should reject empty product name" time="0.0004205">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should accept valid image URL" time="0.0003595">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should handle decimal prices" time="0.0003609">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should accept valid status values" time="0.00034">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should require positive minStockLevel" time="0.0003722">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; productSchema &gt; should require positive shelfLifeDays" time="0.0003981">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should accept valid alternate UOM" time="0.000296">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should reject zero conversion factor" time="0.0002579">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should reject negative conversion factor" time="0.0001979">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should reject negative selling price" time="0.0001826">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should accept decimal conversion factors" time="0.0001624">
+        </testcase>
+        <testcase classname="tests/unit/validations/product.validation.test.ts" name="Product Validation &gt; alternateUOMSchema &gt; should require UOM name" time="0.0001868">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/purchase-order.validation.test.ts" timestamp="2025-12-30T04:23:27.047Z" hostname="DESKTOP-HQV3RB6" tests="16" failures="0" errors="0" skipped="0" time="0.0136162">
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderItemSchema &gt; should accept valid item data" time="0.0031999">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderItemSchema &gt; should reject negative quantity" time="0.0008935">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderItemSchema &gt; should reject zero quantity" time="0.0004946">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderItemSchema &gt; should reject negative unit price" time="0.000399">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderItemSchema &gt; should accept decimal quantities and prices" time="0.0003642">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should accept valid purchase order" time="0.0010753">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should accept optional notes field" time="0.0004039">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should reject missing required fields" time="0.0008468">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should reject empty items array" time="0.0003728">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should handle multiple items" time="0.0004413">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should validate delivery date is a valid date" time="0.0002756">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; purchaseOrderSchema &gt; should validate all items have positive quantities" time="0.0002753">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; updatePurchaseOrderSchema &gt; should accept partial updates" time="0.0002656">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; updatePurchaseOrderSchema &gt; should accept delivery date update" time="0.0002244">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; updatePurchaseOrderSchema &gt; should accept items update" time="0.0002632">
+        </testcase>
+        <testcase classname="tests/unit/validations/purchase-order.validation.test.ts" name="Purchase Order Validation &gt; updatePurchaseOrderSchema &gt; should reject empty items array in update" time="0.0002577">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/receiving-voucher.validation.test.ts" timestamp="2025-12-30T04:23:27.049Z" hostname="DESKTOP-HQV3RB6" tests="15" failures="0" errors="0" skipped="0" time="0.0134612">
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should accept valid item data" time="0.0031853">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should accept partial delivery" time="0.0005025">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should accept zero receivedQuantity with reason" time="0.0003486">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should reject negative receivedQuantity" time="0.0006129">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should reject negative orderedQuantity" time="0.0004051">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; receivingVoucherItemSchema &gt; should accept decimal quantities" time="0.000286">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should accept valid receiving voucher" time="0.0016101">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should accept optional fields" time="0.0005535">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should reject missing required fields" time="0.0007355">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should reject empty items array" time="0.0004608">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should handle multiple items with mixed received quantities" time="0.0003078">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should require at least one item with receivedQuantity &gt; 0" time="0.0002674">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should reject percentage discount &gt; 100" time="0.0002971">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should accept percentage discount &lt;= 100" time="0.0002863">
+        </testcase>
+        <testcase classname="tests/unit/validations/receiving-voucher.validation.test.ts" name="Receiving Voucher Validation &gt; createReceivingVoucherSchema &gt; should reject negative additional fees" time="0.0003294">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/sales-agent.validation.test.ts" timestamp="2025-12-30T04:23:27.051Z" hostname="DESKTOP-HQV3RB6" tests="36" failures="0" errors="0" skipped="0" time="0.0277472">
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should validate a complete sales agent" time="0.0080754">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should validate with minimal required fields" time="0.0008794">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should accept valid code formats" time="0.0011134">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should accept valid phone formats" time="0.0006771">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should accept valid email addresses" time="0.0007876">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should accept empty string for optional fields" time="0.0007286">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; valid inputs &gt; should accept both active and inactive status" time="0.0003413">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject missing name" time="0.0009781">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject empty name" time="0.0012694">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject name longer than 100 characters" time="0.0005561">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject missing code" time="0.000314">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject empty code" time="0.0005229">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject code longer than 20 characters" time="0.0004093">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject invalid code formats" time="0.0010566">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject invalid email formats" time="0.0014235">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject email longer than 100 characters" time="0.0004614">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject invalid phone formats" time="0.0006826">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject phone longer than 20 characters" time="0.0002925">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject contactPerson longer than 100 characters" time="0.0003155">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject invalid status values" time="0.0002587">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject negative displayOrder" time="0.0001934">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; createSalesAgentSchema &gt; invalid inputs &gt; should reject non-integer displayOrder" time="0.0001844">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should validate partial update with name only" time="0.0002299">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should validate partial update with code only" time="0.0001323">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should validate partial update with optional fields" time="0.0001566">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should validate update with all fields" time="0.0002586">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should validate empty update object" time="0.0001313">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should reject invalid field values in partial update" time="0.0001332">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should reject empty name in update" time="0.0001493">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should reject empty code in update" time="0.0001314">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should apply the same validation rules as create schema" time="0.0003226">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; updateSalesAgentSchema &gt; should allow clearing optional fields with empty string" time="0.0001497">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; edge cases &gt; should trim whitespace from strings" time="0.0001611">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; edge cases &gt; should handle unicode characters in name" time="0.0001611">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; edge cases &gt; should handle special characters in contactPerson" time="0.0001559">
+        </testcase>
+        <testcase classname="tests/unit/validations/sales-agent.validation.test.ts" name="Sales Agent Validation Schemas &gt; edge cases &gt; should handle international phone formats" time="0.0001454">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/validations/supplier.validation.test.ts" timestamp="2025-12-30T04:23:27.056Z" hostname="DESKTOP-HQV3RB6" tests="5" failures="0" errors="0" skipped="0" time="0.0098933">
+        <testcase classname="tests/unit/validations/supplier.validation.test.ts" name="Supplier Validation Schema &gt; should validate complete valid input" time="0.0035919">
+        </testcase>
+        <testcase classname="tests/unit/validations/supplier.validation.test.ts" name="Supplier Validation Schema &gt; should accept new payment terms Net 3 and Net 7" time="0.0007446">
+        </testcase>
+        <testcase classname="tests/unit/validations/supplier.validation.test.ts" name="Supplier Validation Schema &gt; should validate optional taxId" time="0.0004134">
+        </testcase>
+        <testcase classname="tests/unit/validations/supplier.validation.test.ts" name="Supplier Validation Schema &gt; should fail on invalid payment terms" time="0.0013938">
+        </testcase>
+        <testcase classname="tests/unit/validations/supplier.validation.test.ts" name="Supplier Validation Schema &gt; should fail on missing required fields" time="0.0011187">
+        </testcase>
+    </testsuite>
+    <testsuite name="tests/unit/components/ar/payment-dialog.test.tsx" timestamp="2025-12-30T04:23:27.057Z" hostname="DESKTOP-HQV3RB6" tests="3" failures="0" errors="0" skipped="0" time="1.6385289">
+        <testcase classname="tests/unit/components/ar/payment-dialog.test.tsx" name="PaymentDialog &gt; renders correctly with AR details" time="0.5096741">
+        </testcase>
+        <testcase classname="tests/unit/components/ar/payment-dialog.test.tsx" name="PaymentDialog &gt; validates amount cannot exceed balance" time="0.5053797">
+        </testcase>
+        <testcase classname="tests/unit/components/ar/payment-dialog.test.tsx" name="PaymentDialog &gt; submits valid payment successfully" time="0.6205432">
+            <system-err>
+Received NaN for the `value` attribute. If this is expected, cast the value to a string.
+
+Cannot update a component (`Controller`) while rendering a different component (`PaymentDialog`). To locate the bad setState() call inside `PaymentDialog`, follow the stack trace as described in https://react.dev/link/setstate-in-render
+
+            </system-err>
+        </testcase>
+    </testsuite>
+</testsuites>

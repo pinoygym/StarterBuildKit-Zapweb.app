@@ -1,5 +1,12 @@
 import { defineConfig } from 'vitest/config';
 import path from 'path';
+import dotenv from 'dotenv';
+
+// Load test environment variables BEFORE any other configuration
+// This ensures tests run against the test database (neondb_test), not production
+dotenv.config({ path: '.env.test' });
+
+console.log('🧪 Vitest loading .env.test - Database:', process.env.DATABASE_URL?.includes('neondb_test') ? 'neondb_test ✅' : 'WARNING: Not using test DB!');
 
 export default defineConfig({
   test: {
@@ -10,8 +17,21 @@ export default defineConfig({
     testTimeout: 120000,
     hookTimeout: 120000,
     env: {
-      BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3002',
+      BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3000',
+      DATABASE_URL: process.env.DATABASE_URL, // Ensure test DB is passed to tests
+      NODE_ENV: 'test',
     },
+    // Limit concurrency to prevent database connection pool exhaustion
+    poolOptions: {
+      threads: {
+        maxThreads: 4,
+        minThreads: 1,
+      },
+    },
+    // Reduce concurrent test file execution
+    maxConcurrency: 3,
+    // For unit tests, isolate should be true to prevent cross-test pollution
+    isolate: true,
   },
   resolve: {
     alias: {

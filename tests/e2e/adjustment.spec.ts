@@ -33,7 +33,7 @@ test.describe('Inventory Adjustment Workflow', () => {
         // Add Item
         // Product Search
         // Use the placeholder to find the trigger
-        const productCombobox = page.getByPlaceholder('Search product...');
+        const productCombobox = page.getByRole('combobox').filter({ hasText: 'Search product...' });
         await productCombobox.click();
 
         // Wait for at least one option and click it
@@ -42,7 +42,7 @@ test.describe('Inventory Adjustment Workflow', () => {
         await firstOption.click();
 
         // Set Quantity
-        await page.getByLabel('Quantity').fill('10');
+        await page.getByLabel('Adjust Qty').fill('10');
 
         // Set Type to ABSOLUTE
         await page.getByLabel('Type').click();

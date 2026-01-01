@@ -2,6 +2,7 @@ import { prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
 import { createTestUser, createTestBranch, createTestWarehouse, createTestSupplier } from '@/tests/helpers/test-db-utils';
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
+
 import { BASE_URL } from '../config';
 
 describe('Receiving Voucher List Integrity Tests', () => {
@@ -199,3 +200,4 @@ describe('Receiving Voucher List Integrity Tests', () => {
         expect(foundRV.branchId).toBe(testBranch.id);
     });
 });
+

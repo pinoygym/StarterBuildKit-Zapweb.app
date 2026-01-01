@@ -160,6 +160,24 @@ export async function POST(req: NextRequest) {
       })
     }
 
+    // Product Categories
+    const categories = ['Water', 'Carbonated', 'Juice', 'Alcohol']
+    for (const catName of categories) {
+      const code = catName.toUpperCase().substring(0, 3)
+      await prisma.productCategory.upsert({
+        where: { name: catName },
+        update: { updatedAt: new Date() },
+        create: {
+          id: randomUUID(),
+          name: catName,
+          code: code,
+          description: `${catName} products`,
+          status: 'active',
+          updatedAt: new Date(),
+        },
+      })
+    }
+
     // Products
     let pWater = await prisma.product.findFirst({ where: { name: 'Absolute 500ml Bottle' } })
     if (pWater) {

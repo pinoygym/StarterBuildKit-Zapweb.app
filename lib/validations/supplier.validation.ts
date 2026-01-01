@@ -22,6 +22,8 @@ export const updateSupplierSchema = z.object({
   phone: z.string()
     .min(1, 'Phone number is required')
     .regex(/^[\d\s\-\+\(\)]+$/, 'Invalid phone number format')
+    .optional(),
+  email: z.string()
     .email('Invalid email format')
     .optional(),
   taxId: z.string().max(50, 'Tax ID is too long').optional(),

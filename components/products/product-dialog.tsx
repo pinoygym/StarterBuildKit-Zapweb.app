@@ -115,36 +115,14 @@ export function ProductDialog({
 
   const onSubmit = async (data: ProductFormData) => {
     try {
-      const result = await onSave(product?.id, data);
-
-      if (result.success) {
-        toast({
-          title: 'Success',
-          description: `Product ${isEditing ? 'updated' : 'created'} successfully`,
-        });
-        onOpenChange(false);
-        form.reset();
-      } else {
-        // Handle validation errors
-        if (result.fields) {
-          Object.entries(result.fields).forEach(([field, message]) => {
-            form.setError(field as any, {
-              type: 'manual',
-              message: message as string,
-            });
-          });
-        }
-
-        toast({
-          title: 'Error',
-          description: result.error || `Failed to ${isEditing ? 'update' : 'create'} product`,
-          variant: 'destructive',
-        });
-      }
-    } catch (error) {
+      await onSave(product?.id, data);
+      onOpenChange(false);
+      form.reset();
+    } catch (error: any) {
+      console.error(error);
       toast({
         title: 'Error',
-        description: (error as Error)?.message || `Failed to ${isEditing ? 'update' : 'create'} product`,
+        description: error.message || 'Failed to save product',
         variant: 'destructive',
       });
     }

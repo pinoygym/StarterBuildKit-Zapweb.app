@@ -33,6 +33,7 @@ import {
     AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { Copy, RotateCcw, CheckCircle, ArrowLeft, Printer, Loader2 } from 'lucide-react';
+import { ProductHistoryDialog } from '@/components/products/product-history-dialog';
 
 export default function AdjustmentDetailPage({ params }: { params: Promise<{ id: string }> }) {
     const { id } = use(params);
@@ -52,6 +53,16 @@ export default function AdjustmentDetailPage({ params }: { params: Promise<{ id:
     const [reverseDialogOpen, setReverseDialogOpen] = useState(false);
     const [printDialogOpen, setPrintDialogOpen] = useState(false);
 
+    const [historyDialogOpen, setHistoryDialogOpen] = useState(false);
+    const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
+    const [selectedProductName, setSelectedProductName] = useState<string | null>(null);
+
+    const handleProductClick = (productId: string, productName: string) => {
+        setSelectedProductId(productId);
+        setSelectedProductName(productName);
+        setHistoryDialogOpen(true);
+    };
+
     const getAdjustmentSlip = (): AdjustmentSlip | null => {
         if (!adjustment) return null;
 
@@ -64,16 +75,45 @@ export default function AdjustmentDetailPage({ params }: { params: Promise<{ id:
             adjustmentDate: new Date(adjustment.adjustmentDate),
             totalItems: adjustment.items.length,
             createdAt: new Date(adjustment.createdAt),
-            items: adjustment.items.map(item => ({
-                id: item.id,
-                productId: item.productId,
-                productName: item.Product.name,
-                quantity: item.quantity,
-                baseUOM: item.uom, // Use the stored UOM
-                warehouseId: adjustment.warehouseId,
-                warehouseName: adjustment.Warehouse.name,
-                createdAt: new Date(adjustment.createdAt) // Using parent creation date as item date isn't strictly tracked separate here
-            }))
+            items: adjustment.items.map(item => {
+                // Calculate conversion factor if alternate UOM is used
+                let conversionFactor: number | undefined = undefined;
+                let conversionUOM: string | undefined = undefined;
+
+                // If product has alternate UOMs, display the conversion info
+                if (item.Product.productUOMs && item.Product.productUOMs.length > 0) {
+                    // Find if the selected UOM is an alternate UOM
+                    const selectedAlternateUOM = item.Product.productUOMs.find(
+                        uom => uom.name.toLowerCase() === item.uom.toLowerCase()
+                    );
+
+                    if (selectedAlternateUOM) {
+                        // Currently using an alternate UOM - show its conversion
+                        conversionFactor = selectedAlternateUOM.conversionFactor;
+                        conversionUOM = item.uom;
+                    } else if (item.uom.toLowerCase() === item.Product.baseUOM.toLowerCase()) {
+                        // Currently using base UOM - show the first alternate UOM's conversion for reference
+                        const firstAlternate = item.Product.productUOMs[0];
+                        conversionFactor = firstAlternate.conversionFactor;
+                        conversionUOM = firstAlternate.name;
+                    }
+                }
+
+                return {
+                    id: item.id,
+                    productId: item.productId,
+                    productName: item.Product.name,
+                    quantity: item.quantity,
+                    baseUOM: item.uom, // This field name is misleading - it's actually the UOM used in adjustment
+                    actualBaseUOM: item.Product.baseUOM, // Product's actual base UOM
+                    conversionFactor,
+                    conversionUOM,
+                    warehouseId: adjustment.warehouseId,
+                    warehouseName: adjustment.Warehouse.name,
+                    createdAt: new Date(adjustment.createdAt),
+                    systemQuantity: item.systemQuantity
+                };
+            })
         };
     };
 
@@ -235,6 +275,10 @@ export default function AdjustmentDetailPage({ params }: { params: Promise<{ id:
                                 )}
                             </>
                         )}
+                        <Button variant="secondary" onClick={() => router.push(`/inventory/adjustments/${id}/verify`)} className="bg-purple-100 text-purple-900 hover:bg-purple-200 border-purple-200">
+                            <CheckCircle className="h-4 w-4 mr-2" />
+                            Smart Verify
+                        </Button>
                     </div>
                 }
             />
@@ -297,7 +341,14 @@ export default function AdjustmentDetailPage({ params }: { params: Promise<{ id:
                                     <tbody>
                                         {adjustment.items.map((item) => (
                                             <tr key={item.id} className="border-t">
-                                                <td className="p-3">{item.Product.name}</td>
+                                                <td className="p-3">
+                                                    <button
+                                                        onClick={() => handleProductClick(item.productId, item.Product.name)}
+                                                        className="hover:underline text-primary text-left font-medium"
+                                                    >
+                                                        {item.Product.name}
+                                                    </button>
+                                                </td>
                                                 <td className="p-3"><Badge variant="outline">{item.type}</Badge></td>
                                                 <td className="p-3">{item.quantity}</td>
                                                 <td className="p-3">{item.uom}</td>
@@ -316,6 +367,15 @@ export default function AdjustmentDetailPage({ params }: { params: Promise<{ id:
                     adjustment={getAdjustmentSlip()!}
                     open={printDialogOpen}
                     onClose={() => setPrintDialogOpen(false)}
+                />
+            )}
+
+            {selectedProductId && (
+                <ProductHistoryDialog
+                    open={historyDialogOpen}
+                    onOpenChange={setHistoryDialogOpen}
+                    productId={selectedProductId}
+                    productName={selectedProductName || undefined}
                 />
             )}
         </div>

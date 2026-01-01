@@ -65,10 +65,10 @@ export async function generateTTS(
         voice: {
           languageCode: langConfig.languageCode,
           name: langConfig.voiceName,
-          ssmlGender: langConfig.ssmlGender as any,
+          ssmlGender: langConfig.ssmlGender as const,
         },
         audioConfig: {
-          audioEncoding: 'MP3' as any,
+          audioEncoding: 'MP3' as const,
           speakingRate: 0.95, // Slightly slower for clarity
           pitch: 0,
           volumeGainDb: 0,

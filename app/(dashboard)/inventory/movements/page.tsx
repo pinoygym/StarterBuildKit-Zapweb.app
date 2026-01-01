@@ -122,7 +122,7 @@ export default function StockMovementsPage() {
 
     return (
       <a href={link} className="text-primary hover:underline">
-        {movement.referenceType}-{movement.referenceId.slice(0, 8)}
+        {movement.referenceType}-{movement.referenceId}
       </a>
     );
   };
@@ -136,7 +136,7 @@ export default function StockMovementsPage() {
       movement.Warehouse.name,
       `${formatQuantity(Number(movement.quantity))} ${movement.Product.baseUOM}`,
       movement.reason || '-',
-      movement.referenceType ? `${movement.referenceType}-${movement.referenceId?.slice(0, 8)}` : '-',
+      movement.referenceType ? `${movement.referenceType}-${movement.referenceId}` : '-',
     ]);
 
     const csvContent = [

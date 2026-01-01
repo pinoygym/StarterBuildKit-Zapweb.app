@@ -79,6 +79,13 @@ export class InventoryService {
     );
 
     if (!alternateUOM) {
+      // FALLBACK: If UOM is 'pcs' or 'pc', treat as 1:1 with base units
+      // This handles cases where users use 'pcs' interchangeably with base units
+      if (['pcs', 'pc'].includes(uom.trim().toLowerCase())) {
+        console.warn(`UOM '${uom}' not found for product ${product.name}, defaulting to 1:1 conversion.`);
+        return quantity;
+      }
+
       throw new ValidationError(`UOM '${uom}' not found for product ${product.name}`, {
         uom: 'Invalid UOM for this product',
       });
@@ -203,6 +210,8 @@ export class InventoryService {
           reason: data.reason || 'Stock addition',
           referenceId: data.referenceId,
           referenceType: data.referenceType,
+          uom: data.uom,
+          conversionFactor: baseUnitCost !== data.unitCost ? data.unitCost / baseUnitCost : 1,
         },
       });
 
@@ -275,6 +284,8 @@ export class InventoryService {
           reason: data.reason || 'Stock deduction',
           referenceId: data.referenceId,
           referenceType: data.referenceType,
+          uom: data.uom,
+          conversionFactor: baseQuantity / data.quantity,
         },
       });
     };
@@ -348,8 +359,11 @@ export class InventoryService {
           warehouseId: data.sourceWarehouseId,
           type: 'OUT',
           quantity: baseQuantity,
-          reason: data.reason || `Transfer to destination warehouse`,
+          reason: data.reason || `Transfer to ${data.destinationWarehouseId}`,
+          referenceId: data.referenceId,
           referenceType: 'TRANSFER',
+          uom: data.uom,
+          conversionFactor: baseQuantity / data.quantity,
         },
       });
 
@@ -379,8 +393,11 @@ export class InventoryService {
           warehouseId: data.destinationWarehouseId,
           type: 'IN',
           quantity: baseQuantity,
-          reason: data.reason || `Transfer from source warehouse`,
+          reason: data.reason || `Transfer from ${data.sourceWarehouseId}`,
+          referenceId: data.referenceId,
           referenceType: 'TRANSFER',
+          uom: data.uom,
+          conversionFactor: baseQuantity / data.quantity,
         },
       });
     });
@@ -757,7 +774,7 @@ export class InventoryService {
   /**
    * Batch adjust stock for multiple items in a warehouse
    */
-  async adjustStockBatch(data: AdjustStockBatchInput): Promise<void> {
+  async adjustStockBatch(data: AdjustStockBatchInput, tx?: Prisma.TransactionClient): Promise<void> {
     if (!data.items || data.items.length === 0) {
       throw new ValidationError('No items to adjust', {
         items: 'At least one item is required',
@@ -767,6 +784,10 @@ export class InventoryService {
     try {
       // OPTIMIZATION 1: Batch fetch all products at once (outside transaction)
       const productIds = data.items.map(item => item.productId);
+
+      // Use provided tx or prisma for read operations if possible, but for consistency 
+      // with how we'll use the data, regular prisma client is fine for reading 
+      // unless we suspect uncommitted changes in tx affect this (unlikely for product config)
       const products = await prisma.product.findMany({
         where: { id: { in: productIds } },
         include: { productUOMs: true }
@@ -782,6 +803,7 @@ export class InventoryService {
         adjustmentType: 'RELATIVE' | 'ABSOLUTE';
         product: any;
         baseQuantity: number;
+        conversionFactor: number;
       }> = [];
 
       for (const [index, item] of data.items.entries()) {
@@ -802,18 +824,46 @@ export class InventoryService {
           // Inline conversion to avoid extra DB calls
           if (item.uom.trim().toLowerCase() === product.baseUOM.trim().toLowerCase()) {
             baseQuantity = item.quantity;
+            processedItems.push({
+              ...item,
+              product,
+              baseQuantity,
+              conversionFactor: 1
+            });
           } else {
             const alternateUOM = product.productUOMs.find(
               (u: any) => u.name.trim().toLowerCase() === item.uom.trim().toLowerCase()
             );
 
             if (!alternateUOM) {
+              // FALLBACK: If UOM is 'pcs' or 'pc', treat as 1:1 with base units
+              if (['pcs', 'pc'].includes(item.uom.trim().toLowerCase())) {
+                console.warn(`UOM '${item.uom}' not found for product ${product.name} in batch adjustment, defaulting to 1:1 conversion.`);
+
+                const factor = 1;
+                baseQuantity = item.quantity * factor;
+                processedItems.push({
+                  ...item,
+                  product,
+                  baseQuantity,
+                  conversionFactor: factor
+                });
+                continue;
+              }
+
               throw new ValidationError(`UOM '${item.uom}' not found for product ${product.name}`, {
                 uom: 'Invalid UOM for this product',
               });
             }
 
-            baseQuantity = item.quantity * Number(alternateUOM.conversionFactor);
+            const factor = Number(alternateUOM.conversionFactor);
+            baseQuantity = item.quantity * factor;
+            processedItems.push({
+              ...item,
+              product,
+              baseQuantity,
+              conversionFactor: factor
+            });
           }
         } catch (e: any) {
           throw new ValidationError(`UOM conversion failed for ${product.name}: ${e.message}`, {
@@ -828,21 +878,15 @@ export class InventoryService {
             quantity: 'Invalid quantity',
           });
         }
-
-        processedItems.push({
-          ...item,
-          product,
-          baseQuantity
-        });
       }
 
       // OPTIMIZATION 3: Increased timeout for large batches
       const timeout = data.items.length > 50 ? 60000 : 30000;
 
-      // OPTIMIZATION 4: Single transaction with all pre-calculated data
-      await prisma.$transaction(async (tx) => {
+      // Helper function to execute the main logic
+      const execute = async (transaction: Prisma.TransactionClient) => {
         // Batch fetch current inventory levels
-        const inventoryRecords = await tx.inventory.findMany({
+        const inventoryRecords = await transaction.inventory.findMany({
           where: {
             warehouseId: data.warehouseId,
             productId: { in: productIds }
@@ -903,6 +947,8 @@ export class InventoryService {
             referenceId: data.referenceNumber,
             referenceType: 'ADJUSTMENT' as const,
             createdAt: data.adjustmentDate ? new Date(data.adjustmentDate) : new Date(),
+            uom: item.uom,
+            conversionFactor: item.conversionFactor
           });
         }
 
@@ -914,7 +960,7 @@ export class InventoryService {
           const chunk = inventoryUpdates.slice(i, i + CHUNK_SIZE);
 
           await Promise.all(chunk.map(update =>
-            tx.inventory.upsert({
+            transaction.inventory.upsert({
               where: {
                 productId_warehouseId: {
                   productId: update.productId,
@@ -937,14 +983,22 @@ export class InventoryService {
         for (let i = 0; i < stockMovements.length; i += CHUNK_SIZE) {
           const chunk = stockMovements.slice(i, i + CHUNK_SIZE);
 
-          await tx.stockMovement.createMany({
+          await transaction.stockMovement.createMany({
             data: chunk
           });
         }
-      }, {
-        maxWait: 10000,
-        timeout: timeout,
-      });
+      };
+
+      // OPTIMIZATION 4: Single transaction with all pre-calculated data
+      // Use provided transaction or create a new one
+      if (tx) {
+        await execute(tx);
+      } else {
+        await prisma.$transaction(execute, {
+          maxWait: 10000,
+          timeout: timeout,
+        });
+      }
     } catch (error: any) {
       // Log the full error for debugging
       console.error('Error in adjustStockBatch:', error);
@@ -1311,6 +1365,8 @@ export class InventoryService {
         documentNumber: movement.referenceId || null,
         referenceType: movement.referenceType || null,
         referenceId: movement.referenceId || null,
+        uom: movement.uom,
+        conversionFactor: movement.conversionFactor ? Number(movement.conversionFactor) : null,
       };
     });
 
@@ -1326,6 +1382,162 @@ export class InventoryService {
       product,
       summary,
       movements: processedMovements,
+    };
+  }
+  /**
+   * Audit all inventory to find discrepancies between current stock and stock movements
+   */
+  async auditInventory(): Promise<{
+    totalChecked: number;
+    discrepanciesFound: number;
+    discrepancies: Array<{
+      productId: string;
+      productName: string;
+      warehouseId: string;
+      warehouseName: string;
+      systemQuantity: number;
+      calculatedQuantity: number;
+      variance: number;
+    }>;
+    allItems: Array<{
+      productId: string;
+      productName: string;
+      warehouseId: string;
+      warehouseName: string;
+      baseUOM: string;
+      systemQuantity: number;
+      calculatedQuantity: number;
+      variance: number;
+      status: 'PASS' | 'FAIL';
+      movementCount: number;
+      movements: Array<{
+        id: string;
+        type: string;
+        quantity: number;
+        reason: string | null;
+        referenceType: string | null;
+        referenceId: string | null;
+        createdAt: Date;
+        quantityChange: number;
+        runningBalance: number;
+      }>;
+    }>;
+  }> {
+    // Fetch all inventory records
+    const inventoryRecords = await prisma.inventory.findMany({
+      include: {
+        Product: { select: { id: true, name: true, baseUOM: true } },
+        Warehouse: { select: { id: true, name: true } }
+      },
+      orderBy: [{ productId: 'asc' }, { warehouseId: 'asc' }]
+    });
+
+    // Fetch all stock movements
+    const stockMovements = await prisma.stockMovement.findMany({
+      orderBy: { createdAt: 'asc' }
+    });
+
+    const movementMap = new Map<string, any[]>();
+
+    for (const sm of stockMovements) {
+      const key = `${sm.productId}-${sm.warehouseId}`;
+      if (!movementMap.has(key)) {
+        movementMap.set(key, []);
+      }
+      movementMap.get(key)?.push(sm);
+    }
+
+    const discrepancies = [];
+    const allItems = [];
+
+    for (const inv of inventoryRecords) {
+      const key = `${inv.productId}-${inv.warehouseId}`;
+      const movements = movementMap.get(key) || [];
+
+      let calculatedQuantity = 0;
+      const processedMovements = [];
+
+      for (const movement of movements) {
+        const qty = Number(movement.quantity);
+        let quantityChange = 0;
+
+        switch (movement.type) {
+          case 'IN':
+            quantityChange = qty;
+            break;
+          case 'OUT':
+            quantityChange = -qty;
+            break;
+          case 'ADJUSTMENT':
+            // Logic matching getProductHistory
+            const reasonLower = movement.reason?.toLowerCase() || '';
+            if (reasonLower.includes('increase') ||
+              reasonLower.includes('add') ||
+              reasonLower.includes('beginning')) {
+              quantityChange = qty;
+            } else {
+              quantityChange = -qty;
+            }
+            break;
+          case 'TRANSFER':
+            quantityChange = qty;
+            break;
+          default:
+            quantityChange = qty;
+        }
+        calculatedQuantity += quantityChange;
+
+        processedMovements.push({
+          id: movement.id,
+          type: movement.type,
+          quantity: qty,
+          reason: movement.reason,
+          referenceType: movement.referenceType,
+          referenceId: movement.referenceId,
+          createdAt: movement.createdAt,
+          quantityChange,
+          runningBalance: calculatedQuantity
+        });
+      }
+
+      const systemQuantity = Number(inv.quantity);
+      const variance = calculatedQuantity - systemQuantity;
+      const hasDiscrepancy = Math.abs(variance) > 0.0001;
+
+      const itemDetail = {
+        productId: inv.productId,
+        productName: inv.Product.name,
+        warehouseId: inv.warehouseId,
+        warehouseName: inv.Warehouse.name,
+        baseUOM: inv.Product.baseUOM,
+        systemQuantity,
+        calculatedQuantity,
+        variance,
+        status: hasDiscrepancy ? 'FAIL' as const : 'PASS' as const,
+        movementCount: movements.length,
+        movements: processedMovements
+      };
+
+      allItems.push(itemDetail);
+
+      if (hasDiscrepancy) {
+        discrepancies.push({
+          productId: inv.productId,
+          productName: inv.Product.name,
+          warehouseId: inv.warehouseId,
+          warehouseName: inv.Warehouse.name,
+          systemQuantity,
+          calculatedQuantity,
+          variance
+        });
+      }
+    }
+
+    return {
+      totalChecked: inventoryRecords.length,
+      discrepanciesFound: discrepancies.length,
+      discrepancies,
+      allItems
     };
   }
 }

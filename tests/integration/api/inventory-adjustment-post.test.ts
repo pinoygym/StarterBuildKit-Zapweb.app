@@ -149,3 +149,4 @@ describe('Inventory Adjustment Post API', () => {
         expect(postData.data.status).toBe('POSTED');
     });
 });
+

@@ -4,6 +4,7 @@ import { createTestUser, createTestBranch, createTestWarehouse, createTestSuppli
 import { describe, it, expect, beforeAll, afterAll, afterEach } from 'vitest';
 import { authService } from '@/services/auth.service';
 import bcrypt from 'bcryptjs';
+
 import { BASE_URL } from '../config';
 
 describe('Receiving Voucher Transaction Integrity Tests', () => {
@@ -19,6 +20,7 @@ describe('Receiving Voucher Transaction Integrity Tests', () => {
 
     beforeAll(async () => {
         // 1. Seed data
+        const BASE_URL = process.env.BASE_URL || 'http://127.0.0.1:3000';
         console.log('Transaction Test BASE_URL:', BASE_URL);
         const seedRes = await fetch(`${BASE_URL}/api/dev/seed`, {
             method: 'POST',
@@ -408,3 +410,4 @@ describe('Receiving Voucher Transaction Integrity Tests', () => {
         });
     });
 });
+

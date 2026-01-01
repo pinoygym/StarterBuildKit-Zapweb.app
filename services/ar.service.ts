@@ -2,6 +2,7 @@ import { arRepository } from '@/repositories/ar.repository';
 import { CreateARInput, RecordARPaymentInput, ARFilters, ARAgingReport, ARAgingBucket, RecordBatchPaymentInput, ARPaymentReportFilters, ARPaymentReportResponse, ARPaymentReportItem } from '@/types/ar.types';
 import { prisma, Prisma } from '@/lib/prisma';
 import { randomUUID } from 'crypto';
+import { fundSourceService } from '@/services/fund-source.service';
 
 export class ARService {
   async createAR(data: CreateARInput, tx?: any) {
@@ -42,17 +43,33 @@ export class ARService {
         throw new Error('Payment amount exceeds outstanding balance');
       }
 
+      const paymentId = randomUUID();
+
       // Create payment record
       await tx.aRPayment.create({
         data: {
-          id: randomUUID(),
+          id: paymentId,
           AccountsReceivable: { connect: { id: data.arId } },
           amount: data.amount,
           paymentMethod: data.paymentMethod,
           referenceNumber: data.referenceNumber,
           paymentDate: data.paymentDate,
+          ...(data.fundSourceId ? { FundSource: { connect: { id: data.fundSourceId } } } : {}),
         },
       });
+
+      // Record fund source deposit if specified
+      if (data.fundSourceId && data.createdById) {
+        await fundSourceService.recordDeposit(
+          data.fundSourceId,
+          data.amount,
+          `AR Payment from ${ar.customerName}`,
+          data.createdById,
+          'AR_PAYMENT',
+          paymentId,
+          tx
+        );
+      }
 
       // Update AR record
       const newPaidAmount = new Prisma.Decimal(ar.paidAmount).plus(data.amount);

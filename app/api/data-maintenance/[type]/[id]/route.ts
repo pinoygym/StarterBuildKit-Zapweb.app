@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { dataMaintenanceService } from '@/services/data-maintenance.service';
 import { ReferenceDataType } from '@/types/data-maintenance.types';
+import { authService } from '@/services/auth.service';
+import { userService } from '@/services/user.service';
 
 export const dynamic = 'force-dynamic';
 
@@ -15,10 +17,29 @@ const VALID_TYPES: ReferenceDataType[] = [
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ type: string; id: string }> }
+  props: { params: Promise<{ type: string; id: string }> }
 ) {
+  const params = await props.params;
   try {
-    const { type, id } = await params;
+    // 1. Verify Authentication
+    const token = request.cookies.get('auth-token')?.value || request.headers.get('authorization')?.replace('Bearer ', '');
+
+    if (!token) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const payload = authService.verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ success: false, error: 'Invalid token' }, { status: 401 });
+    }
+
+    // 2. Verify Authentication
+    const user = await userService.getUserById(payload.userId);
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+    }
+
+    const { type, id } = params;
 
     // Validate type
     if (!VALID_TYPES.includes(type as ReferenceDataType)) {
@@ -48,10 +69,29 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ type: string; id: string }> }
+  props: { params: Promise<{ type: string; id: string }> }
 ) {
+  const params = await props.params;
   try {
-    const { type, id } = await params;
+    // 1. Verify Authentication
+    const token = request.cookies.get('auth-token')?.value || request.headers.get('authorization')?.replace('Bearer ', '');
+
+    if (!token) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const payload = authService.verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ success: false, error: 'Invalid token' }, { status: 401 });
+    }
+
+    // 2. Verify Authentication
+    const user = await userService.getUserById(payload.userId);
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+    }
+
+    const { type, id } = params;
 
     // Validate type
     if (!VALID_TYPES.includes(type as ReferenceDataType)) {
@@ -83,10 +123,29 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ type: string; id: string }> }
+  props: { params: Promise<{ type: string; id: string }> }
 ) {
+  const params = await props.params;
   try {
-    const { type, id } = await params;
+    // 1. Verify Authentication
+    const token = request.cookies.get('auth-token')?.value || request.headers.get('authorization')?.replace('Bearer ', '');
+
+    if (!token) {
+      return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const payload = authService.verifyToken(token);
+    if (!payload) {
+      return NextResponse.json({ success: false, error: 'Invalid token' }, { status: 401 });
+    }
+
+    // 2. Verify Authentication
+    const user = await userService.getUserById(payload.userId);
+    if (!user) {
+      return NextResponse.json({ success: false, error: 'User not found' }, { status: 404 });
+    }
+
+    const { type, id } = params;
 
     // Validate type
     if (!VALID_TYPES.includes(type as ReferenceDataType)) {

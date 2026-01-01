@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { prisma } from '@/lib/prisma';
+
 import { BASE_URL } from '../config';
 
 describe('Roles API', () => {
@@ -162,3 +163,4 @@ describe('Roles API', () => {
         expect([404, 400]).toContain(verifyResponse.status);
     });
 });
+

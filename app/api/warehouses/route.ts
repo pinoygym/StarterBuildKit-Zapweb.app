@@ -26,7 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: false, error: 'Failed to fetch warehouses' },
+      { success: false, error: error instanceof Error ? error.message : 'Failed to fetch warehouses' },
       { status: 500 }
     );
   }
@@ -42,7 +42,7 @@ export async function POST(request: NextRequest) {
       { success: true, data: warehouse },
       { status: 201 }
     );
-  } catch (error) {
+  } catch (error: any) {
     console.error('Error creating warehouse:', error);
 
     if (error instanceof AppError) {
@@ -52,8 +52,16 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Handle Prisma Foreign Key Constraint Violation
+    if (error.code === 'P2003') {
+      return NextResponse.json(
+        { success: false, error: 'Invalid branch ID. The specified branch does not exist.' },
+        { status: 400 }
+      );
+    }
+
     return NextResponse.json(
-      { success: false, error: 'Failed to create warehouse' },
+      { success: false, error: error instanceof Error ? error.message : 'Failed to create warehouse' },
       { status: 500 }
     );
   }
