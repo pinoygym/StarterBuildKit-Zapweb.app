@@ -1,0 +1,121 @@
+import { PrismaClient, Role, Prisma } from '@prisma/client';
+import { RoleFilters } from '@/types/role.types';
+
+const prisma = new PrismaClient();
+
+export class RoleRepository {
+  /**
+   * Find all roles with optional filters
+   */
+  async findAll(filters?: RoleFilters) {
+    const where: Prisma.RoleWhereInput = {};
+
+    if (filters?.search) {
+      where.OR = [
+        { name: { contains: filters.search, mode: 'insensitive' } },
+        { description: { contains: filters.search, mode: 'insensitive' } },
+      ];
+    }
+
+    if (filters?.isSystem !== undefined) {
+      where.isSystem = filters.isSystem;
+    }
+
+    return prisma.role.findMany({
+      where,
+      orderBy: { createdAt: 'desc' },
+    });
+  }
+
+  /**
+   * Find role by ID
+   */
+  async findById(roleId: string) {
+    return prisma.role.findUnique({
+      where: { id: roleId },
+    });
+  }
+
+  /**
+   * Find role by ID with permissions
+   */
+  async findByIdWithPermissions(roleId: string) {
+    return prisma.role.findUnique({
+      where: { id: roleId },
+      include: {
+        permissions: {
+          include: {
+            permission: true,
+          },
+        },
+      },
+    });
+  }
+
+  /**
+   * Find role by name
+   */
+  async findByName(name: string) {
+    return prisma.role.findUnique({
+      where: { name },
+    });
+  }
+
+  /**
+   * Create new role
+   */
+  async create(data: Prisma.RoleCreateInput) {
+    return prisma.role.create({
+      data,
+    });
+  }
+
+  /**
+   * Update role
+   */
+  async update(roleId: string, data: Prisma.RoleUpdateInput) {
+    return prisma.role.update({
+      where: { id: roleId },
+      data,
+    });
+  }
+
+  /**
+   * Delete role
+   */
+  async delete(roleId: string) {
+    // Check if role is a system role
+    const role = await this.findById(roleId);
+    if (role?.isSystem) {
+      throw new Error('Cannot delete system role');
+    }
+
+    return prisma.role.delete({
+      where: { id: roleId },
+    });
+  }
+
+  /**
+   * Check if role has users
+   */
+  async hasUsers(roleId: string) {
+    const count = await prisma.user.count({
+      where: { roleId },
+    });
+    return count > 0;
+  }
+
+  /**
+   * Get role with user count
+   */
+  async getRoleWithUserCount(roleId: string) {
+    const [role, userCount] = await Promise.all([
+      this.findByIdWithPermissions(roleId),
+      prisma.user.count({ where: { roleId } }),
+    ]);
+
+    return role ? { ...role, userCount } : null;
+  }
+}
+
+export const roleRepository = new RoleRepository();

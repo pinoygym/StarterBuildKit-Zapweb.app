@@ -1,0 +1,688 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Branch Model
+model Branch {
+  id        String   @id @default(uuid())
+  name      String
+  code      String   @unique
+  location  String
+  manager   String
+  phone     String
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  warehouses        Warehouse[]
+  purchaseOrders    PurchaseOrder[]
+  salesOrders       SalesOrder[]
+  posSales          POSSale[]
+  expenses          Expense[]
+  arRecords         AccountsReceivable[]
+  apRecords         AccountsPayable[]
+  users             User[]
+  userBranchAccess  UserBranchAccess[]
+  receivingVouchers ReceivingVoucher[]
+
+  @@index([status])
+  @@index([code])
+  @@index([createdAt])
+}
+
+// Product Model
+model Product {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  description   String?
+  category      String
+  imageUrl      String?
+  basePrice     Decimal  @db.Decimal(10, 2)
+  baseUOM       String
+  minStockLevel Int
+  shelfLifeDays Int
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  alternateUOMs         ProductUOM[]
+  inventoryBatches      InventoryBatch[]
+  poItems               PurchaseOrderItem[]
+  soItems               SalesOrderItem[]
+  posItems              POSSaleItem[]
+  receivingVoucherItems ReceivingVoucherItem[]
+
+  @@index([status])
+  @@index([category])
+  @@index([name])
+  @@index([category, status])
+  @@index([createdAt])
+}
+
+// Product UOM Model
+model ProductUOM {
+  id               String   @id @default(uuid())
+  productId        String
+  name             String
+  conversionFactor Decimal  @db.Decimal(10, 4)
+  sellingPrice     Decimal  @db.Decimal(10, 2)
+  createdAt        DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([productId])
+}
+
+// Warehouse Model
+model Warehouse {
+  id          String   @id @default(uuid())
+  name        String
+  location    String
+  manager     String
+  maxCapacity Int
+  branchId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  branch            Branch             @relation(fields: [branchId], references: [id])
+  inventoryBatches  InventoryBatch[]
+  purchaseOrders    PurchaseOrder[]
+  salesOrders       SalesOrder[]
+  receivingVouchers ReceivingVoucher[]
+
+  @@index([branchId])
+  @@index([branchId, name])
+}
+
+// Inventory Batch Model
+model InventoryBatch {
+  id           String   @id @default(uuid())
+  batchNumber  String   @unique
+  productId    String
+  warehouseId  String
+  quantity     Decimal  @db.Decimal(10, 2)
+  unitCost     Decimal  @db.Decimal(10, 2)
+  expiryDate   DateTime
+  receivedDate DateTime
+  status       String   @default("active")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  product   Product         @relation(fields: [productId], references: [id])
+  warehouse Warehouse       @relation(fields: [warehouseId], references: [id])
+  movements StockMovement[]
+
+  @@index([productId, warehouseId])
+  @@index([expiryDate])
+  @@index([status])
+  @@index([batchNumber])
+  @@index([productId, status])
+  @@index([warehouseId, status])
+  @@index([expiryDate, status])
+}
+
+// Stock Movement Model
+model StockMovement {
+  id            String   @id @default(uuid())
+  batchId       String
+  type          String // "IN", "OUT", "TRANSFER", "ADJUSTMENT"
+  quantity      Decimal  @db.Decimal(10, 2)
+  reason        String?
+  referenceId   String?
+  referenceType String? // "PO", "SO", "POS"
+  createdAt     DateTime @default(now())
+
+  batch InventoryBatch @relation(fields: [batchId], references: [id])
+
+  @@index([batchId])
+  @@index([referenceId, referenceType])
+  @@index([createdAt])
+}
+
+// Supplier Model
+model Supplier {
+  id            String   @id @default(uuid())
+  companyName   String
+  contactPerson String
+  phone         String
+  email         String
+  paymentTerms  String // "Net 15", "Net 30", "Net 60", "COD"
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  purchaseOrders PurchaseOrder[]
+  apRecords      AccountsPayable[]
+
+  @@index([status])
+  @@index([companyName])
+}
+
+// Customer Model
+model Customer {
+  id              String   @id @default(uuid())
+  customerCode    String   @unique
+  companyName     String?
+  contactPerson   String
+  phone           String
+  email           String
+  address         String?
+  city            String?
+  region          String?
+  postalCode      String?
+  paymentTerms    String   @default("Net 30") // "Net 15", "Net 30", "Net 60", "COD"
+  creditLimit     Decimal? @db.Decimal(10, 2)
+  taxId           String?
+  customerType    String   @default("regular") // "regular", "wholesale", "retail"
+  notes           String?
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  salesOrders SalesOrder[]
+  arRecords   AccountsReceivable[]
+
+  @@index([status])
+  @@index([customerCode])
+  @@index([companyName])
+  @@index([contactPerson])
+  @@index([email])
+  @@index([customerType])
+}
+
+// Purchase Order Model
+model PurchaseOrder {
+  id                   String    @id @default(uuid())
+  poNumber             String    @unique
+  supplierId           String
+  warehouseId          String
+  branchId             String
+  totalAmount          Decimal   @db.Decimal(10, 2)
+  status               String    @default("draft")
+  receivingStatus      String?   @default("pending")
+  expectedDeliveryDate DateTime
+  actualDeliveryDate   DateTime?
+  notes                String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  supplier          Supplier            @relation(fields: [supplierId], references: [id])
+  warehouse         Warehouse           @relation(fields: [warehouseId], references: [id])
+  branch            Branch              @relation(fields: [branchId], references: [id])
+  items             PurchaseOrderItem[]
+  receivingVouchers ReceivingVoucher[]
+
+  @@index([supplierId])
+  @@index([warehouseId])
+  @@index([branchId])
+  @@index([status])
+  @@index([receivingStatus])
+  @@index([poNumber])
+  @@index([createdAt])
+}
+
+// Purchase Order Item Model
+model PurchaseOrderItem {
+  id               String  @id @default(uuid())
+  poId             String
+  productId        String
+  quantity         Decimal @db.Decimal(10, 2)
+  unitPrice        Decimal @db.Decimal(10, 2)
+  subtotal         Decimal @db.Decimal(10, 2)
+  receivedQuantity Decimal @default(0) @db.Decimal(10, 2)
+
+  purchaseOrder PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  product       Product       @relation(fields: [productId], references: [id])
+
+  @@index([poId])
+  @@index([productId])
+}
+
+// Sales Order Model
+model SalesOrder {
+  id                String   @id @default(uuid())
+  orderNumber       String   @unique
+  customerId        String?
+  customerName      String
+  customerPhone     String
+  customerEmail     String
+  deliveryAddress   String
+  warehouseId       String
+  branchId          String
+  totalAmount       Decimal  @db.Decimal(10, 2)
+  status            String   @default("draft")
+  salesOrderStatus  String   @default("pending")
+  deliveryDate      DateTime
+  convertedToSaleId String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  customer  Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  warehouse Warehouse @relation(fields: [warehouseId], references: [id])
+  branch    Branch    @relation(fields: [branchId], references: [id])
+  items     SalesOrderItem[]
+
+  @@index([customerId])
+  @@index([warehouseId])
+  @@index([branchId])
+  @@index([status])
+  @@index([salesOrderStatus])
+  @@index([orderNumber])
+  @@index([createdAt])
+}
+
+// Sales Order Item Model
+model SalesOrderItem {
+  id        String  @id @default(uuid())
+  soId      String
+  productId String
+  quantity  Decimal @db.Decimal(10, 2)
+  uom       String
+  unitPrice Decimal @db.Decimal(10, 2)
+  subtotal  Decimal @db.Decimal(10, 2)
+
+  salesOrder SalesOrder @relation(fields: [soId], references: [id], onDelete: Cascade)
+  product    Product    @relation(fields: [productId], references: [id])
+
+  @@index([soId])
+  @@index([productId])
+}
+
+// POS Sale Model
+model POSSale {
+  id                   String   @id @default(uuid())
+  receiptNumber        String   @unique
+  branchId             String
+  subtotal             Decimal  @db.Decimal(10, 2)
+  tax                  Decimal  @db.Decimal(10, 2)
+  totalAmount          Decimal  @db.Decimal(10, 2)
+  paymentMethod        String
+  amountReceived       Decimal? @db.Decimal(10, 2)
+  change               Decimal? @db.Decimal(10, 2)
+  convertedFromOrderId String?
+  createdAt            DateTime @default(now())
+
+  branch Branch        @relation(fields: [branchId], references: [id])
+  items  POSSaleItem[]
+
+  @@index([branchId])
+  @@index([receiptNumber])
+  @@index([createdAt])
+  @@index([paymentMethod])
+  @@index([branchId, createdAt])
+  @@index([branchId, paymentMethod])
+}
+
+// POS Sale Item Model
+model POSSaleItem {
+  id              String  @id @default(uuid())
+  saleId          String
+  productId       String
+  quantity        Decimal @db.Decimal(10, 2)
+  uom             String
+  unitPrice       Decimal @db.Decimal(10, 2)
+  subtotal        Decimal @db.Decimal(10, 2)
+  costOfGoodsSold Decimal @db.Decimal(10, 2)
+
+  sale    POSSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([saleId])
+  @@index([productId])
+}
+
+// Accounts Receivable Model
+model AccountsReceivable {
+  id           String   @id @default(uuid())
+  branchId     String
+  customerId   String?
+  customerName String
+  salesOrderId String?
+  totalAmount  Decimal  @db.Decimal(10, 2)
+  paidAmount   Decimal  @default(0) @db.Decimal(10, 2)
+  balance      Decimal  @db.Decimal(10, 2)
+  dueDate      DateTime
+  status       String   @default("pending")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  customer Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+  branch   Branch    @relation(fields: [branchId], references: [id])
+  payments ARPayment[]
+
+  @@index([customerId])
+  @@index([branchId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([createdAt])
+  @@index([branchId, status])
+  @@index([status, dueDate])
+  @@index([customerName])
+}
+
+// AR Payment Model
+model ARPayment {
+  id              String   @id @default(uuid())
+  arId            String
+  amount          Decimal  @db.Decimal(10, 2)
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime @default(now())
+
+  ar AccountsReceivable @relation(fields: [arId], references: [id], onDelete: Cascade)
+
+  @@index([arId])
+  @@index([paymentDate])
+}
+
+// Accounts Payable Model
+model AccountsPayable {
+  id              String   @id @default(uuid())
+  branchId        String
+  supplierId      String
+  purchaseOrderId String?
+  totalAmount     Decimal  @db.Decimal(10, 2)
+  paidAmount      Decimal  @default(0) @db.Decimal(10, 2)
+  balance         Decimal  @db.Decimal(10, 2)
+  dueDate         DateTime
+  status          String   @default("pending")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  branch   Branch      @relation(fields: [branchId], references: [id])
+  supplier Supplier    @relation(fields: [supplierId], references: [id])
+  payments APPayment[]
+
+  @@index([branchId])
+  @@index([supplierId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([createdAt])
+  @@index([branchId, status])
+  @@index([supplierId, status])
+  @@index([status, dueDate])
+}
+
+// AP Payment Model
+model APPayment {
+  id              String   @id @default(uuid())
+  apId            String
+  amount          Decimal  @db.Decimal(10, 2)
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime @default(now())
+
+  ap AccountsPayable @relation(fields: [apId], references: [id], onDelete: Cascade)
+
+  @@index([apId])
+  @@index([paymentDate])
+}
+
+// Expense Model
+model Expense {
+  id            String   @id @default(uuid())
+  branchId      String
+  expenseDate   DateTime
+  category      String
+  amount        Decimal  @db.Decimal(10, 2)
+  description   String
+  paymentMethod String
+  vendor        String?
+  receiptUrl    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  branch Branch @relation(fields: [branchId], references: [id])
+
+  @@index([branchId])
+  @@index([category])
+  @@index([expenseDate])
+  @@index([createdAt])
+  @@index([branchId, category])
+  @@index([branchId, expenseDate])
+  @@index([category, expenseDate])
+}
+
+// User Model
+model User {
+  id                String     @id @default(uuid())
+  email             String     @unique
+  passwordHash      String
+  firstName         String
+  lastName          String
+  phone             String?
+  roleId            String
+  branchId          String?
+  status            UserStatus @default(ACTIVE)
+  emailVerified     Boolean    @default(false)
+  lastLoginAt       DateTime?
+  passwordChangedAt DateTime?
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+
+  role                Role                 @relation(fields: [roleId], references: [id], onDelete: Restrict)
+  branch              Branch?              @relation(fields: [branchId], references: [id], onDelete: SetNull)
+  sessions            Session[]
+  auditLogs           AuditLog[]
+  branchAccess        UserBranchAccess[]
+  passwordResetTokens PasswordResetToken[]
+
+  @@index([email], map: "idx_user_email")
+  @@index([roleId], map: "idx_user_role")
+  @@index([branchId], map: "idx_user_branch")
+  @@index([status], map: "idx_user_status")
+  @@index([emailVerified], map: "idx_user_email_verified")
+  @@map("User")
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+// Role Model
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String?
+  isSystem    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  users       User[]
+  permissions RolePermission[]
+
+  @@index([name], map: "idx_role_name")
+  @@index([isSystem], map: "idx_role_is_system")
+  @@map("Role")
+}
+
+// Permission Model
+model Permission {
+  id          String             @id @default(uuid())
+  resource    PermissionResource
+  action      PermissionAction
+  description String?
+  createdAt   DateTime           @default(now())
+
+  roles RolePermission[]
+
+  @@unique([resource, action], map: "unique_permission_resource_action")
+  @@index([resource], map: "idx_permission_resource")
+  @@index([action], map: "idx_permission_action")
+  @@map("Permission")
+}
+
+enum PermissionResource {
+  USERS
+  ROLES
+  PRODUCTS
+  INVENTORY
+  SALES
+  PURCHASES
+  ACCOUNTING
+  REPORTS
+  BRANCHES
+  SETTINGS
+}
+
+enum PermissionAction {
+  READ
+  CREATE
+  UPDATE
+  DELETE
+  MANAGE
+}
+
+// RolePermission Junction Model
+model RolePermission {
+  id           String   @id @default(uuid())
+  roleId       String
+  permissionId String
+  createdAt    DateTime @default(now())
+
+  role       Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  permission Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId], map: "unique_role_permission")
+  @@index([roleId], map: "idx_role_permission_role")
+  @@index([permissionId], map: "idx_role_permission_permission")
+  @@map("RolePermission")
+}
+
+// Session Model
+model Session {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  ipAddress String?
+  userAgent String?  @db.VarChar(500)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "idx_session_user")
+  @@index([token], map: "idx_session_token")
+  @@index([expiresAt], map: "idx_session_expires")
+  @@map("Session")
+}
+
+// AuditLog Model
+model AuditLog {
+  id         String   @id @default(uuid())
+  userId     String?
+  action     String   @db.VarChar(100)
+  resource   String   @db.VarChar(100)
+  resourceId String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?  @db.VarChar(500)
+  createdAt  DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([userId], map: "idx_audit_log_user")
+  @@index([resource], map: "idx_audit_log_resource")
+  @@index([resourceId], map: "idx_audit_log_resource_id")
+  @@index([createdAt], map: "idx_audit_log_created")
+  @@index([action], map: "idx_audit_log_action")
+  @@map("AuditLog")
+}
+
+// UserBranchAccess Model
+model UserBranchAccess {
+  id        String   @id @default(uuid())
+  userId    String
+  branchId  String
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  branch Branch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, branchId], map: "unique_user_branch_access")
+  @@index([userId], map: "idx_user_branch_access_user")
+  @@index([branchId], map: "idx_user_branch_access_branch")
+  @@map("UserBranchAccess")
+}
+
+// PasswordResetToken Model
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId], map: "idx_password_reset_user")
+  @@index([token], map: "idx_password_reset_token")
+  @@index([expiresAt], map: "idx_password_reset_expires")
+  @@map("PasswordResetToken")
+}
+
+// Receiving Voucher Model
+model ReceivingVoucher {
+  id                  String   @id @default(uuid())
+  rvNumber            String   @unique
+  purchaseOrderId     String
+  warehouseId         String
+  branchId            String
+  receiverName        String
+  deliveryNotes       String?
+  status              String   @default("complete")
+  totalOrderedAmount  Decimal  @db.Decimal(10, 2)
+  totalReceivedAmount Decimal  @db.Decimal(10, 2)
+  varianceAmount      Decimal  @db.Decimal(10, 2)
+  receivedDate        DateTime @default(now())
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  purchaseOrder PurchaseOrder          @relation(fields: [purchaseOrderId], references: [id])
+  warehouse     Warehouse              @relation(fields: [warehouseId], references: [id])
+  branch        Branch                 @relation(fields: [branchId], references: [id])
+  items         ReceivingVoucherItem[]
+
+  @@index([purchaseOrderId])
+  @@index([warehouseId])
+  @@index([branchId])
+  @@index([rvNumber])
+  @@index([status])
+  @@index([receivedDate])
+  @@index([createdAt])
+}
+
+// Receiving Voucher Item Model
+model ReceivingVoucherItem {
+  id                 String  @id @default(uuid())
+  rvId               String
+  productId          String
+  orderedQuantity    Decimal @db.Decimal(10, 2)
+  receivedQuantity   Decimal @db.Decimal(10, 2)
+  varianceQuantity   Decimal @db.Decimal(10, 2)
+  variancePercentage Decimal @db.Decimal(5, 2)
+  varianceReason     String?
+  unitPrice          Decimal @db.Decimal(10, 2)
+  lineTotal          Decimal @db.Decimal(10, 2)
+
+  receivingVoucher ReceivingVoucher @relation(fields: [rvId], references: [id], onDelete: Cascade)
+  product          Product          @relation(fields: [productId], references: [id])
+
+  @@index([rvId])
+  @@index([productId])
+}
