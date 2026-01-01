@@ -1,0 +1,1069 @@
+$ vitest run tests/integration --fileParallelism=false tests/integration/api/receiving-voucher-uom.test.ts
+
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mC:/Users/HI/Documents/GitHub/buenasv2[39m
+
+[90mstdout[2m | tests/integration/api/customers.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:05.730Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/customers.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/customers.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [31m❯[39m tests/integration/api/customers.test.ts [2m([22m[2m8 tests[22m[2m | [22m[31m2 failed[39m[2m)[22m[33m 4208[2mms[22m[39m
+[31m       [31m×[31m should create a new customer[39m[32m 239[2mms[22m[39m
+[31m       [31m×[31m should create a new customer with empty email[39m[32m 161[2mms[22m[39m
+       [32m✓[39m should return 400 for missing required fields[32m 16[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of customers [33m 607[2mms[22m[39m
+       [32m✓[39m should filter customers by search[32m 148[2mms[22m[39m
+       [32m✓[39m should return customer by ID[32m 0[2mms[22m[39m
+       [32m✓[39m should update customer details[32m 0[2mms[22m[39m
+       [32m✓[39m should delete (or deactivate) customer[32m 0[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/customer-search.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:10.858Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/customer-search.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/customer-search.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [31m❯[39m tests/integration/api/customer-search.test.ts [2m([22m[2m5 tests[22m[2m | [22m[33m5 skipped[39m[2m)[22m[33m 2637[2mms[22m[39m
+     [2m[90m↓[39m[22m should find customer by single keyword "UniqueName"
+     [2m[90m↓[39m[22m should find customer by exact phrase "SearchTest One"
+     [2m[90m↓[39m[22m should find customer by partial multi-keyword "Alpha One"
+     [2m[90m↓[39m[22m should find customer by mixed case keywords "uniqueNAME beta"
+     [2m[90m↓[39m[22m should NOT find customer if one keyword matches and another does not "Alpha Gamma"
+[90mstdout[2m | tests/integration/api/adjustments-stress.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:14.402Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/adjustments-stress.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/adjustments-stress.test.ts[2m > [22m[2mLarge Scale Inventory Adjustment API
+[22m[39mCleaning up...
+
+ [31m❯[39m tests/integration/api/adjustments-stress.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 1953[2mms[22m[39m
+     [2m[90m↓[39m[22m should successfully create and retrieve an adjustment with 100 items
+[90mstdout[2m | tests/integration/api/adjustments-large-batch.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:17.316Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/adjustments-large-batch.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/adjustments-large-batch.test.ts[2m > [22m[2mFifty Items Inventory Adjustment Verification
+[22m[39mCleaning up...
+
+ [31m❯[39m tests/integration/api/adjustments-large-batch.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 1850[2mms[22m[39m
+     [2m[90m↓[39m[22m should successfully create and retrieve an adjustment with exactly 50 items
+[90mstdout[2m | tests/integration/api/fund-sources.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:19.521Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/fund-sources.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/fund-sources.test.ts [2m([22m[2m35 tests[22m[2m)[22m[33m 26640[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a cash register fund source successfully [33m 734[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a bank account fund source with bank details [33m 662[2mms[22m[39m
+       [33m[2m✓[22m[39m should create company-wide fund source without branch [33m 675[2mms[22m[39m
+       [33m[2m✓[22m[39m should set default fund source [33m 855[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject duplicate code [33m 743[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all fund sources [33m 666[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by type [33m 664[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 666[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 665[2mms[22m[39m
+       [33m[2m✓[22m[39m should search by name [33m 663[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch fund source by ID [33m 409[2mms[22m[39m
+       [33m[2m✓[22m[39m should return 404 for non-existent fund source [33m 344[2mms[22m[39m
+       [33m[2m✓[22m[39m should update fund source details [33m 738[2mms[22m[39m
+       [33m[2m✓[22m[39m should update status to inactive [33m 731[2mms[22m[39m
+       [33m[2m✓[22m[39m should record a deposit [33m 544[2mms[22m[39m
+       [33m[2m✓[22m[39m should record a withdrawal [33m 558[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject withdrawal exceeding balance [33m 350[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch transaction history [33m 1062[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter transactions by type [33m 738[2mms[22m[39m
+       [33m[2m✓[22m[39m should support pagination [33m 733[2mms[22m[39m
+       [33m[2m✓[22m[39m should adjust balance for reconciliation [33m 869[2mms[22m[39m
+       [33m[2m✓[22m[39m should transfer funds between sources [33m 1723[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle transfer with fee [33m 1586[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject transfer exceeding balance [33m 675[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject transfer to same fund source [33m 669[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all transfers [33m 1143[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by source fund [33m 738[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by destination fund [33m 781[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch dashboard summary [33m 546[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter summary by branch [33m 564[2mms[22m[39m
+       [33m[2m✓[22m[39m should soft delete fund source with transactions [33m 617[2mms[22m[39m
+       [33m[2m✓[22m[39m should hard delete fund source without transactions [33m 355[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:55:46.497Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts[2m > [22m[2mReceiving Voucher UOM Conversion Integration Tests
+[22m[39mTest BASE_URL: http://localhost:3001
+
+ [32m✓[39m tests/integration/api/receiving-voucher-uom.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 19832[2mms[22m[39m
+       [33m[2m✓[22m[39m should successfully create receiving voucher with case to bottle conversion [33m 2938[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle partial case receipt (0.5 case = 5 bottles) [33m 2843[2mms[22m[39m
+       [33m[2m✓[22m[39m should work with pack UOM conversion [33m 2915[2mms[22m[39m
+       [33m[2m✓[22m[39m should fail with invalid UOM configuration [33m 1941[2mms[22m[39m
+       [33m[2m✓[22m[39m should prevent the original UOM conversion bug [33m 2909[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:56:06.656Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/ar.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 17720[2mms[22m[39m
+       [33m[2m✓[22m[39m should create AR record successfully [33m 687[2mms[22m[39m
+       [33m[2m✓[22m[39m should record full payment and update status to paid [33m 1440[2mms[22m[39m
+       [33m[2m✓[22m[39m should record partial payment and update status to partial [33m 1373[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple partial payments [33m 2817[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject payment exceeding balance [33m 899[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject zero or negative payment [33m 898[2mms[22m[39m
+       [33m[2m✓[22m[39m should validate required payment fields [33m 691[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate aging buckets correctly [33m 544[2mms[22m[39m
+       [33m[2m✓[22m[39m should group by customer correctly [33m 542[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate total outstanding correctly [33m 541[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all AR records [33m 898[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 543[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 475[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/ap.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:56:24.708Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/ap.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/ap.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/ap.test.ts [2m([22m[2m16 tests[22m[2m)[22m[33m 18081[2mms[22m[39m
+       [33m[2m✓[22m[39m should create AP record successfully [33m 756[2mms[22m[39m
+       [33m[2m✓[22m[39m should create AP record with all discount and charge fields [33m 751[2mms[22m[39m
+       [33m[2m✓[22m[39m should record full payment and update status to paid [33m 1089[2mms[22m[39m
+       [33m[2m✓[22m[39m should record partial payment and update status to partial [33m 1024[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple partial payments [33m 2742[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject payment exceeding balance [33m 481[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject zero or negative payment [33m 480[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle different payment methods [33m 4285[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate aging buckets correctly [33m 907[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate total outstanding correctly [33m 477[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all AP records [33m 827[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 458[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 413[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by supplier [33m 411[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:56:43.700Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mTransaction Test BASE_URL: http://localhost:3001
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogging in...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogin Status: [33m200[39m
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogin successful, token obtained
+Creating test user...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test branch...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test warehouse...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test supplier...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mTest data created
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould create RV, update inventory, and record stock movement in single transaction
+[22m[39mbeforeEach: Creating Product and PO
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould rollback all changes if any operation fails
+[22m[39mbeforeEach: Creating Product and PO
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould handle multiple items in single transaction
+[22m[39mbeforeEach: Creating Product and PO
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mRegression: Nested Transaction Bug[2m > [22m[2mshould not throw 500 error due to nested transactions
+[22m[39mbeforeEach: Creating Product and PO
+
+ [32m✓[39m tests/integration/api/receiving-voucher-transaction.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 18788[2mms[22m[39m
+       [33m[2m✓[22m[39m should create RV, update inventory, and record stock movement in single transaction [33m 3547[2mms[22m[39m
+       [33m[2m✓[22m[39m should rollback all changes if any operation fails [33m 1747[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple items in single transaction [33m 4598[2mms[22m[39m
+       [33m[2m✓[22m[39m should not throw 500 error due to nested transactions [33m 3232[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/registration.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  write to custom object with { processEnv: myObject }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:57:02.818Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/registration.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/registration.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/registration.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 16590[2mms[22m[39m
+       [33m[2m✓[22m[39m should successfully register a new user with valid data [33m 1852[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject registration with duplicate email [33m 2015[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject registration with invalid role ID [33m 1296[2mms[22m[39m
+       [33m[2m✓[22m[39m should hash password before storing in database [33m 1779[2mms[22m[39m
+       [33m[2m✓[22m[39m should create audit log entry for registration [33m 1927[2mms[22m[39m
+       [33m[2m✓[22m[39m should not include updatedAt field in user creation (regression test) [33m 1789[2mms[22m[39m
+       [33m[2m✓[22m[39m should work with correct Cashier role ID (regression test) [33m 1721[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:57:20.320Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)
+[22m[39mSetup: Creating test user and environment...
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)
+[22m[39mCreating 50 test products...
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)
+[22m[39mCreated 50 products.
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)[2m > [22m[2mshould create, save, and post an adjustment with 50 items
+[22m[39mCreating draft adjustment with 50 items...
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)[2m > [22m[2mshould create, save, and post an adjustment with 50 items
+[22m[39mAdjustment created: 7380b97c-c602-4116-ac6b-ba3c87cc41b7
+Posting adjustment...
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)[2m > [22m[2mshould create, save, and post an adjustment with 50 items
+[22m[39mPost Status: [33m200[39m
+Post Data Success: [33mtrue[39m
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)[2m > [22m[2mshould create, save, and post an adjustment with 50 items
+[22m[39mVerified 50 inventory records updated correctly.
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)
+[22m[39mCleaning up...
+
+[90mstdout[2m | tests/integration/api/adjustments-batch-verification.test.ts[2m > [22m[2mBatch Inventory Adjustment Verification (50 Items)
+[22m[39mCleanup complete.
+
+ [32m✓[39m tests/integration/api/adjustments-batch-verification.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 12807[2mms[22m[39m
+     [33m[2m✓[22m[39m should create, save, and post an adjustment with 50 items [33m 8844[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/purchase-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  override existing env vars with { override: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:57:34.007Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/purchase-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/purchase-orders.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/purchase-orders.test.ts [2m([22m[2m8 tests[22m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 11772[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new purchase order [33m 1004[2mms[22m[39m
+       [33m[2m✓[22m[39m should update purchase order [33m 856[2mms[22m[39m
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:57:46.099Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m🔍 Starting Reproduction Test for RV Average Cost Anomaly...
+
+1️⃣ Setting up test data...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   Created Product: Test Product e72044da (Base: pcs, Alt: box=10pcs)
+
+2️⃣ Scenario 1: First Receipt (1 box @ 100)
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m[InventoryService.addStock] Product: e72044da-9022-456a-b0aa-8852e146ad68, Qty: 1, UOM: box -> baseQuantity: 10
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251227-0028
+   Average Cost: 10
+   Expected: 10
+
+3️⃣ Scenario 2: Second Receipt (1 box @ 200)
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m[InventoryService.addStock] Product: e72044da-9022-456a-b0aa-8852e146ad68, Qty: 1, UOM: box -> baseQuantity: 10
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251227-0029
+   Average Cost: 15
+   Expected: 15
+
+4️⃣ Scenario 3: Third Receipt (1 box @ 100 with 20 discount)
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m[InventoryService.addStock] Product: e72044da-9022-456a-b0aa-8852e146ad68, Qty: 1, UOM: box -> baseQuantity: 10
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251227-0030
+   Average Cost: 12.66666666666667
+   Expected: 12.67
+
+🧹 Cleaning up...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:57:58.558Z","context":{"target":"supplier.delete","timestamp":"2025-12-27T03:57:58.558Z","message":"\nInvalid `prisma.supplier.delete()` invocation in\nC:/Users/HI/Documents/GitHub/buenasv2/tests/integration/reproduce_rv_avg_cost.test.ts:238:53\n\n  235     await prisma.productUOM.deleteMany({ where: { productId: product.id } });\n  236     await prisma.product.delete({ where: { id: product.id } });\n  237 }\n→ 238 if (supplier) await prisma.supplier.delete(\nForeign key constraint violated on the constraint: `AccountsPayable_supplierId_fkey`"}}
+
+[90mstderr[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39mCleanup failed PrismaClientKnownRequestError: 
+Invalid `prisma.supplier.delete()` invocation in
+C:/Users/HI/Documents/GitHub/buenasv2/tests/integration/reproduce_rv_avg_cost.test.ts:238:53
+
+  235     await prisma.productUOM.deleteMany({ where: { productId: product.id } });
+  236     await prisma.product.delete({ where: { id: product.id } });
+  237 }
+→ 238 if (supplier) await prisma.supplier.delete(
+Foreign key constraint violated on the constraint: `AccountsPayable_supplierId_fkey`
+    at qr.handleRequestError [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:8172[90m)[39m
+    at qr.handleAndLogRequestError [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:7467[90m)[39m
+    at qr.request [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:7174[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at a [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:75:5816[90m)[39m
+    at C:/Users/HI/Documents/GitHub/buenasv2/tests/integration/reproduce_rv_avg_cost.test.ts:238:31
+    at [90mfile:///C:/Users/HI/Documents/GitHub/buenasv2/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:915:20 {
+  code: [32m'P2003'[39m,
+  meta: {
+    modelName: [32m'Supplier'[39m,
+    driverAdapterError: DriverAdapterError: ForeignKeyConstraintViolation
+        at PrismaPgAdapter.onError [90m(file:///C:/Users/HI/Documents/GitHub/buenasv2/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:657:11[90m)[39m
+        at PrismaPgAdapter.performIO [90m(file:///C:/Users/HI/Documents/GitHub/buenasv2/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:652:12[90m)[39m
+    [90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+        at PrismaPgAdapter.queryRaw [90m(file:///C:/Users/HI/Documents/GitHub/buenasv2/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:572:30[90m)[39m
+        at [90mC:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:24163
+        at fr [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:24002[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:42384[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:42808[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:41603[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:43982[90m)[39m {
+      cause: [36m[Object][39m
+    }
+  },
+  clientVersion: [32m'7.1.0'[39m
+}
+
+ [32m✓[39m tests/integration/reproduce_rv_avg_cost.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 11609[2mms[22m[39m
+     [33m[2m✓[22m[39m should calculate weighted average cost correctly across multiple receipts [33m 10014[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/data-maintenance.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:57:58.863Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/data-maintenance.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/data-maintenance.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/data-maintenance.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 10315[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new product category [33m 834[2mms[22m[39m
+       [33m[2m✓[22m[39m should return 400 for existing name [33m 491[2mms[22m[39m
+       [33m[2m✓[22m[39m should return 400 for existing code [33m 484[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of product categories [33m 358[2mms[22m[39m
+       [33m[2m✓[22m[39m should update product category details [33m 495[2mms[22m[39m
+       [33m[2m✓[22m[39m should delete product category [33m 785[2mms[22m[39m
+       [33m[2m✓[22m[39m should create expense category [33m 495[2mms[22m[39m
+       [33m[2m✓[22m[39m should delete expense category [33m 425[2mms[22m[39m
+       [33m[2m✓[22m[39m should create unit of measure [33m 498[2mms[22m[39m
+       [33m[2m✓[22m[39m should delete unit of measure [33m 427[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/sales-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:58:10.094Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/sales-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/sales-orders.test.ts [2m([22m[2m6 tests[22m[2m)[22m[33m 10826[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new sales order [33m 1330[2mms[22m[39m
+       [33m[2m✓[22m[39m should update sales order [33m 840[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-list.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:58:21.839Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-list.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-list.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/receiving-voucher-list.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 9300[2mms[22m[39m
+     [33m[2m✓[22m[39m should show newly created receiving voucher in the list [33m 3638[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/products.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:58:31.456Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/products.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  override existing env vars with { override: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/products.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/products.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 8252[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new product [33m 510[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of products [33m 357[2mms[22m[39m
+       [33m[2m✓[22m[39m should update product details [33m 653[2mms[22m[39m
+       [33m[2m✓[22m[39m should delete (or deactivate) product [33m 1395[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/warehouses.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:58:40.635Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/warehouses.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/warehouses.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/warehouses.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 9123[2mms[22m[39m
+     [33m[2m✓[22m[39m lists warehouses [33m 4363[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:58:50.674Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts[2m > [22m[2mInventory Post 500 Error Reproduction
+[22m[39mSetup: Creating test user...
+
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts[2m > [22m[2mInventory Post 500 Error Reproduction
+[22m[39mTest data created. User: test-1dee3299-80a4-4a46-8f03-f234abc1973e@example.com
+Attempting to login to http://localhost:3001
+
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts[2m > [22m[2mInventory Post 500 Error Reproduction
+[22m[39mLogin response status: [33m200[39m
+
+[90mstdout[2m | tests/integration/api/repro-inventory-post.test.ts[2m > [22m[2mInventory Post 500 Error Reproduction
+[22m[39mLogin cookie received: Yes
+Login successful
+
+ [32m✓[39m tests/integration/api/repro-inventory-post.test.ts [2m([22m[2m3 tests[22m[2m)[22m[33m 9145[2mms[22m[39m
+     [33m[2m✓[22m[39m should successfully post an inventory adjustment [33m 2499[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle potential error triggers (e.g., missing alternate UOM) [33m 1651[2mms[22m[39m
+     [33m[2m✓[22m[39m should handle negative stock scenario if valid [33m 1722[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/pos.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  override existing env vars with { override: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:00.694Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/pos.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/pos.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+[90mstdout[2m | tests/integration/api/pos.test.ts[2m > [22m[2mPOS Sales API[2m > [22m[2mdeducts inventory correctly after sale
+[22m[39mInitial Stock: [33m4998[39m
+
+[90mstdout[2m | tests/integration/api/pos.test.ts[2m > [22m[2mPOS Sales API[2m > [22m[2mdeducts inventory correctly after sale
+[22m[39mFinal Stock: [33m4993[39m
+
+ [32m✓[39m tests/integration/api/pos.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 8534[2mms[22m[39m
+     [33m[2m✓[22m[39m processes a cash sale [33m 1785[2mms[22m[39m
+     [33m[2m✓[22m[39m deducts inventory correctly after sale [33m 1905[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/roles.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:10.250Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/roles.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/roles.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+[90mstdout[2m | tests/integration/api/roles.test.ts[2m > [22m[2mRoles API
+[22m[39mLogin response: {
+  success: [33mtrue[39m,
+  token: [32m'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiJjbWk3cDAxdG4wMDZsdmFhZ29kaW83dzIzIiwiZW1haWwiOiJjeWJlcmdhZGFAZ21haWwuY29tIiwicm9sZUlkIjoiNWNmYTY3NTMtZWEwYy00YWU5LWI0NzYtZjRkYjkzNWExYzk4IiwiYnJhbmNoSWQiOiI1MzM4ZmFiOS0xZTA4LTRjZmQtOWM2OS02YTVjMTQwZjRmZWYiLCJpYXQiOjE3NjY4MDc5NTIsImV4cCI6MTc2Njg5NDM1Mn0.UmTh5uSIt2gmFjDQsTnwFGk6MQ24k7zwPrxgB7by3gM'[39m,
+  user: {
+    id: [32m'cmi7p01tn006lvaagodio7w23'[39m,
+    email: [32m'cybergada@gmail.com'[39m,
+    firstName: [32m'Cyber'[39m,
+    lastName: [32m'Gada'[39m,
+    roleId: [32m'5cfa6753-ea0c-4ae9-b476-f4db935a1c98'[39m,
+    branchId: [32m'5338fab9-1e08-4cfd-9c69-6a5c140f4fef'[39m,
+    status: [32m'ACTIVE'[39m,
+    emailVerified: [33mtrue[39m,
+    isSuperMegaAdmin: [33mtrue[39m,
+    role: {
+      id: [32m'5cfa6753-ea0c-4ae9-b476-f4db935a1c98'[39m,
+      name: [32m'Super Admin'[39m,
+      description: [32m'Full system access with all permissions'[39m
+    },
+    branch: {
+      id: [32m'5338fab9-1e08-4cfd-9c69-6a5c140f4fef'[39m,
+      name: [32m'Mabini'[39m,
+      code: [32m'mb001'[39m
+    }
+  },
+  permissions: [
+    [32m'USERS:READ'[39m,        [32m'USERS:CREATE'[39m,      [32m'USERS:UPDATE'[39m,
+    [32m'USERS:DELETE'[39m,      [32m'USERS:MANAGE'[39m,      [32m'ROLES:READ'[39m,
+    [32m'ROLES:CREATE'[39m,      [32m'ROLES:UPDATE'[39m,      [32m'ROLES:DELETE'[39m,
+    [32m'ROLES:MANAGE'[39m,      [32m'PRODUCTS:READ'[39m,     [32m'PRODUCTS:CREATE'[39m,
+    [32m'PRODUCTS:UPDATE'[39m,   [32m'PRODUCTS:DELETE'[39m,   [32m'PRODUCTS:MANAGE'[39m,
+    [32m'INVENTORY:READ'[39m,    [32m'INVENTORY:CREATE'[39m,  [32m'INVENTORY:UPDATE'[39m,
+    [32m'INVENTORY:DELETE'[39m,  [32m'INVENTORY:MANAGE'[39m,  [32m'SALES:READ'[39m,
+    [32m'SALES:CREATE'[39m,      [32m'SALES:UPDATE'[39m,      [32m'SALES:DELETE'[39m,
+    [32m'SALES:MANAGE'[39m,      [32m'PURCHASES:READ'[39m,    [32m'PURCHASES:CREATE'[39m,
+    [32m'PURCHASES:UPDATE'[39m,  [32m'PURCHASES:DELETE'[39m,  [32m'PURCHASES:MANAGE'[39m,
+    [32m'ACCOUNTING:READ'[39m,   [32m'ACCOUNTING:CREATE'[39m, [32m'ACCOUNTING:UPDATE'[39m,
+    [32m'ACCOUNTING:DELETE'[39m, [32m'ACCOUNTING:MANAGE'[39m, [32m'REPORTS:READ'[39m,
+    [32m'REPORTS:MANAGE'[39m,    [32m'BRANCHES:READ'[39m,     [32m'BRANCHES:CREATE'[39m,
+    [32m'BRANCHES:UPDATE'[39m,   [32m'BRANCHES:DELETE'[39m,   [32m'BRANCHES:MANAGE'[39m,
+    [32m'SETTINGS:READ'[39m,     [32m'SETTINGS:UPDATE'[39m,   [32m'SETTINGS:MANAGE'[39m
+  ]
+}
+
+[90mstdout[2m | tests/integration/api/roles.test.ts[2m > [22m[2mRoles API[2m > [22m[2mDELETE /api/roles/[id] - should delete role
+[22m[39mDeleting role: 8566c778-3fcc-4d9a-a546-2ea131a06f7e
+
+[90mstdout[2m | tests/integration/api/roles.test.ts[2m > [22m[2mRoles API
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:59:16.788Z","context":{"target":"role.delete","timestamp":"2025-12-27T03:59:16.788Z","message":"\nInvalid `prisma.role.delete()` invocation:\n\n\nAn operation failed because it depends on one or more records that were required but not found. No record was found for a delete."}}
+
+[90mstdout[2m | tests/integration/api/roles.test.ts[2m > [22m[2mRoles API
+[22m[39mCleanup failed (might already be deleted): PrismaClientKnownRequestError: 
+Invalid `prisma.role.delete()` invocation:
+
+
+An operation failed because it depends on one or more records that were required but not found. No record was found for a delete.
+    at qr.handleRequestError [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:8172[90m)[39m
+    at qr.handleAndLogRequestError [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:7467[90m)[39m
+    at qr.request [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:7174[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at a [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:75:5816[90m)[39m
+    at C:/Users/HI/Documents/GitHub/buenasv2/tests/integration/api/roles.test.ts:46:17 {
+  code: [32m'P2025'[39m,
+  meta: { modelName: [32m'Role'[39m, operation: [32m'a delete'[39m },
+  clientVersion: [32m'7.1.0'[39m
+}
+
+ [32m✓[39m tests/integration/api/roles.test.ts [2m([22m[2m5 tests[22m[2m)[22m[33m 6525[2mms[22m[39m
+     [33m[2m✓[22m[39m GET /api/roles - should return list of roles [33m 887[2mms[22m[39m
+     [33m[2m✓[22m[39m POST /api/roles - should create a new role [33m 816[2mms[22m[39m
+     [33m[2m✓[22m[39m POST /api/roles - should fail with duplicate name [33m 673[2mms[22m[39m
+     [33m[2m✓[22m[39m PUT /api/roles/[id] - should update role [33m 538[2mms[22m[39m
+     [33m[2m✓[22m[39m DELETE /api/roles/[id] - should delete role [33m 1120[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/inventory-adjustment-neg.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:17.805Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-neg.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-neg.test.ts[2m > [22m[2mInventory Adjustment Negative Post API
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:59:23.632Z","context":{"target":"product.delete","timestamp":"2025-12-27T03:59:23.632Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-neg.test.ts[2m > [22m[2mInventory Adjustment Negative Post API
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:59:24.121Z","context":{"target":"warehouse.delete","timestamp":"2025-12-27T03:59:24.121Z","message":"\nInvalid `prisma.warehouse.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_warehouseId_fkey`"}}
+
+ [32m✓[39m tests/integration/api/inventory-adjustment-neg.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 6302[2mms[22m[39m
+     [33m[2m✓[22m[39m should allow negative adjustment (stock reduction) [33m 2603[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/inventory-adjustment-post.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:25.072Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-post.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-post.test.ts[2m > [22m[2mInventory Adjustment Post API
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:59:30.306Z","context":{"target":"product.delete","timestamp":"2025-12-27T03:59:30.306Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `Inventory_productId_fkey`"}}
+
+[90mstdout[2m | tests/integration/api/inventory-adjustment-post.test.ts[2m > [22m[2mInventory Adjustment Post API
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-27T03:59:30.769Z","context":{"target":"warehouse.delete","timestamp":"2025-12-27T03:59:30.769Z","message":"\nInvalid `prisma.warehouse.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `Inventory_warehouseId_fkey`"}}
+
+ [32m✓[39m tests/integration/api/inventory-adjustment-post.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5681[2mms[22m[39m
+     [33m[2m✓[22m[39m should create and then successfully POST an adjustment [33m 2533[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:31.711Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/adjustments.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/adjustments.test.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 4960[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of adjustments with auth [33m 972[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/api-regression.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:37.050Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/api-regression.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/api-regression.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 5138[2mms[22m[39m
+       [33m[2m✓[22m[39m should return PO with correct Prisma relation names (capital letters) [33m 669[2mms[22m[39m
+       [33m[2m✓[22m[39m should list POs with correct property names [33m 571[2mms[22m[39m
+       [33m[2m✓[22m[39m should return RV with correct Prisma relation names [33m 1151[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/inventory.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  override existing env vars with { override: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:43.194Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/inventory.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/inventory.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/inventory.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 5502[2mms[22m[39m
+     [33m[2m✓[22m[39m lists inventory [33m 388[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/products-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:49.711Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/products-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  write to custom object with { processEnv: myObject }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/products-uom.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/products-uom.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 5552[2mms[22m[39m
+     [33m[2m✓[22m[39m updates product alternate UOMs [33m 744[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/ar-payments-report.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T03:59:56.315Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/ar-payments-report.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/ar-payments-report.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/ar-payments-report.test.ts [2m([22m[2m11 tests[22m[2m)[22m[33m 5125[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/uom-traceability-e2e.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  override existing env vars with { override: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:02.463Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/uom-traceability-e2e.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/uom-traceability-e2e.test.ts[2m > [22m[2mEnd-to-End UOM Traceability Test[2m > [22m[2mshould track UOM correctly for both Adjustments and POS Sales
+[22m[39m[CompanySettingsService] Attempting to find existing settings...
+
+[90mstdout[2m | tests/integration/api/uom-traceability-e2e.test.ts[2m > [22m[2mEnd-to-End UOM Traceability Test[2m > [22m[2mshould track UOM correctly for both Adjustments and POS Sales
+[22m[39m[CompanySettingsService] Found settings: YES
+
+[90mstdout[2m | tests/integration/api/uom-traceability-e2e.test.ts[2m > [22m[2mEnd-to-End UOM Traceability Test[2m > [22m[2mshould track UOM correctly for both Adjustments and POS Sales
+[22m[39mSuccessfully verified UOM traceability for Adjustment (TEST-ADJ-1766808004769) and POS Sale (TEST-RCP-1766808005365)
+
+ [32m✓[39m tests/integration/api/uom-traceability-e2e.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 4498[2mms[22m[39m
+     [33m[2m✓[22m[39m should track UOM correctly for both Adjustments and POS Sales [33m 2565[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/auth.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:08.144Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/auth.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/auth.test.ts
+[22m[39m[config.ts] envBase: "http://localhost:3001"
+[config.ts] BASE_URL: "http://localhost:3001"
+
+ [32m✓[39m tests/integration/api/auth.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 4020[2mms[22m[39m
+     [33m[2m✓[22m[39m valid login returns 200 and me returns 200 with cookie [33m 1861[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/inventory-adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:13.158Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/inventory-adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/inventory-adjustments.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 3452[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of adjustments with auth [33m 913[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/diagnostic-adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  load multiple .env files with { path: ['.env.local', '.env'] }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:17.618Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/diagnostic-adjustments.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/diagnostic-adjustments.test.ts[2m > [22m[2mDiagnostic: List Adjustments[2m > [22m[2mshould list draft and recently posted adjustments
+[22m[39mDiagnostic results written to diagnostic-results.json
+
+ [32m✓[39m tests/integration/api/diagnostic-adjustments.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2317[2mms[22m[39m
+     [33m[2m✓[22m[39m should list draft and recently posted adjustments [33m 724[2mms[22m[39m
+[90mstdout[2m | tests/integration/auth-forms.test.tsx
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  enable debug logging with { debug: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:20.896Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/auth-forms.test.tsx
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Setup: DATABASE_URL is defined
+
+[90mstderr[2m | tests/integration/auth-forms.test.tsx
+[22m[39mTest auth initialization failed, tests may need to handle auth independently: TypeError: Cannot read properties of undefined (reading 'text')
+    at Module.loginUserViaApi (C:/Users/HI/Documents/GitHub/buenasv2/tests/helpers/test-db-utils.ts:145:31)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at initTestAuth (C:/Users/HI/Documents/GitHub/buenasv2/tests/setup.ts:46:23)
+    at C:/Users/HI/Documents/GitHub/buenasv2/tests/setup.ts:74:9
+
+ [32m✓[39m tests/integration/auth-forms.test.tsx [2m([22m[2m8 tests[22m[2m)[22m[33m 2174[2mms[22m[39m
+     [33m[2m✓[22m[39m submits form with email and shows success state [33m 327[2mms[22m[39m
+     [33m[2m✓[22m[39m shows error message on API failure [33m 409[2mms[22m[39m
+     [33m[2m✓[22m[39m shows generic error on network failure [33m 339[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/post-all.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  suppress all logs with { quiet: true }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:24.521Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/post-all.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/post-all.test.ts[2m > [22m[2mExecution: Post All Draft Adjustments[2m > [22m[2mshould post all draft adjustments
+[22m[39mFound 1 draft adjustments to post.
+Posting ADJ-20251226-0001...
+
+[90mstderr[2m | tests/integration/api/post-all.test.ts[2m > [22m[2mExecution: Post All Draft Adjustments[2m > [22m[2mshould post all draft adjustments
+[22m[39m===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: bdb9f9f8-cd84-4c64-be0e-464c15ea09a7
+User ID: cb8547b6-538a-42b7-973e-c25df27c0852
+Error: ValidationError: No items to adjust
+    at new AppError (C:/Users/HI/Documents/GitHub/buenasv2/lib/errors.ts:57:11)
+    at new ValidationError (C:/Users/HI/Documents/GitHub/buenasv2/lib/errors.ts:66:5)
+    at InventoryService.adjustStockBatch (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory.service.ts:773:13)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:283:40)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at Proxy._transactionWithCallback [90m(C:\Users\HI\Documents\GitHub\buenasv2\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:75:4390[90m)[39m
+    at InventoryAdjustmentService.post (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:221:16)
+    at C:/Users/HI/Documents/GitHub/buenasv2/tests/integration/api/post-all.test.ts:22:32
+    at [90mfile:///C:/Users/HI/Documents/GitHub/buenasv2/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:915:20 {
+  statusCode: [33m400[39m,
+  code: [32m'VALIDATION_ERROR'[39m,
+  isOperational: [33mtrue[39m,
+  details: { items: [32m'At least one item is required'[39m },
+  fields: { items: [32m'At least one item is required'[39m }
+}
+Stack: ValidationError: No items to adjust
+    at new AppError (C:/Users/HI/Documents/GitHub/buenasv2/lib/errors.ts:57:11)
+    at new ValidationError (C:/Users/HI/Documents/GitHub/buenasv2/lib/errors.ts:66:5)
+    at InventoryService.adjustStockBatch (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory.service.ts:773:13)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:283:40)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at Proxy._transactionWithCallback (C:\Users\HI\Documents\GitHub\buenasv2\node_modules\@prisma\client\runtime\client.js:75:4390)
+    at InventoryAdjustmentService.post (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:221:16)
+    at C:/Users/HI/Documents/GitHub/buenasv2/tests/integration/api/post-all.test.ts:22:32
+    at file:///C:/Users/HI/Documents/GitHub/buenasv2/node_modules/@vitest/runner/dist/index.js:915:20
+============================================
+
+[90mstdout[2m | tests/integration/api/post-all.test.ts[2m > [22m[2mExecution: Post All Draft Adjustments[2m > [22m[2mshould post all draft adjustments
+[22m[39mPosting results written to posting-results.json
+
+[90mstderr[2m | tests/integration/api/post-all.test.ts[2m > [22m[2mExecution: Post All Draft Adjustments[2m > [22m[2mshould post all draft adjustments
+[22m[39mFailed to post ADJ-20251226-0001: No items to adjust
+
+ [32m✓[39m tests/integration/api/post-all.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 2062[2mms[22m[39m
+     [33m[2m✓[22m[39m should post all draft adjustments [33m 535[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/verify-movements.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  write to custom object with { processEnv: myObject }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:27.579Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/verify-movements.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/verify-movements.test.ts[2m > [22m[2mVerification: Stock Movements for Posted Adjustment[2m > [22m[2mshould have correct uom and factor in stock movements
+[22m[39mVerified 63 movements.
+
+ [32m✓[39m tests/integration/api/verify-movements.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1801[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/inspect-draft.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: 👥 sync secrets across teammates & machines: https://dotenvx.com/ops
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-27T04:00:30.370Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/inspect-draft.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: ✅ audit secrets and track compliance: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/inspect-draft.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 1840[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 3 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/adjustments-large-batch.test.ts[2m > [22mFifty Items Inventory Adjustment Verification
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m loginUserViaApi tests/helpers/test-db-utils.ts:[2m140:20[22m[39m
+    [90m138| [39m[90m// Function to log in a user via the API[39m
+    [90m139| [39mexport async function loginUserViaApi(credentials: any, baseUrl: strin…
+    [90m140| [39m  [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39mbaseUrl[36m}[39m[32m/api/auth/login`[39m[33m,[39m {
+    [90m   | [39m                   [31m^[39m
+    [90m141| [39m    method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m142| [39m    headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+[90m [2m❯[22m createAndLoginUser tests/helpers/test-db-utils.ts:[2m171:23[22m[39m
+[90m [2m❯[22m tests/integration/api/adjustments-large-batch.test.ts:[2m18:26[22m[39m
+
+{
+  stack: 'AggregateError: \n' +
+    '    at internalConnectMultiple (node:net:1134:18)\n' +
+    '    at afterConnectMultiple (node:net:1715:7)',
+  errors: [
+    {
+      stack: 'Error: connect ECONNREFUSED ::1:3000\n' +
+        '    at createConnectionError (node:net:1678:14)\n' +
+        '    at afterConnectMultiple (node:net:1708:16)',
+      message: 'connect ECONNREFUSED ::1:3000',
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000,
+      constructor: 'Function<Error>',
+      name: 'Error',
+      toString: 'Function<toString>'
+    },
+    {
+      stack: 'Error: connect ECONNREFUSED 127.0.0.1:3000\n' +
+        '    at createConnectionError (node:net:1678:14)\n' +
+        '    at afterConnectMultiple (node:net:1708:16)',
+      message: 'connect ECONNREFUSED 127.0.0.1:3000',
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000,
+      constructor: 'Function<Error>',
+      name: 'Error',
+      toString: 'Function<toString>'
+    }
+  ],
+  code: 'ECONNREFUSED',
+  constructor: 'Function<AggregateError>',
+  name: 'Caused by: AggregateError',
+  message: '',
+  toString: 'Function<toString>',
+  stacks: []
+}
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errors: [ { stack: 'Error: connect ECONNREFUSED ::1:3000\n    at createConnectionError (node:net:1678:14)\n    at afterConnectMultiple (node:net:1708:16)', message: 'connect ECONNREFUSED ::1:3000', errno: -4078, code: 'ECONNREFUSED', syscall: 'connect', address: '::1', port: 3000, constructor: 'Function<Error>', name: 'Error', toString: 'Function<toString>' }, { stack: 'Error: connect ECONNREFUSED 127.0.0.1:3000\n    at createConnectionError (node:net:1678:14)\n    at afterConnectMultiple (node:net:1708:16)', message: 'connect ECONNREFUSED 127.0.0.1:3000', errno: -4078, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000, constructor: 'Function<Error>', name: 'Error', toString: 'Function<toString>' } ], code: 'ECONNREFUSED' }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/adjustments-stress.test.ts[2m > [22mLarge Scale Inventory Adjustment API
+[31m[1mTypeError[22m: fetch failed[39m
+[36m [2m❯[22m loginUserViaApi tests/helpers/test-db-utils.ts:[2m140:20[22m[39m
+    [90m138| [39m[90m// Function to log in a user via the API[39m
+    [90m139| [39mexport async function loginUserViaApi(credentials: any, baseUrl: strin…
+    [90m140| [39m  [35mconst[39m response [33m=[39m [35mawait[39m [34mfetch[39m([32m`[39m[36m${[39mbaseUrl[36m}[39m[32m/api/auth/login`[39m[33m,[39m {
+    [90m   | [39m                   [31m^[39m
+    [90m141| [39m    method[33m:[39m [32m'POST'[39m[33m,[39m
+    [90m142| [39m    headers[33m:[39m { [32m'Content-Type'[39m[33m:[39m [32m'application/json'[39m }[33m,[39m
+[90m [2m❯[22m createAndLoginUser tests/helpers/test-db-utils.ts:[2m171:23[22m[39m
+[90m [2m❯[22m tests/integration/api/adjustments-stress.test.ts:[2m18:26[22m[39m
+
+{
+  stack: 'AggregateError: \n' +
+    '    at internalConnectMultiple (node:net:1134:18)\n' +
+    '    at afterConnectMultiple (node:net:1715:7)',
+  errors: [
+    {
+      stack: 'Error: connect ECONNREFUSED ::1:3000\n' +
+        '    at createConnectionError (node:net:1678:14)\n' +
+        '    at afterConnectMultiple (node:net:1708:16)',
+      message: 'connect ECONNREFUSED ::1:3000',
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '::1',
+      port: 3000,
+      constructor: 'Function<Error>',
+      name: 'Error',
+      toString: 'Function<toString>'
+    },
+    {
+      stack: 'Error: connect ECONNREFUSED 127.0.0.1:3000\n' +
+        '    at createConnectionError (node:net:1678:14)\n' +
+        '    at afterConnectMultiple (node:net:1708:16)',
+      message: 'connect ECONNREFUSED 127.0.0.1:3000',
+      errno: -4078,
+      code: 'ECONNREFUSED',
+      syscall: 'connect',
+      address: '127.0.0.1',
+      port: 3000,
+      constructor: 'Function<Error>',
+      name: 'Error',
+      toString: 'Function<toString>'
+    }
+  ],
+  code: 'ECONNREFUSED',
+  constructor: 'Function<AggregateError>',
+  name: 'Caused by: AggregateError',
+  message: '',
+  toString: 'Function<toString>',
+  stacks: []
+}
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[22m[39m
+[31m[1mSerialized Error:[22m[39m [90m{ errors: [ { stack: 'Error: connect ECONNREFUSED ::1:3000\n    at createConnectionError (node:net:1678:14)\n    at afterConnectMultiple (node:net:1708:16)', message: 'connect ECONNREFUSED ::1:3000', errno: -4078, code: 'ECONNREFUSED', syscall: 'connect', address: '::1', port: 3000, constructor: 'Function<Error>', name: 'Error', toString: 'Function<toString>' }, { stack: 'Error: connect ECONNREFUSED 127.0.0.1:3000\n    at createConnectionError (node:net:1678:14)\n    at afterConnectMultiple (node:net:1708:16)', message: 'connect ECONNREFUSED 127.0.0.1:3000', errno: -4078, code: 'ECONNREFUSED', syscall: 'connect', address: '127.0.0.1', port: 3000, constructor: 'Function<Error>', name: 'Error', toString: 'Function<toString>' } ], code: 'ECONNREFUSED' }[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customer-search.test.ts[2m > [22mCustomer Search Integration Tests
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading 'id')[39m
+[36m [2m❯[22m tests/integration/api/customer-search.test.ts:[2m44:34[22m[39m
+    [90m 42| [39m        })[33m;[39m
+    [90m 43| [39m        [35mconst[39m data1 [33m=[39m [35mawait[39m res1[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 44| [39m        customer1Id [33m=[39m data1[33m.[39mdata[33m.[39mid[33m;[39m
+    [90m   | [39m                                 [31m^[39m
+    [90m 45| [39m
+    [90m 46| [39m        [90m// Create Test Customer 2[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/5]⎯[22m[39m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mPOST /api/customers[2m > [22mshould create a new customer
+[31m[1mError[22m[39m: Failed to create customer (Status 500): {
+  "success": false,
+  "error": "Failed to create customer",
+  "details": "\nInvalid `__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:204\n\n  499 async create(data) {\n  500     const customerCode = data.customerCode || await this.getNextCustomerCode();\n  501     const { createdById, ...customerData } = data;\n→ 502     return await __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create(\nUnique constraint failed on the fields: (`\"customerCode\"`)",
+  "stack": "PrismaClientKnownRequestError: \nInvalid `__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:204\n\n  499 async create(data) {\n  500     const customerCode = data.customerCode || await this.getNextCustomerCode();\n  501     const { createdById, ...customerData } = data;\n→ 502     return await __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create(\nUnique constraint failed on the fields: (`\"customerCode\"`)\n    at qr.handleRequestError (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:8172)\n    at qr.handleAndLogRequestError (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7467)\n    at qr.request (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7174)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async a (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:75:5816)\n    at async CustomerRepository.create (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:16)\n    at async CustomerService.createCustomer (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:1211:26)\n    at async POST (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:2479:26)\n    at async AppRouteRouteModule.do (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:5:37789)\n    at async AppRouteRouteModule.handle (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:5:45045)\n    at async responseGenerator (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14339:38)\n    at async AppRouteRouteModule.handleResponse (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:1:187851)\n    at async handleResponse (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14401:32)\n    at async handler (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14454:13)\n    at async DevServer.renderToResponseWithComponentsImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1413:9)\n    at async DevServer.renderPageComponent (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1465:24)\n    at async DevServer.renderToResponseImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1515:32)\n    at async DevServer.pipeImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1021:25)\n    at async NextNodeServer.handleCatchallRenderRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\next-server.js:394:17)\n    at async DevServer.handleRequestImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:912:17)\n    at async C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:382:20\n    at async Span.traceAsyncFn (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\trace\\trace.js:157:20)\n    at async DevServer.handleRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:378:24)\n    at async invokeRender (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:240:21)\n    at async handleRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:436:24)\n    at async requestHandlerImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:484:13)\n    at async Server.requestListener (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\start-server.js:226:13)"
+}
+[36m [2m❯[22m tests/integration/api/customers.test.ts:[2m75:23[22m[39m
+    [90m 73| [39m            [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m 74| [39m            [35mif[39m (response[33m.[39mstatus [33m!==[39m [34m201[39m) {
+    [90m 75| [39m                throw new Error(`Failed to create customer (Status ${r…
+    [90m   | [39m                      [31m^[39m
+    [90m 76| [39m            }
+    [90m 77| [39m            [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m201[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/5]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mPOST /api/customers[2m > [22mshould create a new customer with empty email
+[31m[1mError[22m[39m: Failed to create customer (Status 500): {
+  "success": false,
+  "error": "Failed to create customer",
+  "details": "\nInvalid `__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:204\n\n  499 async create(data) {\n  500     const customerCode = data.customerCode || await this.getNextCustomerCode();\n  501     const { createdById, ...customerData } = data;\n→ 502     return await __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create(\nUnique constraint failed on the fields: (`\"customerCode\"`)",
+  "stack": "PrismaClientKnownRequestError: \nInvalid `__TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:204\n\n  499 async create(data) {\n  500     const customerCode = data.customerCode || await this.getNextCustomerCode();\n  501     const { createdById, ...customerData } = data;\n→ 502     return await __TURBOPACK__imported__module__$5b$project$5d2f$Documents$2f$GitHub$2f$buenasv2$2f$lib$2f$prisma$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__[\"prisma\"].customer.create(\nUnique constraint failed on the fields: (`\"customerCode\"`)\n    at qr.handleRequestError (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:8172)\n    at qr.handleAndLogRequestError (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7467)\n    at qr.request (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7174)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async a (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:75:5816)\n    at async CustomerRepository.create (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:502:16)\n    at async CustomerService.createCustomer (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:1211:26)\n    at async POST (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\[root-of-the-server]__e86bb54c._.js:2479:26)\n    at async AppRouteRouteModule.do (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:5:37789)\n    at async AppRouteRouteModule.handle (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:5:45045)\n    at async responseGenerator (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14339:38)\n    at async AppRouteRouteModule.handleResponse (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\compiled\\next-server\\app-route-turbo.runtime.dev.js:1:187851)\n    at async handleResponse (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14401:32)\n    at async handler (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\.next\\dev\\server\\chunks\\13547_next_fcc52d1f._.js:14454:13)\n    at async DevServer.renderToResponseWithComponentsImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1413:9)\n    at async DevServer.renderPageComponent (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1465:24)\n    at async DevServer.renderToResponseImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1515:32)\n    at async DevServer.pipeImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:1021:25)\n    at async NextNodeServer.handleCatchallRenderRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\next-server.js:394:17)\n    at async DevServer.handleRequestImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\base-server.js:912:17)\n    at async C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:382:20\n    at async Span.traceAsyncFn (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\trace\\trace.js:157:20)\n    at async DevServer.handleRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\dev\\next-dev-server.js:378:24)\n    at async invokeRender (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:240:21)\n    at async handleRequest (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:436:24)\n    at async requestHandlerImpl (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\router-server.js:484:13)\n    at async Server.requestListener (C:\\Users\\HI\\Documents\\GitHub\\buenasv2\\node_modules\\next\\dist\\server\\lib\\start-server.js:226:13)"
+}
+[36m [2m❯[22m tests/integration/api/customers.test.ts:[2m103:23[22m[39m
+    [90m101| [39m            [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m102| [39m            [35mif[39m (response[33m.[39mstatus [33m!==[39m [34m201[39m) {
+    [90m103| [39m                throw new Error(`Failed to create customer (Status ${r…
+    [90m   | [39m                      [31m^[39m
+    [90m104| [39m            }
+    [90m105| [39m            [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m201[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/5]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m32 passed[39m[22m[90m (36)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m183 passed[39m[22m[2m | [22m[33m8 skipped[39m[90m (193)[39m
+[2m   Start at [22m 11:55:04
+[2m   Duration [22m 327.49s[2m (transform 766ms, setup 6.51s, import 1.94s, tests 296.93s, environment 16.49s)[22m
+
+error: script "test:integration" exited with code 1

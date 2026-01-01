@@ -1,0 +1,27 @@
+import { NextRequest, NextResponse } from 'next/server';
+import { approvalService } from '@/services/approval.service';
+import { authService } from '@/services/auth.service';
+
+export async function POST(
+    request: NextRequest,
+    { params }: { params: Promise<{ id: string }> }
+) {
+    try {
+        const token = request.cookies.get('auth-token')?.value;
+        if (!token) return NextResponse.json({ success: false, error: 'Unauthorized' }, { status: 401 });
+
+        const payload = authService.verifyToken(token);
+        if (!payload) return NextResponse.json({ success: false, error: 'Invalid token' }, { status: 401 });
+
+        const { id } = await params;
+        const body = await request.json();
+        const { reviewNote } = body;
+
+        await approvalService.rejectRequest(id, payload.userId, reviewNote);
+
+        return NextResponse.json({ success: true, message: 'Request rejected successfully' });
+    } catch (error: any) {
+        console.error('Error rejecting request:', error);
+        return NextResponse.json({ success: false, error: error.message || 'Failed to reject request' }, { status: 500 });
+    }
+}
