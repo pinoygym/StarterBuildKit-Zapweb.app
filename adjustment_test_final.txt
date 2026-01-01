@@ -1,0 +1,60 @@
+﻿
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mC:/Users/cyber/Documents/GitHub/buenasv2[39m
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ΓÜÖ∩╕Å  load multiple .env files with { path: ['.env.local', '.env'] }
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ΓÜÖ∩╕Å  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts
+[22m[39m{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-15T13:30:15.822Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlips[2m > [22m[2mshould filter by searchQuery (reference number)
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:20.787Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:20.787Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlips[2m > [22m[2mshould filter by searchQuery (reason)
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:20.965Z","context":{"target":"product.create","timestamp":"2025-12-15T13:30:20.965Z","message":"\nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`name`)"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlips[2m > [22m[2mshould filter by searchQuery (reason)
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:21.433Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:21.433Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlips[2m > [22m[2mshould return adjustments sorted by date (newest first)
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:21.946Z","context":{"target":"product.create","timestamp":"2025-12-15T13:30:21.946Z","message":"\nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`name`)"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlips[2m > [22m[2mshould return adjustments sorted by date (newest first)
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:22.367Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:22.367Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould return null when adjustment not found
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:22.883Z","context":{"target":"product.create","timestamp":"2025-12-15T13:30:22.883Z","message":"\nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`name`)"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould return null when adjustment not found
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:23.286Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:23.286Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould return complete adjustment slip with all items
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:23.764Z","context":{"target":"product.create","timestamp":"2025-12-15T13:30:23.764Z","message":"\nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`name`)"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould return complete adjustment slip with all items
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:24.171Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:24.171Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould include product and warehouse details
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:25.028Z","context":{"target":"product.create","timestamp":"2025-12-15T13:30:25.028Z","message":"\nInvalid `prisma.product.create()` invocation:\n\n\nUnique constraint failed on the fields: (`name`)"}}
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts[2m > [22m[2mInventoryService - Adjustment Slips[2m > [22m[2mgetAdjustmentSlipById[2m > [22m[2mshould include product and warehouse details
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-12-15T13:30:25.717Z","context":{"target":"product.delete","timestamp":"2025-12-15T13:30:25.716Z","message":"\nInvalid `prisma.product.delete()` invocation:\n\n\nForeign key constraint violated on the constraint: `StockMovement_productId_fkey`"}}
+
+ [31mΓ¥»[39m tests/unit/services/inventory-adjustments.service.test.ts [2m([22m[2m9 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[33m 9555[2mms[22m[39m
+       [33m[2mΓ£ô[22m[39m should return empty array when no adjustments exist [33m 2533[2mms[22m[39m
+       [33m[2mΓ£ô[22m[39m should return adjustment slips grouped by referenceId [33m 1062[2mms[22m[39m
+       [33m[2mΓ£ô[22m[39m should filter by warehouseId [33m 545[2mms[22m[39m
+[31m       [31m├ù[31m should filter by searchQuery (reference number)[39m[33m 500[2mms[22m[39m
+[31m       [31m├ù[31m should filter by searchQuery (reason)[39m[33m 625[2mms[22m[39m
+[31m       [31m├ù[31m should return adjustments sorted by date (newest first)[39m[33m 931[2mms[22m[39m
+[31m       [31m├ù[31m should return null when adjustment not found[39m[33m 919[2mms[22m[39m
+[31m       [31m├ù[31m should return complete adjustment slip with all items[39m[33m 885[2mms[22m[39m
+[31m       [31m├ù[31m should include product and warehouse details[39m[33m 1546[2mms[22m[39m
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (9)[39m
+[2m   Start at [22m 21:30:10
+[2m   Duration [22m 15.75s[2m (transform 724ms, setup 817ms, import 1.12s, tests 9.55s, environment 2.54s)[22m
+

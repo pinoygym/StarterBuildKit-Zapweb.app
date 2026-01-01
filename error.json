@@ -1,0 +1,13 @@
+{
+  "message": "\nInvalid `prisma.product.findUnique()` invocation in\nC:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\scripts\\import-obs-items.ts:138:48\n\n  135 // 4. Product Upsert\n  136 // Generate ID deterministically or use random for new\n  137 // We check by name\n→ 138 let product = await prisma.product.findUnique(\nThe column `(not available)` does not exist in the current database.",
+  "code": "P2022",
+  "meta": {},
+  "clientVersion": "7.1.0",
+  "name": "PrismaClientKnownRequestError",
+  "originalLine": 5174,
+  "originalColumn": 50,
+  "line": 65,
+  "column": 8178,
+  "sourceURL": "C:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js",
+  "stack": "PrismaClientKnownRequestError: \nInvalid `prisma.product.findUnique()` invocation in\nC:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\scripts\\import-obs-items.ts:138:48\n\n  135 // 4. Product Upsert\n  136 // Generate ID deterministically or use random for new\n  137 // We check by name\n→ 138 let product = await prisma.product.findUnique(\nThe column `(not available)` does not exist in the current database.\n    at handleRequestError (C:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:8178)\n    at handleAndLogRequestError (C:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7467)\n    at request (C:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\node_modules\\@prisma\\client\\runtime\\client.js:65:7174)\n    at processTicksAndRejections (native:7:39)"
+}

@@ -1,0 +1,64 @@
+import type { NextConfig } from "next";
+
+// Trigger rebuild
+
+const nextConfig: NextConfig = {
+
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  // Suppress hydration warnings in development (browser extensions like Dark Reader can cause these)
+  reactStrictMode: false,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // TODO: Restrict this to actual image hosts for improved security and performance. E.g., 'your-image-cdn.com', 'res.cloudinary.com'
+      },
+    ],
+  },
+  // Skip static optimization for deployment compatibility
+  output: 'standalone',
+
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'X-DNS-Prefetch-Control',
+            value: 'on'
+          },
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload'
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=()'
+          },
+        ]
+      }
+    ]
+  },
+};
+
+export default nextConfig;

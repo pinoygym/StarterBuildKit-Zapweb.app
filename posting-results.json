@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "id": "52505cea-fad1-4196-8f39-317f853681ec",
+      "adjustmentNumber": "ADJ-20251224-0009",
+      "status": "POSTED",
+      "itemCount": 14
+    },
+    {
+      "id": "e51a702b-e476-44fe-bfc7-94b27523b037",
+      "adjustmentNumber": "ADJ-20251224-0002",
+      "status": "POSTED",
+      "itemCount": 33
+    },
+    {
+      "id": "c367d4c4-c5f3-42e2-9bf6-5fa51a993da3",
+      "adjustmentNumber": "ADJ-20251224-0003",
+      "status": "POSTED",
+      "itemCount": 9
+    },
+    {
+      "id": "56ee5c86-d05c-493d-8f83-6e11f76daae2",
+      "adjustmentNumber": "ADJ-20251224-0004",
+      "status": "POSTED",
+      "itemCount": 17
+    },
+    {
+      "id": "63608b61-9106-4ecd-be19-4760512e3671",
+      "adjustmentNumber": "ADJ-20251224-0005",
+      "status": "POSTED",
+      "itemCount": 54
+    },
+    {
+      "id": "14f4731f-4be7-4cfa-bea9-927ffe8530ad",
+      "adjustmentNumber": "ADJ-20251224-0006",
+      "status": "POSTED",
+      "itemCount": 60
+    },
+    {
+      "id": "4827fa24-7837-4094-83ed-469a30d3e91c",
+      "adjustmentNumber": "ADJ-20251224-0007",
+      "status": "POSTED",
+      "itemCount": 37
+    },
+    {
+      "id": "c4d48d3a-94e6-461c-9449-d0347b7043cc",
+      "adjustmentNumber": "ADJ-20251224-0008",
+      "status": "POSTED",
+      "itemCount": 25
+    },
+    {
+      "id": "2d206960-5128-4059-aa61-27a4f601043a",
+      "adjustmentNumber": "ADJ-20251224-0001",
+      "status": "POSTED",
+      "itemCount": 63
+    }
+  ],
+  "verification": {
+    "movements": []
+  }
+}

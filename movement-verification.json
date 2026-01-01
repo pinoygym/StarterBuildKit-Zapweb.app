@@ -1,0 +1,1073 @@
+[
+  {
+    "id": "0df913eb-f2bc-41b2-a5b3-4d0fe6069526",
+    "type": "IN",
+    "quantity": 9,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "26c44fc1-054a-4fa3-81fc-fb8d9865e743",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "container",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Canon Oil 15kl",
+      "baseUOM": "container"
+    }
+  },
+  {
+    "id": "b0eacd56-be9f-4905-a1e7-1cb637cfaec8",
+    "type": "IN",
+    "quantity": 5,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1e2eecb5-9f53-4618-a64a-4e27702d09d9",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "container",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Rainbow Oil ",
+      "baseUOM": "gallon"
+    }
+  },
+  {
+    "id": "bf52b995-d0f8-4b97-b64c-228ce3aaee34",
+    "type": "IN",
+    "quantity": 24,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "71086a98-cc60-45dd-b2d7-0847fe755659",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Select",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "6dab3876-c78d-4d3b-93bc-e226d68dba2c",
+    "type": "IN",
+    "quantity": 260,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "ef8f2f71-114f-493b-a1b8-22241430c838",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "drum",
+    "conversionFactor": 32.5,
+    "Product": {
+      "name": "Snowlar edited",
+      "baseUOM": "KILO"
+    }
+  },
+  {
+    "id": "d5a797af-30a4-4120-be77-f3ea32878a54",
+    "type": "IN",
+    "quantity": 126.75,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b6d274a9-8b85-4059-8660-b71bdba169b7",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "drum",
+    "conversionFactor": 42.25,
+    "Product": {
+      "name": "Sunrise Margarine edited",
+      "baseUOM": "KILO"
+    }
+  },
+  {
+    "id": "3d13084e-acc6-4d0a-a4fb-4038e62bb69f",
+    "type": "IN",
+    "quantity": 12,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "034413bc-354d-4bdf-a308-03d4428cfbfa",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Vanilla - 120ml",
+      "baseUOM": "bottle"
+    }
+  },
+  {
+    "id": "9d4aede5-e8d8-4bba-a26e-8fc8d437fca2",
+    "type": "IN",
+    "quantity": 36,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "436bfbff-c2c5-498e-9cef-10094cfb28a6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "box",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Vanilla - Concentrated",
+      "baseUOM": "gallon"
+    }
+  },
+  {
+    "id": "ea5a8c77-7d1d-42f5-a493-46704b2fac42",
+    "type": "IN",
+    "quantity": 72,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "658e5519-b04d-4fc8-a5c9-f918b9133984",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Vanilla - Orion",
+      "baseUOM": "gallon"
+    }
+  },
+  {
+    "id": "d09b46b0-9a56-4a80-8205-b15a03ef3f3c",
+    "type": "IN",
+    "quantity": 520,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "524362b8-73d3-45a5-bad4-add6dc019323",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "boX",
+    "conversionFactor": 20,
+    "Product": {
+      "name": "Bakels Platinum Instant Active",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "e6ea6ccd-d34f-496b-8585-6521d54f1ec2",
+    "type": "IN",
+    "quantity": 160,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "9df54eef-dbd1-4859-88c2-c713ac5e1cf3",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "Box",
+    "conversionFactor": 20,
+    "Product": {
+      "name": "Mauripan edited",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "cc8b85d2-abc2-490b-a13f-d817ee03e8a0",
+    "type": "IN",
+    "quantity": 36,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "6f839873-6e62-4bb9-8676-f383bb6a362d",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Redstar Active Yeast",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "ef0e19a7-3e7a-42a9-89f8-c2ee373f5bb6",
+    "type": "IN",
+    "quantity": 75,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "9a6c8f54-151a-4876-8c68-49f80e1e8d25",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "bag",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Favorich Brown",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "edd969aa-286a-47f6-8e92-01af22da260e",
+    "type": "IN",
+    "quantity": 50,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "bbe96b58-36a5-4390-82a8-776c21fdfeb1",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "Bag",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Favorich black",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "8fdb921e-1793-4a73-bdfe-7fec22bf47f9",
+    "type": "IN",
+    "quantity": 336,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "9020fa48-feec-42cf-9400-79cc0d9b21ee",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "Box",
+    "conversionFactor": 48,
+    "Product": {
+      "name": "Quezo",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "19ced539-c377-41c6-a9ca-59d07d55809e",
+    "type": "IN",
+    "quantity": 8,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "286604fe-81af-4fe3-9ad1-7a5d3602f051",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 4,
+    "Product": {
+      "name": "Anise Concentrated",
+      "baseUOM": "gallon"
+    }
+  },
+  {
+    "id": "c91164e7-c557-45be-a901-5db65b1fe153",
+    "type": "IN",
+    "quantity": 96,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "4b80dcff-9c01-4538-af49-10d488f686e4",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 6,
+    "Product": {
+      "name": "Anti-Amag",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "8cf85346-a2ca-4f16-9c71-dde4fbc8d676",
+    "type": "IN",
+    "quantity": 120,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "4f2ad89b-14e3-4e84-ab39-a6ec8e021e31",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "pail",
+    "conversionFactor": 10,
+    "Product": {
+      "name": "Bakers Choice BP edited",
+      "baseUOM": "KILO"
+    }
+  },
+  {
+    "id": "53e5df8d-42bb-47f2-83bb-4e3b1de53e64",
+    "type": "IN",
+    "quantity": 75,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b47da81d-f766-4135-9219-a352e45efc50",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "bag",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Baking Soda edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "a885e24e-9abc-4261-a40b-185217b80711",
+    "type": "IN",
+    "quantity": 1,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "621fe297-2194-4a21-ae7e-da1bc317a44c",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "WHOLESALE_UNIT",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Blueberry 6kg",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "1ab47361-4f46-450e-bad8-8d7c3a50b5ac",
+    "type": "IN",
+    "quantity": 32,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "69e59ad0-300e-4aa0-a2fb-6e097e8c1e59",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Calumet bag14kg",
+      "baseUOM": "bag"
+    }
+  },
+  {
+    "id": "9e8ad6b8-9066-42ba-8f51-ce2a7ea98bd2",
+    "type": "IN",
+    "quantity": 150,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "7c59eed6-a13d-4529-80fa-3ffeeaf776f6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Carbonato edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "ab1a312d-f857-4279-9baf-299680c71dbe",
+    "type": "IN",
+    "quantity": 27.75,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "5222ce9c-5c0c-49dc-a081-8bf87c4819d3",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "Drum",
+    "conversionFactor": 27.75,
+    "Product": {
+      "name": "Cinnamon Powder",
+      "baseUOM": "kl"
+    }
+  },
+  {
+    "id": "b0390b24-cc24-4f56-9282-6b79e10da2d8",
+    "type": "IN",
+    "quantity": 200,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "37dbb439-710f-4472-a48f-f9fa10c60695",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Cornstarch edited",
+      "baseUOM": "kl."
+    }
+  },
+  {
+    "id": "0daa2556-6407-4a89-9a1c-7bdf86cefb3e",
+    "type": "IN",
+    "quantity": 744,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "f3871bc8-2155-4286-ac63-002b09de0bd6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Dobrim",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "7b61e9f1-a56f-4d41-820f-0b98cd310b3c",
+    "type": "IN",
+    "quantity": 350,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "c875a6e2-a14d-43be-8c11-793225926ffa",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 50,
+    "Product": {
+      "name": "Doner edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "61b5f750-cb80-4fd0-bb64-751dd0caace1",
+    "type": "IN",
+    "quantity": 32,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "a13b252b-31b7-4c5b-accf-e7ee2b7e9bc7",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 16,
+    "Product": {
+      "name": "Lihia Water",
+      "baseUOM": "liter"
+    }
+  },
+  {
+    "id": "477f0add-14c7-418d-85ec-bbc5a1554a32",
+    "type": "IN",
+    "quantity": 100,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "abf2eba6-121c-40f9-a216-87cca7d41cd9",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Longa",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "a99b2838-ad2d-4b9a-97a6-1a54dc2c1dea",
+    "type": "IN",
+    "quantity": 24,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "372ed925-6b52-4f65-a7a1-3dd7889b411d",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Orange Oil",
+      "baseUOM": "bottle"
+    }
+  },
+  {
+    "id": "533a655c-4027-457e-bf4e-0145295341ab",
+    "type": "IN",
+    "quantity": 78,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b3294555-cbfa-498e-8bf4-57a26755c0d4",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "pail",
+    "conversionFactor": 13,
+    "Product": {
+      "name": "Panadero Premier Active Dry edited",
+      "baseUOM": "KILO"
+    }
+  },
+  {
+    "id": "12236507-93ff-4173-b30f-1d1e2800dbf6",
+    "type": "IN",
+    "quantity": 170,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "d675ef09-d589-488c-a23e-3b17a500685e",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 5,
+    "Product": {
+      "name": "Sprinter Unico",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "2310ed61-8950-4ef2-a9f0-abbca317bb0a",
+    "type": "IN",
+    "quantity": 20,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "79f07bab-b4f2-4b89-a40e-c3edab6755b3",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 10,
+    "Product": {
+      "name": "Ultra Soft",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "205a1de0-b6fc-4637-af30-e1fa22331b54",
+    "type": "IN",
+    "quantity": 1488,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1909951e-a862-4a83-9634-018d9c804dda",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 48,
+    "Product": {
+      "name": "Alaska Evaporated Red",
+      "baseUOM": "CAN"
+    }
+  },
+  {
+    "id": "424744f5-8f0b-40f1-982a-26543b596992",
+    "type": "IN",
+    "quantity": 48,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "221f716e-e935-4f99-ad88-fe643a3b539b",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 48,
+    "Product": {
+      "name": "Angel Evaporated 410ml",
+      "baseUOM": "CAN"
+    }
+  },
+  {
+    "id": "8f4e0795-6deb-46a8-94df-b76d518c621c",
+    "type": "IN",
+    "quantity": 336,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "110d0815-9f5e-4323-a93f-4bf0e6c70dd2",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 48,
+    "Product": {
+      "name": "Cheezee",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "b1dd3ce5-1bf5-49ac-9c7c-71da2620b1b2",
+    "type": "IN",
+    "quantity": 384,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "331ece8b-c5c6-4086-95f9-29f4327c1b8f",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "box",
+    "conversionFactor": 48,
+    "Product": {
+      "name": "Doreen Condensed",
+      "baseUOM": "can"
+    }
+  },
+  {
+    "id": "c24029ed-0322-4644-8580-aa1c6bd30d5a",
+    "type": "IN",
+    "quantity": 125,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "d8dfce11-f988-4328-b643-5a82e5ff9144",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Dairy Bake edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "c70d5bc9-60c3-4564-a549-ec4408fc4295",
+    "type": "IN",
+    "quantity": 200,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "945a2de3-cd68-4bbc-8495-d5775b4c33c6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Farmland edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "5710926c-d619-47fa-902a-9ca59598d0c8",
+    "type": "IN",
+    "quantity": 200,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "e4292316-0c95-46d7-a0b7-5c57ac5e5145",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Masterchef edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "f793ba4c-4128-47ac-816c-ebd9605e3177",
+    "type": "IN",
+    "quantity": 550,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "242257e6-efb3-4b66-b7f6-b4bc80b2bed0",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "All Purpose Flour edited",
+      "baseUOM": "kl"
+    }
+  },
+  {
+    "id": "ee3dacae-74e6-45b2-a459-d7abf304f36d",
+    "type": "IN",
+    "quantity": 475,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b0e93e06-493b-471f-bf96-525fe77fb2f3",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Cake Flour edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "46065b2e-c9d3-45be-b51a-a5efebc683f9",
+    "type": "IN",
+    "quantity": 600,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1cab8b9b-0fc0-4cf4-b4c4-b97cb442fce6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "General edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "3d3a321a-5656-462b-a9ee-cb609dc63f39",
+    "type": "IN",
+    "quantity": 575,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "cb64e712-a71c-439c-8d6e-6f02834c1d7c",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Island edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "ca8230dd-bb10-4cb2-8971-a42f14a8ad30",
+    "type": "IN",
+    "quantity": 1,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b4fdec5d-0ccb-4108-9784-18bce840af7d",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Megastar edited",
+      "baseUOM": "sack"
+    }
+  },
+  {
+    "id": "ee232670-2cfb-4963-b742-bfc21ccaf44d",
+    "type": "IN",
+    "quantity": 100,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "b6db85d1-a2c3-419f-90e6-37f380d7a005",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Silverstar edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "7d423987-fe45-4e3f-9e8e-55c57fd37172",
+    "type": "IN",
+    "quantity": 27,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "0b76ff84-024b-49e9-ad56-8a5ba678c53c",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Sunflour edited",
+      "baseUOM": "sack"
+    }
+  },
+  {
+    "id": "b8953cfa-f9b3-4092-aff9-3e7fe31aa717",
+    "type": "IN",
+    "quantity": 26,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "65f59e70-60f7-4d85-98fe-3bc7845a4622",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Sunshine edited",
+      "baseUOM": "sack"
+    }
+  },
+  {
+    "id": "4bb29d93-c4ea-454d-aaea-5965c543b1f2",
+    "type": "IN",
+    "quantity": 3,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "e9e545a7-53c7-4e62-8242-3f505f4f5d8f",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 1,
+    "Product": {
+      "name": "Red Bowl Cake Flour edited",
+      "baseUOM": "sack"
+    }
+  },
+  {
+    "id": "191748a9-867a-473f-b2df-ce55c285c6a8",
+    "type": "IN",
+    "quantity": 75,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "d2c95ed2-8efa-4ba0-b32b-1b1e72628d18",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Bensdorp edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "44c8da59-b72d-4d94-abc6-45a88024e640",
+    "type": "IN",
+    "quantity": 175,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "6a17ca89-4a43-402b-becb-2127a1ae1ef1",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Emmie Victory Cocoa edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "9340c6d8-f9a3-4cce-98a8-c53da9aab8dc",
+    "type": "IN",
+    "quantity": 20,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "20667e21-4261-4599-a4b7-8294eba422b5",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 10,
+    "Product": {
+      "name": "Ube Powder (16 Kg)",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "8a2e5cc2-a8eb-4328-b0b5-834ae895a277",
+    "type": "IN",
+    "quantity": 36,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "30816ef2-49ee-4d8c-9431-8cc1b7e3db69",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Choco Brown",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "9fd4dcad-1654-44bb-a482-a64d7fc5bf51",
+    "type": "IN",
+    "quantity": 36,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "e964b112-5105-4c09-b495-e8e79dc64868",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Egg Yellow",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "ad1efc52-8541-43fa-94a3-3c26ba012f5a",
+    "type": "IN",
+    "quantity": 24,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "99d0f27d-3b1e-4371-adc4-bf5eb0f3b197",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Orange (JAR)",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "526d8a09-b125-4b04-9e6f-cb9bff1ada00",
+    "type": "IN",
+    "quantity": 72,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "923f4ef7-6a4d-4553-96eb-b290333b77fa",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Rosa Pink",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "fa6be233-c216-4db3-b8b2-5a50acefc76e",
+    "type": "IN",
+    "quantity": 48,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "e01d65b5-bb7a-49a9-8893-66a2e6e308bb",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Straw Red",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "0c67271b-2ae5-476a-af8b-76cb6c4615c7",
+    "type": "IN",
+    "quantity": 24,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "49661efe-6798-47ea-a1b4-50af39fc6348",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Foodcolor - Ube Violet",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "9c9fcd56-1a2b-48e7-b0fd-6382ee045c9a",
+    "type": "IN",
+    "quantity": 1500,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1950ee5c-43f7-4167-bfd0-0263893f5fca",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 50,
+    "Product": {
+      "name": "Raw Sugar - Wash Brown 50kg edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "a42811c6-fad9-48bb-be44-34b147644126",
+    "type": "IN",
+    "quantity": 168,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "73da3bf3-7a27-4ab9-b739-ff43d7079053",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "box",
+    "conversionFactor": 24,
+    "Product": {
+      "name": "Sugar - Penco Confectioner Sugar edited",
+      "baseUOM": "pack"
+    }
+  },
+  {
+    "id": "3a330b5a-fc9a-4e82-a51e-a13fea94c55b",
+    "type": "IN",
+    "quantity": 1250,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "4db70458-b55e-40f0-815f-6a5124cdb6cf",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 50,
+    "Product": {
+      "name": "Refined - Sugar edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "c1759d20-2df0-4c93-840b-d41a588e216c",
+    "type": "IN",
+    "quantity": 250,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1815c623-a0f6-44dc-8b47-9fcd2922a76f",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 25,
+    "Product": {
+      "name": "Iodized Salt edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "1e073294-ac22-4280-b55b-e183d120a266",
+    "type": "IN",
+    "quantity": 266,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "1d4542f9-2f46-44bd-a728-8f865069c1cf",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "sack",
+    "conversionFactor": 38,
+    "Product": {
+      "name": "Rocksalt edited",
+      "baseUOM": "kilo"
+    }
+  },
+  {
+    "id": "d53b4e50-50b2-468f-870a-e4b779f2b9e4",
+    "type": "IN",
+    "quantity": 18,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "0018c322-db07-4475-9d05-2d4ee0ba6e3e",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 6,
+    "Product": {
+      "name": "Bambi Butter",
+      "baseUOM": "jar"
+    }
+  },
+  {
+    "id": "4c6b630a-6e01-40cf-8fbf-80e5438b1656",
+    "type": "IN",
+    "quantity": 12,
+    "reason": "BEGINNING INVENTORY",
+    "referenceId": "ADJ-20251224-0001",
+    "referenceType": "ADJUSTMENT",
+    "createdAt": "2025-12-24T02:14:00.998Z",
+    "productId": "9e5623ad-45d7-4d39-804f-53c377750bc6",
+    "warehouseId": "4ea9be70-7ebb-4049-a67c-a5bcd0aba824",
+    "uom": "BOX",
+    "conversionFactor": 12,
+    "Product": {
+      "name": "Butter Oil",
+      "baseUOM": "bottle"
+    }
+  }
+]

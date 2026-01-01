@@ -1,0 +1,447 @@
+Fetching all POSTED adjustments...
+Found 9 POSTED adjustments.
+======================================================================================================================================================
+
+Verifying Adjustment: ADJ-20251224-0009
+Date: 2025-12-24T03:26:34.588Z | Warehouse: Mabini Store
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+LEATHER Maruyama Black/Black       | 30.45   | 30.45   | 0.00    | 30.45   | ✅ MATCH | 
+LEATHER Maruyama Green/Green       | 51.50   | 51.50   | 0.00    | 51.50   | ✅ MATCH | 
+LEATHER Maruyama Red/Red           | 51.00   | 51.00   | 0.00    | 51.00   | ✅ MATCH | 
+LEATHER Maruyama White/Grey        | 26.73   | 26.73   | 0.00    | 26.73   | ✅ MATCH | 
+LEATHER Maruyama White/White       | 50.00   | 50.00   | 0.00    | 50.00   | ✅ MATCH | 
+LEATHER Maruyama Yellow/Yellow     | 52.00   | 52.00   | 0.00    | 52.00   | ✅ MATCH | 
+Others - LEATHER Plainfoam Violet  | 22.54   | 22.54   | 0.00    | 22.54   | ✅ MATCH | 
+Others - LEATHER Spider Leatherat  | 18.48   | 18.48   | 0.00    | 18.48   | ✅ MATCH | 
+LEATHER Vinyl Crest Black          | 20.23   | 20.23   | 0.00    | 20.23   | ✅ MATCH | 
+LEATHER Vinyl Crest Brown          | 40.00   | 40.00   | 0.00    | 40.00   | ✅ MATCH | 
+LEATHER Yamaha Black               | 53.75   | 53.75   | 0.00    | 53.75   | ✅ MATCH | 
+LEATHER Yamaha Dark Gray           | 0.85    | 0.85    | 0.00    | 0.85    | ✅ MATCH | 
+Others - LEATHER Woodstock Blue    | 14.50   | 14.50   | 0.00    | 14.50   | ✅ MATCH | 
+LEATHER Sackoline 8"               | 37.25   | 37.25   | 0.00    | 37.25   | ✅ MATCH | 
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0008
+Date: 2025-12-24T03:23:08.793Z | Warehouse: Mabini Store
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+UPHOLSTERY Rubber Matting Black 7  | 10.25   | 10.25   | 0.00    | 10.25   | ✅ MATCH | 
+UPHOLSTERY Rubber Matting Gray 72  | 9.50    | 9.50    | 0.00    | 9.50    | ✅ MATCH | 
+Others - UPHOLSTERY Strap #3/4     | 40.00   | 480.00  | 0.00    | 40.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Strap #3/4 (7cfb5b8e-775a-4600-9658-90caee625d3d)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Strap #3/4     | 12.00   | 480.00  | 0.00    | 480.00  | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Zipper #3      | 5.00    | 50.75   | 0.00    | 250.00  | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Zipper #3 (a5263848-49dd-4c88-864e-c6c485f14de1)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Zipper #3      | 50.75   | 50.75   | 0.00    | 50.75   | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Zipper #8 Bla  | 5.00    | 120.00  | 0.00    | 120.00  | ✅ MATCH | 
+Others - UPHOLSTERY Zipper #10 Bl  | 47.00   | 200.00  | 0.00    | 47.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Zipper #10 Black (505015ce-c251-4685-ba92-b00cdce7acdf)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Zipper #10 Bl  | 4.00    | 200.00  | 0.00    | 200.00  | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Zipper Runner  | 400.00  | 400.00  | 0.00    | 400.00  | ✅ MATCH | 
+Others - UPHOLSTERY Zipper Runner  | 659.00  | 659.00  | 0.00    | 659.00  | ✅ MATCH | 
+Others - UPHOLSTERY Zipper Runner  | 422.00  | 422.00  | 0.00    | 422.00  | ✅ MATCH | 
+Others - UPHOLSTERY Zipper Runner  | 705.00  | 705.00  | 0.00    | 705.00  | ✅ MATCH | 
+Others - FOAM Urethane 1/2x44x80   | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Others - FOAM Urethane 1/4x44x80   | 13.00   | 13.00   | 0.00    | 13.00   | ✅ MATCH | 
+Others - UPHOLSTERY Air Ventelato  | 57.00   | 57.00   | 0.00    | 57.00   | ✅ MATCH | 
+Others - UPHOLSTERY Astra Assorte  | 185.00  | 1620.00 | 0.00    | 185.00  | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Astra Assorted (5501e5ef-d3a6-47a0-841b-b3372c5057ef)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Astra Assorte  | 162.00  | 1620.00 | 0.00    | 1620.00 | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Astra Black    | 8.00    | 180.00  | 0.00    | 8.00    | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Astra Black (6b663407-5abc-4420-b028-3a1cfc0f80e0)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Astra Black    | 18.00   | 180.00  | 0.00    | 180.00  | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Astra White    | 21.00   | 150.00  | 0.00    | 21.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Astra White (3b4b90b2-3122-4e2f-a2d3-46db0ff8e8a4)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Astra White    | 15.00   | 150.00  | 0.00    | 150.00  | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Chairnails As  | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+UPHOLSTERY Gauge #12               | 63.50   | 63.50   | 0.00    | 63.50   | ✅ MATCH | 
+UPHOLSTERY Gauge #14               | 50.00   | 50.00   | 0.00    | 50.00   | ✅ MATCH | 
+UPHOLSTERY Gauge #16               | 64.00   | 64.00   | 0.00    | 64.00   | ✅ MATCH | 
+UPHOLSTERY Gauge #30               | 19.25   | 19.25   | 0.00    | 19.25   | ✅ MATCH | 
+Others - UPHOLSTERY Gromets #3     | 56.00   | 900.00  | 0.00    | 56.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Gromets #3 (9fb571ef-c1c1-4740-b67d-395dd5364c95)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Gromets #3     | 9.00    | 900.00  | 0.00    | 900.00  | ✅ MATCH | Duplicate Item
+Others - UPHOLSTERY Lambo #36      | 82.00   | 82.00   | 0.00    | 82.00   | ✅ MATCH | 
+Others - UPHOLSTERY Lambo #54      | 147.00  | 147.00  | 0.00    | 147.00  | ✅ MATCH | 
+Others - UPHOLSTERY Magic Tape     | 19.00   | 450.00  | 0.00    | 19.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - UPHOLSTERY Magic Tape (16545cbc-764e-45cd-b7b8-a350ba4b7f32)
+    >>> Adjustment Time: 2025-12-24T03:23:08.793Z
+    >>> Subsequent Movements found: 0
+Others - UPHOLSTERY Magic Tape     | 18.00   | 450.00  | 0.00    | 450.00  | ✅ MATCH | Duplicate Item
+Result: 8 ISSUES FOUND
+
+Verifying Adjustment: ADJ-20251224-0007
+Date: 2025-12-24T03:13:17.455Z | Warehouse: Mabini Store
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Others - SHOEMATERIAL Sole Origen  | 23.00   | 23.00   | 0.00    | 23.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Origen  | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 12.00   | 12.00   | 0.00    | 12.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 39.00   | 39.00   | 0.00    | 39.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 23.00   | 23.00   | 0.00    | 23.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 18.00   | 18.00   | 0.00    | 18.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 25.00   | 25.00   | 0.00    | 25.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Rugged  | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Yellow  | 8.00    | 6.00    | 0.00    | 8.00    | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - SHOEMATERIAL Sole Yellow (d2da34dd-1759-4d8b-a90e-6b02817d95a8)
+    >>> Adjustment Time: 2025-12-24T03:13:17.455Z
+    >>> Subsequent Movements found: 0
+Others - SHOEMATERIAL Sole Yellow  | 6.00    | 6.00    | 0.00    | 6.00    | ✅ MATCH | Duplicate Item
+Others - SHOEMATERIAL Turn Button  | 60.00   | 3900.00 | 0.00    | 60.00   | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - SHOEMATERIAL Turn Button Local (31ad4990-6bb0-4967-b6ce-d15aa55e05cd)
+    >>> Adjustment Time: 2025-12-24T03:13:17.455Z
+    >>> Subsequent Movements found: 0
+Others - SHOEMATERIAL Turn Button  | 39.00   | 3900.00 | 0.00    | 3900.00 | ✅ MATCH | Duplicate Item
+Others - BILLIARD MATERIALS Blue   | 2.00    | 111.00  | 0.00    | 288.00  | ❌ MISMATCH| Duplicate Item
+    >>> TRACE MISMATCH: Others - BILLIARD MATERIALS Blue Chalk (e8395fd5-73cc-4184-b892-010d367c3176)
+    >>> Adjustment Time: 2025-12-24T03:13:17.455Z
+    >>> Subsequent Movements found: 0
+Others - SHOEMATERIAL Snap Local   | 8.00    | 8.00    | 0.00    | 8.00    | ✅ MATCH | 
+Others - BILLIARD MATERIALS Blue   | 111.00  | 111.00  | 0.00    | 111.00  | ✅ MATCH | Duplicate Item
+Others - SHOEMATERIAL JRB Black    | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Others - SHOEMATERIAL JRB Brown    | 17.00   | 17.00   | 0.00    | 17.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Nylon Pamo   | 23.00   | 23.00   | 0.00    | 23.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Nylon Pamo   | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Lady    | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Origen  | 33.00   | 33.00   | 0.00    | 33.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Origen  | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Others - SHOEMATERIAL Sole Origen  | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Others - BILLIARD MATERIALS Knigh  | 24.00   | 24.00   | 0.00    | 24.00   | ✅ MATCH | 
+LEATHER Bruce Beige                | 20.80   | 20.80   | 0.00    | 20.80   | ✅ MATCH | 
+LEATHER Bruce Gray                 | 18.00   | 18.00   | 0.00    | 18.00   | ✅ MATCH | 
+LEATHER Bruce Yellow               | 52.85   | 52.85   | 0.00    | 52.85   | ✅ MATCH | 
+LEATHER Bruce Red                  | 22.25   | 22.25   | 0.00    | 22.25   | ✅ MATCH | 
+Others - LEATHER Charol Apple Gre  | 45.50   | 45.50   | 0.00    | 45.50   | ✅ MATCH | 
+Others - LEATHER Charol Black      | 27.75   | 27.75   | 0.00    | 27.75   | ✅ MATCH | 
+Others - LEATHER Charol Green      | 86.15   | 86.15   | 0.00    | 86.15   | ✅ MATCH | 
+Others - LEATHER Charol Orange     | 22.95   | 22.95   | 0.00    | 22.95   | ✅ MATCH | 
+Others - LEATHER Charol Sky Blue   | 64.25   | 64.25   | 0.00    | 64.25   | ✅ MATCH | 
+Others - LEATHER Charol Violet     | 4.79    | 4.79    | 0.00    | 4.79    | ✅ MATCH | 
+Others - LEATHER Charol White      | 56.00   | 56.00   | 0.00    | 56.00   | ✅ MATCH | 
+Others - LEATHER Charol Yellow     | 33.75   | 33.75   | 0.00    | 33.75   | ✅ MATCH | 
+LEATHER Bruce White                | 51.20   | 51.20   | 0.00    | 51.20   | ✅ MATCH | 
+LEATHER Planet Dark Gray           | 1.89    | 1.89    | 0.00    | 1.89    | ✅ MATCH | 
+LEATHER Bruce Spicy Brown          | 4.60    | 4.60    | 0.00    | 4.60    | ✅ MATCH | 
+LEATHER Bruce Royal Blue           | 20.30   | 20.30   | 0.00    | 20.30   | ✅ MATCH | 
+Result: 3 ISSUES FOUND
+
+Verifying Adjustment: ADJ-20251224-0006
+Date: 2025-12-24T03:03:29.433Z | Warehouse: Mabini Store
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Masterchef edited                  | 9.50    | 9.50    | 0.00    | 9.50    | ✅ MATCH | 
+All Purpose Flour edited           | 22.00   | 22.00   | 0.00    | 22.00   | ✅ MATCH | 
+Cake Flour edited                  | 25.00   | 25.00   | 0.00    | 25.00   | ✅ MATCH | 
+General edited                     | 104.50  | 104.50  | 0.00    | 104.50  | ✅ MATCH | 
+Island edited                      | 74.00   | 74.00   | 0.00    | 74.00   | ✅ MATCH | 
+Silverstar edited                  | 42.50   | 42.50   | 0.00    | 42.50   | ✅ MATCH | 
+Others - TISSUE Precut             | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Anise Concentrated                 | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Anti-Amag                          | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Baking Soda edited                 | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Calumet kilo                       | 47.00   | 47.00   | 0.00    | 47.00   | ✅ MATCH | 
+Cornstarch edited                  | 43.00   | 43.00   | 0.00    | 43.00   | ✅ MATCH | 
+Dobrim                             | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+Doner edited                       | 42.50   | 42.50   | 0.00    | 42.50   | ✅ MATCH | 
+Lihia Water                        | 22.00   | 22.00   | 0.00    | 22.00   | ✅ MATCH | 
+Longa                              | 11.50   | 11.50   | 0.00    | 11.50   | ✅ MATCH | 
+Orange Oil                         | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | Duplicate Item
+Panadero Premier Active Dry edite  | 11.00   | 11.00   | 0.00    | 11.00   | ✅ MATCH | 
+Sprinter Unico                     | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Ultra Soft                         | 5.00    | 5.00    | 0.00    | 5.00    | ✅ MATCH | 
+Alaska Evaporada Yellow            | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+Alaska Evaporated Red              | 64.00   | 64.00   | 0.00    | 64.00   | ✅ MATCH | 
+Angel Evaporated 410ml             | 70.00   | 70.00   | 0.00    | 70.00   | ✅ MATCH | 
+Cheezee                            | 35.00   | 35.00   | 0.00    | 35.00   | ✅ MATCH | 
+Dairy Bake edited                  | 14.00   | 14.00   | 0.00    | 14.00   | ✅ MATCH | 
+Doreen Condensed                   | 58.00   | 58.00   | 0.00    | 58.00   | ✅ MATCH | 
+Farmland edited                    | 23.50   | 23.50   | 0.00    | 23.50   | ✅ MATCH | 
+Others - TWINE Dura Flex Twine     | 16.00   | 16.00   | 0.00    | 16.00   | ✅ MATCH | 
+Quezo                              | 24.00   | 24.00   | 0.00    | 24.00   | ✅ MATCH | 
+Others - TISSUE Roll               | 39.00   | 39.00   | 0.00    | 39.00   | ✅ MATCH | 
+Bensdorp edited                    | 19.00   | 19.00   | 0.00    | 19.00   | ✅ MATCH | 
+Emmie Victory Cocoa edited         | 9.50    | 9.50    | 0.00    | 9.50    | ✅ MATCH | 
+Hershey                            | 7.50    | 7.50    | 0.00    | 7.50    | ✅ MATCH | 
+Ube Powder (16 Kg)                 | 15.00   | 15.00   | 0.00    | 15.00   | ✅ MATCH | 
+Foodcolor - Choco Brown            | 15.00   | 15.00   | 0.00    | 15.00   | ✅ MATCH | 
+Foodcolor - Egg Yellow             | 17.00   | 17.00   | 0.00    | 17.00   | ✅ MATCH | 
+Foodcolor - Straw Red              | 11.00   | 11.00   | 0.00    | 11.00   | ✅ MATCH | 
+Foodcolor - Orange 60ml            | 18.00   | 18.00   | 0.00    | 18.00   | ✅ MATCH | 
+Foodcolor - Orange (JAR)           | 21.00   | 21.00   | 0.00    | 21.00   | ✅ MATCH | 
+Foodcolor - Rosa Pink              | 17.00   | 17.00   | 0.00    | 17.00   | ✅ MATCH | 
+Foodcolor - Ube Violet             | 30.00   | 30.00   | 0.00    | 30.00   | ✅ MATCH | 
+Raw Sugar - Wash Brown 50kg edite  | 288.00  | 288.00  | 0.00    | 288.00  | ✅ MATCH | 
+Sugar - Penco Confectioner Sugar   | 11.00   | 11.00   | 0.00    | 11.00   | ✅ MATCH | 
+Refined - Sugar edited             | 95.50   | 95.50   | 0.00    | 95.50   | ✅ MATCH | 
+Iodized Salt edited                | 1.00    | 1.00    | 0.00    | 1.00    | ✅ MATCH | 
+Rocksalt edited                    | 90.00   | 90.00   | 0.00    | 90.00   | ✅ MATCH | 
+Bambi Butter                       | 2.00    | 2.00    | 0.00    | 2.00    | ✅ MATCH | 
+Butter Oil                         | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+Snowlar edited                     | 5.50    | 5.50    | 0.00    | 5.50    | ✅ MATCH | 
+Select                             | 11.00   | 11.00   | 0.00    | 11.00   | ✅ MATCH | 
+Sunrise Margarine edited           | 53.50   | 53.50   | 0.00    | 53.50   | ✅ MATCH | 
+Vanilla - 60ml                     | 107.00  | 107.00  | 0.00    | 107.00  | ✅ MATCH | 
+Vanilla - 120ml                    | 69.00   | 69.00   | 0.00    | 69.00   | ✅ MATCH | 
+Vanilla - Concentrated             | 5.00    | 5.00    | 0.00    | 5.00    | ✅ MATCH | 
+Vanilla - OIL                      | 10.00   | 10.00   | 0.00    | 10.00   | ✅ MATCH | 
+Vanilla - Orion                    | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Bakels Platinum Instant Active     | 17.00   | 17.00   | 0.00    | 17.00   | ✅ MATCH | 
+Mauripan edited                    | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Redstar Active Yeast               | 8.00    | 8.00    | 0.00    | 8.00    | ✅ MATCH | 
+Yeast (Retail)                     | 64.00   | 64.00   | 0.00    | 64.00   | ✅ MATCH | 
+Orange Oil                         | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | Duplicate Item
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0005
+Date: 2025-12-24T02:50:33.605Z | Warehouse: Mabini Store
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Cup - Baking Cup #3                | 101.00  | 101.00  | 0.00    | 101.00  | ✅ MATCH | 
+Cup - Turta Cup                    | 100.00  | 100.00  | 0.00    | 100.00  | ✅ MATCH | 
+PLASTIC - Excellent 2 1/2x10 (01)  | 33.00   | 33.00   | 0.00    | 33.00   | ✅ MATCH | 
+PLASTIC - Texas 1-1/2x10           | 44.00   | 44.00   | 0.00    | 44.00   | ✅ MATCH | 
+PLASTIC - Texas 1-1/4x10           | 43.00   | 43.00   | 0.00    | 43.00   | ✅ MATCH | 
+PLASTIC - Texas 3x10               | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+PLASTIC - Texas 3x16               | 86.00   | 86.00   | 0.00    | 86.00   | ✅ MATCH | 
+PLASTIC - King 5x9 HD              | 78.00   | 78.00   | 0.00    | 78.00   | ✅ MATCH | 
+PLASTIC - King 6x10 HD             | 51.00   | 51.00   | 0.00    | 51.00   | ✅ MATCH | 
+PLASTIC - King 6x12 HD             | 108.00  | 108.00  | 0.00    | 108.00  | ✅ MATCH | 
+PLASTIC - King 8x12 HD             | 29.00   | 29.00   | 0.00    | 29.00   | ✅ MATCH | 
+PLASTIC - Whitehorse 40x45         | 23.00   | 23.00   | 0.00    | 23.00   | ✅ MATCH | 
+ROLLBAG 10x16                      | 16.00   | 16.00   | 0.00    | 16.00   | ✅ MATCH | 
+ROLLBAG 5x9                        | 15.00   | 15.00   | 0.00    | 15.00   | ✅ MATCH | 
+ROLLBAG 8x12                       | 21.00   | 21.00   | 0.00    | 21.00   | ✅ MATCH | 
+Cup - Baking Cup #1                | 55.00   | 55.00   | 0.00    | 55.00   | ✅ MATCH | 
+Cup - Baking Cup #2                | 53.00   | 53.00   | 0.00    | 53.00   | ✅ MATCH | 
+PLASTIC - Tasty Wrapper Large      | 20.00   | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+PLASTIC - King 8x14 HD             | 173.00  | 173.00  | 0.00    | 173.00  | ✅ MATCH | 
+Paperbag #25                       | 2.00    | 2.00    | 0.00    | 2.00    | ✅ MATCH | 
+Paperbag #1                        | 12.00   | 12.00   | 0.00    | 12.00   | ✅ MATCH | 
+Paperbag #3                        | 1.00    | 1.00    | 0.00    | 1.00    | ✅ MATCH | 
+Paperbag #2                        | 12.00   | 12.00   | 0.00    | 12.00   | ✅ MATCH | 
+Paperbag #8                        | 6.00    | 6.00    | 0.00    | 6.00    | ✅ MATCH | 
+Paperbag #10                       | 6.00    | 6.00    | 0.00    | 6.00    | ✅ MATCH | 
+PLASTIC - Excellent 6x8 (01)       | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+Others - RUGBY                     | 8.00    | 8.00    | 0.00    | 8.00    | ✅ MATCH | 
+PLASTIC - Water Celophine Orange   | 324.00  | 324.00  | 0.00    | 324.00  | ✅ MATCH | 
+PLASTIC - Water Celophine Red      | 131.00  | 131.00  | 0.00    | 131.00  | ✅ MATCH | 
+PLASTIC - Excellent 2x3 (02)       | 40.00   | 40.00   | 0.00    | 40.00   | ✅ MATCH | 
+PLASTIC - Excellent 3x5 (02)       | 22.00   | 22.00   | 0.00    | 22.00   | ✅ MATCH | 
+PLASTIC - Excellent 3x10 (02)      | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x7 (02)       | 18.00   | 18.00   | 0.00    | 18.00   | ✅ MATCH | 
+PLASTIC - Excellent 5x8 (03)       | 2.00    | 2.00    | 0.00    | 2.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x9 (01)       | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x9 (02)       | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x10 (01)      | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x10 (02)      | 8.00    | 8.00    | 0.00    | 8.00    | ✅ MATCH | 
+PLASTIC - Excellent 6x12 (01)      | 2.00    | 2.00    | 0.00    | 2.00    | ✅ MATCH | 
+PLASTIC - Excellent 6x12 (02)      | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+PLASTIC - Excellent 7x14 (01)      | 10.00   | 10.00   | 0.00    | 10.00   | ✅ MATCH | 
+PLASTIC - Excellent 7x14 (02)      | 1.00    | 1.00    | 0.00    | 1.00    | ✅ MATCH | 
+PLASTIC - Excellent 8x12 (01)      | 88.00   | 88.00   | 0.00    | 88.00   | ✅ MATCH | 
+PLASTIC - Excellent 8x12 (02)      | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+PLASTIC - Excellent 8x14 (02)      | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+PLASTIC - Excellent 4x6 (02)       | 18.00   | 18.00   | 0.00    | 18.00   | ✅ MATCH | 
+PLASTIC - Excellent 4x8 (02)       | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+PLASTIC - Excellent 4x8 (01)       | 54.00   | 54.00   | 0.00    | 54.00   | ✅ MATCH | 
+PLASTIC - Excellent 2x10 (01)      | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Maxime Cat tuna 7kg edited         | 6.00    | 6.00    | 0.00    | 6.00    | ✅ MATCH | 
+Maxime Puppy 20kg edited           | 18.50   | 18.50   | 0.00    | 18.50   | ✅ MATCH | 
+Feeds - WOOFY Adult edited         | 13.50   | 13.50   | 0.00    | 13.50   | ✅ MATCH | 
+PLASTIC - Excellent 10x16 (02)     | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+PLASTIC - Excellent 5x7 (01)       | 15.00   | 15.00   | 0.00    | 15.00   | ✅ MATCH | 
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0004
+Date: 2025-12-24T02:38:16.766Z | Warehouse: Mabini Bodega
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Maxime Cat tuna 7kg edited         | 5.00    | 35.00   | 0.00    | 35.00   | ✅ MATCH | 
+Feeds - WOOFY Adult edited         | 2.00    | 40.00   | 0.00    | 40.00   | ✅ MATCH | 
+Maxime Adult 20kg edited           | 14.00   | 14.00   | 0.00    | 14.00   | ✅ MATCH | 
+Others - CHLORINE 70% edited       | 3.00    | 126.60  | 0.00    | 126.60  | ✅ MATCH | 
+Others - RUGBY                     | 6.00    | 144.00  | 0.00    | 144.00  | ✅ MATCH | 
+Elite Hog Gestatex edited          | 10.00   | 10.00   | 0.00    | 10.00   | ✅ MATCH | 
+Elite Hog Growex 1 edited          | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Elite Hog Growex 2 edited          | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Elite Hog Lactatex edited          | 8.00    | 8.00    | 0.00    | 8.00    | ✅ MATCH | 
+Elite Hog Startex edited           | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Elite Hog Pre Startex 2 edited     | 5.00    | 5.00    | 0.00    | 5.00    | ✅ MATCH | 
+Kunemax Breeder edited             | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Kunemax Grower edited              | 1.00    | 1.00    | 0.00    | 1.00    | ✅ MATCH | 
+PLASTIC - Glassin White            | 10.00   | 5000.00 | 0.00    | 5000.00 | ✅ MATCH | 
+Others - TWINE Dura Flex Twine     | 2.00    | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Others - TISSUE Precut             | 15.00   | 75.00   | 0.00    | 75.00   | ✅ MATCH | 
+Others - TISSUE Roll               | 20.00   | 960.00  | 0.00    | 960.00  | ✅ MATCH | 
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0003
+Date: 2025-12-24T02:35:41.183Z | Warehouse: Mabini Bodega
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+PS Layer Chicken edited            | 5.00    | 5.00    | 0.00    | 5.00    | ✅ MATCH | 
+Gallimax1 edited                   | 1.00    | 1.00    | 0.00    | 1.00    | ✅ MATCH | 
+Gallimax2 edited                   | 10.00   | 10.00   | 0.00    | 10.00   | ✅ MATCH | 
+Gallimax2plus edited               | 7.00    | 7.00    | 0.00    | 7.00    | ✅ MATCH | 
+Gallimax3 brown edited             | 5.00    | 5.00    | 0.00    | 5.00    | ✅ MATCH | 
+Salto Baby Stag Developer edited   | 2.00    | 50.00   | 0.00    | 50.00   | ✅ MATCH | 
+ Salto Chick Booster edited        | 3.00    | 75.00   | 0.00    | 75.00   | ✅ MATCH | 
+Basic Finisher edited              | 4.00    | 4.00    | 0.00    | 4.00    | ✅ MATCH | 
+Express Chicken Layex 1 edited     | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0002
+Date: 2025-12-24T02:32:07.458Z | Warehouse: Mabini Bodega
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+PLASTIC - Excellent 2x3 (02)       | 45.00   | 450.00  | 0.00    | 450.00  | ✅ MATCH | 
+PLASTIC - Excellent 3x10 (02)      | 22.00   | 220.00  | 0.00    | 220.00  | ✅ MATCH | 
+PLASTIC - Excellent 5x7 (02)       | 12.00   | 120.00  | 0.00    | 120.00  | ✅ MATCH | 
+PLASTIC - Excellent 5x8 (02)       | 18.00   | 180.00  | 0.00    | 180.00  | ✅ MATCH | 
+PLASTIC - Excellent 5x9 (02)       | 7.00    | 70.00   | 0.00    | 70.00   | ✅ MATCH | 
+PLASTIC - Excellent 6x12 (02)      | 20.00   | 200.00  | 0.00    | 200.00  | ✅ MATCH | 
+PLASTIC - Excellent 7x14 (01)      | 15.00   | 150.00  | 0.00    | 150.00  | ✅ MATCH | 
+PLASTIC - Excellent 7x14 (02)      | 14.00   | 140.00  | 0.00    | 140.00  | ✅ MATCH | 
+PLASTIC - Excellent 8x12 (01)      | 18.00   | 180.00  | 0.00    | 180.00  | ✅ MATCH | 
+PLASTIC - Excellent 8x12 (02)      | 40.00   | 200.00  | 0.00    | 200.00  | ✅ MATCH | 
+PLASTIC - Excellent 8x14 (02)      | 21.00   | 210.00  | 0.00    | 210.00  | ✅ MATCH | 
+PLASTIC - Excellent 10x16 (02)     | 8.00    | 40.00   | 0.00    | 40.00   | ✅ MATCH | 
+PLASTIC - Excellent 4x6 (02)       | 9.00    | 90.00   | 0.00    | 90.00   | ✅ MATCH | 
+Paperbag #4                        | 5.00    | 50.00   | 0.00    | 50.00   | ✅ MATCH | 
+Paperbag #6                        | 3.00    | 30.00   | 0.00    | 30.00   | ✅ MATCH | 
+Paperbag #8                        | 2.00    | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+Paperbag #12                       | 2.00    | 20.00   | 0.00    | 20.00   | ✅ MATCH | 
+PLASTIC - Excellent 6x8 (01)       | 25.00   | 250.00  | 0.00    | 250.00  | ✅ MATCH | 
+PLASTIC - Texas 1-1/2x10           | 21.00   | 1050.00 | 0.00    | 1050.00 | ✅ MATCH | 
+PLASTIC - Texas 1-1/4x10           | 13.00   | 650.00  | 0.00    | 650.00  | ✅ MATCH | 
+PLASTIC - Texas 3x10               | 23.00   | 460.00  | 0.00    | 460.00  | ✅ MATCH | 
+PLASTIC - Texas 3x16               | 48.00   | 480.00  | 0.00    | 480.00  | ✅ MATCH | 
+PLASTIC - King 5x9 HD              | 78.00   | 780.00  | 0.00    | 780.00  | ✅ MATCH | 
+PLASTIC - King 6x10 HD             | 28.00   | 280.00  | 0.00    | 280.00  | ✅ MATCH | 
+PLASTIC - King 6x12 HD             | 48.00   | 480.00  | 0.00    | 480.00  | ✅ MATCH | 
+PLASTIC - King 8x12 HD             | 41.00   | 410.00  | 0.00    | 410.00  | ✅ MATCH | 
+ROLLBAG 10x16                      | 13.00   | 65.00   | 0.00    | 65.00   | ✅ MATCH | 
+ROLLBAG 5x9                        | 47.00   | 235.00  | 0.00    | 235.00  | ✅ MATCH | 
+ROLLBAG 8x12                       | 50.00   | 250.00  | 0.00    | 250.00  | ✅ MATCH | 
+Cup - Baking Cup #1                | 4.00    | 80.00   | 0.00    | 80.00   | ✅ MATCH | 
+Cup - Baking Cup #2                | 80.00   | 960.00  | 0.00    | 960.00  | ✅ MATCH | 
+Cup - Baking Cup #3                | 24.00   | 480.00  | 0.00    | 480.00  | ✅ MATCH | 
+PLASTIC - Texas 4x10               | 29.00   | 580.00  | 0.00    | 580.00  | ✅ MATCH | 
+Result: OK
+
+Verifying Adjustment: ADJ-20251224-0001
+Date: 2025-12-24T02:24:00.277Z | Warehouse: Mabini Bodega
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Product                            | Adj Act | Cur Inv | Sub Mvmt| Calc Exp| Status  | Note
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Canon Oil 15kl                     | 27.00   | 27.00   | 0.00    | 27.00   | ✅ MATCH | 
+Rainbow Oil                        | 15.00   | 15.00   | 0.00    | 15.00   | ✅ MATCH | 
+Select                             | 50.00   | 72.00   | 0.00    | 600.00  | ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Select (71086a98-cc60-45dd-b2d7-0847fe755659)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Snowlar edited                     | 528.00  | 780.00  | 0.00    | 17160.00| ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Snowlar edited (ef8f2f71-114f-493b-a1b8-22241430c838)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Sunrise Margarine edited           | 256.50  | 380.25  | 0.00    | 10837.13| ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Sunrise Margarine edited (b6d274a9-8b85-4059-8660-b71bdba169b7)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Vanilla - 120ml                    | 25.00   | 36.00   | 0.00    | 300.00  | ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Vanilla - 120ml (034413bc-354d-4bdf-a308-03d4428cfbfa)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Vanilla - Concentrated             | 75.00   | 108.00  | 0.00    | 900.00  | ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Vanilla - Concentrated (436bfbff-c2c5-498e-9cef-10094cfb28a6)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Vanilla - Orion                    | 150.00  | 216.00  | 0.00    | 1800.00 | ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Vanilla - Orion (658e5519-b04d-4fc8-a5c9-f918b9133984)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Bakels Platinum Instant Active     | 1066.00 | 1560.00 | 0.00    | 21320.00| ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Bakels Platinum Instant Active (524362b8-73d3-45a5-bad4-add6dc019323)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Mauripan edited                    | 328.00  | 480.00  | 0.00    | 6560.00 | ❌ MISMATCH| 
+    >>> TRACE MISMATCH: Mauripan edited (9df54eef-dbd1-4859-88c2-c713ac5e1cf3)
+    >>> Adjustment Time: 2025-12-24T02:24:00.277Z
+    >>> Subsequent Movements found: 0
+Redstar Active Yeast               | 75.00   | 108.00  | 0.00    | 900.00  | ❌ MISMATCH| 
+Favorich Brown                     | 153.00  | 225.00  | 0.00    | 3825.00 | ❌ MISMATCH| 
+Favorich black                     | 102.00  | 150.00  | 0.00    | 2550.00 | ❌ MISMATCH| 
+Quezo                              | 679.00  | 1008.00 | 0.00    | 32592.00| ❌ MISMATCH| 
+Bensdorp edited                    | 153.00  | 225.00  | 0.00    | 3825.00 | ❌ MISMATCH| 
+Emmie Victory Cocoa edited         | 357.00  | 525.00  | 0.00    | 8925.00 | ❌ MISMATCH| 
+Ube Powder (16 Kg)                 | 42.00   | 60.00   | 0.00    | 420.00  | ❌ MISMATCH| 
+Foodcolor - Choco Brown            | 75.00   | 108.00  | 0.00    | 900.00  | ❌ MISMATCH| 
+Foodcolor - Egg Yellow             | 75.00   | 108.00  | 0.00    | 900.00  | ❌ MISMATCH| 
+Foodcolor - Orange (JAR)           | 50.00   | 72.00   | 0.00    | 600.00  | ❌ MISMATCH| 
+Foodcolor - Rosa Pink              | 150.00  | 216.00  | 0.00    | 1800.00 | ❌ MISMATCH| 
+Foodcolor - Straw Red              | 100.00  | 144.00  | 0.00    | 1200.00 | ❌ MISMATCH| 
+Foodcolor - Ube Violet             | 50.00   | 72.00   | 0.00    | 600.00  | ❌ MISMATCH| 
+Raw Sugar - Wash Brown 50kg edite  | 3030.00 | 4500.00 | 0.00    | 151500.00| ❌ MISMATCH| 
+Sugar - Penco Confectioner Sugar   | 343.00  | 504.00  | 0.00    | 8232.00 | ❌ MISMATCH| 
+Refined - Sugar edited             | 2525.00 | 3750.00 | 0.00    | 126250.00| ❌ MISMATCH| 
+Iodized Salt edited                | 510.00  | 750.00  | 0.00    | 12750.00| ❌ MISMATCH| 
+Rocksalt edited                    | 539.00  | 798.00  | 0.00    | 20482.00| ❌ MISMATCH| 
+Bambi Butter                       | 39.00   | 54.00   | 0.00    | 234.00  | ❌ MISMATCH| 
+Butter Oil                         | 25.00   | 36.00   | 0.00    | 300.00  | ❌ MISMATCH| 
+Anise Concentrated                 | 18.00   | 24.00   | 0.00    | 72.00   | ❌ MISMATCH| 
+Anti-Amag                          | 208.00  | 288.00  | 0.00    | 1248.00 | ❌ MISMATCH| 
+Bakers Choice BP edited            | 252.00  | 360.00  | 0.00    | 2520.00 | ❌ MISMATCH| 
+Baking Soda edited                 | 153.00  | 225.00  | 0.00    | 3825.00 | ❌ MISMATCH| 
+Blueberry 6kg                      | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Calumet bag14kg                    | 96.00   | 96.00   | 0.00    | 96.00   | ✅ MATCH | 
+Carbonato edited                   | 306.00  | 450.00  | 0.00    | 7650.00 | ❌ MISMATCH| 
+Cinnamon Powder                    | 56.50   | 83.25   | 0.00    | 1567.88 | ❌ MISMATCH| 
+Cornstarch edited                  | 408.00  | 600.00  | 0.00    | 10200.00| ❌ MISMATCH| 
+Dobrim                             | 1550.00 | 2232.00 | 0.00    | 18600.00| ❌ MISMATCH| 
+Doner edited                       | 707.00  | 1050.00 | 0.00    | 35350.00| ❌ MISMATCH| 
+Lihia Water                        | 66.00   | 96.00   | 0.00    | 1056.00 | ❌ MISMATCH| 
+Longa                              | 204.00  | 300.00  | 0.00    | 5100.00 | ❌ MISMATCH| 
+Orange Oil                         | 50.00   | 72.00   | 0.00    | 600.00  | ❌ MISMATCH| 
+Panadero Premier Active Dry edite  | 162.00  | 234.00  | 0.00    | 2106.00 | ❌ MISMATCH| 
+Sprinter Unico                     | 374.00  | 510.00  | 0.00    | 1870.00 | ❌ MISMATCH| 
+Ultra Soft                         | 42.00   | 60.00   | 0.00    | 420.00  | ❌ MISMATCH| 
+Alaska Evaporated Red              | 3007.00 | 4464.00 | 0.00    | 144336.00| ❌ MISMATCH| 
+Angel Evaporated 410ml             | 97.00   | 144.00  | 0.00    | 4656.00 | ❌ MISMATCH| 
+Cheezee                            | 679.00  | 1008.00 | 0.00    | 32592.00| ❌ MISMATCH| 
+Doreen Condensed                   | 776.00  | 1152.00 | 0.00    | 37248.00| ❌ MISMATCH| 
+Dairy Bake edited                  | 255.00  | 375.00  | 0.00    | 6375.00 | ❌ MISMATCH| 
+Farmland edited                    | 408.00  | 600.00  | 0.00    | 10200.00| ❌ MISMATCH| 
+Masterchef edited                  | 408.00  | 600.00  | 0.00    | 10200.00| ❌ MISMATCH| 
+All Purpose Flour edited           | 1122.00 | 1650.00 | 0.00    | 28050.00| ❌ MISMATCH| 
+Cake Flour edited                  | 969.00  | 1425.00 | 0.00    | 24225.00| ❌ MISMATCH| 
+General edited                     | 1224.00 | 1800.00 | 0.00    | 30600.00| ❌ MISMATCH| 
+Island edited                      | 1173.00 | 1725.00 | 0.00    | 29325.00| ❌ MISMATCH| 
+Megastar edited                    | 3.00    | 3.00    | 0.00    | 3.00    | ✅ MATCH | 
+Silverstar edited                  | 204.00  | 300.00  | 0.00    | 5100.00 | ❌ MISMATCH| 
+Sunflour edited                    | 81.00   | 81.00   | 0.00    | 81.00   | ✅ MATCH | 
+Sunshine edited                    | 78.00   | 78.00   | 0.00    | 78.00   | ✅ MATCH | 
+Red Bowl Cake Flour edited         | 9.00    | 9.00    | 0.00    | 9.00    | ✅ MATCH | 
+Result: 55 ISSUES FOUND
