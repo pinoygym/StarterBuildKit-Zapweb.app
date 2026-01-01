@@ -1,0 +1,2 @@
+const envBase = process.env.BASE_URL || process.env.VITEST_BASE_URL
+export const BASE_URL = envBase && envBase.startsWith('http') ? envBase.replace(/\/$/, '') : 'http://127.0.0.1:3000'
