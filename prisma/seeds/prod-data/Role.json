@@ -1,0 +1,42 @@
+[
+  {
+    "id": "0030a4da-e68c-4e78-a6f2-35cd836eff9e",
+    "name": "Super Admin",
+    "description": "Full system access with all permissions",
+    "isSystem": true,
+    "createdAt": "2025-12-02T17:08:24.527Z",
+    "updatedAt": "2025-12-02T17:54:14.612Z"
+  },
+  {
+    "id": "8a31b769-0d1c-478d-aff0-28e56583c9dd",
+    "name": "Branch Manager",
+    "description": "Manage branch operations and staff",
+    "isSystem": true,
+    "createdAt": "2025-12-02T17:08:24.995Z",
+    "updatedAt": "2025-12-02T17:54:15.086Z"
+  },
+  {
+    "id": "93122a79-14f5-46a7-8e12-70d63ddf1871",
+    "name": "Cashier",
+    "description": "Handle POS transactions and customer sales",
+    "isSystem": true,
+    "createdAt": "2025-12-02T17:08:25.062Z",
+    "updatedAt": "2025-12-02T17:54:15.151Z"
+  },
+  {
+    "id": "4f4a4995-e2f2-4d4d-b323-e8fdecf2f447",
+    "name": "Warehouse Staff",
+    "description": "Manage inventory and stock movements",
+    "isSystem": true,
+    "createdAt": "2025-12-02T17:08:25.130Z",
+    "updatedAt": "2025-12-02T17:54:15.217Z"
+  },
+  {
+    "id": "c0751702-65ab-4e1d-bf1c-002bfa1f398f",
+    "name": "Accountant",
+    "description": "Manage financial operations and reporting",
+    "isSystem": true,
+    "createdAt": "2025-12-02T17:08:25.205Z",
+    "updatedAt": "2025-12-02T17:54:15.282Z"
+  }
+]

@@ -1,0 +1,26 @@
+﻿
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mC:/Users/cyber/Documents/GitHub/buenasv2[39m
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+[dotenv@17.2.3] injecting env (0) from .env -- tip: Γ£à audit secrets and track compliance: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/unit/services/inventory-adjustments.service.test.ts
+[22m[39m{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-15T13:54:57.315Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould return empty array when no adjustments exist[33m 1749[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould return adjustment slips grouped by referenceId[33m 616[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould filter by warehouseId[33m 502[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould filter by searchQuery (reference number)[33m 498[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould filter by searchQuery (reason)[33m 542[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlips[2m > [22mshould return adjustments sorted by date (newest first)[33m 575[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlipById[2m > [22mshould return null when adjustment not found[33m 473[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlipById[2m > [22mshould return complete adjustment slip with all items[33m 608[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/services/inventory-adjustments.service.test.ts[2m > [22mInventoryService - Adjustment Slips[2m > [22mgetAdjustmentSlipById[2m > [22mshould include product and warehouse details[33m 781[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m9 passed[39m[22m[90m (9)[39m
+[2m   Start at [22m 21:54:53
+[2m   Duration [22m 10.11s[2m (transform 369ms, setup 657ms, import 431ms, tests 6.35s, environment 2.21s)[22m
+
