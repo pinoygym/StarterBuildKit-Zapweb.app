@@ -1,0 +1,317 @@
+[
+  {
+    "id": "cmi7oy9zs0000vaecg8aag71l",
+    "resource": "USERS",
+    "action": "READ",
+    "description": "View user information",
+    "createdAt": "2025-11-20T09:14:25.430Z"
+  },
+  {
+    "id": "cmi7oyalp0001vaecub846o5s",
+    "resource": "USERS",
+    "action": "CREATE",
+    "description": "Create new users",
+    "createdAt": "2025-11-20T09:14:26.222Z"
+  },
+  {
+    "id": "cmi7oyav90002vaec7v5yymqb",
+    "resource": "USERS",
+    "action": "UPDATE",
+    "description": "Update user information",
+    "createdAt": "2025-11-20T09:14:26.565Z"
+  },
+  {
+    "id": "cmi7oyb4t0003vaec0roeglwz",
+    "resource": "USERS",
+    "action": "DELETE",
+    "description": "Delete users",
+    "createdAt": "2025-11-20T09:14:26.910Z"
+  },
+  {
+    "id": "cmi7oybed0004vaec069mdwsd",
+    "resource": "USERS",
+    "action": "MANAGE",
+    "description": "Full user management access",
+    "createdAt": "2025-11-20T09:14:27.254Z"
+  },
+  {
+    "id": "cmi7oybny0005vaecz4lvockm",
+    "resource": "ROLES",
+    "action": "READ",
+    "description": "View roles and permissions",
+    "createdAt": "2025-11-20T09:14:27.598Z"
+  },
+  {
+    "id": "cmi7oybxi0006vaecczld526b",
+    "resource": "ROLES",
+    "action": "CREATE",
+    "description": "Create new roles",
+    "createdAt": "2025-11-20T09:14:27.942Z"
+  },
+  {
+    "id": "cmi7oyc750007vaecaavk4qol",
+    "resource": "ROLES",
+    "action": "UPDATE",
+    "description": "Update roles and assign permissions",
+    "createdAt": "2025-11-20T09:14:28.289Z"
+  },
+  {
+    "id": "cmi7oycgo0008vaecrnbzjuzu",
+    "resource": "ROLES",
+    "action": "DELETE",
+    "description": "Delete roles",
+    "createdAt": "2025-11-20T09:14:28.633Z"
+  },
+  {
+    "id": "cmi7oycqe0009vaec2enhi9fy",
+    "resource": "ROLES",
+    "action": "MANAGE",
+    "description": "Full role management access",
+    "createdAt": "2025-11-20T09:14:28.983Z"
+  },
+  {
+    "id": "cmi7oyd0n000avaec02s6jg8t",
+    "resource": "PRODUCTS",
+    "action": "READ",
+    "description": "View product catalog",
+    "createdAt": "2025-11-20T09:14:29.351Z"
+  },
+  {
+    "id": "cmi7oyda6000bvaech5gof4k1",
+    "resource": "PRODUCTS",
+    "action": "CREATE",
+    "description": "Create new products",
+    "createdAt": "2025-11-20T09:14:29.695Z"
+  },
+  {
+    "id": "cmi7oydjq000cvaec6y1zsqbq",
+    "resource": "PRODUCTS",
+    "action": "UPDATE",
+    "description": "Update product information",
+    "createdAt": "2025-11-20T09:14:30.038Z"
+  },
+  {
+    "id": "cmi7oydt9000dvaeci6hiyku4",
+    "resource": "PRODUCTS",
+    "action": "DELETE",
+    "description": "Delete products",
+    "createdAt": "2025-11-20T09:14:30.382Z"
+  },
+  {
+    "id": "cmi7oye2t000evaecoi9jph2h",
+    "resource": "PRODUCTS",
+    "action": "MANAGE",
+    "description": "Full product management access",
+    "createdAt": "2025-11-20T09:14:30.725Z"
+  },
+  {
+    "id": "cmi7oyecc000fvaecuhj3tekl",
+    "resource": "INVENTORY",
+    "action": "READ",
+    "description": "View inventory levels",
+    "createdAt": "2025-11-20T09:14:31.068Z"
+  },
+  {
+    "id": "cmi7oyelw000gvaecat6re57s",
+    "resource": "INVENTORY",
+    "action": "CREATE",
+    "description": "Add new inventory batches",
+    "createdAt": "2025-11-20T09:14:31.412Z"
+  },
+  {
+    "id": "cmi7oyevf000hvaec8l59zem3",
+    "resource": "INVENTORY",
+    "action": "UPDATE",
+    "description": "Adjust inventory levels",
+    "createdAt": "2025-11-20T09:14:31.756Z"
+  },
+  {
+    "id": "cmi7oyf4z000ivaec87gvpw56",
+    "resource": "INVENTORY",
+    "action": "DELETE",
+    "description": "Remove inventory batches",
+    "createdAt": "2025-11-20T09:14:32.099Z"
+  },
+  {
+    "id": "cmi7oyfei000jvaecpj8y9n6x",
+    "resource": "INVENTORY",
+    "action": "MANAGE",
+    "description": "Full inventory management access",
+    "createdAt": "2025-11-20T09:14:32.443Z"
+  },
+  {
+    "id": "cmi7oyfo2000kvaec6fkb5vs5",
+    "resource": "SALES",
+    "action": "READ",
+    "description": "View sales orders and POS transactions",
+    "createdAt": "2025-11-20T09:14:32.787Z"
+  },
+  {
+    "id": "cmi7oyfxt000lvaec3r3iz69j",
+    "resource": "SALES",
+    "action": "CREATE",
+    "description": "Create sales orders and POS sales",
+    "createdAt": "2025-11-20T09:14:33.137Z"
+  },
+  {
+    "id": "cmi7oyg7c000mvaecakoebxtt",
+    "resource": "SALES",
+    "action": "UPDATE",
+    "description": "Update sales orders",
+    "createdAt": "2025-11-20T09:14:33.481Z"
+  },
+  {
+    "id": "cmi7oyggw000nvaecz3z5pydu",
+    "resource": "SALES",
+    "action": "DELETE",
+    "description": "Delete sales orders",
+    "createdAt": "2025-11-20T09:14:33.824Z"
+  },
+  {
+    "id": "cmi7oygqg000ovaecltq5s5oq",
+    "resource": "SALES",
+    "action": "MANAGE",
+    "description": "Full sales management access",
+    "createdAt": "2025-11-20T09:14:34.168Z"
+  },
+  {
+    "id": "cmi7oygzz000pvaecog8w72yo",
+    "resource": "PURCHASES",
+    "action": "READ",
+    "description": "View purchase orders",
+    "createdAt": "2025-11-20T09:14:34.512Z"
+  },
+  {
+    "id": "cmi7oyh9j000qvaecbcxs01f1",
+    "resource": "PURCHASES",
+    "action": "CREATE",
+    "description": "Create purchase orders",
+    "createdAt": "2025-11-20T09:14:34.855Z"
+  },
+  {
+    "id": "cmi7oyhj4000rvaecx1frenui",
+    "resource": "PURCHASES",
+    "action": "UPDATE",
+    "description": "Update purchase orders",
+    "createdAt": "2025-11-20T09:14:35.201Z"
+  },
+  {
+    "id": "cmi7oyhso000svaec6630676v",
+    "resource": "PURCHASES",
+    "action": "DELETE",
+    "description": "Delete purchase orders",
+    "createdAt": "2025-11-20T09:14:35.545Z"
+  },
+  {
+    "id": "cmi7oyi28000tvaecxkl65uvq",
+    "resource": "PURCHASES",
+    "action": "MANAGE",
+    "description": "Full purchase management access",
+    "createdAt": "2025-11-20T09:14:35.889Z"
+  },
+  {
+    "id": "cmi7oyibs000uvaecdwxnhn2v",
+    "resource": "ACCOUNTING",
+    "action": "READ",
+    "description": "View AR/AP and expenses",
+    "createdAt": "2025-11-20T09:14:36.233Z"
+  },
+  {
+    "id": "cmi7oyild000vvaec1d6hpav1",
+    "resource": "ACCOUNTING",
+    "action": "CREATE",
+    "description": "Create AR/AP entries and expenses",
+    "createdAt": "2025-11-20T09:14:36.578Z"
+  },
+  {
+    "id": "cmi7oyiux000wvaeci36zg9n7",
+    "resource": "ACCOUNTING",
+    "action": "UPDATE",
+    "description": "Update AR/AP and expenses",
+    "createdAt": "2025-11-20T09:14:36.921Z"
+  },
+  {
+    "id": "cmi7oyj4g000xvaec7x9dcn26",
+    "resource": "ACCOUNTING",
+    "action": "DELETE",
+    "description": "Delete AR/AP entries and expenses",
+    "createdAt": "2025-11-20T09:14:37.265Z"
+  },
+  {
+    "id": "cmi7oyje0000yvaecaunclltm",
+    "resource": "ACCOUNTING",
+    "action": "MANAGE",
+    "description": "Full accounting access",
+    "createdAt": "2025-11-20T09:14:37.609Z"
+  },
+  {
+    "id": "cmi7oyjnl000zvaecbbh8gssp",
+    "resource": "REPORTS",
+    "action": "READ",
+    "description": "View reports and analytics",
+    "createdAt": "2025-11-20T09:14:37.953Z"
+  },
+  {
+    "id": "cmi7oyjx90010vaeci2rhlmgv",
+    "resource": "REPORTS",
+    "action": "MANAGE",
+    "description": "Generate and export reports",
+    "createdAt": "2025-11-20T09:14:38.301Z"
+  },
+  {
+    "id": "cmi7oyk6t0011vaecmly8z3nd",
+    "resource": "BRANCHES",
+    "action": "READ",
+    "description": "View branch information",
+    "createdAt": "2025-11-20T09:14:38.645Z"
+  },
+  {
+    "id": "cmi7oykge0012vaec11b07u1y",
+    "resource": "BRANCHES",
+    "action": "CREATE",
+    "description": "Create new branches",
+    "createdAt": "2025-11-20T09:14:38.990Z"
+  },
+  {
+    "id": "cmi7oykpy0013vaec19s2o0y0",
+    "resource": "BRANCHES",
+    "action": "UPDATE",
+    "description": "Update branch information",
+    "createdAt": "2025-11-20T09:14:39.334Z"
+  },
+  {
+    "id": "cmi7oykzi0014vaec8k5q6b93",
+    "resource": "BRANCHES",
+    "action": "DELETE",
+    "description": "Delete branches",
+    "createdAt": "2025-11-20T09:14:39.679Z"
+  },
+  {
+    "id": "cmi7oyl920015vaec7tckr4st",
+    "resource": "BRANCHES",
+    "action": "MANAGE",
+    "description": "Full branch management access",
+    "createdAt": "2025-11-20T09:14:40.023Z"
+  },
+  {
+    "id": "cmi7oylim0016vaec7yf17cs9",
+    "resource": "SETTINGS",
+    "action": "READ",
+    "description": "View system settings",
+    "createdAt": "2025-11-20T09:14:40.366Z"
+  },
+  {
+    "id": "cmi7oylu30017vaecliu3nw5n",
+    "resource": "SETTINGS",
+    "action": "UPDATE",
+    "description": "Update system settings",
+    "createdAt": "2025-11-20T09:14:40.710Z"
+  },
+  {
+    "id": "cmi7oym3o0018vaec2zdj0wwm",
+    "resource": "SETTINGS",
+    "action": "MANAGE",
+    "description": "Full system configuration access",
+    "createdAt": "2025-11-20T09:14:41.124Z"
+  }
+]

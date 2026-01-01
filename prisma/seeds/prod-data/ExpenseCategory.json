@@ -1,0 +1,101 @@
+[
+  {
+    "id": "cmi8yklcq0005vatghub1tn9t",
+    "name": "Utilities",
+    "code": "UTIL",
+    "description": "Electricity, water, internet, phone",
+    "status": "active",
+    "displayOrder": 1,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:29.307Z",
+    "updatedAt": "2025-12-02T17:55:01.843Z"
+  },
+  {
+    "id": "cmi8yklsy0006vatgugjuegsw",
+    "name": "Rent",
+    "code": "RENT",
+    "description": "Office and warehouse rent",
+    "status": "active",
+    "displayOrder": 2,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:29.890Z",
+    "updatedAt": "2025-12-02T17:55:01.913Z"
+  },
+  {
+    "id": "cmi8ykm2z0007vatgxtod50y0",
+    "name": "Salaries",
+    "code": "SAL",
+    "description": "Employee salaries and wages",
+    "status": "active",
+    "displayOrder": 3,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:30.252Z",
+    "updatedAt": "2025-12-02T17:55:01.979Z"
+  },
+  {
+    "id": "cmi8ykmd10008vatgtjjgrb1i",
+    "name": "Transportation",
+    "code": "TRANS",
+    "description": "Fuel, vehicle maintenance, delivery costs",
+    "status": "active",
+    "displayOrder": 4,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:30.613Z",
+    "updatedAt": "2025-12-02T17:55:02.044Z"
+  },
+  {
+    "id": "cmi8ykmn70009vatgxscmskfz",
+    "name": "Marketing",
+    "code": "MKTG",
+    "description": "Advertising and promotional expenses",
+    "status": "active",
+    "displayOrder": 5,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:30.979Z",
+    "updatedAt": "2025-12-02T17:55:02.109Z"
+  },
+  {
+    "id": "cmi8ykmx8000avatg3hxedw2b",
+    "name": "Maintenance",
+    "code": "MAINT",
+    "description": "Equipment and facility maintenance",
+    "status": "active",
+    "displayOrder": 6,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T06:31:31.340Z",
+    "updatedAt": "2025-12-02T17:55:02.174Z"
+  },
+  {
+    "id": "cmi8ykn79000bvatgo5de9ymi",
+    "name": "Office Supplies",
+    "code": "OFFICE",
+    "description": "Stationery, printer supplies, etc.",
+    "status": "active",
+    "displayOrder": 7,
+    "isSystemDefined": false,
+    "createdAt": "2025-11-21T06:31:31.701Z",
+    "updatedAt": "2025-12-02T17:55:02.239Z"
+  },
+  {
+    "id": "cmi8yknhc000cvatg03vzz7m6",
+    "name": "Other",
+    "code": "OTHER",
+    "description": "Miscellaneous expenses",
+    "status": "active",
+    "displayOrder": 8,
+    "isSystemDefined": false,
+    "createdAt": "2025-11-21T06:31:32.064Z",
+    "updatedAt": "2025-12-02T17:55:02.304Z"
+  },
+  {
+    "id": "cmi99kmz50000vankn3uueml4",
+    "name": "Customer Discounts",
+    "code": "DISC",
+    "description": "Discounts given to customers on sales transactions",
+    "status": "active",
+    "displayOrder": 9,
+    "isSystemDefined": true,
+    "createdAt": "2025-11-21T11:39:27.183Z",
+    "updatedAt": "2025-12-02T17:55:02.369Z"
+  }
+]
