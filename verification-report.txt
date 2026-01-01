@@ -1,0 +1,77 @@
+﻿
+≡ƒöì VERIFYING PRODUCTION DATABASE CONFIGURATION
+
+This script will check:
+1. Which database Vercel is using
+2. If admin user exists in each database
+3. Database statistics
+
+
+================================================================================
+Checking: Development (ep-noisy-mountain)
+Branch: ep-noisy-mountain-a18wvzwi
+================================================================================
+
+node : PrismaClientConstruc
+torValidationError: 
+Unknown property 
+datasources provided to 
+PrismaClient constructor.
+At line:1 char:1
++ node scripts/verify-produ
+ction-db.js 2>&1 | 
+Out-File -FilePath verifi 
+...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecified: (Pri  
+  smaClientCon...nt cons   
+ tructor.:String) [], R    
+emoteException
+    + FullyQualifiedErrorI 
+   d : NativeCommandError
+ 
+Read more at https://pris.l
+y/d/client-constructor
+    at rl (C:\Users\HI\Docu
+ments\GitHub\_deve 
+local\_React Apps\test\node
+_modules\@prisma\client\run
+time\client.js:66:3441)
+    at new t (C:\Users\HI\D
+ocuments\GitHub\_deve 
+local\_React Apps\test\node
+_modules\@prisma\client\run
+time\client.js:70:990)
+    at checkDatabase (C:\Us
+ers\HI\Documents\GitHub\_de
+ve local\_React Apps\test\s
+cripts\verify-production-db
+.js:35:20)
+    at main (C:\Users\HI\Do
+cuments\GitHub\_deve 
+local\_React Apps\test\scri
+pts\verify-production-db.js
+:127:33)
+    at Object.<anonymous> (
+C:\Users\HI\Documents\GitHu
+b\_deve local\_React Apps\t
+est\scripts\verify-producti
+on-db.js:184:1)
+    at Module._compile (nod
+e:internal/modules/cjs/load
+er:1760:14)
+    at Object..js (node:int
+ernal/modules/cjs/loader:18
+93:10)
+    at Module.load (node:in
+ternal/modules/cjs/loader:1
+480:32)
+    at Module._load (node:i
+nternal/modules/cjs/loader:
+1299:12)
+    at 
+TracingChannel.traceSync (n
+ode:diagnostics_channel:328
+:14)
