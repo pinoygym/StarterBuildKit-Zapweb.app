@@ -1,0 +1,29 @@
+import { asyncHandler } from '@/lib/api-error';
+import { settingsService } from '@/services/settings.service';
+import { AppError } from '@/lib/errors';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
+export const fetchCache = 'force-no-store';
+
+// GET /api/settings/database/stats - Get database statistics
+export const GET = asyncHandler(async () {
+  try {
+    const stats = await settingsService.getDatabaseStats();
+    return Response.json({ success: true, data: stats });
+  } catch (error) {
+    console.error('Error fetching database stats:', error);
+
+    if (error instanceof AppError) {
+      return Response.json(
+        { success: false, error: error.message },
+        { status: error.statusCode }
+      );
+    }
+
+    return Response.json(
+      { success: false, error: 'Failed to fetch database statistics' },
+      { status: 500 }
+    );
+  }
+}

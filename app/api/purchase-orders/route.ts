@@ -1,0 +1,77 @@
+import { asyncHandler } from '@/lib/api-error';
+import { NextRequest } from 'next/server';
+import { purchaseOrderService } from '@/services/purchase-order.service';
+import { AppError } from '@/lib/errors';
+import { PurchaseOrderFilters } from '@/types/purchase-order.types';
+
+export const dynamic = 'force-dynamic';
+
+// GET /api/purchase-orders - Fetch all purchase orders with optional filters
+export const GET = asyncHandler(async (request: NextRequest) {
+  try {
+    console.log('=== PURCHASE ORDERS GET REQUEST START ===');
+    const searchParams = request.nextUrl.searchParams;
+
+    const filters: PurchaseOrderFilters = {
+      status: searchParams.get('status') as any || undefined,
+      branchId: searchParams.get('branchId') || undefined,
+      supplierId: searchParams.get('supplierId') || undefined,
+      warehouseId: searchParams.get('warehouseId') || undefined,
+      startDate: searchParams.get('startDate') ? new Date(searchParams.get('startDate')!) : undefined,
+      endDate: searchParams.get('endDate') ? new Date(searchParams.get('endDate')!) : undefined,
+    };
+
+    console.log('Purchase order filters:', JSON.stringify(filters, null, 2));
+    console.log('Calling purchaseOrderService.getAllPurchaseOrders...');
+    const purchaseOrders = await purchaseOrderService.getAllPurchaseOrders(filters);
+    console.log('Purchase orders retrieved successfully, count:', purchaseOrders.length);
+    return Response.json({ success: true, data: purchaseOrders });
+  } catch (error) {
+    console.error('Error fetching purchase orders:', error);
+    
+    if (error instanceof AppError) {
+      return Response.json(
+        { success: false, error: error.message },
+        { status: error.statusCode }
+      );
+    }
+    
+    return Response.json(
+      { success: false, error: 'Failed to fetch purchase orders' },
+      { status: 500 }
+    );
+  }
+}
+
+// POST /api/purchase-orders - Create a new purchase order
+export const POST = asyncHandler(async (request: NextRequest) {
+  try {
+    const body = await request.json();
+    
+    // Convert date string to Date object
+    if (body.expectedDeliveryDate) {
+      body.expectedDeliveryDate = new Date(body.expectedDeliveryDate);
+    }
+    
+    const purchaseOrder = await purchaseOrderService.createPurchaseOrder(body);
+    
+    return Response.json(
+      { success: true, data: purchaseOrder },
+      { status: 201 }
+    );
+  } catch (error) {
+    console.error('Error creating purchase order:', error);
+    
+    if (error instanceof AppError) {
+      return Response.json(
+        { success: false, error: error.message, fields: (error as any).fields },
+        { status: error.statusCode }
+      );
+    }
+    
+    return Response.json(
+      { success: false, error: 'Failed to create purchase order', details: (error as any)?.message },
+      { status: 500 }
+    );
+  }
+}

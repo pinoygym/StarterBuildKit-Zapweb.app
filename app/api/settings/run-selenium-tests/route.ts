@@ -1,0 +1,61 @@
+import { asyncHandler } from '@/lib/api-error';
+import { NextRequest } from 'next/server';
+import { authService } from '@/services/auth.service';
+import { userService } from '@/services/user.service';
+import { exec } from 'child_process';
+import util from 'util';
+
+const execPromise = util.promisify(exec);
+
+export const dynamic = 'force-dynamic';
+
+export const POST = asyncHandler(async (request: NextRequest) {
+  try {
+    // 1. Authentication & Authorization
+    const token = request.cookies.get('auth-token')?.value;
+    if (!token) {
+      return Response.json({ success: false, message: 'Unauthorized' }, { status: 401 });
+    }
+
+    const payload = authService.verifyToken(token);
+    if (!payload) {
+      return Response.json({ success: false, message: 'Invalid token' }, { status: 401 });
+    }
+
+    const user = await userService.getUserById(payload.userId);
+    if (!user || !(user as any).isSuperMegaAdmin) {
+      return Response.json({ success: false, message: 'Forbidden: Super Mega Admin Access Required' }, { status: 403 });
+    }
+
+    console.log(`Starting System Health Check (Selenium CRUD) for user ${user.email}...`);
+
+    // 2. Run System Check
+    const timeout = 120000; // 120 seconds
+    const command = 'npm run test:selenium:crud';
+    
+    try {
+        const { stdout, stderr } = await execPromise(command, { timeout });
+        
+        return Response.json({
+            success: true,
+            data: {
+                message: 'System Health Check Completed Successfully',
+                output: stdout
+            }
+        });
+
+    } catch (error: any) {
+        return Response.json({
+            success: false,
+            error: 'System Health Check Failed (Tests Failed)',
+            data: {
+                output: error.stdout,
+                errors: error.stderr || error.message
+            }
+        }, { status: 200 }); // Return 200 to allow UI to show logs
+    }
+
+  } catch (error: any) {
+    return Response.json({ success: false, message: error.message }, { status: 500 });
+  }
+}
