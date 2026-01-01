@@ -1,0 +1,57 @@
+﻿[dotenv@17.2.3] injecting env (1) from .env.local -- tip: ≡ƒùé∩╕Å backup and recover secrets: https://dotenvx.com/ops
+Using connection string: postgresql://neondb_owner:****@ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+Fetching adjustment ADJ-20251224-0007...
+Found 1 adjustments.
+===================================================
+Adjustment Number: ADJ-20251224-0007
+Reference Number: ADJ-07
+Date: Wed Dec 24 2025 11:03:34 GMT+0800 (China Standard Time)
+Status: DRAFT
+Reason: BEGINNING INV.
+Branch: Mabini
+Warehouse: Mabini Store
+Items:
+ΓöîΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö¼ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÉ
+Γöé [0m[1m [0m  Γöé [0m[1mProduct[0m                                        Γöé [0m[1mSystem Qty[0m  Γöé [0m[1mAdj Qty[0m     Γöé [0m[1mActual Qty[0m  Γöé [0m[1mUOM[0m    Γöé [0m[1mBase[0m   Γöé [0m[1mConversions[0m Γöé
+Γö£ΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö╝ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöñ
+Γöé  0 Γöé Others - SHOEMATERIAL JRB Black                Γöé null bottle Γöé 7 bottle    Γöé null bottle Γöé bottle Γöé bottle Γöé None        Γöé
+Γöé  1 Γöé Others - SHOEMATERIAL JRB Brown                Γöé null bottle Γöé 17 bottle   Γöé null bottle Γöé bottle Γöé bottle Γöé None        Γöé
+Γöé  2 Γöé Others - SHOEMATERIAL Nylon Pamo Black         Γöé null roll   Γöé 23 roll     Γöé null roll   Γöé roll   Γöé roll   Γöé None        Γöé
+Γöé  3 Γöé Others - SHOEMATERIAL Nylon Pamo White         Γöé null roll   Γöé 20 roll     Γöé null roll   Γöé roll   Γöé roll   Γöé None        Γöé
+Γöé  4 Γöé Others - SHOEMATERIAL Sole Lady                Γöé null UNIT   Γöé 3 sheet     Γöé null sheet  Γöé sheet  Γöé UNIT   Γöé sheet: 1    Γöé
+Γöé  5 Γöé Others - SHOEMATERIAL Sole Origenal Brown #8   Γöé null pairs  Γöé 33 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé  6 Γöé Others - SHOEMATERIAL Sole Origenal Brown #9   Γöé null pairs  Γöé 20 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé  7 Γöé Others - SHOEMATERIAL Sole Origenal Brown #10  Γöé null pairs  Γöé 20 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé  8 Γöé Others - SHOEMATERIAL Sole Origenal Brown #11  Γöé null pairs  Γöé 23 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé  9 Γöé Others - SHOEMATERIAL Sole Origenal Brown #12  Γöé null pairs  Γöé 20 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 10 Γöé Others - SHOEMATERIAL Sole Rugged #8           Γöé null pairs  Γöé 12 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 11 Γöé Others - SHOEMATERIAL Sole Rugged #9           Γöé null pairs  Γöé 39 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 12 Γöé Others - SHOEMATERIAL Sole Rugged #10          Γöé null pairs  Γöé 23 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 13 Γöé Others - SHOEMATERIAL Sole Rugged #11          Γöé null pairs  Γöé 18 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 14 Γöé Others - SHOEMATERIAL Sole Rugged #12          Γöé null pairs  Γöé 25 pairs    Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 15 Γöé Others - SHOEMATERIAL Sole Rugged #13          Γöé null pairs  Γöé 7 pairs     Γöé null pairs  Γöé pairs  Γöé pairs  Γöé None        Γöé
+Γöé 16 Γöé Others - SHOEMATERIAL Sole Yellow              Γöé null pcs    Γöé 8 pcs       Γöé null pcs    Γöé pcs    Γöé pcs    Γöé sheet: 1    Γöé
+Γöé 17 Γöé Others - SHOEMATERIAL Sole Yellow              Γöé null pcs    Γöé 6 sheet     Γöé null sheet  Γöé sheet  Γöé pcs    Γöé sheet: 1    Γöé
+Γöé 18 Γöé Others - SHOEMATERIAL Turn Button Local        Γöé null pcs    Γöé 60 pcs      Γöé null pcs    Γöé pcs    Γöé pcs    Γöé Box: 100    Γöé
+Γöé 19 Γöé Others - SHOEMATERIAL Turn Button Local        Γöé null pcs    Γöé 39 Box      Γöé null Box    Γöé Box    Γöé pcs    Γöé Box: 100    Γöé
+Γöé 20 Γöé Others - BILLIARD MATERIALS Blue Chalk         Γöé null PACK   Γöé 2 carton    Γöé null carton Γöé carton Γöé PACK   Γöé carton: 144 Γöé
+Γöé 21 Γöé Others - SHOEMATERIAL Snap Local               Γöé null pairs  Γöé 8 box       Γöé null box    Γöé box    Γöé pairs  Γöé box: 1      Γöé
+Γöé 22 Γöé Others - BILLIARD MATERIALS Blue Chalk         Γöé null PACK   Γöé 111 PACK    Γöé null PACK   Γöé PACK   Γöé PACK   Γöé carton: 144 Γöé
+Γöé 23 Γöé Others - BILLIARD MATERIALS Knight Cue Tip (G) Γöé null pack   Γöé 24 pack     Γöé null pack   Γöé pack   Γöé pack   Γöé None        Γöé
+Γöé 24 Γöé LEATHER Bruce Beige                            Γöé null METER  Γöé 20.8 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 25 Γöé LEATHER Bruce Gray                             Γöé null METER  Γöé 18 METER    Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 26 Γöé LEATHER Bruce Yellow                           Γöé null METER  Γöé 52.85 METER Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 27 Γöé LEATHER Bruce Red                              Γöé null METER  Γöé 22.25 METER Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 28 Γöé Others - LEATHER Charol Apple Green            Γöé null METER  Γöé 45.5 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 29 Γöé Others - LEATHER Charol Black                  Γöé null METER  Γöé 27.75 METER Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 30 Γöé Others - LEATHER Charol Green                  Γöé null METER  Γöé 86.15 METER Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 31 Γöé Others - LEATHER Charol Orange                 Γöé null METER  Γöé 22.95 METER Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 32 Γöé Others - LEATHER Charol Sky Blue               Γöé null METER  Γöé 64.25 METER Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 33 Γöé Others - LEATHER Charol Violet                 Γöé null METER  Γöé 4.79 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 34 Γöé Others - LEATHER Charol White                  Γöé null METER  Γöé 56 METER    Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 35 Γöé Others - LEATHER Charol Yellow                 Γöé null METER  Γöé 33.75 METER Γöé null METER  Γöé METER  Γöé METER  Γöé ROLL: 50    Γöé
+Γöé 36 Γöé LEATHER Bruce White                            Γöé null METER  Γöé 51.2 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 37 Γöé LEATHER Planet Dark Gray                       Γöé null METER  Γöé 1.89 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 38 Γöé LEATHER Bruce Spicy Brown                      Γöé null METER  Γöé 4.6 METER   Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+Γöé 39 Γöé LEATHER Bruce Royal Blue                       Γöé null METER  Γöé 20.3 METER  Γöé null METER  Γöé METER  Γöé METER  Γöé roll: 50    Γöé
+ΓööΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓö┤ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÿ

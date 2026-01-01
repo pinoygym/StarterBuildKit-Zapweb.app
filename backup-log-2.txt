@@ -1,0 +1,26 @@
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-16T11:06:47.590Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+Testing FULL BackupService.createBackup()...
+{"level":"error","message":"Prisma error","timestamp":"2025-12-16T11:06:48.437Z","context":{"target":"supplier.findMany","timestamp":"2025-12-16T11:06:48.436Z","message":"\nInvalid `prisma.supplier.findMany()` invocation in\nC:\\Users\\cyber\\Documents\\GitHub\\buenasv2\\services\\backup.service.ts:113:29\n\n  110 prisma.expenseCategory.findMany(),\n  111 prisma.expenseVendor.findMany(),\n  112 prisma.paymentMethod.findMany(),\n→ 113 prisma.supplier.findMany(\nThe column `(not available)` does not exist in the current database."}}
+Backup failed!
+Error message: 
+Invalid `prisma.supplier.findMany()` invocation in
+C:\Users\cyber\Documents\GitHub\buenasv2\services\backup.service.ts:113:29
+
+  110 prisma.expenseCategory.findMany(),
+  111 prisma.expenseVendor.findMany(),
+  112 prisma.paymentMethod.findMany(),
+→ 113 prisma.supplier.findMany(
+The column `(not available)` does not exist in the current database.
+Error code: P2022
+Error meta: {
+  "modelName": "Supplier",
+  "driverAdapterError": {
+    "name": "DriverAdapterError",
+    "cause": {
+      "originalCode": "42703",
+      "originalMessage": "column Supplier.taxId does not exist",
+      "kind": "ColumnNotFound"
+    }
+  }
+}
+Client Version: 7.1.0
