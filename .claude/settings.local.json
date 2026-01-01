@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx prisma migrate:*)",
+      "Bash(npx prisma db pull:*)",
+      "Bash(node test-db-connection.js:*)",
+      "Bash(npm install:*)",
+      "Bash(dir:*)",
+      "Bash(npm run build:*)",
+      "Bash(nul)",
+      "Bash(cat:*)",
+      "Bash(test:*)",
+      "Bash(vercel --version:*)",
+      "Bash(vercel whoami:*)",
+      "Bash(vercel:*)",
+      "Bash(git rm:*)",
+      "Bash(git commit:*)",
+      "Bash(git push)",
+      "Bash(npx prisma:*)",
+      "Bash(node seed-auth.js:*)",
+      "Bash(node -e:*)",
+      "Bash(node check-user.js:*)",
+      "Bash(node test-login.js:*)",
+      "Bash(node check-roles.js:*)",
+      "Bash(node test-registration.js:*)",
+      "Bash(node test-apis.js:*)",
+      "Bash(node test-dashboard-api.js:*)",
+      "Bash(node check-schema.js:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

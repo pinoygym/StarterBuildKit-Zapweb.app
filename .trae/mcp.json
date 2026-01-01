@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "Neon": {
+      "url": "https://mcp.neon.tech/mcp",
+      "type": "http",
+      "headers": {
+        "Authorization": "Bearer ${env:NEON_API_KEY}"
+      }
+    }
+  },
+  "inputs": []
+}
