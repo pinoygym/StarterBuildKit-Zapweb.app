@@ -1,0 +1,34 @@
+
+ RUN  v4.0.8 C:/Users/HI/Documents/GitHub/_deve local/_React Apps/test
+
+ ❯ tests/integration/api/auth.test.ts (2 tests | 1 failed) 2858ms
+     ✓ invalid login returns 401 279ms
+     × valid login returns 200 and me returns 200 with cookie 2578ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  tests/integration/api/auth.test.ts > Auth API > valid login returns 200 and me returns 200 with cookie
+AssertionError: expected 401 to be 200 // Object.is equality
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 200[39m
+[31m+ 401[39m
+
+ ❯ tests/integration/api/auth.test.ts:34:26
+     32|     const setCookie = login.headers.get('set-cookie') || ''
+     33|     const loginBody = await login.json()
+     34|     expect(login.status).toBe(200)
+       |                          ^
+     35|     expect(loginBody.success).toBe(true)
+     36| 
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  1 failed | 1 passed (2)
+   Start at  23:21:47
+   Duration  3.45s (transform 33ms, setup 0ms, collect 48ms, tests 2.86s, environment 0ms, prepare 14ms)
+
