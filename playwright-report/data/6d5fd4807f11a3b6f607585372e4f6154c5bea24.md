@@ -1,0 +1,525 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - text: InventoryPro
+      - button "Open menu" [ref=e10]:
+        - img [ref=e11]
+    - complementary [ref=e12]:
+      - generic [ref=e13]:
+        - img [ref=e15]
+        - generic [ref=e19]: InventoryProInventory & POS
+      - navigation [ref=e20]:
+        - link "Dashboard" [ref=e21] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e22]
+          - text: Dashboard
+        - link "Products" [ref=e27] [cursor=pointer]:
+          - /url: /products
+          - img [ref=e28]
+          - text: Products
+        - link "Inventory" [ref=e32] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e33]
+          - text: Inventory
+        - link "Warehouses" [ref=e36] [cursor=pointer]:
+          - /url: /warehouses
+          - img [ref=e37]
+          - text: Warehouses
+        - link "Branches" [ref=e40] [cursor=pointer]:
+          - /url: /branches
+          - img [ref=e41]
+          - text: Branches
+        - link "Suppliers" [ref=e45] [cursor=pointer]:
+          - /url: /suppliers
+          - img [ref=e46]
+          - text: Suppliers
+        - link "Purchase Orders" [ref=e51] [cursor=pointer]:
+          - /url: /purchase-orders
+          - img [ref=e52]
+          - text: Purchase Orders
+        - link "Sales Orders" [ref=e56] [cursor=pointer]:
+          - /url: /sales-orders
+          - img [ref=e57]
+          - text: Sales Orders
+        - link "POS" [ref=e60] [cursor=pointer]:
+          - /url: /pos
+          - img [ref=e61]
+          - text: POS
+        - link "AR/AP" [ref=e66] [cursor=pointer]:
+          - /url: /ar-ap
+          - img [ref=e67]
+          - text: AR/AP
+        - link "Expenses" [ref=e69] [cursor=pointer]:
+          - /url: /expenses
+          - img [ref=e70]
+          - text: Expenses
+        - link "Alerts" [ref=e73] [cursor=pointer]:
+          - /url: /alerts
+          - img [ref=e74]
+          - text: Alerts
+        - link "Reports" [ref=e76] [cursor=pointer]:
+          - /url: /reports
+          - img [ref=e77]
+          - text: Reports
+        - generic [ref=e79]:
+          - paragraph [ref=e80]: Settings
+          - link "Users" [ref=e81] [cursor=pointer]:
+            - /url: /users
+            - img [ref=e82]
+            - text: Users
+          - link "Roles" [ref=e94] [cursor=pointer]:
+            - /url: /roles
+            - img [ref=e95]
+            - text: Roles
+      - generic [ref=e98]:
+        - paragraph [ref=e99]: © 2024 InventoryPro
+        - paragraph [ref=e100]: v1.0.0
+    - generic [ref=e101]:
+      - banner [ref=e102]:
+        - generic [ref=e103]:
+          - heading "Welcome to InventoryPro" [level=1] [ref=e105]
+          - generic [ref=e107]:
+            - img [ref=e108]
+            - combobox [ref=e112]:
+              - generic: All Branches
+              - img [ref=e113]
+      - main [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - navigation [ref=e118]:
+              - link "Dashboard" [ref=e120] [cursor=pointer]:
+                - /url: /dashboard
+              - generic [ref=e121]:
+                - img [ref=e122]
+                - text: Products
+            - generic [ref=e124]:
+              - generic [ref=e125]:
+                - heading "Products" [level=1] [ref=e126]
+                - paragraph [ref=e127]: Manage your product catalog with multiple UOMs and pricing
+              - button "Add Product" [ref=e129]:
+                - img [ref=e130]
+                - text: Add Product
+          - generic [ref=e131]:
+            - generic [ref=e132]:
+              - img [ref=e133]
+              - textbox "Search products..." [ref=e136]
+            - combobox [ref=e137]:
+              - text: All Categories
+              - img [ref=e138]
+            - combobox [ref=e140]:
+              - text: All Status
+              - img [ref=e141]
+          - table [ref=e145]:
+            - rowgroup [ref=e146]:
+              - row "Image Name Category Base Price Base UOM Min Stock Status Actions" [ref=e147]:
+                - cell [ref=e148]
+                - cell "Image" [ref=e149]
+                - cell "Name" [ref=e150]
+                - cell "Category" [ref=e151]
+                - cell "Base Price" [ref=e152]
+                - cell "Base UOM" [ref=e153]
+                - cell "Min Stock" [ref=e154]
+                - cell "Status" [ref=e155]
+                - cell "Actions" [ref=e156]
+            - rowgroup [ref=e157]:
+              - row "Absolute Distilled Water 500ml Absolute purified distilled water in 500ml bottle Water ₱15.00 bottle 600 active" [ref=e158]:
+                - cell [ref=e159]:
+                  - button [ref=e160]:
+                    - img [ref=e161]
+                - cell [ref=e163]:
+                  - img [ref=e165]
+                - cell "Absolute Distilled Water 500ml Absolute purified distilled water in 500ml bottle" [ref=e169]:
+                  - generic [ref=e170]:
+                    - generic [ref=e171]: Absolute Distilled Water 500ml
+                    - generic [ref=e172]: Absolute purified distilled water in 500ml bottle
+                - cell "Water" [ref=e173]:
+                  - generic [ref=e174]: Water
+                - cell "₱15.00" [ref=e175]
+                - cell "bottle" [ref=e176]:
+                  - code [ref=e177]: bottle
+                - cell "600" [ref=e178]
+                - cell "active" [ref=e179]:
+                  - generic [ref=e180]: active
+                - cell [ref=e181]:
+                  - generic [ref=e182]:
+                    - button [ref=e183]:
+                      - img [ref=e184]
+                    - button [disabled] [ref=e187]:
+                      - img [ref=e188]
+              - row "Coca-Cola 8oz Bottle Classic Coca-Cola in 8oz glass bottle Carbonated ₱25.00 bottle 500 active" [ref=e191]:
+                - cell [ref=e192]:
+                  - button [ref=e193]:
+                    - img [ref=e194]
+                - cell [ref=e196]:
+                  - img [ref=e198]
+                - cell "Coca-Cola 8oz Bottle Classic Coca-Cola in 8oz glass bottle" [ref=e202]:
+                  - generic [ref=e203]:
+                    - generic [ref=e204]: Coca-Cola 8oz Bottle
+                    - generic [ref=e205]: Classic Coca-Cola in 8oz glass bottle
+                - cell "Carbonated" [ref=e206]:
+                  - generic [ref=e207]: Carbonated
+                - cell "₱25.00" [ref=e208]
+                - cell "bottle" [ref=e209]:
+                  - code [ref=e210]: bottle
+                - cell "500" [ref=e211]
+                - cell "active" [ref=e212]:
+                  - generic [ref=e213]: active
+                - cell [ref=e214]:
+                  - generic [ref=e215]:
+                    - button [ref=e216]:
+                      - img [ref=e217]
+                    - button [disabled] [ref=e220]:
+                      - img [ref=e221]
+              - row "Del Monte Pineapple Juice 1L Del Monte 100% pineapple juice in 1L tetra pack Juices ₱55.00 pack 200 active" [ref=e224]:
+                - cell [ref=e225]:
+                  - button [ref=e226]:
+                    - img [ref=e227]
+                - cell [ref=e229]:
+                  - img [ref=e231]
+                - cell "Del Monte Pineapple Juice 1L Del Monte 100% pineapple juice in 1L tetra pack" [ref=e235]:
+                  - generic [ref=e236]:
+                    - generic [ref=e237]: Del Monte Pineapple Juice 1L
+                    - generic [ref=e238]: Del Monte 100% pineapple juice in 1L tetra pack
+                - cell "Juices" [ref=e239]:
+                  - generic [ref=e240]: Juices
+                - cell "₱55.00" [ref=e241]
+                - cell "pack" [ref=e242]:
+                  - code [ref=e243]: pack
+                - cell "200" [ref=e244]
+                - cell "active" [ref=e245]:
+                  - generic [ref=e246]: active
+                - cell [ref=e247]:
+                  - generic [ref=e248]:
+                    - button [ref=e249]:
+                      - img [ref=e250]
+                    - button [disabled] [ref=e253]:
+                      - img [ref=e254]
+              - row "Integration Test Product 1763130527442 Water ₱100.00 pcs 10 active" [ref=e257]:
+                - cell [ref=e258]
+                - cell [ref=e259]:
+                  - img [ref=e261]
+                - cell "Integration Test Product 1763130527442" [ref=e265]:
+                  - generic [ref=e267]: Integration Test Product 1763130527442
+                - cell "Water" [ref=e268]:
+                  - generic [ref=e269]: Water
+                - cell "₱100.00" [ref=e270]
+                - cell "pcs" [ref=e271]:
+                  - code [ref=e272]: pcs
+                - cell "10" [ref=e273]
+                - cell "active" [ref=e274]:
+                  - generic [ref=e275]: active
+                - cell [ref=e276]:
+                  - generic [ref=e277]:
+                    - button [ref=e278]:
+                      - img [ref=e279]
+                    - button [disabled] [ref=e282]:
+                      - img [ref=e283]
+              - row "Integration Test Product 1763130544545 Water ₱100.00 pcs 10 active" [ref=e286]:
+                - cell [ref=e287]
+                - cell [ref=e288]:
+                  - img [ref=e290]
+                - cell "Integration Test Product 1763130544545" [ref=e294]:
+                  - generic [ref=e296]: Integration Test Product 1763130544545
+                - cell "Water" [ref=e297]:
+                  - generic [ref=e298]: Water
+                - cell "₱100.00" [ref=e299]
+                - cell "pcs" [ref=e300]:
+                  - code [ref=e301]: pcs
+                - cell "10" [ref=e302]
+                - cell "active" [ref=e303]:
+                  - generic [ref=e304]: active
+                - cell [ref=e305]:
+                  - generic [ref=e306]:
+                    - button [ref=e307]:
+                      - img [ref=e308]
+                    - button [disabled] [ref=e311]:
+                      - img [ref=e312]
+              - row "Integration Test Product 1763130544560 Water ₱100.00 pcs 10 active" [ref=e315]:
+                - cell [ref=e316]
+                - cell [ref=e317]:
+                  - img [ref=e319]
+                - cell "Integration Test Product 1763130544560" [ref=e323]:
+                  - generic [ref=e325]: Integration Test Product 1763130544560
+                - cell "Water" [ref=e326]:
+                  - generic [ref=e327]: Water
+                - cell "₱100.00" [ref=e328]
+                - cell "pcs" [ref=e329]:
+                  - code [ref=e330]: pcs
+                - cell "10" [ref=e331]
+                - cell "active" [ref=e332]:
+                  - generic [ref=e333]: active
+                - cell [ref=e334]:
+                  - generic [ref=e335]:
+                    - button [ref=e336]:
+                      - img [ref=e337]
+                    - button [disabled] [ref=e340]:
+                      - img [ref=e341]
+              - row "Integration Test Product 1763130812499 Water ₱100.00 pcs 10 active" [ref=e344]:
+                - cell [ref=e345]
+                - cell [ref=e346]:
+                  - img [ref=e348]
+                - cell "Integration Test Product 1763130812499" [ref=e352]:
+                  - generic [ref=e354]: Integration Test Product 1763130812499
+                - cell "Water" [ref=e355]:
+                  - generic [ref=e356]: Water
+                - cell "₱100.00" [ref=e357]
+                - cell "pcs" [ref=e358]:
+                  - code [ref=e359]: pcs
+                - cell "10" [ref=e360]
+                - cell "active" [ref=e361]:
+                  - generic [ref=e362]: active
+                - cell [ref=e363]:
+                  - generic [ref=e364]:
+                    - button [ref=e365]:
+                      - img [ref=e366]
+                    - button [disabled] [ref=e369]:
+                      - img [ref=e370]
+              - row "Integration Test Product 1763130812508 Water ₱100.00 pcs 10 active" [ref=e373]:
+                - cell [ref=e374]
+                - cell [ref=e375]:
+                  - img [ref=e377]
+                - cell "Integration Test Product 1763130812508" [ref=e381]:
+                  - generic [ref=e383]: Integration Test Product 1763130812508
+                - cell "Water" [ref=e384]:
+                  - generic [ref=e385]: Water
+                - cell "₱100.00" [ref=e386]
+                - cell "pcs" [ref=e387]:
+                  - code [ref=e388]: pcs
+                - cell "10" [ref=e389]
+                - cell "active" [ref=e390]:
+                  - generic [ref=e391]: active
+                - cell [ref=e392]:
+                  - generic [ref=e393]:
+                    - button [ref=e394]:
+                      - img [ref=e395]
+                    - button [disabled] [ref=e398]:
+                      - img [ref=e399]
+              - row "Integration Test Product 1763130819160 Water ₱100.00 pcs 10 active" [ref=e402]:
+                - cell [ref=e403]
+                - cell [ref=e404]:
+                  - img [ref=e406]
+                - cell "Integration Test Product 1763130819160" [ref=e410]:
+                  - generic [ref=e412]: Integration Test Product 1763130819160
+                - cell "Water" [ref=e413]:
+                  - generic [ref=e414]: Water
+                - cell "₱100.00" [ref=e415]
+                - cell "pcs" [ref=e416]:
+                  - code [ref=e417]: pcs
+                - cell "10" [ref=e418]
+                - cell "active" [ref=e419]:
+                  - generic [ref=e420]: active
+                - cell [ref=e421]:
+                  - generic [ref=e422]:
+                    - button [ref=e423]:
+                      - img [ref=e424]
+                    - button [disabled] [ref=e427]:
+                      - img [ref=e428]
+              - row "Integration Test Product 1763130819166 Water ₱100.00 pcs 10 active" [ref=e431]:
+                - cell [ref=e432]
+                - cell [ref=e433]:
+                  - img [ref=e435]
+                - cell "Integration Test Product 1763130819166" [ref=e439]:
+                  - generic [ref=e441]: Integration Test Product 1763130819166
+                - cell "Water" [ref=e442]:
+                  - generic [ref=e443]: Water
+                - cell "₱100.00" [ref=e444]
+                - cell "pcs" [ref=e445]:
+                  - code [ref=e446]: pcs
+                - cell "10" [ref=e447]
+                - cell "active" [ref=e448]:
+                  - generic [ref=e449]: active
+                - cell [ref=e450]:
+                  - generic [ref=e451]:
+                    - button [ref=e452]:
+                      - img [ref=e453]
+                    - button [disabled] [ref=e456]:
+                      - img [ref=e457]
+              - row "Integration Test Product 1763136176653 Water ₱100.00 pcs 10 active" [ref=e460]:
+                - cell [ref=e461]
+                - cell [ref=e462]:
+                  - img [ref=e464]
+                - cell "Integration Test Product 1763136176653" [ref=e468]:
+                  - generic [ref=e470]: Integration Test Product 1763136176653
+                - cell "Water" [ref=e471]:
+                  - generic [ref=e472]: Water
+                - cell "₱100.00" [ref=e473]
+                - cell "pcs" [ref=e474]:
+                  - code [ref=e475]: pcs
+                - cell "10" [ref=e476]
+                - cell "active" [ref=e477]:
+                  - generic [ref=e478]: active
+                - cell [ref=e479]:
+                  - generic [ref=e480]:
+                    - button [ref=e481]:
+                      - img [ref=e482]
+                    - button [disabled] [ref=e485]:
+                      - img [ref=e486]
+              - row "Integration Test Product 1763136221497 Water ₱100.00 pcs 10 active" [ref=e489]:
+                - cell [ref=e490]
+                - cell [ref=e491]:
+                  - img [ref=e493]
+                - cell "Integration Test Product 1763136221497" [ref=e497]:
+                  - generic [ref=e499]: Integration Test Product 1763136221497
+                - cell "Water" [ref=e500]:
+                  - generic [ref=e501]: Water
+                - cell "₱100.00" [ref=e502]
+                - cell "pcs" [ref=e503]:
+                  - code [ref=e504]: pcs
+                - cell "10" [ref=e505]
+                - cell "active" [ref=e506]:
+                  - generic [ref=e507]: active
+                - cell [ref=e508]:
+                  - generic [ref=e509]:
+                    - button [ref=e510]:
+                      - img [ref=e511]
+                    - button [disabled] [ref=e514]:
+                      - img [ref=e515]
+              - row "Minute Maid Orange Juice 1L Minute Maid orange juice in 1L tetra pack Juices ₱60.00 pack 200 active" [ref=e518]:
+                - cell [ref=e519]:
+                  - button [ref=e520]:
+                    - img [ref=e521]
+                - cell [ref=e523]:
+                  - img [ref=e525]
+                - cell "Minute Maid Orange Juice 1L Minute Maid orange juice in 1L tetra pack" [ref=e529]:
+                  - generic [ref=e530]:
+                    - generic [ref=e531]: Minute Maid Orange Juice 1L
+                    - generic [ref=e532]: Minute Maid orange juice in 1L tetra pack
+                - cell "Juices" [ref=e533]:
+                  - generic [ref=e534]: Juices
+                - cell "₱60.00" [ref=e535]
+                - cell "pack" [ref=e536]:
+                  - code [ref=e537]: pack
+                - cell "200" [ref=e538]
+                - cell "active" [ref=e539]:
+                  - generic [ref=e540]: active
+                - cell [ref=e541]:
+                  - generic [ref=e542]:
+                    - button [ref=e543]:
+                      - img [ref=e544]
+                    - button [disabled] [ref=e547]:
+                      - img [ref=e548]
+              - row "Mountain Dew 500ml Bottle Mountain Dew citrus soda in 500ml PET bottle Carbonated ₱35.00 bottle 350 active" [ref=e551]:
+                - cell [ref=e552]:
+                  - button [ref=e553]:
+                    - img [ref=e554]
+                - cell [ref=e556]:
+                  - img [ref=e558]
+                - cell "Mountain Dew 500ml Bottle Mountain Dew citrus soda in 500ml PET bottle" [ref=e562]:
+                  - generic [ref=e563]:
+                    - generic [ref=e564]: Mountain Dew 500ml Bottle
+                    - generic [ref=e565]: Mountain Dew citrus soda in 500ml PET bottle
+                - cell "Carbonated" [ref=e566]:
+                  - generic [ref=e567]: Carbonated
+                - cell "₱35.00" [ref=e568]
+                - cell "bottle" [ref=e569]:
+                  - code [ref=e570]: bottle
+                - cell "350" [ref=e571]
+                - cell "active" [ref=e572]:
+                  - generic [ref=e573]: active
+                - cell [ref=e574]:
+                  - generic [ref=e575]:
+                    - button [ref=e576]:
+                      - img [ref=e577]
+                    - button [disabled] [ref=e580]:
+                      - img [ref=e581]
+              - row "Pepsi 12oz Can Pepsi Cola in 12oz aluminum can Carbonated ₱30.00 can 400 active" [ref=e584]:
+                - cell [ref=e585]:
+                  - button [ref=e586]:
+                    - img [ref=e587]
+                - cell [ref=e589]:
+                  - img [ref=e591]
+                - cell "Pepsi 12oz Can Pepsi Cola in 12oz aluminum can" [ref=e595]:
+                  - generic [ref=e596]:
+                    - generic [ref=e597]: Pepsi 12oz Can
+                    - generic [ref=e598]: Pepsi Cola in 12oz aluminum can
+                - cell "Carbonated" [ref=e599]:
+                  - generic [ref=e600]: Carbonated
+                - cell "₱30.00" [ref=e601]
+                - cell "can" [ref=e602]:
+                  - code [ref=e603]: can
+                - cell "400" [ref=e604]
+                - cell "active" [ref=e605]:
+                  - generic [ref=e606]: active
+                - cell [ref=e607]:
+                  - generic [ref=e608]:
+                    - button [ref=e609]:
+                      - img [ref=e610]
+                    - button [disabled] [ref=e613]:
+                      - img [ref=e614]
+              - row "Red Bull Energy Drink 250ml Red Bull energy drink in 250ml can Energy Drinks ₱75.00 can 250 active" [ref=e617]:
+                - cell [ref=e618]:
+                  - button [ref=e619]:
+                    - img [ref=e620]
+                - cell [ref=e622]:
+                  - img [ref=e624]
+                - cell "Red Bull Energy Drink 250ml Red Bull energy drink in 250ml can" [ref=e628]:
+                  - generic [ref=e629]:
+                    - generic [ref=e630]: Red Bull Energy Drink 250ml
+                    - generic [ref=e631]: Red Bull energy drink in 250ml can
+                - cell "Energy Drinks" [ref=e632]:
+                  - generic [ref=e633]: Energy Drinks
+                - cell "₱75.00" [ref=e634]
+                - cell "can" [ref=e635]:
+                  - code [ref=e636]: can
+                - cell "250" [ref=e637]
+                - cell "active" [ref=e638]:
+                  - generic [ref=e639]: active
+                - cell [ref=e640]:
+                  - generic [ref=e641]:
+                    - button [ref=e642]:
+                      - img [ref=e643]
+                    - button [disabled] [ref=e646]:
+                      - img [ref=e647]
+              - row "Sprite 1.5L Bottle Sprite lemon-lime soda in 1.5L PET bottle Carbonated ₱45.00 bottle 300 active" [ref=e650]:
+                - cell [ref=e651]:
+                  - button [ref=e652]:
+                    - img [ref=e653]
+                - cell [ref=e655]:
+                  - img [ref=e657]
+                - cell "Sprite 1.5L Bottle Sprite lemon-lime soda in 1.5L PET bottle" [ref=e661]:
+                  - generic [ref=e662]:
+                    - generic [ref=e663]: Sprite 1.5L Bottle
+                    - generic [ref=e664]: Sprite lemon-lime soda in 1.5L PET bottle
+                - cell "Carbonated" [ref=e665]:
+                  - generic [ref=e666]: Carbonated
+                - cell "₱45.00" [ref=e667]
+                - cell "bottle" [ref=e668]:
+                  - code [ref=e669]: bottle
+                - cell "300" [ref=e670]
+                - cell "active" [ref=e671]:
+                  - generic [ref=e672]: active
+                - cell [ref=e673]:
+                  - generic [ref=e674]:
+                    - button [ref=e675]:
+                      - img [ref=e676]
+                    - button [disabled] [ref=e679]:
+                      - img [ref=e680]
+    - region "Notifications (F8)":
+      - list
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e683]:
+    - img [ref=e685]
+    - button "Open Tanstack query devtools" [ref=e733] [cursor=pointer]:
+      - img [ref=e734]
+  - generic:
+    - generic [ref=e784] [cursor=pointer]:
+      - img [ref=e785]
+      - generic [ref=e787]: 1 error
+      - button "Hide Errors" [ref=e788]:
+        - img [ref=e789]
+    - status [ref=e792]:
+      - generic [ref=e793]:
+        - img [ref=e795]
+        - generic [ref=e797]:
+          - text: Static route
+          - button "Hide static indicator" [ref=e798] [cursor=pointer]:
+            - img [ref=e799]
+  - alert [ref=e802]
+```
