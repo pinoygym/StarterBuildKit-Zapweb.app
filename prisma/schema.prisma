@@ -1,0 +1,390 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Branch Model
+model Branch {
+  id        String   @id @default(uuid())
+  name      String
+  code      String   @unique
+  location  String
+  manager   String
+  phone     String
+  status    String   @default("active")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  warehouses         Warehouse[]
+  purchaseOrders     PurchaseOrder[]
+  salesOrders        SalesOrder[]
+  posSales           POSSale[]
+  expenses           Expense[]
+  arRecords          AccountsReceivable[]
+  apRecords          AccountsPayable[]
+
+  @@index([status])
+  @@index([code])
+}
+
+// Product Model
+model Product {
+  id            String   @id @default(uuid())
+  name          String   @unique
+  description   String?
+  category      String
+  imageUrl      String?
+  basePrice     Decimal  @db.Decimal(10, 2)
+  baseUOM       String
+  minStockLevel Int
+  shelfLifeDays Int
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  alternateUOMs    ProductUOM[]
+  inventoryBatches InventoryBatch[]
+  poItems          PurchaseOrderItem[]
+  soItems          SalesOrderItem[]
+  posItems         POSSaleItem[]
+
+  @@index([status])
+  @@index([category])
+  @@index([name])
+}
+
+// Product UOM Model
+model ProductUOM {
+  id               String   @id @default(uuid())
+  productId        String
+  name             String
+  conversionFactor Decimal  @db.Decimal(10, 4)
+  sellingPrice     Decimal  @db.Decimal(10, 2)
+  createdAt        DateTime @default(now())
+
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([productId])
+}
+
+// Warehouse Model
+model Warehouse {
+  id          String   @id @default(uuid())
+  name        String
+  location    String
+  manager     String
+  maxCapacity Int
+  branchId    String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  branch           Branch           @relation(fields: [branchId], references: [id])
+  inventoryBatches InventoryBatch[]
+  purchaseOrders   PurchaseOrder[]
+  salesOrders      SalesOrder[]
+
+  @@index([branchId])
+}
+
+// Inventory Batch Model
+model InventoryBatch {
+  id           String   @id @default(uuid())
+  batchNumber  String   @unique
+  productId    String
+  warehouseId  String
+  quantity     Decimal  @db.Decimal(10, 2)
+  unitCost     Decimal  @db.Decimal(10, 2)
+  expiryDate   DateTime
+  receivedDate DateTime
+  status       String   @default("active")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  product   Product         @relation(fields: [productId], references: [id])
+  warehouse Warehouse       @relation(fields: [warehouseId], references: [id])
+  movements StockMovement[]
+
+  @@index([productId, warehouseId])
+  @@index([expiryDate])
+  @@index([status])
+  @@index([batchNumber])
+}
+
+// Stock Movement Model
+model StockMovement {
+  id            String   @id @default(uuid())
+  batchId       String
+  type          String // "IN", "OUT", "TRANSFER", "ADJUSTMENT"
+  quantity      Decimal  @db.Decimal(10, 2)
+  reason        String?
+  referenceId   String?
+  referenceType String? // "PO", "SO", "POS"
+  createdAt     DateTime @default(now())
+
+  batch InventoryBatch @relation(fields: [batchId], references: [id])
+
+  @@index([batchId])
+  @@index([referenceId, referenceType])
+  @@index([createdAt])
+}
+
+// Supplier Model
+model Supplier {
+  id            String   @id @default(uuid())
+  companyName   String
+  contactPerson String
+  phone         String
+  email         String
+  paymentTerms  String // "Net 15", "Net 30", "Net 60", "COD"
+  status        String   @default("active")
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  purchaseOrders PurchaseOrder[]
+  apRecords      AccountsPayable[]
+
+  @@index([status])
+  @@index([companyName])
+}
+
+// Purchase Order Model
+model PurchaseOrder {
+  id                   String    @id @default(uuid())
+  poNumber             String    @unique
+  supplierId           String
+  warehouseId          String
+  branchId             String
+  totalAmount          Decimal   @db.Decimal(10, 2)
+  status               String    @default("draft")
+  expectedDeliveryDate DateTime
+  actualDeliveryDate   DateTime?
+  notes                String?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  supplier  Supplier            @relation(fields: [supplierId], references: [id])
+  warehouse Warehouse           @relation(fields: [warehouseId], references: [id])
+  branch    Branch              @relation(fields: [branchId], references: [id])
+  items     PurchaseOrderItem[]
+
+  @@index([supplierId])
+  @@index([warehouseId])
+  @@index([branchId])
+  @@index([status])
+  @@index([poNumber])
+  @@index([createdAt])
+}
+
+// Purchase Order Item Model
+model PurchaseOrderItem {
+  id        String  @id @default(uuid())
+  poId      String
+  productId String
+  quantity  Decimal @db.Decimal(10, 2)
+  unitPrice Decimal @db.Decimal(10, 2)
+  subtotal  Decimal @db.Decimal(10, 2)
+
+  purchaseOrder PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  product       Product       @relation(fields: [productId], references: [id])
+
+  @@index([poId])
+  @@index([productId])
+}
+
+// Sales Order Model
+model SalesOrder {
+  id                String   @id @default(uuid())
+  orderNumber       String   @unique
+  customerName      String
+  customerPhone     String
+  customerEmail     String
+  deliveryAddress   String
+  warehouseId       String
+  branchId          String
+  totalAmount       Decimal  @db.Decimal(10, 2)
+  status            String   @default("draft")
+  salesOrderStatus  String   @default("pending")
+  deliveryDate      DateTime
+  convertedToSaleId String?
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  warehouse Warehouse        @relation(fields: [warehouseId], references: [id])
+  branch    Branch           @relation(fields: [branchId], references: [id])
+  items     SalesOrderItem[]
+
+  @@index([warehouseId])
+  @@index([branchId])
+  @@index([status])
+  @@index([salesOrderStatus])
+  @@index([orderNumber])
+  @@index([createdAt])
+}
+
+// Sales Order Item Model
+model SalesOrderItem {
+  id        String  @id @default(uuid())
+  soId      String
+  productId String
+  quantity  Decimal @db.Decimal(10, 2)
+  uom       String
+  unitPrice Decimal @db.Decimal(10, 2)
+  subtotal  Decimal @db.Decimal(10, 2)
+
+  salesOrder SalesOrder @relation(fields: [soId], references: [id], onDelete: Cascade)
+  product    Product    @relation(fields: [productId], references: [id])
+
+  @@index([soId])
+  @@index([productId])
+}
+
+// POS Sale Model
+model POSSale {
+  id                   String   @id @default(uuid())
+  receiptNumber        String   @unique
+  branchId             String
+  subtotal             Decimal  @db.Decimal(10, 2)
+  tax                  Decimal  @db.Decimal(10, 2)
+  totalAmount          Decimal  @db.Decimal(10, 2)
+  paymentMethod        String
+  amountReceived       Decimal? @db.Decimal(10, 2)
+  change               Decimal? @db.Decimal(10, 2)
+  convertedFromOrderId String?
+  createdAt            DateTime @default(now())
+
+  branch Branch        @relation(fields: [branchId], references: [id])
+  items  POSSaleItem[]
+
+  @@index([branchId])
+  @@index([receiptNumber])
+  @@index([createdAt])
+  @@index([paymentMethod])
+}
+
+// POS Sale Item Model
+model POSSaleItem {
+  id              String  @id @default(uuid())
+  saleId          String
+  productId       String
+  quantity        Decimal @db.Decimal(10, 2)
+  uom             String
+  unitPrice       Decimal @db.Decimal(10, 2)
+  subtotal        Decimal @db.Decimal(10, 2)
+  costOfGoodsSold Decimal @db.Decimal(10, 2)
+
+  sale    POSSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id])
+
+  @@index([saleId])
+  @@index([productId])
+}
+
+// Accounts Receivable Model
+model AccountsReceivable {
+  id           String   @id @default(uuid())
+  branchId     String
+  customerName String
+  salesOrderId String?
+  totalAmount  Decimal  @db.Decimal(10, 2)
+  paidAmount   Decimal  @db.Decimal(10, 2) @default(0)
+  balance      Decimal  @db.Decimal(10, 2)
+  dueDate      DateTime
+  status       String   @default("pending")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  branch   Branch      @relation(fields: [branchId], references: [id])
+  payments ARPayment[]
+
+  @@index([branchId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([createdAt])
+}
+
+// AR Payment Model
+model ARPayment {
+  id              String   @id @default(uuid())
+  arId            String
+  amount          Decimal  @db.Decimal(10, 2)
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime @default(now())
+
+  ar AccountsReceivable @relation(fields: [arId], references: [id], onDelete: Cascade)
+
+  @@index([arId])
+  @@index([paymentDate])
+}
+
+// Accounts Payable Model
+model AccountsPayable {
+  id              String   @id @default(uuid())
+  branchId        String
+  supplierId      String
+  purchaseOrderId String?
+  totalAmount     Decimal  @db.Decimal(10, 2)
+  paidAmount      Decimal  @db.Decimal(10, 2) @default(0)
+  balance         Decimal  @db.Decimal(10, 2)
+  dueDate         DateTime
+  status          String   @default("pending")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  branch   Branch      @relation(fields: [branchId], references: [id])
+  supplier Supplier    @relation(fields: [supplierId], references: [id])
+  payments APPayment[]
+
+  @@index([branchId])
+  @@index([supplierId])
+  @@index([status])
+  @@index([dueDate])
+  @@index([createdAt])
+}
+
+// AP Payment Model
+model APPayment {
+  id              String   @id @default(uuid())
+  apId            String
+  amount          Decimal  @db.Decimal(10, 2)
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime @default(now())
+
+  ap AccountsPayable @relation(fields: [apId], references: [id], onDelete: Cascade)
+
+  @@index([apId])
+  @@index([paymentDate])
+}
+
+// Expense Model
+model Expense {
+  id            String   @id @default(uuid())
+  branchId      String
+  expenseDate   DateTime
+  category      String
+  amount        Decimal  @db.Decimal(10, 2)
+  description   String
+  paymentMethod String
+  vendor        String?
+  receiptUrl    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  branch Branch @relation(fields: [branchId], references: [id])
+
+  @@index([branchId])
+  @@index([category])
+  @@index([expenseDate])
+  @@index([createdAt])
+}
