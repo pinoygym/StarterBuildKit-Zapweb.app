@@ -1,0 +1,96 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - text: InventoryPro
+      - button "Open menu" [ref=e11]:
+        - img [ref=e12]
+    - complementary [ref=e16]:
+      - generic [ref=e17]:
+        - img [ref=e19]
+        - generic [ref=e24]: InventoryProInventory & POS
+      - navigation [ref=e25]:
+        - link "Dashboard" [ref=e26] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e27]
+          - text: Dashboard
+        - link "Products" [ref=e32] [cursor=pointer]:
+          - /url: /products
+          - img [ref=e33]
+          - text: Products
+        - link "Inventory" [ref=e38] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e39]
+          - text: Inventory
+        - link "Warehouses" [ref=e43] [cursor=pointer]:
+          - /url: /warehouses
+          - img [ref=e44]
+          - text: Warehouses
+        - link "Branches" [ref=e49] [cursor=pointer]:
+          - /url: /branches
+          - img [ref=e50]
+          - text: Branches
+        - link "Suppliers" [ref=e58] [cursor=pointer]:
+          - /url: /suppliers
+          - img [ref=e59]
+          - text: Suppliers
+        - link "Purchase Orders" [ref=e64] [cursor=pointer]:
+          - /url: /purchase-orders
+          - img [ref=e65]
+          - text: Purchase Orders
+        - link "Sales Orders" [ref=e69] [cursor=pointer]:
+          - /url: /sales-orders
+          - img [ref=e70]
+          - text: Sales Orders
+        - link "POS" [ref=e76] [cursor=pointer]:
+          - /url: /pos
+          - img [ref=e77]
+          - text: POS
+        - link "AR/AP" [ref=e83] [cursor=pointer]:
+          - /url: /ar-ap
+          - img [ref=e84]
+          - text: AR/AP
+        - link "Expenses" [ref=e87] [cursor=pointer]:
+          - /url: /expenses
+          - img [ref=e88]
+          - text: Expenses
+        - link "Alerts" [ref=e92] [cursor=pointer]:
+          - /url: /alerts
+          - img [ref=e93]
+          - text: Alerts
+        - link "Reports" [ref=e97] [cursor=pointer]:
+          - /url: /reports
+          - img [ref=e98]
+          - text: Reports
+        - generic [ref=e103]:
+          - paragraph [ref=e104]: Settings
+          - link "Users" [ref=e105] [cursor=pointer]:
+            - /url: /users
+            - img [ref=e106]
+            - text: Users
+          - link "Roles" [ref=e118] [cursor=pointer]:
+            - /url: /roles
+            - img [ref=e119]
+            - text: Roles
+      - generic [ref=e122]:
+        - paragraph [ref=e123]: © 2024 InventoryPro
+        - paragraph [ref=e124]: v1.0.0
+    - generic [ref=e125]:
+      - banner [ref=e126]:
+        - generic [ref=e127]:
+          - heading "Welcome to InventoryPro" [level=1] [ref=e129]
+          - img [ref=e132]
+      - main [ref=e140]:
+        - generic [ref=e144]:
+          - heading "Products" [level=1] [ref=e145]
+          - paragraph [ref=e146]: Manage your product catalog
+    - region "Notifications (F8)":
+      - list
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+```
