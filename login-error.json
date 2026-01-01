@@ -1,0 +1,7 @@
+{
+  "status": 500,
+  "body": {
+    "success": false,
+    "message": "\nInvalid `prisma.user.findUnique()` invocation:\n\n\nThe table `public.User` does not exist in the current database."
+  }
+}
