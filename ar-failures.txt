@@ -1,0 +1,145 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.8 [39m[90mC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test[39m
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+ [31m❯[39m tests/integration/api/ar.test.ts [2m([22m[2m14 tests[22m[2m | [22m[31m6 failed[39m[2m)[22m[33m 13479[2mms[22m[39m
+[31m       [31m×[31m should create AR record successfully[39m[33m 494[2mms[22m[39m
+       [32m✓[39m should validate required fields[32m 19[2mms[22m[39m
+[31m       [31m×[31m should record full payment and update status to paid[39m[33m 899[2mms[22m[39m
+[31m       [31m×[31m should record partial payment and update status to partial[39m[33m 899[2mms[22m[39m
+[31m       [31m×[31m should handle multiple partial payments[39m[33m 2279[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject payment exceeding balance [33m 563[2mms[22m[39m
+[31m       [31m×[31m should reject zero or negative payment[39m[32m 227[2mms[22m[39m
+       [32m✓[39m should validate required payment fields[32m 246[2mms[22m[39m
+[31m       [31m×[31m should calculate aging buckets correctly[39m[33m 507[2mms[22m[39m
+       [33m[2m✓[22m[39m should group by customer correctly [33m 493[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate total outstanding correctly [33m 494[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all AR records [33m 432[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 433[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 430[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 6 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mPOST /api/ar - Create AR[2m > [22mshould create AR record successfully
+[31m[1mAssertionError[22m: expected 1000 to be '1000' // Object.is equality[39m
+
+[32m- Expected:[39m 
+"1000"
+
+[31m+ Received:[39m 
+1000
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m99:37[22m[39m
+    [90m 97| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m 98| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m 99| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mtotalAmount)[33m.[39m[34mtoBe[39m([32m'1000'[39m)[33m;[39m
+    [90m   | [39m                                    [31m^[39m
+    [90m100| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mpaidAmount)[33m.[39m[34mtoBe[39m([32m'0'[39m)[33m;[39m
+    [90m101| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mbalance)[33m.[39m[34mtoBe[39m([32m'1000'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mPOST /api/ar/payment - Record Payment[2m > [22mshould record full payment and update status to paid
+[31m[1mAssertionError[22m: expected 1000 to be '1000' // Object.is equality[39m
+
+[32m- Expected:[39m 
+"1000"
+
+[31m+ Received:[39m 
+1000
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m162:36[22m[39m
+    [90m160| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m161| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m162| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mpaidAmount)[33m.[39m[34mtoBe[39m([32m'1000'[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m163| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mbalance)[33m.[39m[34mtoBe[39m([32m'0'[39m)[33m;[39m
+    [90m164| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mstatus)[33m.[39m[34mtoBe[39m([32m'paid'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mPOST /api/ar/payment - Record Payment[2m > [22mshould record partial payment and update status to partial
+[31m[1mAssertionError[22m: expected 500 to be '500' // Object.is equality[39m
+
+[32m- Expected:[39m 
+"500"
+
+[31m+ Received:[39m 
+500
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m193:36[22m[39m
+    [90m191| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m192| [39m      [34mexpect[39m(data[33m.[39msuccess)[33m.[39m[34mtoBe[39m([35mtrue[39m)[33m;[39m
+    [90m193| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mpaidAmount)[33m.[39m[34mtoBe[39m([32m'500'[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m194| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mbalance)[33m.[39m[34mtoBe[39m([32m'500'[39m)[33m;[39m
+    [90m195| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mstatus)[33m.[39m[34mtoBe[39m([32m'partial'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mPOST /api/ar/payment - Record Payment[2m > [22mshould handle multiple partial payments
+[31m[1mAssertionError[22m: expected 1000 to be '1000' // Object.is equality[39m
+
+[32m- Expected:[39m 
+"1000"
+
+[31m+ Received:[39m 
+1000
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m238:36[22m[39m
+    [90m236| [39m
+    [90m237| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m200[39m)[33m;[39m
+    [90m238| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mpaidAmount)[33m.[39m[34mtoBe[39m([32m'1000'[39m)[33m;[39m
+    [90m   | [39m                                   [31m^[39m
+    [90m239| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mbalance)[33m.[39m[34mtoBe[39m([32m'0'[39m)[33m;[39m
+    [90m240| [39m      [34mexpect[39m(data[33m.[39mdata[33m.[39mstatus)[33m.[39m[34mtoBe[39m([32m'paid'[39m)[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mPOST /api/ar/payment - Record Payment[2m > [22mshould reject zero or negative payment
+[31m[1mAssertionError[22m: expected 'Missing required fields' to contain 'greater than 0'[39m
+
+Expected: [32m"greater than 0"[39m
+Received: [31m"Missing required fields"[39m
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m289:26[22m[39m
+    [90m287| [39m      [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m400[39m)[33m;[39m
+    [90m288| [39m      [35mconst[39m data [33m=[39m [35mawait[39m response[33m.[39m[34mjson[39m()[33m;[39m
+    [90m289| [39m      [34mexpect[39m(data[33m.[39merror)[33m.[39m[34mtoContain[39m([32m'greater than 0'[39m)[33m;[39m
+    [90m   | [39m                         [31m^[39m
+    [90m290| [39m    })[33m;[39m
+    [90m291| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/6]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests[2m > [22mGET /api/ar/aging-report - Aging Analysis[2m > [22mshould calculate aging buckets correctly
+[31m[1mAssertionError[22m: expected 2 to be 1 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 1[39m
+[31m+ 2[39m
+
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m406:31[22m[39m
+    [90m404| [39m      const bucket90plus = buckets.find((b: any) => b.bucket === '90+'…
+    [90m405| [39m
+    [90m406| [39m      [34mexpect[39m(bucket030[33m.[39mcount)[33m.[39m[34mtoBe[39m([34m1[39m)[33m;[39m
+    [90m   | [39m                              [31m^[39m
+    [90m407| [39m      [34mexpect[39m([34mparseFloat[39m(bucket030[33m.[39mtotalAmount))[33m.[39m[34mtoBe[39m([34m1000[39m)[33m;[39m
+    [90m408| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/6]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m6 failed[39m[22m[2m | [22m[1m[32m8 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 03:40:24
+[2m   Duration [22m 14.60s[2m (transform 106ms, setup 211ms, collect 152ms, tests 13.48s, environment 0ms, prepare 19ms)[22m
+

@@ -1,0 +1,528 @@
+﻿
+Running 22 tests using 8 workers
+
+[1A[2K[1/22] [setup] ΓÇ║ tests\e2e\auth.setup.ts:5:6 ΓÇ║ authenticate
+[1A[2K[2/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page
+[1A[2K[3/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:37:9 ΓÇ║ Settings ΓÇ║ should handle seed test data
+[1A[2K[4/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin
+[1A[2K[5/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section
+[1A[2K[6/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data
+[1A[2K[7/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions
+[1A[2K[8/22] [chromium] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section
+[1A[2K[9/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page
+[1A[2K  1) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Company Settings')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Company Settings')[22m
+
+
+      11 |
+      12 |     test('should display company settings section', async ({ page }) => {
+    > 13 |         await expect(page.getByText('Company Settings')).toBeVisible();
+         |                                                          ^
+      14 |         // Wait for loading to finish
+      15 |         await expect(page.getByLabel('Company Name')).toBeVisible({ timeout: 10000 });
+      16 |         await expect(page.getByLabel('Address')).toBeVisible();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:13:58
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-company-settings-section-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-company-settings-section-chromium\error-context.md
+
+
+[1A[2K  2) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Settings' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Settings' })[22m
+
+
+       7 |
+       8 |     test('should display settings page', async ({ page }) => {
+    >  9 |         await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
+         |                                                                       ^
+      10 |     });
+      11 |
+      12 |     test('should display company settings section', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:9:71
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-settings-page-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-settings-page-chromium\error-context.md
+
+
+[1A[2K  3) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Delete Transactions' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Delete Transactions' })[22m
+
+
+      75 |         // Find delete transactions button
+      76 |         const deleteButton = page.getByRole('button', { name: 'Delete Transactions' });
+    > 77 |         await expect(deleteButton).toBeVisible();
+         |                                    ^
+      78 |
+      79 |         // Click delete button
+      80 |         await deleteButton.click();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:77:36
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-delete-all-transactions-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-delete-all-transactions-chromium\error-context.md
+
+
+[1A[2K  4) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Database Management')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Database Management')[22m
+
+
+      18 |
+      19 |     test('should display database management section', async ({ page }) => {
+    > 20 |         await expect(page.getByText('Database Management')).toBeVisible();
+         |                                                             ^
+      21 |         await expect(page.getByText('Database Statistics')).toBeVisible();
+      22 |     });
+      23 |
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:20:61
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-database-management-section-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-database-management-section-chromium\error-context.md
+
+
+[1A[2K  5) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Admin Testing Tools')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Admin Testing Tools')[22m
+
+
+      24 |     test('should display Admin Testing Tools for Super Mega Admin', async ({ page }) => {
+      25 |         // Verify section header
+    > 26 |         await expect(page.getByText('Admin Testing Tools')).toBeVisible();
+         |                                                             ^
+      27 |
+      28 |         // Verify badge
+      29 |         await expect(page.getByText('SUPER MEGA ADMIN ONLY')).toBeVisible();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:26:61
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-d-0b199--Tools-for-Super-Mega-Admin-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-d-0b199--Tools-for-Super-Mega-Admin-chromium\error-context.md
+
+
+[1A[2K[10/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section
+[1A[2K[11/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data
+[1A[2K[12/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:37:9 ΓÇ║ Settings ΓÇ║ should handle seed test data
+[1A[2K[13/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin
+[1A[2K[14/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section
+[1A[2K  6) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('heading', { name: 'Settings' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('heading', { name: 'Settings' })[22m
+
+
+       7 |
+       8 |     test('should display settings page', async ({ page }) => {
+    >  9 |         await expect(page.getByRole('heading', { name: 'Settings' })).toBeVisible();
+         |                                                                       ^
+      10 |     });
+      11 |
+      12 |     test('should display company settings section', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:9:71
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-settings-page-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-settings-page-firefox\error-context.md
+
+
+[1A[2K[15/22] [firefox] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions
+[1A[2K  7) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:37:9 ΓÇ║ Settings ΓÇ║ should handle seed test data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Test Data Seeded').first()
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByText('Test Data Seeded').first()[22m
+
+
+      46 |         // Note: Seeding might be fast, so we check for the toast
+      47 |         // Use first() to avoid strict mode violation if multiple elements match (e.g. toast and screen reader text)
+    > 48 |         await expect(page.getByText('Test Data Seeded').first()).toBeVisible({ timeout: 15000 });
+         |                                                                  ^
+      49 |     });
+      50 |
+      51 |     test('should handle delete table data', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:48:66
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-seed-test-data-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-seed-test-data-chromium\error-context.md
+
+
+[1A[2K  8) [chromium] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Table Data Deleted').first()
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByText('Table Data Deleted').first()[22m
+
+
+      69 |
+      70 |         // Verify success toast
+    > 71 |         await expect(page.getByText('Table Data Deleted').first()).toBeVisible({ timeout: 15000 });
+         |                                                                    ^
+      72 |     });
+      73 |
+      74 |     test('should handle delete all transactions', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:71:68
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-delete-table-data-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-delete-table-data-chromium\error-context.md
+
+
+[1A[2K[16/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page
+[1A[2K[17/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section
+[1A[2K[18/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section
+[1A[2K  9) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Database Management')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Database Management')[22m
+
+
+      18 |
+      19 |     test('should display database management section', async ({ page }) => {
+    > 20 |         await expect(page.getByText('Database Management')).toBeVisible();
+         |                                                             ^
+      21 |         await expect(page.getByText('Database Statistics')).toBeVisible();
+      22 |     });
+      23 |
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:20:61
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-database-management-section-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-database-management-section-firefox\error-context.md
+
+
+[1A[2K  10) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByRole('button', { name: 'Delete Transactions' })
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByRole('button', { name: 'Delete Transactions' })[22m
+
+
+      75 |         // Find delete transactions button
+      76 |         const deleteButton = page.getByRole('button', { name: 'Delete Transactions' });
+    > 77 |         await expect(deleteButton).toBeVisible();
+         |                                    ^
+      78 |
+      79 |         // Click delete button
+      80 |         await deleteButton.click();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:77:36
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-delete-all-transactions-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-delete-all-transactions-firefox\error-context.md
+
+
+[1A[2K  11) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Admin Testing Tools')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Admin Testing Tools')[22m
+
+
+      24 |     test('should display Admin Testing Tools for Super Mega Admin', async ({ page }) => {
+      25 |         // Verify section header
+    > 26 |         await expect(page.getByText('Admin Testing Tools')).toBeVisible();
+         |                                                             ^
+      27 |
+      28 |         // Verify badge
+      29 |         await expect(page.getByText('SUPER MEGA ADMIN ONLY')).toBeVisible();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:26:61
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-d-0b199--Tools-for-Super-Mega-Admin-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-d-0b199--Tools-for-Super-Mega-Admin-firefox\error-context.md
+
+
+[1A[2K  12) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Company Settings')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Company Settings')[22m
+
+
+      11 |
+      12 |     test('should display company settings section', async ({ page }) => {
+    > 13 |         await expect(page.getByText('Company Settings')).toBeVisible();
+         |                                                          ^
+      14 |         // Wait for loading to finish
+      15 |         await expect(page.getByLabel('Company Name')).toBeVisible({ timeout: 10000 });
+      16 |         await expect(page.getByLabel('Address')).toBeVisible();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:13:58
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-company-settings-section-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-company-settings-section-firefox\error-context.md
+
+
+[1A[2K  13) [webkit] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Company Settings')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Company Settings')[22m
+
+
+      11 |
+      12 |     test('should display company settings section', async ({ page }) => {
+    > 13 |         await expect(page.getByText('Company Settings')).toBeVisible();
+         |                                                          ^
+      14 |         // Wait for loading to finish
+      15 |         await expect(page.getByLabel('Company Name')).toBeVisible({ timeout: 10000 });
+      16 |         await expect(page.getByLabel('Address')).toBeVisible();
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:13:58
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-company-settings-section-webkit\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-company-settings-section-webkit\error-context.md
+
+
+[1A[2K[19/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin
+[1A[2K[20/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:37:9 ΓÇ║ Settings ΓÇ║ should handle seed test data
+[1A[2K[21/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data
+[1A[2K[22/22] [webkit] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions
+[1A[2K  14) [webkit] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Database Management')
+    Expected: visible
+    Timeout: 5000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 5000ms[22m
+    [2m  - waiting for getByText('Database Management')[22m
+
+
+      18 |
+      19 |     test('should display database management section', async ({ page }) => {
+    > 20 |         await expect(page.getByText('Database Management')).toBeVisible();
+         |                                                             ^
+      21 |         await expect(page.getByText('Database Statistics')).toBeVisible();
+      22 |     });
+      23 |
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:20:61
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-display-database-management-section-webkit\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-display-database-management-section-webkit\error-context.md
+
+
+[1A[2K  15) [firefox] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    [31mTest timeout of 30000ms exceeded.[39m
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Table Data Deleted').first()
+    Expected: visible
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByText('Table Data Deleted').first()[22m
+
+
+      69 |
+      70 |         // Verify success toast
+    > 71 |         await expect(page.getByText('Table Data Deleted').first()).toBeVisible({ timeout: 15000 });
+         |                                                                    ^
+      72 |     });
+      73 |
+      74 |     test('should handle delete all transactions', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:71:68
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-delete-table-data-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-delete-table-data-firefox\error-context.md
+
+
+[1A[2K  16) [webkit] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Table Data Deleted').first()
+    Expected: visible
+    Timeout: 15000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 15000ms[22m
+    [2m  - waiting for getByText('Table Data Deleted').first()[22m
+
+
+      69 |
+      70 |         // Verify success toast
+    > 71 |         await expect(page.getByText('Table Data Deleted').first()).toBeVisible({ timeout: 15000 });
+         |                                                                    ^
+      72 |     });
+      73 |
+      74 |     test('should handle delete all transactions', async ({ page }) => {
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\settings.spec.ts:71:68
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\settings-Settings-should-handle-delete-table-data-webkit\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\settings-Settings-should-handle-delete-table-data-webkit\error-context.md
+
+
+[1A[2K  16 failed
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin 
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:37:9 ΓÇ║ Settings ΓÇ║ should handle seed test data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [chromium] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions 
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:8:9 ΓÇ║ Settings ΓÇ║ should display settings page ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:24:9 ΓÇ║ Settings ΓÇ║ should display Admin Testing Tools for Super Mega Admin 
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [firefox] ΓÇ║ tests\e2e\settings.spec.ts:74:9 ΓÇ║ Settings ΓÇ║ should handle delete all transactions ΓöÇ
+    [webkit] ΓÇ║ tests\e2e\settings.spec.ts:12:9 ΓÇ║ Settings ΓÇ║ should display company settings section 
+    [webkit] ΓÇ║ tests\e2e\settings.spec.ts:19:9 ΓÇ║ Settings ΓÇ║ should display database management section 
+    [webkit] ΓÇ║ tests\e2e\settings.spec.ts:51:9 ΓÇ║ Settings ΓÇ║ should handle delete table data ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  6 passed (1.5m)
+
+[36m  Serving HTML report at http://localhost:62335. Press Ctrl+C to quit.[39m

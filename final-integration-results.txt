@@ -1,0 +1,510 @@
+
+> inventory-pro@0.1.0 test:integration
+> vitest run tests/integration
+
+
+[1m[46m RUN [49m[22m [36mv4.0.8 [39m[90mC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test[39m
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/ap.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔄 add secrets lifecycle management: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/products.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  enable debug logging with { debug: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  suppress all logs with { quiet: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/registration.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 prevent committing .env to code: https://dotenvx.com/precommit
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/api-regression.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/api-regression.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/ap.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/products.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/registration.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-uom.test.ts[2m > [22m[2mReceiving Voucher UOM Conversion Integration Tests
+[22m[39mTest BASE_URL: http://127.0.0.1:3007
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/auth.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  write to custom object with { processEnv: myObject }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/products-uom.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/purchase-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/sales-orders.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/inventory.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/warehouses.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔑 add access controls to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/pos.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 🔐 prevent building .env in docker: https://dotenvx.com/prebuild
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/auth.test.ts
+[22m[39mInitializing Prisma with DATABASE_URL: postgresql://neondb_...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mTransaction Test BASE_URL: http://127.0.0.1:3007
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m🔍 Starting Reproduction Test for RV Average Cost Anomaly...
+
+1️⃣ Setting up test data...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   Created Product: Test Product c0da402a (Base: pcs, Alt: box=10pcs)
+
+2️⃣ Scenario 1: First Receipt (1 box @ 100)
+
+ [32m✓[39m tests/integration/api/api-regression.test.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 4297[2mms[22m[39m
+       [33m[2m✓[22m[39m should return PO with correct Prisma relation names (capital letters) [33m 715[2mms[22m[39m
+       [33m[2m✓[22m[39m should list POs with correct property names [33m 630[2mms[22m[39m
+       [33m[2m✓[22m[39m should return RV with correct Prisma relation names [33m 1152[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/customers.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: 📡 add observability to secrets: https://dotenvx.com/ops
+Setup: DATABASE_URL is defined
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251201-0025
+   Average Cost: 10
+   Expected: 10
+
+3️⃣ Scenario 2: Second Receipt (1 box @ 200)
+
+[90mstderr[2m | tests/integration/api/sales-orders.test.ts[2m > [22m[2mSales Orders API Integration Tests
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+Setup failed Error: Login failed
+    at C:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/tests/integration/api/sales-orders.test.ts:37:23
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+
+ [31m❯[39m tests/integration/api/sales-orders.test.ts [2m([22m[2m6 tests[22m[2m | [22m[33m6 skipped[39m[2m)[22m[33m 4772[2mms[22m[39m
+       [2m[90m↓[39m[22m should create a new sales order
+       [2m[90m↓[39m[22m should return 400 for invalid SO data
+       [2m[90m↓[39m[22m should return list of sales orders
+       [2m[90m↓[39m[22m should return a sales order by ID
+       [2m[90m↓[39m[22m should update sales order
+       [2m[90m↓[39m[22m should cancel sales order
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251201-0026
+   Average Cost: 15
+   Expected: 15
+
+4️⃣ Scenario 3: Third Receipt (1 box @ 100 with 20 discount)
+
+[90mstderr[2m | tests/integration/api/products.test.ts[2m > [22m[2mProducts API Integration Tests
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+ [31m❯[39m tests/integration/api/products.test.ts [2m([22m[2m8 tests[22m[2m | [22m[33m8 skipped[39m[2m)[22m[33m 8757[2mms[22m[39m
+       [2m[90m↓[39m[22m should create a new product
+       [2m[90m↓[39m[22m should return 400 for invalid product data
+       [2m[90m↓[39m[22m should return list of products
+       [2m[90m↓[39m[22m should filter products by category
+       [2m[90m↓[39m[22m should return a product by ID
+       [2m[90m↓[39m[22m should return 404 for non-existent product
+       [2m[90m↓[39m[22m should update product details
+       [2m[90m↓[39m[22m should delete (or deactivate) product
+ [31m❯[39m tests/integration/api/ar.test.ts [2m([22m[2m14 tests[22m[2m | [22m[33m14 skipped[39m[2m)[22m[33m 8827[2mms[22m[39m
+       [2m[90m↓[39m[22m should create AR record successfully
+       [2m[90m↓[39m[22m should validate required fields
+       [2m[90m↓[39m[22m should record full payment and update status to paid
+       [2m[90m↓[39m[22m should record partial payment and update status to partial
+       [2m[90m↓[39m[22m should handle multiple partial payments
+       [2m[90m↓[39m[22m should reject payment exceeding balance
+       [2m[90m↓[39m[22m should reject zero or negative payment
+       [2m[90m↓[39m[22m should validate required payment fields
+       [2m[90m↓[39m[22m should calculate aging buckets correctly
+       [2m[90m↓[39m[22m should group by customer correctly
+       [2m[90m↓[39m[22m should calculate total outstanding correctly
+       [2m[90m↓[39m[22m should fetch all AR records
+       [2m[90m↓[39m[22m should filter by status
+       [2m[90m↓[39m[22m should filter by branch
+[90mstderr[2m | tests/integration/api/receiving-voucher-uom.test.ts[2m > [22m[2mReceiving Voucher UOM Conversion Integration Tests
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+ [31m❯[39m tests/integration/api/receiving-voucher-uom.test.ts [2m([22m[2m5 tests[22m[2m | [22m[33m5 skipped[39m[2m)[22m[33m 8921[2mms[22m[39m
+       [2m[90m↓[39m[22m should successfully create receiving voucher with case to bottle conversion
+       [2m[90m↓[39m[22m should handle partial case receipt (0.5 case = 5 bottles)
+       [2m[90m↓[39m[22m should work with pack UOM conversion
+       [2m[90m↓[39m[22m should fail with invalid UOM configuration
+       [2m[90m↓[39m[22m should prevent the original UOM conversion bug
+ [32m✓[39m tests/integration/api/auth.test.ts [2m([22m[2m2 tests[22m[2m)[22m[33m 7969[2mms[22m[39m
+     [33m[2m✓[22m[39m invalid login returns 401 [33m 487[2mms[22m[39m
+     [33m[2m✓[22m[39m valid login returns 200 and me returns 200 with cookie [33m 6628[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogging in...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m   RV Created: RV-20251201-0027
+   Average Cost: 12.66666666666667
+   Expected: 12.67
+
+🧹 Cleaning up...
+
+[90mstdout[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-11-30T20:27:17.254Z","context":{"target":"supplier.delete","timestamp":"2025-11-30T20:27:17.254Z","message":"\nInvalid `prisma.supplier.delete()` invocation in\nC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/tests/integration/reproduce_rv_avg_cost.test.ts:238:53\n\n  235     await prisma.productUOM.deleteMany({ where: { productId: product.id } });\n  236     await prisma.product.delete({ where: { id: product.id } });\n  237 }\n→ 238 if (supplier) await prisma.supplier.delete(\nForeign key constraint violated on the constraint: `AccountsPayable_supplierId_fkey`"}}
+
+[90mstderr[2m | tests/integration/reproduce_rv_avg_cost.test.ts[2m > [22m[2mReceiving Voucher Average Cost Anomaly Reproduction[2m > [22m[2mshould calculate weighted average cost correctly across multiple receipts
+[22m[39mCleanup failed PrismaClientKnownRequestError: 
+Invalid `prisma.supplier.delete()` invocation in
+C:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/tests/integration/reproduce_rv_avg_cost.test.ts:238:53
+
+  235     await prisma.productUOM.deleteMany({ where: { productId: product.id } });
+  236     await prisma.product.delete({ where: { id: product.id } });
+  237 }
+→ 238 if (supplier) await prisma.supplier.delete(
+Foreign key constraint violated on the constraint: `AccountsPayable_supplierId_fkey`
+    at $r.handleRequestError [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:7347[90m)[39m
+    at $r.handleAndLogRequestError [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:6642[90m)[39m
+    at $r.request [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:65:6349[90m)[39m
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+    at a [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:75:5816[90m)[39m
+    at C:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/tests/integration/reproduce_rv_avg_cost.test.ts:238:31
+    at [90mfile:///C:/Users/HI/Documents/GitHub/_deve%20local/_React%20Apps/test/[39mnode_modules/[4m@vitest/runner[24m/dist/index.js:753:20 {
+  code: [32m'P2003'[39m,
+  meta: {
+    modelName: [32m'Supplier'[39m,
+    driverAdapterError: DriverAdapterError: ForeignKeyConstraintViolation
+        at PrismaPgAdapter.onError [90m(file:///C:/Users/HI/Documents/GitHub/_deve%20local/_React%20Apps/test/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:657:11[90m)[39m
+        at PrismaPgAdapter.performIO [90m(file:///C:/Users/HI/Documents/GitHub/_deve%20local/_React%20Apps/test/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:652:12[90m)[39m
+    [90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+        at PrismaPgAdapter.queryRaw [90m(file:///C:/Users/HI/Documents/GitHub/_deve%20local/_React%20Apps/test/[39mnode_modules/[4m@prisma/adapter-pg[24m/dist/index.mjs:572:30[90m)[39m
+        at [90mC:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:23732
+        at mr [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:23571[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:41866[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:42290[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:41116[90m)[39m
+        at e.interpretNode [90m(C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\[39mnode_modules\[4m@prisma\client[24m\runtime\client.js:11:43464[90m)[39m {
+      cause: [36m[Object][39m
+    }
+  },
+  clientVersion: [32m'7.0.0'[39m
+}
+
+ [32m✓[39m tests/integration/reproduce_rv_avg_cost.test.ts [2m([22m[2m1 test[22m[2m)[22m[33m 10163[2mms[22m[39m
+     [33m[2m✓[22m[39m should calculate weighted average cost correctly across multiple receipts [33m 10162[2mms[22m[39m
+[90mstderr[2m | tests/integration/api/inventory.test.ts[2m > [22m[2mInventory API
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+ [31m❯[39m tests/integration/api/inventory.test.ts [2m([22m[2m2 tests[22m[2m | [22m[33m2 skipped[39m[2m)[22m[33m 10967[2mms[22m[39m
+     [2m[90m↓[39m[22m lists inventory
+     [2m[90m↓[39m[22m stock levels endpoint
+[90mstderr[2m | tests/integration/api/products-uom.test.ts[2m > [22m[2mProducts UOM
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+ [31m❯[39m tests/integration/api/products-uom.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 11111[2mms[22m[39m
+     [2m[90m↓[39m[22m updates product alternate UOMs
+[90mstderr[2m | tests/integration/api/pos.test.ts[2m > [22m[2mPOS Sales API
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+ [31m❯[39m tests/integration/api/pos.test.ts [2m([22m[2m2 tests[22m[2m | [22m[33m2 skipped[39m[2m)[22m[33m 11162[2mms[22m[39m
+     [2m[90m↓[39m[22m processes a cash sale
+     [2m[90m↓[39m[22m deducts inventory correctly after sale
+[90mstderr[2m | tests/integration/api/warehouses.test.ts[2m > [22m[2mWarehouses API
+[22m[39mLogin failed: {
+  "success": false,
+  "message": "\nInvalid `prisma.session.create()` invocation:\n\n\nUnique constraint failed on the fields: (`token`)"
+}
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogin Status: [33m200[39m
+
+ [31m❯[39m tests/integration/api/warehouses.test.ts [2m([22m[2m1 test[22m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 11371[2mms[22m[39m
+     [2m[90m↓[39m[22m lists warehouses
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mLogin successful, token obtained
+Creating test user...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test branch...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test warehouse...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mCreating test supplier...
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests
+[22m[39mTest data created
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould create RV, update inventory, and record stock movement in single transaction
+[22m[39mbeforeEach: Creating Product and PO
+
+ [31m❯[39m tests/integration/api/purchase-orders.test.ts [2m([22m[2m8 tests[22m[2m | [22m[31m1 failed[39m[2m | [22m[33m1 skipped[39m[2m)[22m[33m 13510[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new purchase order [33m 1957[2mms[22m[39m
+[31m       [31m×[31m should return 400 for invalid PO data[39m[33m 735[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of purchase orders [33m 397[2mms[22m[39m
+       [32m✓[39m should filter purchase orders by status[32m 238[2mms[22m[39m
+       [33m[2m✓[22m[39m should return a purchase order by ID [33m 1311[2mms[22m[39m
+       [32m✓[39m should return 404 for non-existent PO[32m 160[2mms[22m[39m
+       [33m[2m✓[22m[39m should update purchase order [33m 867[2mms[22m[39m
+       [2m[90m↓[39m[22m should cancel purchase order
+ [31m❯[39m tests/integration/api/customers.test.ts [2m([22m[2m7 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[33m 11201[2mms[22m[39m
+       [33m[2m✓[22m[39m should create a new customer [33m 900[2mms[22m[39m
+       [32m✓[39m should return 400 for missing required fields[32m 71[2mms[22m[39m
+       [33m[2m✓[22m[39m should return list of customers [33m 1538[2mms[22m[39m
+[31m       [31m×[31m should filter customers by search[39m[33m 3376[2mms[22m[39m
+       [33m[2m✓[22m[39m should return customer by ID [33m 498[2mms[22m[39m
+       [32m✓[39m should update customer details[32m 215[2mms[22m[39m
+       [33m[2m✓[22m[39m should delete (or deactivate) customer [33m 592[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould rollback all changes if any operation fails
+[22m[39mbeforeEach: Creating Product and PO
+
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mTransaction Atomicity[2m > [22m[2mshould handle multiple items in single transaction
+[22m[39mbeforeEach: Creating Product and PO
+
+ [32m✓[39m tests/integration/api/registration.test.ts [2m([22m[2m10 tests[22m[2m)[22m[33m 21224[2mms[22m[39m
+       [33m[2m✓[22m[39m should successfully register a new user with valid data [33m 3053[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject registration with duplicate email [33m 5178[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject registration with invalid role ID [33m 808[2mms[22m[39m
+       [33m[2m✓[22m[39m should hash password before storing in database [33m 1067[2mms[22m[39m
+       [33m[2m✓[22m[39m should create audit log entry for registration [33m 1253[2mms[22m[39m
+       [33m[2m✓[22m[39m should not include updatedAt field in user creation (regression test) [33m 1192[2mms[22m[39m
+       [33m[2m✓[22m[39m should work with correct Cashier role ID (regression test) [33m 1120[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/receiving-voucher-transaction.test.ts[2m > [22m[2mReceiving Voucher Transaction Integrity Tests[2m > [22m[2mRegression: Nested Transaction Bug[2m > [22m[2mshould not throw 500 error due to nested transactions
+[22m[39mbeforeEach: Creating Product and PO
+
+ [32m✓[39m tests/integration/api/receiving-voucher-transaction.test.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 42435[2mms[22m[39m
+       [33m[2m✓[22m[39m should create RV, update inventory, and record stock movement in single transaction [33m 5563[2mms[22m[39m
+       [33m[2m✓[22m[39m should rollback all changes if any operation fails [33m 1977[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple items in single transaction [33m 4356[2mms[22m[39m
+       [33m[2m✓[22m[39m should not throw 500 error due to nested transactions [33m 17836[2mms[22m[39m
+[90mstdout[2m | tests/integration/api/ap.test.ts[2m > [22m[2mAccounts Payable API Integration Tests
+[22m[39m{"level":"error","message":"Prisma error","timestamp":"2025-11-30T20:27:56.334Z","context":{"target":"user.delete","timestamp":"2025-11-30T20:27:56.334Z","message":"Connection terminated unexpectedly"}}
+
+ [31m❯[39m tests/integration/api/ap.test.ts [2m([22m[2m15 tests[22m[2m)[22m[33m 50725[2mms[22m[39m
+       [33m[2m✓[22m[39m should create AP record successfully [33m 5165[2mms[22m[39m
+       [33m[2m✓[22m[39m should validate required fields [33m 611[2mms[22m[39m
+       [33m[2m✓[22m[39m should record full payment and update status to paid [33m 3383[2mms[22m[39m
+       [33m[2m✓[22m[39m should record partial payment and update status to partial [33m 3212[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple partial payments [33m 3131[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject payment exceeding balance [33m 696[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject zero or negative payment [33m 482[2mms[22m[39m
+       [33m[2m✓[22m[39m should validate required payment fields [33m 511[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle different payment methods [33m 4008[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate aging buckets correctly [33m 879[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate total outstanding correctly [33m 488[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all AP records [33m 566[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 560[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 442[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by supplier [33m 428[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 9 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ap.test.ts[2m > [22mAccounts Payable API Integration Tests
+[31m[1mError[22m: Connection terminated unexpectedly[39m
+[90m [2m❯[22m node_modules/pg-pool/index.js:[2m45:11[22m[39m
+[90m [2m❯[22m PrismaPgAdapter.performIO ../../../_deve%20local/_React%20Apps/test/node_modules/@prisma/adapter-pg/dist/index.mjs:[2m622:22[22m[39m
+[90m [2m❯[22m PrismaPgAdapter.queryRaw ../../../_deve%20local/_React%20Apps/test/node_modules/@prisma/adapter-pg/dist/index.mjs:[2m572:30[22m[39m
+[90m [2m❯[22m node_modules/@prisma/client/runtime/client.js:[2m11:23732[22m[39m
+[90m [2m❯[22m mr node_modules/@prisma/client/runtime/client.js:[2m11:23571[22m[39m
+[90m [2m❯[22m e.interpretNode node_modules/@prisma/client/runtime/client.js:[2m11:41866[22m[39m
+[90m [2m❯[22m e.interpretNode node_modules/@prisma/client/runtime/client.js:[2m11:42290[22m[39m
+[90m [2m❯[22m e.interpretNode node_modules/@prisma/client/runtime/client.js:[2m11:41116[22m[39m
+[90m [2m❯[22m e.interpretNode node_modules/@prisma/client/runtime/client.js:[2m11:43464[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m43:13[22m[39m
+    [90m 41| [39m
+    [90m 42| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 43| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)[33m;[39m
+    [90m   | [39m            [31m^[39m
+    [90m 44| [39m    }
+    [90m 45| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/ar.test.ts[2m > [22mAccounts Receivable API Integration Tests
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading 'id')[39m
+[36m [2m❯[22m tests/integration/api/ar.test.ts:[2m76:80[22m[39m
+    [90m 74| [39m  [34mafterAll[39m([35masync[39m () [33m=>[39m {
+    [90m 75| [39m    [90m// Cleanup[39m
+    [90m 76| [39m    await prisma.accountsReceivable.deleteMany({ where: { branchId: te…
+    [90m   | [39m                                                                               [31m^[39m
+    [90m 77| [39m    [35mawait[39m prisma[33m.[39mcustomer[33m.[39m[35mdelete[39m({ where[33m:[39m { id[33m:[39m testCustomer[33m.[39mid } })[33m;[39m
+    [90m 78| [39m    [35mawait[39m prisma[33m.[39mbranch[33m.[39m[35mdelete[39m({ where[33m:[39m { id[33m:[39m testBranch[33m.[39mid } })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[3/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/inventory.test.ts[2m > [22mInventory API
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/inventory.test.ts:[2m31:13[22m[39m
+    [90m 29| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 30| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 31| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 32| [39m    }
+    [90m 33| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[4/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/pos.test.ts[2m > [22mPOS Sales API
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/pos.test.ts:[2m40:13[22m[39m
+    [90m 38| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 39| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 40| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 41| [39m    }
+    [90m 42| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[5/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products-uom.test.ts[2m > [22mProducts UOM
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/products-uom.test.ts:[2m35:13[22m[39m
+    [90m 33| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 34| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 35| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 36| [39m    }
+    [90m 37| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[6/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/products.test.ts[2m > [22mProducts API Integration Tests
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/products.test.ts:[2m35:13[22m[39m
+    [90m 33| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 34| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 35| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 36| [39m    }
+    [90m 37| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[7/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m42:13[22m[39m
+    [90m 40| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 41| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 42| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 43| [39m    }
+    [90m 44| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[8/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/receiving-voucher-uom.test.ts[2m > [22mReceiving Voucher UOM Conversion Integration Tests
+[31m[1mTypeError[22m: Cannot read properties of undefined (reading 'id')[39m
+[36m [2m❯[22m tests/integration/api/receiving-voucher-uom.test.ts:[2m170:71[22m[39m
+    [90m168| [39m    [90m// Clean up all test data[39m
+    [90m169| [39m    [35mawait[39m prisma[33m.[39mreceivingVoucherItem[33m.[39m[34mdeleteMany[39m({
+    [90m170| [39m      where: { ReceivingVoucher: { purchaseOrderId: testPurchaseOrder.…
+    [90m   | [39m                                                                      [31m^[39m
+    [90m171| [39m    })[33m;[39m
+    [90m172| [39m    [35mawait[39m prisma[33m.[39mreceivingVoucher[33m.[39m[34mdeleteMany[39m({
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[9/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/sales-orders.test.ts[2m > [22mSales Orders API Integration Tests
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/sales-orders.test.ts:[2m37:23[22m[39m
+    [90m 35| [39m            [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 36| [39m                console.error('Login failed:', JSON.stringify(loginDat…
+    [90m 37| [39m                [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m                      [31m^[39m
+    [90m 38| [39m            }
+    [90m 39| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[10/13]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/warehouses.test.ts[2m > [22mWarehouses API
+[31m[1mError[22m: Login failed[39m
+[36m [2m❯[22m tests/integration/api/warehouses.test.ts:[2m31:13[22m[39m
+    [90m 29| [39m    [35mif[39m ([33m![39mloginData[33m.[39msuccess) {
+    [90m 30| [39m      console.error('Login failed:', JSON.stringify(loginData, null, 2…
+    [90m 31| [39m      [35mthrow[39m [35mnew[39m [33mError[39m([32m'Login failed'[39m)
+    [90m   | [39m            [31m^[39m
+    [90m 32| [39m    }
+    [90m 33| [39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[11/13]⎯[22m[39m
+
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 2 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mGET /api/customers[2m > [22mshould filter customers by search
+[41m[1m FAIL [22m[49m tests/integration/api/purchase-orders.test.ts[2m > [22mPurchase Orders API Integration Tests[2m > [22mPOST /api/purchase-orders[2m > [22mshould return 400 for invalid PO data
+[31m[1mSyntaxError[22m: Unexpected token '<', "<!DOCTYPE "... is not valid JSON[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[12/13]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m11 failed[39m[22m[2m | [22m[1m[32m5 passed[39m[22m[90m (16)[39m
+[2m      Tests [22m [1m[31m2 failed[39m[22m[2m | [22m[1m[32m51 passed[39m[22m[2m | [22m[33m40 skipped[39m[90m (93)[39m
+[2m   Start at [22m 04:27:04
+[2m   Duration [22m 52.13s[2m (transform 1.73s, setup 4.09s, collect 4.47s, tests 237.41s, environment 11.96s, prepare 425ms)[22m
+

@@ -1,0 +1,49 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.8 [39m[90mC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test[39m
+
+[90mstdout[2m | tests/integration/api/customers.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (16) from .env -- tip: ⚙️  override existing env vars with { override: true }
+Setup: DATABASE_URL is defined
+
+ [31m❯[39m tests/integration/api/customers.test.ts [2m([22m[2m7 tests[22m[2m | [22m[31m4 failed[39m[2m)[22m[33m 1569[2mms[22m[39m
+[31m       [31m×[31m should create a new customer[39m[32m 37[2mms[22m[39m
+[31m       [31m×[31m should return 400 for missing required fields[39m[32m 33[2mms[22m[39m
+[31m       [31m×[31m should return list of customers[39m[32m 30[2mms[22m[39m
+[31m       [31m×[31m should filter customers by search[39m[32m 29[2mms[22m[39m
+       [32m✓[39m should return customer by ID[32m 0[2mms[22m[39m
+       [32m✓[39m should update customer details[32m 0[2mms[22m[39m
+       [32m✓[39m should delete (or deactivate) customer[32m 0[2mms[22m[39m
+
+[31m⎯⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Tests 4 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mPOST /api/customers[2m > [22mshould create a new customer
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mGET /api/customers[2m > [22mshould return list of customers
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mGET /api/customers[2m > [22mshould filter customers by search
+[31m[1mSyntaxError[22m: Unexpected token '<', "<!DOCTYPE "... is not valid JSON[39m
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/4]⎯[22m[39m
+
+[41m[1m FAIL [22m[49m tests/integration/api/customers.test.ts[2m > [22mCustomers API Integration Tests[2m > [22mPOST /api/customers[2m > [22mshould return 400 for missing required fields
+[31m[1mAssertionError[22m: expected 404 to be 400 // Object.is equality[39m
+
+[32m- Expected[39m
+[31m+ Received[39m
+
+[32m- 400[39m
+[31m+ 404[39m
+
+[36m [2m❯[22m tests/integration/api/customers.test.ts:[2m73:37[22m[39m
+    [90m 71| [39m                body[33m:[39m [33mJSON[39m[33m.[39m[34mstringify[39m(invalidCustomer)[33m,[39m
+    [90m 72| [39m            })[33m;[39m
+    [90m 73| [39m            [34mexpect[39m(response[33m.[39mstatus)[33m.[39m[34mtoBe[39m([34m400[39m)[33m;[39m
+    [90m   | [39m                                    [31m^[39m
+    [90m 74| [39m        })[33m;[39m
+    [90m 75| [39m    })[33m;[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/4]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[31m4 failed[39m[22m[2m | [22m[1m[32m3 passed[39m[22m[90m (7)[39m
+[2m   Start at [22m 04:08:48
+[2m   Duration [22m 2.94s[2m (transform 46ms, setup 143ms, collect 23ms, tests 1.57s, environment 630ms, prepare 14ms)[22m
+
