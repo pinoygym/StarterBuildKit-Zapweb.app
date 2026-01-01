@@ -1,0 +1,119 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - complementary [ref=e3]:
+      - generic [ref=e4]:
+        - img [ref=e6]
+        - generic [ref=e11]:
+          - generic [ref=e12]: InventoryPro
+          - generic [ref=e13]: Inventory & POS
+      - navigation [ref=e14]:
+        - link "Dashboard" [ref=e15] [cursor=pointer]:
+          - /url: /dashboard
+          - img [ref=e16]
+          - generic [ref=e21]: Dashboard
+        - link "Products" [ref=e22] [cursor=pointer]:
+          - /url: /products
+          - img [ref=e23]
+          - generic [ref=e28]: Products
+        - link "Inventory" [ref=e29] [cursor=pointer]:
+          - /url: /inventory
+          - img [ref=e30]
+          - generic [ref=e34]: Inventory
+        - link "Warehouses" [ref=e35] [cursor=pointer]:
+          - /url: /warehouses
+          - img [ref=e36]
+          - generic [ref=e41]: Warehouses
+        - link "Branches" [ref=e42] [cursor=pointer]:
+          - /url: /branches
+          - img [ref=e43]
+          - generic [ref=e51]: Branches
+        - link "Suppliers" [ref=e52] [cursor=pointer]:
+          - /url: /suppliers
+          - img [ref=e53]
+          - generic [ref=e58]: Suppliers
+        - link "Purchase Orders" [ref=e59] [cursor=pointer]:
+          - /url: /purchase-orders
+          - img [ref=e60]
+          - generic [ref=e64]: Purchase Orders
+        - link "Sales Orders" [ref=e65] [cursor=pointer]:
+          - /url: /sales-orders
+          - img [ref=e66]
+          - generic [ref=e72]: Sales Orders
+        - link "POS" [ref=e73] [cursor=pointer]:
+          - /url: /pos
+          - img [ref=e74]
+          - generic [ref=e80]: POS
+        - link "AR/AP" [ref=e81] [cursor=pointer]:
+          - /url: /ar-ap
+          - img [ref=e82]
+          - generic [ref=e85]: AR/AP
+        - link "Expenses" [ref=e86] [cursor=pointer]:
+          - /url: /expenses
+          - img [ref=e87]
+          - generic [ref=e91]: Expenses
+        - link "Alerts" [ref=e92] [cursor=pointer]:
+          - /url: /alerts
+          - img [ref=e93]
+          - generic [ref=e97]: Alerts
+        - link "Reports" [ref=e98] [cursor=pointer]:
+          - /url: /reports
+          - img [ref=e99]
+          - generic [ref=e104]: Reports
+        - generic [ref=e105]:
+          - paragraph [ref=e106]: Settings
+          - link "Users" [ref=e107] [cursor=pointer]:
+            - /url: /users
+            - img [ref=e108]
+            - generic [ref=e120]: Users
+          - link "Roles" [ref=e121] [cursor=pointer]:
+            - /url: /roles
+            - img [ref=e122]
+            - generic [ref=e124]: Roles
+      - generic [ref=e126]:
+        - paragraph [ref=e127]: © 2024 InventoryPro
+        - paragraph [ref=e128]: v1.0.0
+    - generic [ref=e129]:
+      - banner [ref=e130]:
+        - generic [ref=e131]:
+          - heading "Welcome to InventoryPro" [level=1] [ref=e133]
+          - generic [ref=e135]:
+            - img [ref=e136]
+            - combobox [ref=e144] [cursor=pointer]:
+              - generic: All Branches
+              - img [ref=e145]
+      - main [ref=e147]:
+        - generic [ref=e148]:
+          - generic [ref=e149]:
+            - navigation [ref=e150]:
+              - link "Dashboard" [ref=e152] [cursor=pointer]:
+                - /url: /dashboard
+              - generic [ref=e153]:
+                - img [ref=e154]
+                - generic [ref=e156]: POS
+            - generic [ref=e158]:
+              - heading "Point of Sale" [level=1] [ref=e159]
+              - paragraph [ref=e160]: Process sales transactions
+          - generic [ref=e162]:
+            - paragraph [ref=e163]: Please select a branch to start using the POS system
+            - paragraph [ref=e164]: You can select a branch from the branch selector in the navigation bar
+    - region "Notifications (F8)":
+      - list
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e165]:
+    - img [ref=e167]
+    - button "Open Tanstack query devtools" [ref=e216] [cursor=pointer]:
+      - img [ref=e217]
+  - status [ref=e266]:
+    - generic [ref=e267]:
+      - img [ref=e269]
+      - generic [ref=e271]:
+        - text: Static route
+        - button "Hide static indicator" [ref=e272] [cursor=pointer]:
+          - img [ref=e273]
+  - alert [ref=e276]
+```
