@@ -1,0 +1,6 @@
+
+Checking database: Spring Pond (DATABASE_URL)
+[PASS] 'taxId' column exists in 'Supplier'.
+
+Checking database: Broad Darkness (DATABASE_URL_UNPOOLED)
+[PASS] 'taxId' column exists in 'Supplier'.

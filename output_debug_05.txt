@@ -1,0 +1,71 @@
+﻿
+Running 3 tests using 2 workers
+
+  Γ£ô  1 [setup] ΓÇ║ tests\e2e\auth.setup.ts:5:6 ΓÇ║ authenticate (6.0s)
+  Γ£ÿ  3 [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process (8.7s)
+  Γ£ÿ  2 [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process (15.9s)
+
+
+  1) [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sale Completed')
+    Expected: visible
+    Error: strict mode violation: getByText('Sale Completed') resolved to 2 elements:
+        1) <div class="text-sm font-semibold [&+div]:text-xs">Sale Completed</div> aka getByText('Sale Completed', { exact: true })
+        2) <span role="status" aria-live="assertive">Notification Sale CompletedTransaction processed ΓÇª</span> aka getByText('Notification Sale')
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sale Completed')[22m
+
+
+      107 |
+      108 |     // Verify success
+    > 109 |     await expect(page.getByText('Sale Completed')).toBeVisible({ timeout: 10000 });
+          |                                                    ^
+      110 |   });
+      111 | });
+      112 |
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\pos.spec.ts:109:52
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\pos-POS-System-should-complete-checkout-process-chromium\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\pos-POS-System-should-complete-checkout-process-chromium\error-context.md
+
+  2) [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error: [2mexpect([22m[31mlocator[39m[2m).[22mtoBeVisible[2m([22m[2m)[22m failed
+
+    Locator: getByText('Sale Completed')
+    Expected: visible
+    Timeout: 10000ms
+    Error: element(s) not found
+
+    Call log:
+    [2m  - Expect "toBeVisible" with timeout 10000ms[22m
+    [2m  - waiting for getByText('Sale Completed')[22m
+
+
+      107 |
+      108 |     // Verify success
+    > 109 |     await expect(page.getByText('Sale Completed')).toBeVisible({ timeout: 10000 });
+          |                                                    ^
+      110 |   });
+      111 | });
+      112 |
+        at C:\Users\HI\Documents\GitHub\_deve local\_React Apps\test\tests\e2e\pos.spec.ts:109:52
+
+    attachment #1: screenshot (image/png) ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    test-results\pos-POS-System-should-complete-checkout-process-firefox\test-failed-1.png
+    ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+
+    Error Context: test-results\pos-POS-System-should-complete-checkout-process-firefox\error-context.md
+
+  2 failed
+    [chromium] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+    [firefox] ΓÇ║ tests\e2e\pos.spec.ts:88:7 ΓÇ║ POS System ΓÇ║ should complete checkout process ΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇΓöÇ
+  1 passed (26.6s)
