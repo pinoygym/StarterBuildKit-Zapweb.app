@@ -1,0 +1,145 @@
+﻿
+> inventory-pro@0.1.0 test:unit
+> vitest run tests/unit
+
+
+[1m[46m RUN [49m[22m [36mv4.0.8 [39m[90mC:/Users/HI/Documents/GitHub/_deve local/_React Apps/test[39m
+
+ [31mΓ¥»[39m tests/unit/lib/uom-conversion.test.ts [2m([22m[2m25 tests[22m[2m | [22m[31m1 failed[39m[2m)[22m[32m 19[2mms[22m[39m
+       [32mΓ£ô[39m should find exact UOM match[32m 2[2mms[22m[39m
+       [32mΓ£ô[39m should find case-insensitive exact match[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should find partial match when exact match fails[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should find UOM with descriptive name[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should return null when no match found[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should return same quantity when UOMs are identical[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should convert case to bottles correctly[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should convert pack to bottles correctly[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should handle decimal quantities[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should fail when no conversion found[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should fail with invalid conversion factor[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should work with descriptive UOM names[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should validate correct UOM data[32m 1[2mms[22m[39m
+       [32mΓ£ô[39m should reject empty name[32m 1[2mms[22m[39m
+[31m       [31m├ù[31m should reject invalid conversion factor[39m[32m 8[2mms[22m[39m
+       [32mΓ£ô[39m should reject negative conversion factor[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should reject non-numeric conversion factor[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should calculate correct unit cost for case to bottle conversion[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should calculate correct unit cost for pack to bottle conversion[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should return same cost when no conversion needed[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should fail when conversion fails[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should handle the original bug case: case to bottle conversion[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should handle partial UOM name matching[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should maintain precision with decimal quantities[32m 0[2mms[22m[39m
+       [32mΓ£ô[39m should validate all UOM data before processing[32m 0[2mms[22m[39m
+ [32mΓ£ô[39m tests/unit/jwt-mock-test.test.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 48[2mms[22m[39m
+node.exe : 
+At line:1 char:1
++ & "C:\Program Files\nodejs/node.exe" "C:\Program Files\nodejs/node_mo ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Suites 13 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/ap.service.test.ts[2m [ 
+tests/unit/services/ap.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/ap.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[1/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/ar.service.test.ts[2m [ 
+tests/unit/services/ar.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/ar.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[2/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/auth.service.test.ts[2m [ 
+tests/unit/services/auth.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/auth.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[3/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/branch.service.test.ts[2m [ 
+tests/unit/services/branch.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/branch.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[4/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/inventory.service.test.ts[2m [ 
+tests/unit/services/inventory.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/inventory.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[5/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/inventory.service.uom.test.ts[2m [ 
+tests/unit/services/inventory.service.uom.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/inventory.service.uom.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[6/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/product.service.test.ts[2m [ 
+tests/unit/services/product.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/product.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[7/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/purchase-order.service.test.ts[2m [ 
+tests/unit/services/purchase-order.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/purchase-order.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[8/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/receiving-voucher.service.test.ts[2m [ 
+tests/unit/services/receiving-voucher.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/receiving-voucher.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[9/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/sales-order.service.test.ts[2m [ 
+tests/unit/services/sales-order.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/sales-order.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[10/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/supplier.service.test.ts[2m [ 
+tests/unit/services/supplier.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/supplier.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[11/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/user.service.test.ts[2m [ 
+tests/unit/services/user.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/user.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[12/14]ΓÄ»[22m[39m
+
+[41m[1m FAIL [22m[49m tests/unit/services/warehouse.service.test.ts[2m [ 
+tests/unit/services/warehouse.service.test.ts ][22m
+[31m[1mError[22m: No test suite found in file C:/Users/HI/Documents/GitHub/_deve local/_React 
+Apps/test/tests/unit/services/warehouse.service.test.ts[39m
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[13/14]ΓÄ»[22m[39m
+
+
+[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m[1m[41m Failed Tests 1 [49m[22m[31mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[39m
+
+[41m[1m FAIL [22m[49m tests/unit/lib/uom-conversion.test.ts[2m > [22mUOM Conversion 
+Utilities[2m > [22mvalidateUOMData[2m > [22mshould reject invalid conversion factor
+[31m[1mAssertionError[22m: expected [ Array(1) ] to include 'Conversion factor must be 
+greater thaΓÇª'[39m
+[36m [2mΓ¥»[22m tests/unit/lib/uom-conversion.test.ts:[2m115:29[22m[39m
+    [90m113| [39m      const result = validateUOMData({ id: '1', name: 'Case', conversiΓÇª
+    [90m114| [39m      
+[34mexpect[39m(result[33m.[39misValid)[33m.[39m[34mtoBe[39m([35mfalse[39m)[33m;[39m
+    [90m115| [39m      expect(result.errors).toContain('Conversion factor must be greatΓÇª
+    [90m   | [39m                            [31m^[39m
+    [90m116| [39m    })[33m;[39m
+    [90m117| [39m
+
+[31m[2mΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»ΓÄ»[14/14]ΓÄ»[22m[39m
+
+
+[2m Test Files [22m [1m[31m14 failed[39m[22m[2m | [22m[1m[32m1 passed[39m[22m[90m (15)[39m
+[2m      Tests [22m [1m[31m1 failed[39m[22m[2m | [22m[1m[32m26 passed[39m[22m[90m (27)[39m
+[2m   Start at [22m 10:21:56
+[2m   Duration [22m 909ms[2m (transform 464ms, setup 0ms, collect 722ms, tests 67ms, environment 3ms, prepare 400ms)[22m
+
