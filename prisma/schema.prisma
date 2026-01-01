@@ -1,0 +1,940 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["fullTextSearchPostgres"]
+  engineType      = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model APPayment {
+  id              String          @id
+  apId            String
+  amount          Float
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime        @default(now())
+  AccountsPayable AccountsPayable @relation(fields: [apId], references: [id], onDelete: Cascade)
+
+  @@index([apId])
+  @@index([paymentDate])
+}
+
+model ARPayment {
+  id                 String             @id
+  arId               String
+  amount             Float
+  paymentMethod      String
+  referenceNumber    String?
+  paymentDate        DateTime
+  createdAt          DateTime           @default(now())
+  AccountsReceivable AccountsReceivable @relation(fields: [arId], references: [id], onDelete: Cascade)
+
+  @@index([arId])
+  @@index([paymentDate])
+}
+
+model AccountsPayable {
+  id              String      @id
+  branchId        String
+  supplierId      String
+  purchaseOrderId String?
+  totalAmount     Float
+  paidAmount      Float       @default(0)
+  balance         Float
+  dueDate         DateTime
+  status          String      @default("pending")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime
+  APPayment       APPayment[]
+  Branch          Branch      @relation(fields: [branchId], references: [id])
+  Supplier        Supplier    @relation(fields: [supplierId], references: [id])
+
+  @@index([branchId])
+  @@index([branchId, status])
+  @@index([createdAt])
+  @@index([dueDate])
+  @@index([status, dueDate])
+  @@index([status])
+  @@index([supplierId])
+  @@index([supplierId, status])
+}
+
+model AccountsReceivable {
+  id           String      @id
+  branchId     String
+  customerId   String?
+  customerName String
+  salesOrderId String?
+  totalAmount  Float
+  paidAmount   Float       @default(0)
+  balance      Float
+  dueDate      DateTime
+  status       String      @default("pending")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime
+  ARPayment    ARPayment[]
+  Branch       Branch      @relation(fields: [branchId], references: [id])
+  Customer     Customer?   @relation(fields: [customerId], references: [id])
+
+  @@index([branchId])
+  @@index([branchId, status])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([customerName])
+  @@index([dueDate])
+  @@index([status, dueDate])
+  @@index([status])
+}
+
+model AuditLog {
+  id         String   @id
+  userId     String?
+  action     String
+  resource   String
+  resourceId String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  User       User?    @relation(fields: [userId], references: [id])
+
+  @@index([action], map: "idx_audit_log_action")
+  @@index([createdAt], map: "idx_audit_log_created")
+  @@index([resource], map: "idx_audit_log_resource")
+  @@index([resourceId], map: "idx_audit_log_resource_id")
+  @@index([userId], map: "idx_audit_log_user")
+}
+
+model Branch {
+  id                      String                    @id
+  name                    String
+  code                    String                    @unique
+  location                String
+  manager                 String
+  phone                   String
+  status                  String                    @default("active")
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  AccountsPayable         AccountsPayable[]
+  AccountsReceivable      AccountsReceivable[]
+  CustomerPurchaseHistory CustomerPurchaseHistory[]
+  DailySalesSummary       DailySalesSummary[]
+  EmployeePerformance     EmployeePerformance[]
+  Expense                 Expense[]
+  POSReceipt              POSReceipt[]
+  POSSale                 POSSale[]
+  PromotionUsage          PromotionUsage[]
+  PurchaseOrder           PurchaseOrder[]
+  ReceivingVoucher        ReceivingVoucher[]
+  SalesOrder              SalesOrder[]
+  User                    User[]
+  UserBranchAccess        UserBranchAccess[]
+  Warehouse               Warehouse[]
+
+  @@index([code])
+  @@index([createdAt])
+  @@index([status])
+}
+
+model CompanySettings {
+  id                        String   @id
+  companyName               String
+  address                   String
+  phone                     String?
+  email                     String?
+  taxId                     String?
+  website                   String?
+  logoUrl                   String?
+  headerText                String?
+  footerText                String?
+  receiptHeader             String?
+  receiptFooter             String?
+  primaryColor              String   @default("#3b82f6")
+  secondaryColor            String   @default("#1e40af")
+  fontFamily                String   @default("Inter")
+  paperSize                 String   @default("A4")
+  thermalPrinter            Boolean  @default(false)
+  autoPrintReceipts         Boolean  @default(false)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime
+  discountApprovalThreshold Float    @default(20.0)
+  maxDiscountPercentage     Float    @default(50.0)
+  requireDiscountApproval   Boolean  @default(false)
+  taxInclusive              Boolean  @default(true)
+  vatEnabled                Boolean  @default(false)
+  vatRate                   Float    @default(12.0)
+  vatRegistrationNumber     String?
+}
+
+model Customer {
+  id                      String                    @id
+  customerCode            String                    @unique
+  companyName             String?
+  contactPerson           String
+  phone                   String
+  email                   String?
+  address                 String?
+  city                    String?
+  region                  String?
+  postalCode              String?
+  paymentTerms            String                    @default("Net 30")
+  creditLimit             Float?
+  taxId                   String?
+  customerType            String                    @default("regular")
+  notes                   String?
+  status                  String                    @default("active")
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  AccountsReceivable      AccountsReceivable[]
+  CustomerPurchaseHistory CustomerPurchaseHistory[]
+  POSReceipt              POSReceipt[]
+  PromotionUsage          PromotionUsage[]
+  SalesOrder              SalesOrder[]
+
+  @@index([companyName])
+  @@index([contactPerson])
+  @@index([customerCode])
+  @@index([customerType])
+  @@index([email])
+  @@index([status])
+}
+
+model CustomerPurchaseHistory {
+  id                  String   @id
+  customerId          String
+  saleId              String   @unique
+  branchId            String
+  totalAmount         Float
+  itemsCount          Int
+  paymentMethod       String
+  purchaseDate        DateTime
+  loyaltyPointsEarned Int      @default(0)
+  createdAt           DateTime @default(now())
+  Branch              Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  Customer            Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  POSSale             POSSale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([customerId])
+  @@index([customerId, purchaseDate])
+  @@index([paymentMethod])
+  @@index([purchaseDate])
+}
+
+model DailySalesSummary {
+  id                 String   @id
+  branchId           String
+  date               DateTime
+  totalSales         Float
+  totalTransactions  Int
+  averageTransaction Float
+  cashSales          Float
+  cardSales          Float
+  digitalSales       Float
+  creditSales        Float
+  totalTax           Float
+  totalDiscount      Float
+  grossProfit        Float
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime
+  Branch             Branch   @relation(fields: [branchId], references: [id])
+
+  @@unique([branchId, date])
+  @@index([branchId, date])
+  @@index([branchId])
+  @@index([date])
+}
+
+model EmployeePerformance {
+  id                   String   @id
+  userId               String
+  branchId             String
+  date                 DateTime
+  totalSales           Float
+  transactionCount     Int
+  averageTransaction   Float
+  itemsSold            Int
+  returnsHandled       Int      @default(0)
+  customerSatisfaction Float?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime
+  Branch               Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, branchId, date])
+  @@index([branchId, date])
+  @@index([branchId])
+  @@index([date])
+  @@index([userId, date])
+  @@index([userId])
+}
+
+model Expense {
+  id            String   @id
+  branchId      String
+  expenseDate   DateTime
+  category      String
+  amount        Float
+  description   String
+  paymentMethod String
+  vendor        String?
+  receiptUrl    String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+  Branch        Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+
+  @@index([branchId, category])
+  @@index([branchId, expenseDate])
+  @@index([branchId])
+  @@index([category, expenseDate])
+  @@index([category])
+  @@index([createdAt])
+  @@index([expenseDate])
+}
+
+model ExpenseCategory {
+  id              String   @id
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model ExpenseVendor {
+  id            String   @id
+  name          String   @unique
+  contactPerson String?
+  phone         String?
+  email         String?
+  status        String   @default("active")
+  displayOrder  Int      @default(0)
+  usageCount    Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+
+  @@index([name])
+  @@index([status])
+  @@index([usageCount])
+}
+
+
+model POSReceipt {
+  id             String    @id
+  saleId         String    @unique
+  receiptNumber  String    @unique
+  branchId       String
+  cashierId      String
+  customerId     String?
+  subtotal       Float
+  tax            Float
+  totalAmount    Float
+  paymentMethod  String
+  amountReceived Float
+  change         Float
+  discountAmount Float     @default(0)
+  discountReason String?
+  loyaltyPoints  Int       @default(0)
+  notes          String?
+  barcode        String?
+  qrCode         String?
+  isPrinted      Boolean   @default(false)
+  printCount     Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  Branch         Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User           User      @relation(fields: [cashierId], references: [id], onDelete: Cascade)
+  Customer       Customer? @relation(fields: [customerId], references: [id])
+  POSSale        POSSale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([cashierId])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([paymentMethod])
+  @@index([receiptNumber])
+}
+
+model POSSale {
+  id                      String                   @id
+  receiptNumber           String                   @unique
+  branchId                String
+  subtotal                Float
+  tax                     Float                    @default(0)
+  totalAmount             Float
+  paymentMethod           String
+  amountReceived          Float?
+  change                  Float?
+  convertedFromOrderId    String?
+  createdAt               DateTime                 @default(now())
+  discount                Float                    @default(0)
+  discountReason          String?
+  discountType            String?
+  discountValue           Float?
+  salesAgentId            String?
+  CustomerPurchaseHistory CustomerPurchaseHistory?
+  POSReceipt              POSReceipt?
+  Branch                  Branch                   @relation(fields: [branchId], references: [id])
+  SalesAgent              SalesAgent?              @relation(fields: [salesAgentId], references: [id])
+  POSSaleItem             POSSaleItem[]
+  PromotionUsage          PromotionUsage[]
+
+  @@index([branchId, createdAt])
+  @@index([branchId])
+  @@index([branchId, paymentMethod])
+  @@index([createdAt])
+  @@index([paymentMethod])
+  @@index([receiptNumber])
+  @@index([salesAgentId])
+}
+
+model POSSaleItem {
+  id              String  @id
+  saleId          String
+  productId       String
+  quantity        Float
+  uom             String
+  unitPrice       Float
+  subtotal        Float
+  costOfGoodsSold Float
+  discount        Float   @default(0)
+  discountType    String?
+  discountValue   Float?
+  originalPrice   Float?
+  Product         Product @relation(fields: [productId], references: [id])
+  POSSale         POSSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([saleId])
+}
+
+model PasswordResetToken {
+  id        String   @id
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt], map: "idx_password_reset_expires")
+  @@index([token], map: "idx_password_reset_token")
+  @@index([userId], map: "idx_password_reset_user")
+}
+
+model PaymentMethod {
+  id              String   @id
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  applicableTo    String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model Permission {
+  id             String           @id
+  resource       String
+  action         String
+  description    String?
+  createdAt      DateTime         @default(now())
+  RolePermission RolePermission[]
+
+  @@unique([resource, action], map: "unique_permission_resource_action")
+  @@index([action], map: "idx_permission_action")
+  @@index([resource], map: "idx_permission_resource")
+}
+
+model Product {
+  id               String        @id
+  name             String        @unique
+  description      String?
+  category         String
+  imageUrl         String?
+  basePrice        Float
+  baseUOM          String
+  minStockLevel    Int
+  shelfLifeDays    Int
+  status           String        @default("active")
+  createdAt        DateTime      @default(now())
+  updatedAt        DateTime
+  averageCostPrice Float         @default(0)
+  Inventory        Inventory[]
+  POSSaleItem      POSSaleItem[]
+
+  PurchaseOrderItem    PurchaseOrderItem[]
+  ReceivingVoucherItem ReceivingVoucherItem[]
+  SalesOrderItem       SalesOrderItem[]
+  productUOMs          ProductUOM[]
+  StockMovement        StockMovement[]
+
+  @@index([category])
+  @@index([category, status])
+  @@index([createdAt])
+  @@index([name])
+  @@index([status])
+}
+
+model ProductCategory {
+  id              String   @id
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model ProductUOM {
+  id               String   @id
+  productId        String
+  name             String
+  conversionFactor Float
+  sellingPrice     Float
+  createdAt        DateTime @default(now())
+  Product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([productId])
+}
+
+model PromotionUsage {
+  id             String    @id
+  promotionName  String
+  promotionCode  String?
+  saleId         String
+  customerId     String?
+  discountAmount Float
+  discountType   String
+  discountValue  Float
+  usageDate      DateTime
+  branchId       String
+  createdAt      DateTime  @default(now())
+  Branch         Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  Customer       Customer? @relation(fields: [customerId], references: [id])
+  POSSale        POSSale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([customerId])
+  @@index([promotionCode])
+  @@index([promotionName])
+  @@index([saleId])
+  @@index([usageDate])
+}
+
+model PurchaseOrder {
+  id                   String              @id
+  poNumber             String              @unique
+  supplierId           String
+  warehouseId          String
+  branchId             String
+  totalAmount          Float
+  status               String              @default("draft")
+  receivingStatus      String?             @default("pending")
+  expectedDeliveryDate DateTime
+  actualDeliveryDate   DateTime?
+  notes                String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime
+  Branch               Branch              @relation(fields: [branchId], references: [id])
+  Supplier             Supplier            @relation(fields: [supplierId], references: [id])
+  Warehouse            Warehouse           @relation(fields: [warehouseId], references: [id])
+  PurchaseOrderItem    PurchaseOrderItem[]
+  ReceivingVoucher     ReceivingVoucher[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([poNumber])
+  @@index([receivingStatus])
+  @@index([status])
+  @@index([supplierId])
+  @@index([warehouseId])
+}
+
+model PurchaseOrderItem {
+  id               String        @id
+  poId             String
+  productId        String
+  quantity         Float
+  unitPrice        Float
+  subtotal         Float
+  receivedQuantity Float         @default(0)
+  uom              String
+  PurchaseOrder    PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  Product          Product       @relation(fields: [productId], references: [id])
+
+  @@index([poId])
+  @@index([productId])
+}
+
+model ReceivingVoucher {
+  id                        String                 @id
+  rvNumber                  String                 @unique
+  purchaseOrderId           String
+  warehouseId               String
+  branchId                  String
+  receiverName              String
+  deliveryNotes             String?
+  status                    String                 @default("complete")
+  totalOrderedAmount        Float
+  totalReceivedAmount       Float
+  varianceAmount            Float
+  receivedDate              DateTime               @default(now())
+  createdAt                 DateTime               @default(now())
+  updatedAt                 DateTime
+  additionalFees            Float                  @default(0)
+  additionalFeesDescription String?
+  netAmount                 Float                  @default(0)
+  recomputeAverageCost      Boolean                @default(false)
+  supplierDiscount          Float                  @default(0)
+  supplierDiscountType      String?
+  Branch                    Branch                 @relation(fields: [branchId], references: [id])
+  PurchaseOrder             PurchaseOrder          @relation(fields: [purchaseOrderId], references: [id])
+  Warehouse                 Warehouse              @relation(fields: [warehouseId], references: [id])
+  ReceivingVoucherItem      ReceivingVoucherItem[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([purchaseOrderId])
+  @@index([receivedDate])
+  @@index([rvNumber])
+  @@index([status])
+  @@index([warehouseId])
+}
+
+model ReceivingVoucherItem {
+  id                 String           @id
+  rvId               String
+  productId          String
+  orderedQuantity    Float
+  receivedQuantity   Float
+  varianceQuantity   Float
+  variancePercentage Float
+  varianceReason     String?
+  unitPrice          Float
+  lineTotal          Float
+  uom                String
+  Product            Product          @relation(fields: [productId], references: [id])
+  ReceivingVoucher   ReceivingVoucher @relation(fields: [rvId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([rvId])
+}
+
+model ReportExport {
+  id           String    @id
+  reportType   String
+  reportName   String
+  format       String
+  fileUrl      String?
+  fileSize     Int?
+  status       String    @default("PENDING")
+  filters      Json?
+  errorMessage String?
+  requestedBy  String
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime
+
+  @@index([createdAt])
+  @@index([reportType])
+  @@index([requestedBy])
+  @@index([status])
+}
+
+model ReportTemplate {
+  id          String   @id
+  name        String
+  type        String
+  description String?
+  template    Json
+  isDefault   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+
+  @@index([isActive])
+  @@index([isDefault])
+  @@index([type])
+}
+
+model Role {
+  id             String           @id
+  name           String           @unique
+  description    String?
+  isSystem       Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  RolePermission RolePermission[]
+  User           User[]
+
+  @@index([isSystem], map: "idx_role_is_system")
+  @@index([name], map: "idx_role_name")
+}
+
+model RolePermission {
+  id           String     @id
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  Permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  Role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId], map: "unique_role_permission")
+  @@index([permissionId], map: "idx_role_permission_permission")
+  @@index([roleId], map: "idx_role_permission_role")
+}
+
+model SalesAgent {
+  id            String    @id
+  name          String    @unique
+  code          String    @unique
+  contactPerson String?
+  phone         String?
+  email         String?
+  status        String    @default("active")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime
+  displayOrder  Int       @default(0)
+  POSSale       POSSale[]
+
+  @@index([name])
+  @@index([status])
+}
+
+model SalesOrder {
+  id                String           @id
+  orderNumber       String           @unique
+  customerId        String?
+  customerName      String
+  customerPhone     String
+  customerEmail     String?
+  deliveryAddress   String
+  warehouseId       String
+  branchId          String
+  totalAmount       Float
+  status            String           @default("draft")
+  salesOrderStatus  String           @default("pending")
+  deliveryDate      DateTime
+  convertedToSaleId String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime
+  Branch            Branch           @relation(fields: [branchId], references: [id])
+  Customer          Customer?        @relation(fields: [customerId], references: [id])
+  Warehouse         Warehouse        @relation(fields: [warehouseId], references: [id])
+  SalesOrderItem    SalesOrderItem[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([orderNumber])
+  @@index([salesOrderStatus])
+  @@index([status])
+  @@index([warehouseId])
+}
+
+model SalesOrderItem {
+  id         String     @id
+  soId       String
+  productId  String
+  quantity   Float
+  uom        String
+  unitPrice  Float
+  subtotal   Float
+  Product    Product    @relation(fields: [productId], references: [id])
+  SalesOrder SalesOrder @relation(fields: [soId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([soId])
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt], map: "idx_session_expires")
+  @@index([token], map: "idx_session_token")
+  @@index([userId], map: "idx_session_user")
+}
+
+model StockMovement {
+  id             String         @id
+  productId      String
+  warehouseId    String
+  type           String
+  quantity       Float
+  reason         String?
+  referenceId    String?
+  referenceType  String?
+  createdAt      DateTime       @default(now())
+  Product        Product        @relation(fields: [productId], references: [id])
+  Warehouse      Warehouse      @relation(fields: [warehouseId], references: [id])
+
+  @@index([productId])
+  @@index([warehouseId])
+  @@index([createdAt])
+  @@index([referenceId, referenceType])
+}
+
+model Supplier {
+  id              String            @id
+  companyName     String
+  contactPerson   String
+  phone           String
+  email           String?
+  paymentTerms    String
+  status          String            @default("active")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime
+  AccountsPayable AccountsPayable[]
+  PurchaseOrder   PurchaseOrder[]
+
+  @@index([companyName])
+  @@index([status])
+}
+
+model UnitOfMeasure {
+  id              String   @id
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model User {
+  id                  String                @id
+  email               String                @unique
+  passwordHash        String
+  firstName           String
+  lastName            String
+  phone               String?
+  roleId              String
+  branchId            String?
+  status              String                @default("ACTIVE")
+  emailVerified       Boolean               @default(false)
+  isSuperMegaAdmin    Boolean               @default(false)
+  lastLoginAt         DateTime?
+  passwordChangedAt   DateTime?
+  createdAt           DateTime              @default(now())
+  updatedAt           DateTime
+  branchLockEnabled   Boolean               @default(false)
+  AuditLog            AuditLog[]
+  EmployeePerformance EmployeePerformance[]
+  POSReceipt          POSReceipt[]
+  PasswordResetToken  PasswordResetToken[]
+  Session             Session[]
+  Branch              Branch?               @relation(fields: [branchId], references: [id])
+  Role                Role                  @relation(fields: [roleId], references: [id])
+  UserBranchAccess    UserBranchAccess[]
+
+  @@index([branchId], map: "idx_user_branch")
+  @@index([email], map: "idx_user_email")
+  @@index([emailVerified], map: "idx_user_email_verified")
+  @@index([roleId], map: "idx_user_role")
+  @@index([status], map: "idx_user_status")
+}
+
+model UserBranchAccess {
+  id        String   @id
+  userId    String
+  branchId  String
+  createdAt DateTime @default(now())
+  Branch    Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, branchId], map: "unique_user_branch_access")
+  @@index([branchId], map: "idx_user_branch_access_branch")
+  @@index([userId], map: "idx_user_branch_access_user")
+}
+
+model Warehouse {
+  id               String             @id
+  name             String
+  location         String
+  manager          String
+  maxCapacity      Int
+  branchId         String
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime
+  Inventory        Inventory[]
+  PurchaseOrder    PurchaseOrder[]
+  ReceivingVoucher ReceivingVoucher[]
+  SalesOrder       SalesOrder[]
+  Branch           Branch             @relation(fields: [branchId], references: [id])
+  StockMovement    StockMovement[]
+
+  @@index([branchId])
+  @@index([branchId, name])
+}
+
+model Inventory {
+  id          String    @id @default(cuid())
+  productId   String
+  warehouseId String
+  quantity    Float     @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product   @relation(fields: [productId], references: [id])
+  Warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+
+  @@unique([productId, warehouseId])
+  @@index([productId])
+  @@index([warehouseId])
+}
+
+enum PermissionAction {
+  READ
+  CREATE
+  UPDATE
+  DELETE
+  MANAGE
+}
+
+enum PermissionResource {
+  USERS
+  ROLES
+  PRODUCTS
+  INVENTORY
+  SALES
+  PURCHASES
+  CUSTOMERS
+  SUPPLIERS
+  REPORTS
+  SETTINGS
+  ACCOUNTING
+  BRANCHES
+}
