@@ -1,0 +1,964 @@
+﻿--- RECONCILIATION DATA ---
+PRODUCT| Salto Chick Booster edited
+IMAGE|ADJ-03|3|sack
+STOCK|Mabini Bodega|75|pack
+---
+PRODUCT|Alaska Evaporada Yellow
+IMAGE|ADJ-06|9|CAN
+STOCK|Mabini Store|9|CAN
+---
+PRODUCT|Alaska Evaporated Red
+IMAGE|ADJ-01|31|BOX
+IMAGE|ADJ-06|64|CAN
+STOCK|Mabini Bodega|1488|CAN
+STOCK|Mabini Store|64|CAN
+---
+PRODUCT|All Purpose Flour edited
+IMAGE|ADJ-09|22|kl
+IMAGE|ADJ-01|22|sack
+STOCK|Mabini Bodega|550|kl
+STOCK|Mabini Store|22|kl
+---
+PRODUCT|Angel Evaporated 410ml
+IMAGE|ADJ-01|1|BOX
+IMAGE|ADJ-06|70|CAN
+STOCK|Mabini Bodega|48|CAN
+STOCK|Mabini Store|70|CAN
+---
+PRODUCT|Anise Concentrated
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|4|gallon
+STOCK|Mabini Bodega|8|gallon
+STOCK|Mabini Store|4|gallon
+---
+PRODUCT|Anti-Amag
+IMAGE|ADJ-09|3|pack
+IMAGE|ADJ-01|16|BOX
+STOCK|Mabini Bodega|96|pack
+STOCK|Mabini Store|3|pack
+---
+PRODUCT|Bakels Platinum Instant Active
+IMAGE|ADJ-01|26|boX
+IMAGE|ADJ-06|17|pack
+STOCK|Mabini Bodega|520|pack
+STOCK|Mabini Store|17|pack
+---
+PRODUCT|Bakers Choice BP edited
+IMAGE|ADJ-01|12|pail
+STOCK|Mabini Bodega|120|KILO
+---
+PRODUCT|Baking Soda edited
+IMAGE|ADJ-09|4|kilo
+IMAGE|ADJ-01|3|bag
+STOCK|Mabini Bodega|75|kilo
+STOCK|Mabini Store|4|kilo
+---
+PRODUCT|Bambi Butter
+IMAGE|ADJ-01|3|BOX
+IMAGE|ADJ-06|2|jar
+STOCK|Mabini Bodega|18|jar
+STOCK|Mabini Store|2|jar
+---
+PRODUCT|Basic Finisher edited
+IMAGE|ADJ-03|4|sack
+STOCK|Mabini Bodega|4|sack
+---
+PRODUCT|Bensdorp edited
+IMAGE|ADJ-09|19|kilo
+IMAGE|ADJ-01|3|sack
+STOCK|Mabini Bodega|75|kilo
+STOCK|Mabini Store|19|kilo
+---
+PRODUCT|Blueberry 6kg
+IMAGE|ADJ-01|1|WHOLESALE_UNIT
+STOCK|Mabini Bodega|1|jar
+---
+PRODUCT|Butter Oil
+IMAGE|ADJ-01|1|BOX
+IMAGE|ADJ-06|9|jar
+STOCK|Mabini Bodega|12|jar
+STOCK|Mabini Store|9|jar
+---
+PRODUCT|Cake Flour edited
+IMAGE|ADJ-09|25|kilo
+IMAGE|ADJ-01|19|sack
+STOCK|Mabini Bodega|475|kilo
+STOCK|Mabini Store|25|kilo
+---
+PRODUCT|Calumet bag14kg
+IMAGE|ADJ-01|32|bag
+STOCK|Mabini Bodega|32|bag
+---
+PRODUCT|Calumet kilo
+IMAGE|ADJ-09|47|KILO
+STOCK|Mabini Store|47|KILO
+---
+PRODUCT|Canon Oil 15kl
+IMAGE|ADJ-01|9|container
+STOCK|Mabini Bodega|9|gallon
+---
+PRODUCT|Carbonato edited
+IMAGE|ADJ-01|6|sack
+STOCK|Mabini Bodega|150|kilo
+---
+PRODUCT|Cheezee
+IMAGE|ADJ-01|7|BOX
+IMAGE|ADJ-06|35|pack
+STOCK|Mabini Bodega|336|pack
+STOCK|Mabini Store|35|pack
+---
+PRODUCT|Cinnamon Powder
+IMAGE|ADJ-01|1|Drum
+STOCK|Mabini Bodega|27.75|kl
+---
+PRODUCT|Cornstarch edited
+IMAGE|ADJ-09|43|kl.
+IMAGE|ADJ-01|8|sack
+STOCK|Mabini Bodega|200|kl.
+STOCK|Mabini Store|43|kl.
+---
+PRODUCT|Cup - Baking Cup #1
+IMAGE|ADJ-02|4|BOX
+IMAGE|ADJ-06|55|pack
+STOCK|Mabini Bodega|80|pack
+STOCK|Mabini Store|55|pack
+---
+PRODUCT|Cup - Baking Cup #2
+IMAGE|ADJ-02|80|BOX
+IMAGE|ADJ-06|53|pack
+STOCK|Mabini Bodega|960|pack
+STOCK|Mabini Store|53|pack
+---
+PRODUCT|Cup - Baking Cup #3
+IMAGE|ADJ-02|24|BOX
+IMAGE|ADJ-06|101|pack
+STOCK|Mabini Bodega|480|pack
+STOCK|Mabini Store|101|pack
+---
+PRODUCT|Cup - Turta Cup
+IMAGE|ADJ-06|100|UNIT
+STOCK|Mabini Store|100|UNIT
+---
+PRODUCT|Dairy Bake edited
+IMAGE|ADJ-09|14|kilo
+IMAGE|ADJ-01|5|sack
+STOCK|Mabini Bodega|125|kilo
+STOCK|Mabini Store|14|kilo
+---
+PRODUCT|Dobrim
+IMAGE|ADJ-09|9|pack
+IMAGE|ADJ-01|62|BOX
+STOCK|Mabini Bodega|744|pack
+STOCK|Mabini Store|9|pack
+---
+PRODUCT|Doner edited
+IMAGE|ADJ-09|42.5|kilo
+IMAGE|ADJ-01|7|sack
+STOCK|Mabini Bodega|350|kilo
+STOCK|Mabini Store|42.5|kilo
+---
+PRODUCT|Doreen Condensed
+IMAGE|ADJ-01|8|box
+IMAGE|ADJ-06|58|can
+STOCK|Mabini Bodega|384|can
+STOCK|Mabini Store|58|can
+---
+PRODUCT|Elite Hog Gestatex edited
+IMAGE|ADJ-04|10|sack
+STOCK|Mabini Bodega|10|sack
+---
+PRODUCT|Elite Hog Growex 1 edited
+IMAGE|ADJ-04|7|sack
+STOCK|Mabini Bodega|7|sack
+---
+PRODUCT|Elite Hog Growex 2 edited
+IMAGE|ADJ-04|4|sack
+STOCK|Mabini Bodega|4|sack
+---
+PRODUCT|Elite Hog Lactatex edited
+IMAGE|ADJ-04|8|sack
+STOCK|Mabini Bodega|8|sack
+---
+PRODUCT|Elite Hog Pre Startex 2 edited
+IMAGE|ADJ-04|5|sack
+STOCK|Mabini Bodega|5|sack
+---
+PRODUCT|Elite Hog Startex edited
+IMAGE|ADJ-04|3|sack
+STOCK|Mabini Bodega|3|sack
+---
+PRODUCT|Emmie Victory Cocoa edited
+IMAGE|ADJ-09|9.5|kilo
+IMAGE|ADJ-01|7|sack
+STOCK|Mabini Bodega|175|kilo
+STOCK|Mabini Store|9.5|kilo
+---
+PRODUCT|Express Chicken Layex 1 edited
+IMAGE|ADJ-03|3|sack
+STOCK|Mabini Bodega|3|sack
+---
+PRODUCT|Farmland edited
+IMAGE|ADJ-09|23.5|kilo
+IMAGE|ADJ-01|8|sack
+STOCK|Mabini Bodega|200|kilo
+STOCK|Mabini Store|23.5|kilo
+---
+PRODUCT|Favorich black
+IMAGE|ADJ-01|2|Bag
+STOCK|Mabini Bodega|50|kilo
+---
+PRODUCT|Favorich Brown
+IMAGE|ADJ-01|3|BAG
+STOCK|Mabini Bodega|75|kilo
+---
+PRODUCT|Feeds - WOOFY Adult edited
+IMAGE|ADJ-09|13.5|kilo
+IMAGE|ADJ-04|2|sack
+STOCK|Mabini Bodega|40|kilo
+STOCK|Mabini Store|13.5|kilo
+---
+PRODUCT|Foodcolor - Choco Brown
+IMAGE|ADJ-01|3|BOX
+IMAGE|ADJ-06|15|jar
+STOCK|Mabini Bodega|36|jar
+STOCK|Mabini Store|15|jar
+---
+PRODUCT|Foodcolor - Egg Yellow
+IMAGE|ADJ-01|3|BOX
+IMAGE|ADJ-06|17|jar
+STOCK|Mabini Bodega|36|jar
+STOCK|Mabini Store|17|jar
+---
+PRODUCT|Foodcolor - Orange (JAR)
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|21|jar
+STOCK|Mabini Bodega|24|jar
+STOCK|Mabini Store|21|jar
+---
+PRODUCT|Foodcolor - Orange 60ml
+IMAGE|ADJ-06|18|bottle
+STOCK|Mabini Store|18|bottle
+---
+PRODUCT|Foodcolor - Rosa Pink
+IMAGE|ADJ-01|6|BOX
+IMAGE|ADJ-06|17|pack
+STOCK|Mabini Bodega|72|pack
+STOCK|Mabini Store|17|pack
+---
+PRODUCT|Foodcolor - Straw Red
+IMAGE|ADJ-01|4|BOX
+IMAGE|ADJ-06|11|jar
+STOCK|Mabini Bodega|48|jar
+STOCK|Mabini Store|11|jar
+---
+PRODUCT|Foodcolor - Ube Violet
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|30|jar
+STOCK|Mabini Bodega|24|jar
+STOCK|Mabini Store|30|jar
+---
+PRODUCT|Gallimax1 edited
+IMAGE|ADJ-03|1|sack
+STOCK|Mabini Bodega|1|sack
+---
+PRODUCT|Gallimax2 edited
+IMAGE|ADJ-03|10|sack
+STOCK|Mabini Bodega|10|sack
+---
+PRODUCT|Gallimax2plus edited
+IMAGE|ADJ-03|7|sack
+STOCK|Mabini Bodega|7|sack
+---
+PRODUCT|Gallimax3 brown edited
+IMAGE|ADJ-03|5|sack
+STOCK|Mabini Bodega|5|sack
+---
+PRODUCT|General edited
+IMAGE|ADJ-09|104.5|kilo
+IMAGE|ADJ-01|24|sack
+STOCK|Mabini Bodega|600|kilo
+STOCK|Mabini Store|104.5|kilo
+---
+PRODUCT|Hershey
+IMAGE|ADJ-09|7.5|kilo
+STOCK|Mabini Store|7.5|kilo
+---
+PRODUCT|Iodized Salt edited
+IMAGE|ADJ-09|1|kilo
+IMAGE|ADJ-01|10|sack
+STOCK|Mabini Bodega|250|kilo
+STOCK|Mabini Store|1|kilo
+---
+PRODUCT|Island edited
+IMAGE|ADJ-09|24|kilo
+IMAGE|ADJ-09|50|kilo
+IMAGE|ADJ-01|23|sack
+STOCK|Mabini Bodega|575|kilo
+STOCK|Mabini Store|50|kilo
+---
+PRODUCT|Kunemax Breeder edited
+IMAGE|ADJ-04|4|sack
+STOCK|Mabini Bodega|4|sack
+---
+PRODUCT|Kunemax Grower edited
+IMAGE|ADJ-04|1|sack
+STOCK|Mabini Bodega|1|sack
+---
+PRODUCT|Lihia Water
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|22|liter
+STOCK|Mabini Bodega|32|liter
+STOCK|Mabini Store|22|liter
+---
+PRODUCT|Longa
+IMAGE|ADJ-09|11.5|kilo
+IMAGE|ADJ-01|4|sack
+STOCK|Mabini Bodega|100|kilo
+STOCK|Mabini Store|11.5|kilo
+---
+PRODUCT|Masterchef edited
+IMAGE|ADJ-09|9.5|kilo
+IMAGE|ADJ-01|8|sack
+STOCK|Mabini Bodega|200|kilo
+STOCK|Mabini Store|9.5|kilo
+---
+PRODUCT|Mauripan edited
+IMAGE|ADJ-01|8|Box
+IMAGE|ADJ-06|20|pack
+STOCK|Mabini Bodega|160|pack
+STOCK|Mabini Store|20|pack
+---
+PRODUCT|Maxime Adult 20kg edited
+IMAGE|ADJ-04|14|sack
+STOCK|Mabini Bodega|14|sack
+---
+PRODUCT|Maxime Cat tuna 7kg edited
+IMAGE|ADJ-09|6|kilo
+IMAGE|ADJ-04|5|sack
+STOCK|Mabini Bodega|35|kilo
+STOCK|Mabini Store|6|kilo
+---
+PRODUCT|Maxime Puppy 20kg edited
+IMAGE|ADJ-09|18.5|kilo
+STOCK|Mabini Store|18.5|kilo
+---
+PRODUCT|Megastar edited
+IMAGE|ADJ-01|1|sack
+STOCK|Mabini Bodega|1|sack
+---
+PRODUCT|Orange Oil
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|4|bottle
+STOCK|Mabini Bodega|24|bottle
+STOCK|Mabini Store|4|bottle
+---
+PRODUCT|Others - BILLIARD MATERIALS Blue Chalk
+IMAGE|ADJ-08|111|PACK
+IMAGE|ADJ-05|2|carton
+STOCK|Mabini Store|113|PACK
+---
+PRODUCT|Others - BILLIARD MATERIALS Knight Cue Tip (G)
+IMAGE|ADJ-08|24|pack
+STOCK|Mabini Store|24|pack
+---
+PRODUCT|Others - CHLORINE 70% edited
+IMAGE|ADJ-04|3|drum
+STOCK|Mabini Bodega|126.6|KILO
+---
+PRODUCT|Others - RUGBY
+IMAGE|ADJ-04|6|BOX
+IMAGE|ADJ-07|8|bottle
+STOCK|Mabini Bodega|144|bottle
+STOCK|Mabini Store|8|bottle
+---
+PRODUCT|Others - SHOEMATERIAL JRB Black
+IMAGE|ADJ-05|7|bottle
+STOCK|Mabini Store|7|bottle
+---
+PRODUCT|Others - SHOEMATERIAL JRB Brown
+IMAGE|ADJ-05|17|bottle
+STOCK|Mabini Store|17|bottle
+---
+PRODUCT|Others - SHOEMATERIAL Nylon Pamo Black
+IMAGE|ADJ-08|23|roll
+STOCK|Mabini Store|23|roll
+---
+PRODUCT|Others - SHOEMATERIAL Nylon Pamo White
+IMAGE|ADJ-08|20|roll
+STOCK|Mabini Store|20|roll
+---
+PRODUCT|Others - SHOEMATERIAL Snap Local
+IMAGE|ADJ-10|3|box
+IMAGE|ADJ-05|5|box
+STOCK|Mabini Store|8|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Origenal Brown #10
+IMAGE|ADJ-10|20|pairs
+STOCK|Mabini Store|20|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Origenal Brown #11
+IMAGE|ADJ-10|22|pairs
+STOCK|Mabini Store|22|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Origenal Brown #12
+IMAGE|ADJ-10|20|pairs
+STOCK|Mabini Store|20|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Origenal Brown #8
+IMAGE|ADJ-10|33|pairs
+STOCK|Mabini Store|33|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Origenal Brown #9
+IMAGE|ADJ-10|20|pairs
+STOCK|Mabini Store|20|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #10
+IMAGE|ADJ-10|23|pairs
+STOCK|Mabini Store|23|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #11
+IMAGE|ADJ-10|18|pairs
+STOCK|Mabini Store|18|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #12
+IMAGE|ADJ-10|25|pairs
+STOCK|Mabini Store|25|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #13
+IMAGE|ADJ-10|7|pairs
+STOCK|Mabini Store|7|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #8
+IMAGE|ADJ-10|12|pairs
+STOCK|Mabini Store|12|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Rugged #9
+IMAGE|ADJ-10|39|pairs
+STOCK|Mabini Store|39|pairs
+---
+PRODUCT|Others - SHOEMATERIAL Sole Yellow
+IMAGE|ADJ-07|8|pcs
+STOCK|Mabini Store|8|pcs
+---
+PRODUCT|Others - SHOEMATERIAL Turn Button Local
+IMAGE|ADJ-08|60|pcs
+IMAGE|ADJ-10|39|Box
+STOCK|Mabini Store|3960|pcs
+---
+PRODUCT|Others - TISSUE Precut
+IMAGE|ADJ-04|15|rem
+IMAGE|ADJ-06|7|pack
+STOCK|Mabini Bodega|75|pack
+STOCK|Mabini Store|7|pack
+---
+PRODUCT|Others - TISSUE Roll
+IMAGE|ADJ-04|20|WHOLESALE_UNIT
+IMAGE|ADJ-07|39|ROLL
+STOCK|Mabini Bodega|20|ROLL
+STOCK|Mabini Store|39|ROLL
+---
+PRODUCT|Others - TWINE Dura Flex Twine
+IMAGE|ADJ-04|2|rem
+IMAGE|ADJ-06|16|ROLL
+STOCK|Mabini Bodega|20|ROLL
+STOCK|Mabini Store|16|ROLL
+---
+PRODUCT|Others - UPHOLSTERY Air Ventelator
+IMAGE|ADJ-08|57|pcs
+STOCK|Mabini Store|57|pcs
+---
+PRODUCT|Others - UPHOLSTERY Astra Assorted
+IMAGE|ADJ-08|185|ROLL
+IMAGE|ADJ-10|162|carton
+STOCK|Mabini Store|1805|ROLL
+---
+PRODUCT|Others - UPHOLSTERY Astra Black
+IMAGE|ADJ-08|8|ROLL
+IMAGE|ADJ-10|18|Box
+STOCK|Mabini Store|188|ROLL
+---
+PRODUCT|Others - UPHOLSTERY Astra White
+IMAGE|ADJ-08|21|ROLL
+IMAGE|ADJ-10|15|Box
+STOCK|Mabini Store|171|ROLL
+---
+PRODUCT|Others - UPHOLSTERY Chairnails Assorted
+IMAGE|ADJ-08|20|pcs
+STOCK|Mabini Store|20|pcs
+---
+PRODUCT|Others - UPHOLSTERY Gromets #3
+IMAGE|ADJ-08|56|pcs
+IMAGE|ADJ-10|9|pack
+STOCK|Mabini Store|956|pcs
+---
+PRODUCT|Others - UPHOLSTERY Lambo #36
+IMAGE|ADJ-10|82|pcs
+STOCK|Mabini Store|82|pcs
+---
+PRODUCT|Others - UPHOLSTERY Lambo #54
+IMAGE|ADJ-10|147|pcs
+STOCK|Mabini Store|147|pcs
+---
+PRODUCT|Others - UPHOLSTERY Magic Tape
+IMAGE|ADJ-10|18|roll
+STOCK|Mabini Store|450|METER
+---
+PRODUCT|Others - UPHOLSTERY Strap #3/4
+IMAGE|ADJ-10|12|roll
+STOCK|Mabini Store|480|METER
+---
+PRODUCT|Others - UPHOLSTERY Zipper #10 Black
+IMAGE|ADJ-10|4|roll
+STOCK|Mabini Store|200|METER
+---
+PRODUCT|Others - UPHOLSTERY Zipper #3
+IMAGE|ADJ-10|5|roll
+STOCK|Mabini Store|250|METER
+---
+PRODUCT|Others - UPHOLSTERY Zipper #8 Black
+IMAGE|ADJ-10|5|roll
+STOCK|Mabini Store|120|METER
+---
+PRODUCT|Others - UPHOLSTERY Zipper Runner #10
+IMAGE|ADJ-08|102|pcs
+IMAGE|ADJ-10|600|pcs
+STOCK|Mabini Store|702|pcs
+---
+PRODUCT|Others - UPHOLSTERY Zipper Runner #3
+IMAGE|ADJ-10|400|pcs
+STOCK|Mabini Store|400|pcs
+---
+PRODUCT|Others - UPHOLSTERY Zipper Runner #5
+IMAGE|ADJ-08|159|pcs
+IMAGE|ADJ-10|500|pcs
+STOCK|Mabini Store|659|pcs
+---
+PRODUCT|Others - UPHOLSTERY Zipper Runner #8
+IMAGE|ADJ-08|422|pcs
+STOCK|Mabini Store|422|pcs
+---
+PRODUCT|Panadero Premier Active Dry edited
+IMAGE|ADJ-09|11|KILO
+IMAGE|ADJ-01|6|pail
+STOCK|Mabini Bodega|78|KILO
+STOCK|Mabini Store|11|KILO
+---
+PRODUCT|Paperbag #1
+IMAGE|ADJ-06|12|pack
+STOCK|Mabini Store|12|pack
+---
+PRODUCT|Paperbag #10
+IMAGE|ADJ-06|6|pack
+STOCK|Mabini Store|6|pack
+---
+PRODUCT|Paperbag #12
+IMAGE|ADJ-02|6|rem
+STOCK|Mabini Bodega|60|pack
+---
+PRODUCT|Paperbag #2
+IMAGE|ADJ-06|12|pack
+STOCK|Mabini Store|12|pack
+---
+PRODUCT|Paperbag #25
+IMAGE|ADJ-06|2|pack
+STOCK|Mabini Store|2|pack
+---
+PRODUCT|Paperbag #3
+IMAGE|ADJ-06|1|pack
+STOCK|Mabini Store|1|pack
+---
+PRODUCT|Paperbag #4
+IMAGE|ADJ-02|20|rem
+STOCK|Mabini Bodega|200|pack
+---
+PRODUCT|Paperbag #6
+IMAGE|ADJ-02|9|rem
+STOCK|Mabini Bodega|90|pack
+---
+PRODUCT|Paperbag #8
+IMAGE|ADJ-02|9|rem
+IMAGE|ADJ-06|6|pack
+STOCK|Mabini Bodega|90|pack
+STOCK|Mabini Store|6|pack
+---
+PRODUCT|PLASTIC - Excellent 10x16 (02)
+IMAGE|ADJ-02|8|rem
+IMAGE|ADJ-07|3|pack
+STOCK|Mabini Bodega|40|pack
+STOCK|Mabini Store|3|pack
+---
+PRODUCT|PLASTIC - Excellent 2 1/2x10 (01)
+IMAGE|ADJ-07|33|pack
+STOCK|Mabini Store|33|pack
+---
+PRODUCT|PLASTIC - Excellent 2x10 (01)
+IMAGE|ADJ-07|3|pack
+STOCK|Mabini Store|3|pack
+---
+PRODUCT|PLASTIC - Excellent 2x3 (02)
+IMAGE|ADJ-02|45|rem
+IMAGE|ADJ-06|19|pack
+IMAGE|ADJ-07|21|pack
+STOCK|Mabini Bodega|45|pack
+STOCK|Mabini Store|40|pack
+---
+PRODUCT|PLASTIC - Excellent 3x10 (02)
+IMAGE|ADJ-02|22|rem
+IMAGE|ADJ-07|9|pack
+STOCK|Mabini Bodega|220|pack
+STOCK|Mabini Store|9|pack
+---
+PRODUCT|PLASTIC - Excellent 3x5 (02)
+IMAGE|ADJ-06|1|pack
+IMAGE|ADJ-07|21|pack
+STOCK|Mabini Store|22|pack
+---
+PRODUCT|PLASTIC - Excellent 4x6 (02)
+IMAGE|ADJ-02|9|rem
+IMAGE|ADJ-06|16|pack
+IMAGE|ADJ-07|2|pack
+STOCK|Mabini Bodega|90|pack
+STOCK|Mabini Store|18|pack
+---
+PRODUCT|PLASTIC - Excellent 4x8 (01)
+IMAGE|ADJ-07|54|pack
+STOCK|Mabini Store|54|pack
+---
+PRODUCT|PLASTIC - Excellent 4x8 (02)
+IMAGE|ADJ-07|6|pack
+IMAGE|ADJ-07|1|pack
+STOCK|Mabini Store|1|pack
+---
+PRODUCT|PLASTIC - Excellent 5x10 (01)
+IMAGE|ADJ-07|4|pack
+STOCK|Mabini Store|4|pack
+---
+PRODUCT|PLASTIC - Excellent 5x10 (02)
+IMAGE|ADJ-07|8|pack
+STOCK|Mabini Store|8|pack
+---
+PRODUCT|PLASTIC - Excellent 5x7 (01)
+IMAGE|ADJ-07|15|pack
+STOCK|Mabini Store|15|pack
+---
+PRODUCT|PLASTIC - Excellent 5x7 (02)
+IMAGE|ADJ-02|12|rem
+IMAGE|ADJ-07|18|pack
+STOCK|Mabini Bodega|120|pack
+STOCK|Mabini Store|18|pack
+---
+PRODUCT|PLASTIC - Excellent 5x8 (02)
+IMAGE|ADJ-02|18|rem
+STOCK|Mabini Bodega|180|pack
+---
+PRODUCT|PLASTIC - Excellent 5x8 (03)
+IMAGE|ADJ-07|2|pack
+STOCK|Mabini Store|2|pack
+---
+PRODUCT|PLASTIC - Excellent 5x9 (01)
+IMAGE|ADJ-07|9|pack
+STOCK|Mabini Store|9|pack
+---
+PRODUCT|PLASTIC - Excellent 5x9 (02)
+IMAGE|ADJ-02|7|rem
+IMAGE|ADJ-07|7|pack
+STOCK|Mabini Bodega|70|pack
+STOCK|Mabini Store|7|pack
+---
+PRODUCT|PLASTIC - Excellent 6x12 (01)
+IMAGE|ADJ-07|2|pack
+STOCK|Mabini Store|2|pack
+---
+PRODUCT|PLASTIC - Excellent 6x12 (02)
+IMAGE|ADJ-02|20|rem
+IMAGE|ADJ-07|3|pack
+STOCK|Mabini Bodega|200|pack
+STOCK|Mabini Store|3|pack
+---
+PRODUCT|PLASTIC - Excellent 6x8 (01)
+IMAGE|ADJ-02|25|rem
+IMAGE|ADJ-07|9|pack
+STOCK|Mabini Bodega|250|pack
+STOCK|Mabini Store|9|pack
+---
+PRODUCT|PLASTIC - Excellent 7x14 (01)
+IMAGE|ADJ-02|15|rem
+IMAGE|ADJ-07|10|pack
+STOCK|Mabini Bodega|150|pack
+STOCK|Mabini Store|10|pack
+---
+PRODUCT|PLASTIC - Excellent 7x14 (02)
+IMAGE|ADJ-02|14|rem
+IMAGE|ADJ-07|1|pack
+STOCK|Mabini Bodega|140|pack
+STOCK|Mabini Store|1|pack
+---
+PRODUCT|PLASTIC - Excellent 8x12 (01)
+IMAGE|ADJ-02|18|rem
+IMAGE|ADJ-07|88|pack
+STOCK|Mabini Bodega|180|pack
+STOCK|Mabini Store|88|pack
+---
+PRODUCT|PLASTIC - Excellent 8x12 (02)
+IMAGE|ADJ-02|40|rem
+IMAGE|ADJ-07|9|pack
+STOCK|Mabini Bodega|40|pack
+STOCK|Mabini Store|9|pack
+---
+PRODUCT|PLASTIC - Excellent 8x14 (02)
+IMAGE|ADJ-02|21|rem
+IMAGE|ADJ-07|4|pack
+STOCK|Mabini Bodega|210|pack
+STOCK|Mabini Store|4|pack
+---
+PRODUCT|PLASTIC - Glassin White
+IMAGE|ADJ-04|10|rem
+IMAGE|ADJ-07|131|pcs
+STOCK|Mabini Bodega|100|pcs
+STOCK|Mabini Store|131|pcs
+---
+PRODUCT|PLASTIC - King 1-1/2x10
+IMAGE|ADJ-05|7|pack
+STOCK|Mabini Store|7|pack
+---
+PRODUCT|PLASTIC - King 2-1/2x10
+IMAGE|ADJ-05|89|pack
+STOCK|Mabini Store|89|pack
+---
+PRODUCT|PLASTIC - King 3x10
+IMAGE|ADJ-05|1|pack
+STOCK|Mabini Store|1|pack
+---
+PRODUCT|PLASTIC - King 5x9 HD
+IMAGE|ADJ-02|78|rem
+IMAGE|ADJ-05|68|pack
+IMAGE|ADJ-07|10|pack
+STOCK|Mabini Bodega|780|pack
+STOCK|Mabini Store|78|pack
+---
+PRODUCT|PLASTIC - King 6x10 HD
+IMAGE|ADJ-02|28|rem
+IMAGE|ADJ-05|51|pack
+STOCK|Mabini Bodega|280|pack
+STOCK|Mabini Store|51|pack
+---
+PRODUCT|PLASTIC - King 6x12 HD
+IMAGE|ADJ-02|48|rem
+IMAGE|ADJ-05|108|pack
+STOCK|Mabini Bodega|480|pack
+STOCK|Mabini Store|108|pack
+---
+PRODUCT|PLASTIC - King 8x12 HD
+IMAGE|ADJ-02|41|rem
+IMAGE|ADJ-05|29|pack
+STOCK|Mabini Bodega|410|pack
+STOCK|Mabini Store|29|pack
+---
+PRODUCT|PLASTIC - King 8x14 HD
+IMAGE|ADJ-05|173|pack
+STOCK|Mabini Store|173|pack
+---
+PRODUCT|PLASTIC - Tasty Wrapper Large
+IMAGE|ADJ-06|20|pack
+STOCK|Mabini Store|20|pack
+---
+PRODUCT|PLASTIC - Texas 1-1/2x10
+IMAGE|ADJ-02|21|rem
+IMAGE|ADJ-05|44|pack
+STOCK|Mabini Bodega|210|pack
+STOCK|Mabini Store|44|pack
+---
+PRODUCT|PLASTIC - Texas 1-1/4x10
+IMAGE|ADJ-02|13|rem
+IMAGE|ADJ-05|43|pack
+STOCK|Mabini Bodega|130|pack
+STOCK|Mabini Store|43|pack
+---
+PRODUCT|PLASTIC - Texas 2-1/2x10
+IMAGE|ADJ-05|30|pack
+STOCK|Mabini Store|30|pack
+---
+PRODUCT|PLASTIC - Texas 2x10
+IMAGE|ADJ-05|23|pack
+STOCK|Mabini Store|23|pack
+---
+PRODUCT|PLASTIC - Texas 3x10
+IMAGE|ADJ-02|23|rem
+IMAGE|ADJ-05|20|pack
+STOCK|Mabini Bodega|230|pack
+STOCK|Mabini Store|20|pack
+---
+PRODUCT|PLASTIC - Texas 3x16
+IMAGE|ADJ-02|60|rem
+IMAGE|ADJ-05|74|pack
+STOCK|Mabini Bodega|600|pack
+STOCK|Mabini Store|74|pack
+---
+PRODUCT|PLASTIC - Texas 4x10
+IMAGE|ADJ-02|32|rem
+IMAGE|ADJ-05|57|pack
+STOCK|Mabini Bodega|320|pack
+STOCK|Mabini Store|57|pack
+---
+PRODUCT|PLASTIC - Water Celophine Orange
+IMAGE|ADJ-07|324|pcs
+STOCK|Mabini Store|324|pcs
+---
+PRODUCT|PLASTIC - Water Celophine Red
+IMAGE|ADJ-07|131|pcs
+STOCK|Mabini Store|131|pcs
+---
+PRODUCT|PLASTIC - Whitehorse 40x45
+IMAGE|ADJ-06|23|pcs
+STOCK|Mabini Store|23|pcs
+---
+PRODUCT|PS Layer Chicken edited
+IMAGE|ADJ-03|5|sack
+STOCK|Mabini Bodega|5|sack
+---
+PRODUCT|Quezo
+IMAGE|ADJ-01|7|Box
+IMAGE|ADJ-06|24|pack
+STOCK|Mabini Bodega|336|pack
+STOCK|Mabini Store|24|pack
+---
+PRODUCT|Rainbow Oil 
+IMAGE|ADJ-01|5|container
+STOCK|Mabini Bodega|5|gallon
+---
+PRODUCT|Raw Sugar - Wash Brown 50kg edited
+IMAGE|ADJ-09|288|kilo
+IMAGE|ADJ-01|30|sack
+STOCK|Mabini Bodega|1500|kilo
+STOCK|Mabini Store|288|kilo
+---
+PRODUCT|Red Bowl Cake Flour edited
+IMAGE|ADJ-01|3|sack
+STOCK|Mabini Bodega|3|sack
+---
+PRODUCT|Redstar Active Yeast
+IMAGE|ADJ-01|8|BOX
+IMAGE|ADJ-06|8|pack
+STOCK|Mabini Bodega|96|pack
+STOCK|Mabini Store|8|pack
+---
+PRODUCT|Refined - Sugar edited
+IMAGE|ADJ-09|95.5|kilo
+IMAGE|ADJ-01|25|sack
+STOCK|Mabini Bodega|1250|kilo
+STOCK|Mabini Store|95.5|kilo
+---
+PRODUCT|Rocksalt edited
+IMAGE|ADJ-09|90|kilo
+IMAGE|ADJ-01|7|sack
+STOCK|Mabini Bodega|266|kilo
+STOCK|Mabini Store|90|kilo
+---
+PRODUCT|ROLLBAG 10x16
+IMAGE|ADJ-02|13|roll
+IMAGE|ADJ-07|12|roll
+STOCK|Mabini Bodega|13|roll
+STOCK|Mabini Store|12|roll
+---
+PRODUCT|ROLLBAG 5x9
+IMAGE|ADJ-02|47|roll
+IMAGE|ADJ-07|15|roll
+STOCK|Mabini Bodega|47|roll
+STOCK|Mabini Store|15|roll
+---
+PRODUCT|ROLLBAG 8x12
+IMAGE|ADJ-02|50|roll
+IMAGE|ADJ-07|18|roll
+STOCK|Mabini Bodega|50|roll
+STOCK|Mabini Store|18|roll
+---
+PRODUCT|Salto Baby Stag Developer edited
+IMAGE|ADJ-03|2|sack
+STOCK|Mabini Bodega|50|pack
+---
+PRODUCT|Select
+IMAGE|ADJ-09|11|pack
+IMAGE|ADJ-01|2|BOX
+STOCK|Mabini Bodega|24|pack
+STOCK|Mabini Store|11|pack
+---
+PRODUCT|Silverstar edited
+IMAGE|ADJ-09|42.5|kilo
+IMAGE|ADJ-01|4|sack
+STOCK|Mabini Bodega|100|kilo
+STOCK|Mabini Store|42.5|kilo
+---
+PRODUCT|Snowlar edited
+IMAGE|ADJ-01|8|drum
+IMAGE|ADJ-07|5.5|KILO
+STOCK|Mabini Bodega|260|KILO
+STOCK|Mabini Store|5.5|KILO
+---
+PRODUCT|Sprinter Unico
+IMAGE|ADJ-09|4|pack
+IMAGE|ADJ-01|34|BOX
+STOCK|Mabini Bodega|170|pack
+STOCK|Mabini Store|4|pack
+---
+PRODUCT|Sugar - Penco Confectioner Sugar edited
+IMAGE|ADJ-09|11|pack
+IMAGE|ADJ-01|7|box
+STOCK|Mabini Bodega|168|pack
+STOCK|Mabini Store|11|pack
+---
+PRODUCT|Sunflour edited
+IMAGE|ADJ-01|27|sack
+STOCK|Mabini Bodega|27|sack
+---
+PRODUCT|Sunrise Margarine edited
+IMAGE|ADJ-01|3|drum
+IMAGE|ADJ-07|53.5|KILO
+STOCK|Mabini Bodega|126.75|KILO
+STOCK|Mabini Store|53.5|KILO
+---
+PRODUCT|Sunshine edited
+IMAGE|ADJ-01|26|sack
+STOCK|Mabini Bodega|26|sack
+---
+PRODUCT|Ube Powder (16 Kg)
+IMAGE|ADJ-01|2|BOX
+IMAGE|ADJ-06|15|pack
+STOCK|Mabini Bodega|20|pack
+STOCK|Mabini Store|15|pack
+---
+PRODUCT|Ultra Soft
+IMAGE|ADJ-09|5|pack
+IMAGE|ADJ-01|2|BOX
+STOCK|Mabini Bodega|20|pack
+STOCK|Mabini Store|5|pack
+---
+PRODUCT|Vanilla - 120ml
+IMAGE|ADJ-01|1|BOX
+IMAGE|ADJ-06|69|bottle
+STOCK|Mabini Bodega|12|bottle
+STOCK|Mabini Store|69|bottle
+---
+PRODUCT|Vanilla - 60ml
+IMAGE|ADJ-06|107|bottle
+STOCK|Mabini Store|107|bottle
+---
+PRODUCT|Vanilla - Concentrated
+IMAGE|ADJ-01|3|box
+IMAGE|ADJ-06|5|gallon
+STOCK|Mabini Bodega|36|gallon
+STOCK|Mabini Store|5|gallon
+---
+PRODUCT|Vanilla - OIL
+IMAGE|ADJ-06|10|bottle
+STOCK|Mabini Store|10|bottle
+---
+PRODUCT|Vanilla - Orion
+IMAGE|ADJ-01|6|BOX
+IMAGE|ADJ-06|3|gallon
+STOCK|Mabini Bodega|72|gallon
+STOCK|Mabini Store|3|gallon
+---
+PRODUCT|Yeast (Retail)
+IMAGE|ADJ-07|64|pcs
+STOCK|Mabini Store|64|pcs
+---
