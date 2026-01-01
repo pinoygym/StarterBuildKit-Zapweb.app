@@ -1,0 +1,2 @@
+﻿[0m[1mbun test [0m[2mv1.3.3 (274e01c7)[0m
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-10T15:18:04.517Z","context":{"databaseHost":"ep-floral-silence-a1jm7mgz-pooler.ap-southeast-1.aws.neon.tech"}}

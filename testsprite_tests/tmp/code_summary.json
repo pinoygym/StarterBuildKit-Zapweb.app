@@ -1,0 +1,366 @@
+{
+  "tech_stack": [
+    "TypeScript",
+    "Next.js (App Router)",
+    "React",
+    "Prisma",
+    "PostgreSQL",
+    "TanStack Query",
+    "shadcn/ui"
+  ],
+  "features": [
+    {
+      "name": "Authentication Pages",
+      "description": "Login and register pages for user authentication",
+      "files": [
+        "app/(auth)/login/page.tsx",
+        "app/(auth)/register/page.tsx",
+        "contexts/auth.context.tsx",
+        "middleware/auth.middleware.ts"
+      ]
+    },
+    {
+      "name": "Authentication API",
+      "description": "Next.js API routes for auth: login, logout, register, change password, me, verify email",
+      "files": [
+        "app/api/auth/login/route.ts",
+        "app/api/auth/logout/route.ts",
+        "app/api/auth/register/route.ts",
+        "app/api/auth/change-password/route.ts",
+        "app/api/auth/me/route.ts",
+        "app/api/auth/verify-email/route.ts"
+      ]
+    },
+    {
+      "name": "Authorization & Permissions",
+      "description": "Route middleware and helpers for permission and rate limiting",
+      "files": [
+        "middleware/permission.middleware.ts",
+        "middleware/rate-limit.middleware.ts",
+        "lib/report-security.ts",
+        "middleware.ts"
+      ]
+    },
+    {
+      "name": "Dashboard Pages",
+      "description": "Top-level dashboard and feature modules",
+      "files": [
+        "app/(dashboard)/dashboard/page.tsx",
+        "app/(dashboard)/layout.tsx",
+        "app/page.tsx"
+      ]
+    },
+    {
+      "name": "Branches",
+      "description": "Manage branches with UI and API",
+      "files": [
+        "app/(dashboard)/branches/page.tsx",
+        "app/api/branches/route.ts",
+        "app/api/branches/[id]/route.ts",
+        "components/branches/branch-dialog.tsx",
+        "components/branches/branch-table.tsx",
+        "lib/branch.validation.ts"
+      ]
+    },
+    {
+      "name": "Customers",
+      "description": "Customer CRUD pages, dialogs and API routes",
+      "files": [
+        "app/(dashboard)/customers/page.tsx",
+        "app/api/customers/route.ts",
+        "app/api/customers/[id]/route.ts",
+        "components/customers/customer-dialog.tsx",
+        "components/customers/customer-table.tsx",
+        "lib/customer.validation.ts"
+      ]
+    },
+    {
+      "name": "Products",
+      "description": "Product management and uploads",
+      "files": [
+        "app/(dashboard)/products/page.tsx",
+        "app/api/products/route.ts",
+        "app/api/products/[id]/route.ts",
+        "components/products/product-dialog.tsx",
+        "components/products/product-table.tsx",
+        "components/products/image-upload.tsx",
+        "lib/product.validation.ts"
+      ]
+    },
+    {
+      "name": "Inventory",
+      "description": "Inventory movements, adjustments, transfers and reporting",
+      "files": [
+        "app/(dashboard)/inventory/page.tsx",
+        "app/(dashboard)/inventory/movements/page.tsx",
+        "app/api/inventory/route.ts",
+        "app/api/inventory/[id]/route.ts",
+        "app/api/inventory/movements/route.ts",
+        "app/api/inventory/add-stock/route.ts",
+        "app/api/inventory/deduct-stock/route.ts",
+        "app/api/inventory/transfer/route.ts",
+        "components/inventory/inventory-table.tsx",
+        "components/inventory/adjust-stock-dialog.tsx",
+        "components/inventory/transfer-stock-dialog.tsx",
+        "components/inventory/transfer-slip-print.tsx",
+        "lib/inventory.validation.ts"
+      ]
+    },
+    {
+      "name": "POS",
+      "description": "Point of Sale workflows, product grid, cart, payments and receipts",
+      "files": [
+        "app/(dashboard)/pos/page.tsx",
+        "app/api/pos/products/route.ts",
+        "app/api/pos/sales/route.ts",
+        "app/api/pos/sales/[id]/route.ts",
+        "app/api/pos/today-summary/route.ts",
+        "components/pos/pos-product-grid.tsx",
+        "components/pos/pos-cart.tsx",
+        "components/pos/pos-payment.tsx",
+        "components/pos/pos-receipt.tsx",
+        "components/pos/pos-pending-orders.tsx",
+        "components/pos/pos-today-summary.tsx"
+      ]
+    },
+    {
+      "name": "Purchase Orders",
+      "description": "Create, edit, list and print purchase orders with receiving",
+      "files": [
+        "app/(dashboard)/purchase-orders/page.tsx",
+        "app/(dashboard)/purchase-orders/new/page.tsx",
+        "app/(dashboard)/purchase-orders/[id]/page.tsx",
+        "app/(dashboard)/purchase-orders/[id]/edit/page.tsx",
+        "app/api/purchase-orders/route.ts",
+        "app/api/purchase-orders/[id]/route.ts",
+        "app/api/purchase-orders/[id]/receive/route.ts",
+        "components/purchase-orders/purchase-order-form.tsx",
+        "components/purchase-orders/purchase-order-table.tsx",
+        "components/purchase-orders/purchase-order-print.tsx",
+        "lib/purchase-order.validation.ts"
+      ]
+    },
+    {
+      "name": "Receiving Vouchers",
+      "description": "Receiving vouchers pages, dialogs and API routes",
+      "files": [
+        "app/(dashboard)/receiving-vouchers/page.tsx",
+        "app/(dashboard)/receiving-vouchers/[id]/page.tsx",
+        "app/api/purchase-orders/[id]/receiving-vouchers/route.ts",
+        "app/api/receiving-vouchers/route.ts",
+        "app/api/receiving-vouchers/[id]/route.ts",
+        "components/receiving-vouchers/receiving-voucher-dialog.tsx",
+        "lib/receiving-voucher.validation.ts"
+      ]
+    },
+    {
+      "name": "Sales Orders",
+      "description": "Sales orders management, invoices and printing",
+      "files": [
+        "app/(dashboard)/sales-orders/page.tsx",
+        "app/api/sales-orders/route.ts",
+        "app/api/sales-orders/[id]/route.ts",
+        "app/api/sales-orders/pending/route.ts",
+        "components/sales-orders/sales-order-dialog.tsx",
+        "components/sales-orders/sales-order-table.tsx",
+        "components/sales-orders/sales-order-invoice-print.tsx",
+        "lib/sales-order.validation.ts"
+      ]
+    },
+    {
+      "name": "AR/AP",
+      "description": "Accounts receivable/payable pages, dialogs and API endpoints",
+      "files": [
+        "app/(dashboard)/ar-ap/page.tsx",
+        "app/api/ar/route.ts",
+        "app/api/ar/[id]/route.ts",
+        "app/api/ar/payment/route.ts",
+        "app/api/ar/aging-report/route.ts",
+        "components/ar/ar-payment-dialog.tsx",
+        "components/ar/ar-table.tsx",
+        "lib/ar.validation.ts",
+        "app/api/ap/route.ts",
+        "app/api/ap/[id]/route.ts",
+        "app/api/ap/payment/route.ts",
+        "app/api/ap/aging-report/route.ts",
+        "components/ap/ap-payment-dialog.tsx",
+        "components/ap/ap-table.tsx",
+        "lib/ap.validation.ts"
+      ]
+    },
+    {
+      "name": "Suppliers",
+      "description": "Manage suppliers with dialogs and tables",
+      "files": [
+        "app/(dashboard)/suppliers/page.tsx",
+        "app/api/suppliers/route.ts",
+        "app/api/suppliers/[id]/route.ts",
+        "components/suppliers/supplier-dialog.tsx",
+        "components/suppliers/supplier-table.tsx",
+        "lib/supplier.validation.ts"
+      ]
+    },
+    {
+      "name": "Warehouses",
+      "description": "Warehouse management UI and API",
+      "files": [
+        "app/(dashboard)/warehouses/page.tsx",
+        "app/api/warehouses/route.ts",
+        "app/api/warehouses/[id]/route.ts",
+        "components/warehouses/warehouse-dialog.tsx",
+        "components/warehouses/warehouse-table.tsx",
+        "lib/warehouse.validation.ts"
+      ]
+    },
+    {
+      "name": "Reports",
+      "description": "Reporting pages and comprehensive report UI components",
+      "files": [
+        "app/(dashboard)/reports/page.tsx",
+        "app/api/reports/balance-sheet/route.ts",
+        "app/api/reports/profit-loss/route.ts",
+        "app/api/reports/cash-flow/route.ts",
+        "components/reports/daily-sales-summary-report.tsx",
+        "components/reports/customer-purchase-history-report.tsx",
+        "components/reports/inventory-movement-report.tsx",
+        "components/reports/report-template-manager.tsx",
+        "components/reports/report-template-configurator.tsx",
+        "components/reports/report-template-preview.tsx",
+        "components/reports/comprehensive-pos-receipt.tsx"
+      ]
+    },
+    {
+      "name": "Roles & Permissions UI",
+      "description": "Manage roles and permissions with tables and dialogs",
+      "files": [
+        "app/(dashboard)/roles/page.tsx",
+        "components/roles/role-table.tsx",
+        "components/roles/role-dialog.tsx",
+        "contexts/branch-context.tsx"
+      ]
+    },
+    {
+      "name": "Users Management",
+      "description": "User CRUD UI and verification API",
+      "files": [
+        "app/(dashboard)/users/page.tsx",
+        "app/api/users/route.ts",
+        "app/api/users/[id]/route.ts",
+        "app/api/users/[id]/verify/route.ts",
+        "components/users/user-table.tsx",
+        "components/users/user-dialog.tsx"
+      ]
+    },
+    {
+      "name": "Hooks",
+      "description": "Custom hooks for data fetching and UI state",
+      "files": [
+        "hooks/use-api.ts",
+        "hooks/use-products.ts",
+        "hooks/use-inventory.ts",
+        "hooks/use-purchase-orders.ts",
+        "hooks/use-sales-orders.ts",
+        "hooks/use-customers.ts",
+        "hooks/use-suppliers.ts",
+        "hooks/use-branches.ts",
+        "hooks/use-alerts.ts",
+        "hooks/use-reports.ts",
+        "hooks/use-users.ts",
+        "hooks/use-roles.ts",
+        "hooks/usePermissions.ts",
+        "hooks/useRoles.ts",
+        "hooks/useUsers.ts",
+        "hooks/use-toast.ts"
+      ]
+    },
+    {
+      "name": "Validation Schemas",
+      "description": "Zod/Yup style validation schemas for entities",
+      "files": [
+        "lib/validations/ap.validation.ts",
+        "lib/validations/ar.validation.ts",
+        "lib/validations/branch.validation.ts",
+        "lib/validations/customer.validation.ts",
+        "lib/validations/expense.validation.ts",
+        "lib/validations/inventory.validation.ts",
+        "lib/validations/pos.validation.ts",
+        "lib/validations/product.validation.ts",
+        "lib/validations/purchase-order.validation.ts",
+        "lib/validations/receiving-voucher.validation.ts",
+        "lib/validations/sales-order.validation.ts",
+        "lib/validations/supplier.validation.ts",
+        "lib/validations/warehouse.validation.ts"
+      ]
+    },
+    {
+      "name": "Email Service",
+      "description": "Transactional email templates and service",
+      "files": [
+        "lib/email/email.service.ts",
+        "lib/email/templates/account-created.template.ts",
+        "lib/email/templates/password-changed.template.ts",
+        "lib/email/templates/password-reset.template.ts",
+        "lib/email/templates/verification.template.ts",
+        "lib/email/templates/welcome.template.ts"
+      ]
+    },
+    {
+      "name": "Shared UI",
+      "description": "Shared components and page chrome",
+      "files": [
+        "components/shared/page-header.tsx",
+        "components/shared/sidebar.tsx",
+        "components/shared/confirmation-dialog.tsx",
+        "components/shared/loading-skeleton.tsx",
+        "components/shared/error-boundary.tsx",
+        "components/shared/empty-state.tsx"
+      ]
+    },
+    {
+      "name": "UI Library",
+      "description": "shadcn/ui based primitives and UI components",
+      "files": [
+        "components/ui/button.tsx",
+        "components/ui/input.tsx",
+        "components/ui/form.tsx",
+        "components/ui/table.tsx",
+        "components/ui/dialog.tsx",
+        "components/ui/select.tsx",
+        "components/ui/alert.tsx",
+        "components/ui/calendar.tsx",
+        "components/ui/tabs.tsx"
+      ]
+    },
+    {
+      "name": "Providers",
+      "description": "Global providers including React Query",
+      "files": [
+        "components/providers/query-provider.tsx"
+      ]
+    },
+    {
+      "name": "Utilities & Errors",
+      "description": "Utility helpers, error handling and logging",
+      "files": [
+        "lib/utils.ts",
+        "lib/logger.ts",
+        "lib/errors.ts",
+        "lib/api-error.ts",
+        "lib/api-middleware.ts",
+        "lib/export-utils.ts",
+        "lib/toast-helpers.ts"
+      ]
+    },
+    {
+      "name": "Mobile POS (Expo)",
+      "description": "Standalone React Native/Expo mobile POS app",
+      "files": [
+        "mobile-pos-app/app/(tabs)/index.tsx",
+        "mobile-pos-app/app/(tabs)/explore.tsx",
+        "mobile-pos-app/app/_layout.tsx",
+        "mobile-pos-app/components/ui/collapsible.tsx",
+        "mobile-pos-app/src/api/client.ts"
+      ]
+    }
+  ]
+}
