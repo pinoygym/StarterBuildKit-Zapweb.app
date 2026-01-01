@@ -22,13 +22,6 @@ export default defineConfig({
       NODE_ENV: 'test',
     },
     // Limit concurrency to prevent database connection pool exhaustion
-    poolOptions: {
-      threads: {
-        maxThreads: 4,
-        minThreads: 1,
-      },
-    },
-    // Reduce concurrent test file execution
     maxConcurrency: 3,
     // For unit tests, isolate should be true to prevent cross-test pollution
     isolate: true,

@@ -1,10 +1,10 @@
 
-const BASE_URL = 'http://localhost:3007';
+const SEED_BASE_URL = 'http://localhost:3007';
 
 async function main() {
     try {
         console.log('Testing seed endpoint...');
-        const seedRes = await fetch(`${BASE_URL}/api/dev/seed`, {
+        const seedRes = await fetch(`${SEED_BASE_URL}/api/dev/seed`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({})
@@ -25,7 +25,7 @@ async function main() {
         }
 
         console.log('Testing login endpoint...');
-        const loginRes = await fetch(`${BASE_URL}/api/auth/login`, {
+        const loginRes = await fetch(`${SEED_BASE_URL}/api/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({

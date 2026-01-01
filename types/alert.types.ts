@@ -2,7 +2,7 @@ import { Notification } from '@prisma/client';
 
 export type AlertType = 'LOW_STOCK' | 'EXPIRY' | 'SYSTEM' | 'APPROVAL' | 'PAYMENT_DUE' | 'low_stock' | 'expiring_soon' | 'expired';
 
-export interface Alert extends Partial<Notification> {
+export interface Alert extends Omit<Partial<Notification>, 'createdAt'> {
   id: string;
   type: AlertType | string;
   severity: 'critical' | 'warning' | 'info' | string;
