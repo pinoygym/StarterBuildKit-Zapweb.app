@@ -1,0 +1,108 @@
+﻿Creating supplier...
+Data: {
+  "id": "e802d40f-0d0b-450a-98aa-de9cdc434cb3",
+  "companyName": "Test Supplier Co. 1764221461082",
+  "contactPerson": "John Doe",
+  "phone": "+63-123-456-7890",
+  "email": "supplier-1764221461082@test.com",
+  "paymentTerms": "Net 30",
+  "status": "active",
+  "createdAt": "2025-11-27T05:31:01.082Z",
+  "updatedAt": "2025-11-27T05:31:01.082Z"
+}
+{"level":"error","message":"Prisma error","timestamp":"2025-11-27T05:31:01.225Z","context":{"target":"supplier.create","timestamp":"2025-11-27T05:31:01.225Z","message":"\nInvalid `prisma.supplier.create()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\_deve local\\_React Apps\\test\\reproduce-supplier.ts:10:48\n\n   7 console.log('Creating supplier...');\n   8 const data = createTestSupplier();\n   9 console.log('Data:', JSON.stringify(data, null, 2));\nΓåÆ 10 const supplier = await prisma.supplier.create(\n"}}
+node.exe : Error 
+creating supplier: Pr
+ismaClientKnownReques
+tError: 
+At line:1 char:1
++ & "C:\Program Files
+\nodejs/node.exe" 
+"C:\Program 
+Files\nodejs/node_mo 
+...
++ ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~
+    + CategoryInfo   
+           : NotSpe  
+  cified: (Error c   
+ reating ...nRequ    
+estError: :Strin    
+g) [], RemoteExc    
+eption
+    + FullyQualified 
+   ErrorId : Native  
+  CommandError
+ 
+Invalid `prisma.suppl
+ier.create()` 
+invocation in
+C:\Users\HI\Documents
+\GitHub\_deve 
+local\_React Apps\tes
+t\reproduce-supplier.
+ts:10:48
+
+   7 console.log('Cre
+ating supplier...');
+   8 const data = 
+createTestSupplier();
+   9 
+console.log('Data:', 
+JSON.stringify(data, 
+null, 2));
+ΓåÆ 10 const 
+supplier = await pris
+ma.supplier.create(
+
+    at $r.handleReque
+stError (C:\Users\HI\
+Documents\GitHub\_dev
+e local\_React Apps\t
+est\node_modules\@pri
+sma\client\src\runtim
+e\RequestHandler.ts:2
+28:13)
+    at $r.handleAndLo
+gRequestError (C:\Use
+rs\HI\Documents\GitHu
+b\_deve local\_React 
+Apps\test\node_module
+s\@prisma\client\src\
+runtime\RequestHandle
+r.ts:174:12)
+    at $r.request (C:
+\Users\HI\Documents\G
+itHub\_deve 
+local\_React Apps\tes
+t\node_modules\@prism
+a\client\src\runtime\
+RequestHandler.ts:143
+:12)
+    at process.proces
+sTicksAndRejections (
+node:internal/process
+/task_queues:105:5)
+    at async a (C:\Us
+ers\HI\Documents\GitH
+ub\_deve 
+local\_React Apps\tes
+t\node_modules\@prism
+a\client\src\runtime\
+getPrismaClient.ts:76
+6:24)
+    at async main (C:
+\Users\HI\Documents\G
+itHub\_deve 
+local\_React Apps\tes
+t\reproduce-supplier.
+ts:10:26) {
+  code: 
+'ECONNREFUSED',
+  meta: { modelName: 
+'Supplier' },
+  clientVersion: 
+'7.0.0'
+}

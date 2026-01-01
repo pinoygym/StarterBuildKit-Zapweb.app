@@ -1,0 +1,50 @@
+{
+  "product": "InventoryPro",
+  "version": "1.0",
+  "type": "frontend",
+  "baseUrl": "http://localhost:3000",
+  "modules": [
+    "Authentication",
+    "Dashboard",
+    "Products",
+    "Inventory",
+    "POS",
+    "Purchase Orders",
+    "Receiving Vouchers",
+    "Sales Orders",
+    "AR/AP",
+    "Reports",
+    "Users",
+    "Roles",
+    "Branches",
+    "Warehouses"
+  ],
+  "requirements": [
+    {
+      "id": "REQ-AUTH-LOGIN",
+      "title": "User can access Login page",
+      "acceptanceCriteria": [
+        "Navigate to /login shows Email and Password fields",
+        "Login button is visible"
+      ],
+      "priority": "high"
+    },
+    {
+      "id": "REQ-AUTH-REGISTER",
+      "title": "User can access Register page",
+      "acceptanceCriteria": [
+        "Navigate to /register shows registration form",
+        "Register button is visible"
+      ],
+      "priority": "medium"
+    },
+    {
+      "id": "REQ-AUTH-GUARD",
+      "title": "Unauthenticated users are redirected",
+      "acceptanceCriteria": [
+        "Visiting /dashboard without session redirects to /login"
+      ],
+      "priority": "high"
+    }
+  ]
+}
