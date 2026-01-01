@@ -1,0 +1,625 @@
+# Page snapshot
+
+```yaml
+- generic:
+  - generic:
+    - complementary:
+      - generic:
+        - generic:
+          - img
+        - generic:
+          - generic: InventoryPro
+          - generic: Inventory & POS
+      - navigation:
+        - link:
+          - /url: /dashboard
+          - img
+          - generic: Dashboard
+        - link:
+          - /url: /products
+          - img
+          - generic: Products
+        - link:
+          - /url: /inventory
+          - img
+          - generic: Inventory
+        - link:
+          - /url: /warehouses
+          - img
+          - generic: Warehouses
+        - link:
+          - /url: /branches
+          - img
+          - generic: Branches
+        - link:
+          - /url: /suppliers
+          - img
+          - generic: Suppliers
+        - link:
+          - /url: /purchase-orders
+          - img
+          - generic: Purchase Orders
+        - link:
+          - /url: /sales-orders
+          - img
+          - generic: Sales Orders
+        - link:
+          - /url: /pos
+          - img
+          - generic: POS
+        - link:
+          - /url: /ar-ap
+          - img
+          - generic: AR/AP
+        - link:
+          - /url: /expenses
+          - img
+          - generic: Expenses
+        - link:
+          - /url: /alerts
+          - img
+          - generic: Alerts
+        - link:
+          - /url: /reports
+          - img
+          - generic: Reports
+        - generic:
+          - paragraph: Settings
+          - link:
+            - /url: /users
+            - img
+            - generic: Users
+          - link:
+            - /url: /roles
+            - img
+            - generic: Roles
+      - generic:
+        - generic:
+          - paragraph: © 2024 InventoryPro
+          - paragraph: v1.0.0
+    - generic:
+      - banner:
+        - generic:
+          - generic:
+            - heading [level=1]: Welcome to InventoryPro
+          - generic:
+            - generic:
+              - img
+              - combobox:
+                - generic: All Branches
+                - img
+      - main:
+        - generic:
+          - generic:
+            - navigation:
+              - generic:
+                - link:
+                  - /url: /dashboard
+                  - text: Dashboard
+              - generic:
+                - img
+                - generic: Products
+            - generic:
+              - generic:
+                - heading [level=1]: Products
+                - paragraph: Manage your product catalog with multiple UOMs and pricing
+              - generic:
+                - button:
+                  - img
+                  - text: Add Product
+          - generic:
+            - generic:
+              - img
+              - textbox:
+                - /placeholder: Search products...
+            - combobox:
+              - generic: All Categories
+              - img
+            - combobox:
+              - generic: All Status
+              - img
+          - generic:
+            - generic:
+              - table:
+                - rowgroup:
+                  - row:
+                    - cell
+                    - cell: Image
+                    - cell: Name
+                    - cell: Category
+                    - cell: Base Price
+                    - cell: Base UOM
+                    - cell: Min Stock
+                    - cell: Status
+                    - cell: Actions
+                - rowgroup:
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Absolute Distilled Water 500ml
+                        - generic: Absolute purified distilled water in 500ml bottle
+                    - cell:
+                      - generic: Water
+                    - cell: ₱15.00
+                    - cell:
+                      - code: bottle
+                    - cell: "600"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Coca-Cola 8oz Bottle
+                        - generic: Classic Coca-Cola in 8oz glass bottle
+                    - cell:
+                      - generic: Carbonated
+                    - cell: ₱25.00
+                    - cell:
+                      - code: bottle
+                    - cell: "500"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Del Monte Pineapple Juice 1L
+                        - generic: Del Monte 100% pineapple juice in 1L tetra pack
+                    - cell:
+                      - generic: Juices
+                    - cell: ₱55.00
+                    - cell:
+                      - code: pack
+                    - cell: "200"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130527442
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130544545
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130544560
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130812499
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130812508
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130819160
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763130819166
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763136176653
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Integration Test Product 1763136221497
+                    - cell:
+                      - generic: Water
+                    - cell: ₱100.00
+                    - cell:
+                      - code: pcs
+                    - cell: "10"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Minute Maid Orange Juice 1L
+                        - generic: Minute Maid orange juice in 1L tetra pack
+                    - cell:
+                      - generic: Juices
+                    - cell: ₱60.00
+                    - cell:
+                      - code: pack
+                    - cell: "200"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Mountain Dew 500ml Bottle
+                        - generic: Mountain Dew citrus soda in 500ml PET bottle
+                    - cell:
+                      - generic: Carbonated
+                    - cell: ₱35.00
+                    - cell:
+                      - code: bottle
+                    - cell: "350"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Pepsi 12oz Can
+                        - generic: Pepsi Cola in 12oz aluminum can
+                    - cell:
+                      - generic: Carbonated
+                    - cell: ₱30.00
+                    - cell:
+                      - code: can
+                    - cell: "400"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Red Bull Energy Drink 250ml
+                        - generic: Red Bull energy drink in 250ml can
+                    - cell:
+                      - generic: Energy Drinks
+                    - cell: ₱75.00
+                    - cell:
+                      - code: can
+                    - cell: "250"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+                  - row:
+                    - cell:
+                      - button:
+                        - img
+                    - cell:
+                      - generic:
+                        - img
+                    - cell:
+                      - generic:
+                        - generic: Sprite 1.5L Bottle
+                        - generic: Sprite lemon-lime soda in 1.5L PET bottle
+                    - cell:
+                      - generic: Carbonated
+                    - cell: ₱45.00
+                    - cell:
+                      - code: bottle
+                    - cell: "300"
+                    - cell:
+                      - generic: active
+                    - cell:
+                      - generic:
+                        - button:
+                          - img
+                        - button [disabled]:
+                          - img
+    - list
+  - list
+  - region "Notifications alt+T"
+  - generic:
+    - generic:
+      - img
+    - button:
+      - img
+  - status [ref=e1]:
+    - generic [ref=e2]:
+      - img [ref=e4]
+      - generic [ref=e6]:
+        - text: Static route
+        - button [ref=e7] [cursor=pointer]:
+          - img [ref=e8]
+  - alert
+  - dialog "Create Product" [ref=e12]:
+    - generic [ref=e13]:
+      - heading "Create Product" [level=2] [ref=e14]
+      - paragraph [ref=e15]: Add a new product to your catalog
+    - generic [ref=e16]:
+      - generic [ref=e17]:
+        - heading "Basic Information" [level=3] [ref=e18]
+        - generic [ref=e19]:
+          - text: Product Name
+          - textbox "Product Name" [active] [ref=e20]:
+            - /placeholder: Coca-Cola 500ml
+        - generic [ref=e21]:
+          - text: Description (Optional)
+          - textbox "Description (Optional)" [ref=e22]:
+            - /placeholder: Product description...
+        - generic [ref=e23]:
+          - generic [ref=e24]:
+            - text: Category
+            - combobox "Category" [ref=e25] [cursor=pointer]:
+              - generic: Carbonated
+              - img [ref=e26]
+            - combobox [ref=e28]
+          - generic [ref=e29]:
+            - text: Status
+            - combobox "Status" [ref=e30] [cursor=pointer]:
+              - generic: Active
+              - img [ref=e31]
+            - combobox [ref=e33]
+        - generic [ref=e34]:
+          - text: Product Image (Optional)
+          - generic [ref=e35]:
+            - generic [ref=e36] [cursor=pointer]:
+              - img [ref=e37]
+              - generic [ref=e41]:
+                - paragraph [ref=e42]: Click to upload image
+                - paragraph [ref=e43]: JPEG, PNG, WebP, or GIF (max 5MB)
+            - button "Upload Image" [ref=e44] [cursor=pointer]:
+              - img
+              - text: Upload Image
+      - generic [ref=e45]:
+        - heading "Pricing & Unit of Measure" [level=3] [ref=e46]
+        - generic [ref=e47]:
+          - generic [ref=e48]:
+            - text: Base Price (₱)
+            - spinbutton "Base Price (₱)" [ref=e49]: "0"
+          - generic [ref=e50]:
+            - text: Base UOM
+            - textbox "Base UOM" [ref=e51]:
+              - /placeholder: bottle, can, liter
+              - text: bottle
+            - paragraph [ref=e52]: Base unit of measure
+      - generic [ref=e53]:
+        - generic [ref=e54]:
+          - heading "Alternate UOMs" [level=3] [ref=e55]
+          - button "Add UOM" [ref=e56] [cursor=pointer]:
+            - img
+            - text: Add UOM
+        - paragraph [ref=e57]: No alternate UOMs added. Click "Add UOM" to add different selling units.
+      - generic [ref=e58]:
+        - heading "Inventory Settings" [level=3] [ref=e59]
+        - generic [ref=e60]:
+          - generic [ref=e61]:
+            - text: Minimum Stock Level
+            - spinbutton "Minimum Stock Level" [ref=e62]: "10"
+            - paragraph [ref=e63]: Alert when stock falls below this level
+          - generic [ref=e64]:
+            - text: Shelf Life (Days)
+            - spinbutton "Shelf Life (Days)" [ref=e65]: "365"
+            - paragraph [ref=e66]: Days until product expires
+      - generic [ref=e67]:
+        - button "Cancel" [ref=e68] [cursor=pointer]
+        - button "Create" [ref=e69] [cursor=pointer]
+    - button "Close" [ref=e70] [cursor=pointer]:
+      - img [ref=e71]
+      - generic [ref=e73]: Close
+```

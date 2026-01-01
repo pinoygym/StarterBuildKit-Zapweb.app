@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Bash(npm run dev:*)",
+      "Bash(npx prisma migrate:*)",
+      "Bash(npx prisma db pull:*)",
+      "Bash(node test-db-connection.js:*)",
+      "Bash(npm install:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
