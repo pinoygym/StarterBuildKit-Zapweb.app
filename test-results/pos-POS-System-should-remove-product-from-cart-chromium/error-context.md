@@ -1,0 +1,45 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e5]: Sign in
+      - generic [ref=e6]: Enter your credentials to access your account
+    - generic [ref=e7]:
+      - generic [ref=e8]:
+        - generic [ref=e9]:
+          - text: Email
+          - textbox "Email" [ref=e10]:
+            - /placeholder: admin@inventorypro.com
+            - text: cybergada@gmail.com
+        - generic [ref=e11]:
+          - text: Password
+          - textbox "Password" [ref=e12]:
+            - /placeholder: ••••••••
+        - generic [ref=e13]:
+          - link "Forgot password?" [ref=e15] [cursor=pointer]:
+            - /url: /forgot-password
+          - button "Use demo admin" [ref=e17] [cursor=pointer]
+      - generic [ref=e18]:
+        - button "Sign in" [ref=e19] [cursor=pointer]
+        - generic [ref=e20]:
+          - text: Don't have an account?
+          - link "Sign up" [ref=e21] [cursor=pointer]:
+            - /url: /register
+  - region "Notifications (F8)":
+    - list
+  - region "Notifications alt+T"
+  - generic [ref=e22]:
+    - img [ref=e24]
+    - button "Open Tanstack query devtools" [ref=e72] [cursor=pointer]:
+      - img [ref=e73]
+  - status [ref=e121]:
+    - generic [ref=e122]:
+      - img [ref=e124]
+      - generic [ref=e126]:
+        - text: Static route
+        - button "Hide static indicator" [ref=e127] [cursor=pointer]:
+          - img [ref=e128]
+  - alert [ref=e131]
+```
