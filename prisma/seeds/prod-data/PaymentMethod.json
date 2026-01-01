@@ -1,0 +1,115 @@
+[
+  {
+    "id": "cmi8yknri000dvatgyufrwclk",
+    "name": "Cash",
+    "code": "CASH",
+    "description": "Physical cash payment",
+    "status": "active",
+    "displayOrder": 1,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "expense",
+      "pos",
+      "ar",
+      "ap"
+    ],
+    "createdAt": "2025-11-21T06:31:32.430Z",
+    "updatedAt": "2025-12-02T17:55:02.896Z"
+  },
+  {
+    "id": "cmi8yko7p000evatgf8r9sez5",
+    "name": "Card",
+    "code": "CARD",
+    "description": "Credit or debit card payment",
+    "status": "active",
+    "displayOrder": 2,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "expense",
+      "pos",
+      "ar",
+      "ap"
+    ],
+    "createdAt": "2025-11-21T06:31:33.014Z",
+    "updatedAt": "2025-12-02T17:55:02.967Z"
+  },
+  {
+    "id": "cmi8ykohr000fvatgo19n7j51",
+    "name": "Check",
+    "code": "CHECK",
+    "description": "Bank check payment",
+    "status": "active",
+    "displayOrder": 3,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "expense",
+      "ar",
+      "ap"
+    ],
+    "createdAt": "2025-11-21T06:31:33.375Z",
+    "updatedAt": "2025-12-02T17:55:03.032Z"
+  },
+  {
+    "id": "cmi8ykort000gvatg68fiko6m",
+    "name": "GCash",
+    "code": "GCASH",
+    "description": "GCash mobile payment",
+    "status": "active",
+    "displayOrder": 4,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "expense",
+      "pos",
+      "ar",
+      "ap"
+    ],
+    "createdAt": "2025-11-21T06:31:33.738Z",
+    "updatedAt": "2025-12-02T17:55:03.098Z"
+  },
+  {
+    "id": "cmi8ykp1z000hvatgfs243a3x",
+    "name": "Online Transfer",
+    "code": "ONLINE",
+    "description": "Bank online transfer",
+    "status": "active",
+    "displayOrder": 5,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "expense",
+      "ar",
+      "ap"
+    ],
+    "createdAt": "2025-11-21T06:31:34.103Z",
+    "updatedAt": "2025-12-02T17:55:03.163Z"
+  },
+  {
+    "id": "cmi8ykpc5000ivatgc14ot908",
+    "name": "Credit",
+    "code": "CREDIT",
+    "description": "Payment on credit terms",
+    "status": "active",
+    "displayOrder": 6,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "pos",
+      "ar"
+    ],
+    "createdAt": "2025-11-21T06:31:34.469Z",
+    "updatedAt": "2025-12-02T17:55:03.228Z"
+  },
+  {
+    "id": "cmi8ykpm7000jvatge4pz42tt",
+    "name": "AR Credit",
+    "code": "AR_CREDIT",
+    "description": "Accounts Receivable credit",
+    "status": "active",
+    "displayOrder": 7,
+    "isSystemDefined": true,
+    "applicableTo": [
+      "pos",
+      "ar"
+    ],
+    "createdAt": "2025-11-21T06:31:34.831Z",
+    "updatedAt": "2025-12-02T17:55:03.294Z"
+  }
+]
