@@ -11,7 +11,7 @@ REM Step 1: Stop dev servers
 echo Step 1: Stopping dev servers...
 powershell -Command "Get-NetTCPConnection -LocalPort 3000 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"
 powershell -Command "Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"
-timeout /t 3 /nobreak >nul
+powershell -Command "Start-Sleep -Seconds 3"
 echo   Done!
 echo.
 
@@ -41,7 +41,7 @@ echo Starting test server on port 3001...
 set NODE_ENV=test
 start /B "" cmd /c "bunx next dev -p 3001 2>nul >nul"
 echo Waiting for server to start...
-timeout /t 20 /nobreak >nul
+powershell -Command "Start-Sleep -Seconds 20"
 
 REM Check if server is running
 powershell -Command "try { $r = Invoke-WebRequest -Uri 'http://localhost:3001' -TimeoutSec 5 -ErrorAction SilentlyContinue -UseBasicParsing; Write-Host 'Server is ready!' } catch { Write-Host 'Server may still be starting...' }"
@@ -61,7 +61,7 @@ if %ERRORLEVEL% NEQ 0 (
 REM Stop test server
 echo Stopping test server...
 powershell -Command "Get-NetTCPConnection -LocalPort 3001 -ErrorAction SilentlyContinue | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force -ErrorAction SilentlyContinue }"
-timeout /t 2 /nobreak >nul
+powershell -Command "Start-Sleep -Seconds 2"
 
 REM Step 4: Run E2E Tests
 echo.
