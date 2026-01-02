@@ -19,6 +19,7 @@ export default defineConfig({
     env: {
       BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3000',
       DATABASE_URL: process.env.DATABASE_URL, // Ensure test DB is passed to tests
+      JWT_SECRET: process.env.JWT_SECRET,
       NODE_ENV: 'test',
     },
     // Limit concurrency to prevent database connection pool exhaustion

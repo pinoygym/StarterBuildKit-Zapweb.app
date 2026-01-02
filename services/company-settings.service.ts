@@ -37,14 +37,30 @@ export class CompanySettingsService {
     return settings;
   }
 
-  /**
-   * Update company settings
-   */
   async updateSettings(id: string, data: Partial<CompanySettings>): Promise<CompanySettings> {
     return await prisma.companySettings.update({
       where: { id },
       data,
     });
+  }
+
+  /**
+   * Get public company settings (company name and logo)
+   */
+  async getPublicSettings(): Promise<{ companyName: string; logoUrl: string | null }> {
+    try {
+      const settings = await this.getSettings();
+      return {
+        companyName: settings.companyName,
+        logoUrl: settings.logoUrl,
+      };
+    } catch (error) {
+      console.error('[CompanySettingsService] Error getting public settings:', error);
+      return {
+        companyName: 'InventoryPro',
+        logoUrl: null,
+      };
+    }
   }
 }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/contexts/auth.context';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,24 @@ export default function LoginPage() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [companyName, setCompanyName] = useState('InventoryPro');
+  const [logoUrl, setLogoUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      try {
+        const response = await fetch('/api/settings/public');
+        const result = await response.json();
+        if (result.success && result.data) {
+          setCompanyName(result.data.companyName);
+          setLogoUrl(result.data.logoUrl);
+        }
+      } catch (error) {
+        console.error('Error fetching public settings:', error);
+      }
+    };
+    fetchSettings();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,9 +64,20 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 py-12 px-4 sm:px-6 lg:px-8">
       <Card className="w-full max-w-md">
         <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
+          <div className="flex flex-col items-center justify-center space-y-4 mb-2">
+            {logoUrl ? (
+              <img src={logoUrl} alt={companyName} className="h-16 w-auto object-contain" />
+            ) : (
+              <div className="h-12 w-12 bg-primary/10 rounded-full flex items-center justify-center">
+                <span className="text-primary text-xl font-bold">
+                  {companyName.charAt(0)}
+                </span>
+              </div>
+            )}
+            <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
+          </div>
           <CardDescription className="text-center">
-            Sign in to your InventoryPro account
+            Sign in to your {companyName} account
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleSubmit}>
