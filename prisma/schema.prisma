@@ -1405,3 +1405,20 @@ enum JobStatus {
   COMPLETED
   CANCELLED
 }
+
+ m o d e l   T e n a n t   { 
+     i d                             S t r i n g       @ i d   @ d e f a u l t ( c u i d ( ) ) 
+     s l u g                         S t r i n g       @ u n i q u e   / /   e . g . ,   ' d e f a u l t ' ,   ' b u e n a s ' 
+     n a m e                         S t r i n g 
+     s h o r t N a m e               S t r i n g 
+     d e s c r i p t i o n           S t r i n g ? 
+     v e r s i o n                   S t r i n g       @ d e f a u l t ( \  
+ 1 . 0 . 0 \ ) 
+     e n a b l e d F e a t u r e s   J s o n           @ d e f a u l t ( \ [ ] \ )   / /   S t o r e   F e a t u r e K e y [ ] 
+     i s A c t i v e                 B o o l e a n     @ d e f a u l t ( t r u e ) 
+     c r e a t e d A t               D a t e T i m e   @ d e f a u l t ( n o w ( ) ) 
+     u p d a t e d A t               D a t e T i m e   @ u p d a t e d A t 
+ 
+     @ @ i n d e x ( [ s l u g ] ) 
+ }  
+ 
