@@ -989,9 +989,6 @@ model User {
   Session                              Session[]
   CreatedSuppliers                     Supplier[]            @relation("SupplierCreatedBy")
   UpdatedSuppliers                     Supplier[]            @relation("SupplierUpdatedBy")
-  CreatedCooperativeMembers            CooperativeMember[]   @relation("CooperativeMemberCreatedBy")
-  UpdatedCooperativeMembers            CooperativeMember[]   @relation("CooperativeMemberUpdatedBy")
-  RecordedMemberContributions          MemberContribution[]  @relation("MemberContributionRecordedBy")
   Branch                               Branch?               @relation(fields: [branchId], references: [id])
   Role                                 Role                  @relation(fields: [roleId], references: [id])
   UserBranchAccess                     UserBranchAccess[]
@@ -1136,6 +1133,7 @@ model JobOrder {
   @@index([deviceType])
   @@index([scheduledAt])
   @@index([status, createdAt])
+  @@index([status])
 }
 
 model JobPerformed {
@@ -1408,112 +1406,129 @@ enum JobStatus {
   CANCELLED
 }
 
-// Cooperative Management Models
-model CooperativeMember {
-  id                     String              @id @default(cuid())
-  memberCode             String              @unique
-  firstName              String
-  lastName               String
-  middleName             String?
-  dateOfBirth            DateTime
-  gender                 String              // 'male', 'female', 'other'
-  civilStatus            String              // 'single', 'married', 'widowed', 'separated'
-  email                  String?             @unique
-  phone                  String
-  alternatePhone         String?
-  address                String
-  city                   String?
-  region                 String?
-  postalCode             String?
-  membershipTypeId       String
-  membershipDate         DateTime            @default(now())
-  status                 String              @default("active") // 'active', 'inactive', 'suspended'
-  emergencyContactName   String?
-  emergencyContactPhone  String?
-  emergencyContactRelation String?
-  tinNumber              String?
-  sssNumber              String?
-  photoUrl               String?
-  notes                  String?
-  createdAt              DateTime            @default(now())
-  updatedAt              DateTime            @updatedAt
-  createdById            String?
-  updatedById            String?
-  
-  MembershipType         MembershipType      @relation(fields: [membershipTypeId], references: [id])
-  CreatedBy              User?               @relation("CooperativeMemberCreatedBy", fields: [createdById], references: [id])
-  UpdatedBy              User?               @relation("CooperativeMemberUpdatedBy", fields: [updatedById], references: [id])
-  Contributions          MemberContribution[]
-  Beneficiaries          MemberBeneficiary[]
+ m o d e l   T e n a n t   { 
+     i d                             S t r i n g       @ i d   @ d e f a u l t ( c u i d ( ) ) 
+     s l u g                         S t r i n g       @ u n i q u e   / /   e . g . ,   ' d e f a u l t ' ,   ' b u e n a s ' 
+     n a m e                         S t r i n g 
+     s h o r t N a m e               S t r i n g 
+     d e s c r i p t i o n           S t r i n g ? 
+     v e r s i o n                   S t r i n g       @ d e f a u l t ( \  
+ 1 . 0 . 0 \ ) 
+     e n a b l e d F e a t u r e s   J s o n           @ d e f a u l t ( \ [ ] \ )   / /   S t o r e   F e a t u r e K e y [ ] 
+     i s A c t i v e                 B o o l e a n     @ d e f a u l t ( t r u e ) 
+     c r e a t e d A t               D a t e T i m e   @ d e f a u l t ( n o w ( ) ) 
+     u p d a t e d A t               D a t e T i m e   @ u p d a t e d A t 
+ 
+     @ @ i n d e x ( [ s l u g ] ) 
+ }  
+  
 
-  @@index([memberCode])
-  @@index([email])
-  @@index([status])
-  @@index([membershipTypeId])
-  @@index([firstName])
-  @@index([lastName])
-  @@index([phone])
-  @@index([status, membershipTypeId])
-  @@index([createdAt])
-}
 
-model MembershipType {
-  id                   String              @id @default(cuid())
-  name                 String              @unique
-  code                 String              @unique
-  description          String?
-  requiredShareCapital Float               @default(0)
-  monthlyDues          Float               @default(0)
-  benefits             String?             // JSON string
-  status               String              @default("active") // 'active', 'inactive'
-  displayOrder         Int                 @default(0)
-  isSystemDefined      Boolean             @default(false)
-  createdAt            DateTime            @default(now())
-  updatedAt            DateTime            @updatedAt
-  
-  Members              CooperativeMember[]
-
-  @@index([status])
-  @@index([displayOrder])
-}
-
-model MemberContribution {
-  id               String            @id @default(cuid())
-  memberId         String
-  contributionType String            // 'share_capital', 'savings', 'loan_payment', 'membership_fee', 'other'
-  amount           Float
-  contributionDate DateTime          @default(now())
-  referenceNumber  String?
-  paymentMethod    String            // 'cash', 'bank_transfer', 'check', 'online'
-  notes            String?
-  recordedById     String
-  createdAt        DateTime          @default(now())
-  
-  Member           CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
-  RecordedBy       User              @relation("MemberContributionRecordedBy", fields: [recordedById], references: [id])
-
-  @@index([memberId])
-  @@index([contributionType])
-  @@index([contributionDate])
-  @@index([recordedById])
-  @@index([memberId, contributionDate])
-}
-
-model MemberBeneficiary {
-  id           String            @id @default(cuid())
-  memberId     String
-  fullName     String
-  relationship String            // 'spouse', 'child', 'parent', 'sibling', 'other'
-  dateOfBirth  DateTime?
-  phone        String?
-  percentage   Float?            // 0-100
-  isPrimary    Boolean           @default(false)
-  createdAt    DateTime          @default(now())
-  updatedAt    DateTime          @updatedAt
-  
-  Member       CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
-
-  @@index([memberId])
-  @@index([isPrimary])
-}
-
+m o d e l   C o o p e r a t i v e M e m b e r   {  
+     i d                                           S t r i n g                             @ i d   @ d e f a u l t ( c u i d ( ) )  
+     m e m b e r C o d e                           S t r i n g                             @ u n i q u e  
+     f i r s t N a m e                             S t r i n g  
+     l a s t N a m e                               S t r i n g  
+     m i d d l e N a m e                           S t r i n g ?  
+     d a t e O f B i r t h                         D a t e T i m e  
+     g e n d e r                                   S t r i n g                             / /   ' m a l e ' ,   ' f e m a l e ' ,   ' o t h e r '  
+     c i v i l S t a t u s                         S t r i n g                             / /   ' s i n g l e ' ,   ' m a r r i e d ' ,   ' w i d o w e d ' ,   ' s e p a r a t e d '  
+     e m a i l                                     S t r i n g ?                           @ u n i q u e  
+     p h o n e                                     S t r i n g  
+     a l t e r n a t e P h o n e                   S t r i n g ?  
+     a d d r e s s                                 S t r i n g  
+     c i t y                                       S t r i n g ?  
+     r e g i o n                                   S t r i n g ?  
+     p o s t a l C o d e                           S t r i n g ?  
+     m e m b e r s h i p T y p e I d               S t r i n g  
+     m e m b e r s h i p D a t e                   D a t e T i m e                         @ d e f a u l t ( n o w ( ) )  
+     s t a t u s                                   S t r i n g                             @ d e f a u l t ( " a c t i v e " )   / /   ' a c t i v e ' ,   ' i n a c t i v e ' ,   ' s u s p e n d e d '  
+     e m e r g e n c y C o n t a c t N a m e       S t r i n g ?  
+     e m e r g e n c y C o n t a c t P h o n e     S t r i n g ?  
+     e m e r g e n c y C o n t a c t R e l a t i o n   S t r i n g ?  
+     t i n N u m b e r                             S t r i n g ?  
+     s s s N u m b e r                             S t r i n g ?  
+     p h o t o U r l                               S t r i n g ?  
+     n o t e s                                     S t r i n g ?  
+     c r e a t e d A t                             D a t e T i m e                         @ d e f a u l t ( n o w ( ) )  
+     u p d a t e d A t                             D a t e T i m e                         @ u p d a t e d A t  
+     c r e a t e d B y I d                         S t r i n g ?  
+     u p d a t e d B y I d                         S t r i n g ?  
+      
+     M e m b e r s h i p T y p e                   M e m b e r s h i p T y p e             @ r e l a t i o n ( f i e l d s :   [ m e m b e r s h i p T y p e I d ] ,   r e f e r e n c e s :   [ i d ] )  
+     C r e a t e d B y                             U s e r ?                               @ r e l a t i o n ( " C o o p e r a t i v e M e m b e r C r e a t e d B y " ,   f i e l d s :   [ c r e a t e d B y I d ] ,   r e f e r e n c e s :   [ i d ] )  
+     U p d a t e d B y                             U s e r ?                               @ r e l a t i o n ( " C o o p e r a t i v e M e m b e r U p d a t e d B y " ,   f i e l d s :   [ u p d a t e d B y I d ] ,   r e f e r e n c e s :   [ i d ] )  
+     C o n t r i b u t i o n s                     M e m b e r C o n t r i b u t i o n [ ]  
+     B e n e f i c i a r i e s                     M e m b e r B e n e f i c i a r y [ ]  
+  
+     @ @ i n d e x ( [ m e m b e r C o d e ] )  
+     @ @ i n d e x ( [ e m a i l ] )  
+     @ @ i n d e x ( [ s t a t u s ] )  
+     @ @ i n d e x ( [ m e m b e r s h i p T y p e I d ] )  
+     @ @ i n d e x ( [ f i r s t N a m e ] )  
+     @ @ i n d e x ( [ l a s t N a m e ] )  
+     @ @ i n d e x ( [ p h o n e ] )  
+     @ @ i n d e x ( [ s t a t u s ,   m e m b e r s h i p T y p e I d ] )  
+     @ @ i n d e x ( [ c r e a t e d A t ] )  
+ }  
+  
+ m o d e l   M e m b e r s h i p T y p e   {  
+     i d                                       S t r i n g                             @ i d   @ d e f a u l t ( c u i d ( ) )  
+     n a m e                                   S t r i n g                             @ u n i q u e  
+     c o d e                                   S t r i n g                             @ u n i q u e  
+     d e s c r i p t i o n                     S t r i n g ?  
+     r e q u i r e d S h a r e C a p i t a l   F l o a t                               @ d e f a u l t ( 0 )  
+     m o n t h l y D u e s                     F l o a t                               @ d e f a u l t ( 0 )  
+     b e n e f i t s                           S t r i n g ?                           / /   J S O N   s t r i n g  
+     s t a t u s                               S t r i n g                             @ d e f a u l t ( " a c t i v e " )   / /   ' a c t i v e ' ,   ' i n a c t i v e '  
+     d i s p l a y O r d e r                   I n t                                   @ d e f a u l t ( 0 )  
+     i s S y s t e m D e f i n e d             B o o l e a n                           @ d e f a u l t ( f a l s e )  
+     c r e a t e d A t                         D a t e T i m e                         @ d e f a u l t ( n o w ( ) )  
+     u p d a t e d A t                         D a t e T i m e                         @ u p d a t e d A t  
+      
+     M e m b e r s                             C o o p e r a t i v e M e m b e r [ ]  
+  
+     @ @ i n d e x ( [ s t a t u s ] )  
+     @ @ i n d e x ( [ d i s p l a y O r d e r ] )  
+ }  
+  
+ m o d e l   M e m b e r C o n t r i b u t i o n   {  
+     i d                               S t r i n g                         @ i d   @ d e f a u l t ( c u i d ( ) )  
+     m e m b e r I d                   S t r i n g  
+     c o n t r i b u t i o n T y p e   S t r i n g                         / /   ' s h a r e _ c a p i t a l ' ,   ' s a v i n g s ' ,   ' l o a n _ p a y m e n t ' ,   ' m e m b e r s h i p _ f e e ' ,   ' o t h e r '  
+     a m o u n t                       F l o a t  
+     c o n t r i b u t i o n D a t e   D a t e T i m e                     @ d e f a u l t ( n o w ( ) )  
+     r e f e r e n c e N u m b e r     S t r i n g ?  
+     p a y m e n t M e t h o d         S t r i n g                         / /   ' c a s h ' ,   ' b a n k _ t r a n s f e r ' ,   ' c h e c k ' ,   ' o n l i n e '  
+     n o t e s                         S t r i n g ?  
+     r e c o r d e d B y I d           S t r i n g  
+     c r e a t e d A t                 D a t e T i m e                     @ d e f a u l t ( n o w ( ) )  
+      
+     M e m b e r                       C o o p e r a t i v e M e m b e r   @ r e l a t i o n ( f i e l d s :   [ m e m b e r I d ] ,   r e f e r e n c e s :   [ i d ] ,   o n D e l e t e :   C a s c a d e )  
+     R e c o r d e d B y               U s e r                             @ r e l a t i o n ( " M e m b e r C o n t r i b u t i o n R e c o r d e d B y " ,   f i e l d s :   [ r e c o r d e d B y I d ] ,   r e f e r e n c e s :   [ i d ] )  
+  
+     @ @ i n d e x ( [ m e m b e r I d ] )  
+     @ @ i n d e x ( [ c o n t r i b u t i o n T y p e ] )  
+     @ @ i n d e x ( [ c o n t r i b u t i o n D a t e ] )  
+     @ @ i n d e x ( [ r e c o r d e d B y I d ] )  
+     @ @ i n d e x ( [ m e m b e r I d ,   c o n t r i b u t i o n D a t e ] )  
+ }  
+  
+ m o d e l   M e m b e r B e n e f i c i a r y   {  
+     i d                       S t r i n g                         @ i d   @ d e f a u l t ( c u i d ( ) )  
+     m e m b e r I d           S t r i n g  
+     f u l l N a m e           S t r i n g  
+     r e l a t i o n s h i p   S t r i n g                         / /   ' s p o u s e ' ,   ' c h i l d ' ,   ' p a r e n t ' ,   ' s i b l i n g ' ,   ' o t h e r '  
+     d a t e O f B i r t h     D a t e T i m e ?  
+     p h o n e                 S t r i n g ?  
+     p e r c e n t a g e       F l o a t ?                         / /   0 - 1 0 0  
+     i s P r i m a r y         B o o l e a n                       @ d e f a u l t ( f a l s e )  
+     c r e a t e d A t         D a t e T i m e                     @ d e f a u l t ( n o w ( ) )  
+     u p d a t e d A t         D a t e T i m e                     @ u p d a t e d A t  
+      
+     M e m b e r               C o o p e r a t i v e M e m b e r   @ r e l a t i o n ( f i e l d s :   [ m e m b e r I d ] ,   r e f e r e n c e s :   [ i d ] ,   o n D e l e t e :   C a s c a d e )  
+  
+     @ @ i n d e x ( [ m e m b e r I d ] )  
+     @ @ i n d e x ( [ i s P r i m a r y ] )  
+ }  
+ 
