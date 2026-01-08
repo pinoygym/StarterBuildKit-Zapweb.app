@@ -37,7 +37,10 @@ import { useState } from 'react';
 import { useAuth } from '@/contexts/auth.context';
 import { useCompanyName } from '@/hooks/use-company-settings';
 
-const navigation = [
+import { getTenantConfig } from '@/lib/tenant-config';
+import { TenantConfig, FeatureKey } from '@/config/tenants';
+
+const navigation: { name: string, href: string, icon: any, feature?: FeatureKey }[] = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
   { name: 'Products', href: '/products', icon: Package },
   { name: 'Inventory', href: '/inventory', icon: BoxIcon },
@@ -48,35 +51,42 @@ const navigation = [
   { name: 'Customers', href: '/customers', icon: Users },
   { name: 'Suppliers', href: '/suppliers', icon: Users },
   { name: 'Purchase Orders', href: '/purchase-orders', icon: ShoppingCart },
-  { name: 'Receiving Vouchers', href: '/receiving-vouchers', icon: PackageCheck },
+  { name: 'Receiving Vouchers', href: '/receiving-vouchers', icon: PackageCheck, feature: 'multi_uom' },
   { name: 'Sales Orders', href: '/sales-orders', icon: FileText },
-  { name: 'POS', href: '/pos', icon: Store },
-  { name: 'Sales History', href: '/sales-history', icon: History },
-  { name: 'AR/AP', href: '/ar-ap', icon: CreditCard },
-  { name: 'Fund Sources', href: '/fund-sources', icon: Wallet },
-  { name: 'Expenses', href: '/expenses', icon: Receipt },
+  { name: 'POS', href: '/pos', icon: Store, feature: 'pos' },
+  { name: 'Sales History', href: '/sales-history', icon: History, feature: 'pos' },
+  { name: 'AR/AP', href: '/ar-ap', icon: CreditCard, feature: 'ar_ap' },
+  { name: 'Fund Sources', href: '/fund-sources', icon: Wallet, feature: 'ar_ap' },
+  { name: 'Expenses', href: '/expenses', icon: Receipt, feature: 'expenses' },
   { name: 'Alerts', href: '/alerts', icon: AlertCircle },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
-  { name: 'Roadmap', href: '/roadmap', icon: Milestone },
+  { name: 'Roadmap', href: '/roadmap', icon: Milestone, feature: 'roadmap' },
 ];
 
-const settingsNavigation = [
+const settingsNavigation: { name: string, href: string, icon: any, feature?: FeatureKey }[] = [
   { name: 'Users', href: '/users', icon: UserCog },
   { name: 'Roles', href: '/roles', icon: Shield },
-  { name: 'Audit Logs', href: '/settings/audit-logs', icon: History },
+  { name: 'Audit Logs', href: '/settings/audit-logs', icon: History, feature: 'audit_logs' },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
-
-export function Sidebar({ counts }: { counts?: Record<string, number> }) {
+export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?: Record<string, number>, tenantConfig?: TenantConfig }) {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { user, logout, isSuperMegaAdmin } = useAuth();
   const { companyName } = useCompanyName();
 
+  // Use provided config or fallback to one loaded via env (if available on client)
+  const tenantConfig = initialTenantConfig || getTenantConfig();
+
   const handleLogout = async () => {
     await logout();
+  };
+
+  const isFeatureEnabled = (feature?: FeatureKey) => {
+    if (!feature) return true;
+    return tenantConfig.enabledFeatures.includes(feature);
   };
 
   // Map navigation href to count key
@@ -99,13 +109,20 @@ export function Sidebar({ counts }: { counts?: Record<string, number> }) {
 
   return (
     <>
-      {/* Mobile menu button ... existing code ... */}
+      {/* Mobile menu button */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
             <Package className="h-5 w-5 text-primary-foreground" />
           </div>
-          <span className="font-bold text-lg text-foreground">{companyName}</span>
+          <div className="flex flex-col">
+            <span className="font-bold text-lg text-foreground leading-none">{companyName}</span>
+            <div className="flex items-center gap-1 mt-0.5">
+              <span className="text-[10px] text-muted-foreground font-medium">{tenantConfig.shortName}</span>
+              <span className="text-[10px] text-muted-foreground">•</span>
+              <span className="text-[10px] text-muted-foreground font-medium">{tenantConfig.version}</span>
+            </div>
+          </div>
         </div>
         <Button
           variant="ghost"
@@ -146,53 +163,61 @@ export function Sidebar({ counts }: { counts?: Record<string, number> }) {
           </div>
           <div className="flex flex-col min-w-0 flex-1">
             <span className="font-bold text-base text-foreground leading-tight line-clamp-2">{companyName}</span>
+            <div className="flex items-center gap-1 mt-0.5">
+              <span className="text-[10px] text-muted-foreground font-medium truncate">{tenantConfig.shortName}</span>
+              <span className="text-[10px] text-muted-foreground">•</span>
+              <span className="text-[10px] text-muted-foreground font-medium">{tenantConfig.version}</span>
+            </div>
           </div>
         </div>
 
         {/* Navigation */}
         <nav className="flex-1 overflow-y-auto p-4 space-y-1">
-          {navigation.map((item) => {
-            const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
-            const Icon = item.icon;
-            const count = getCount(item.href);
+          {navigation
+            .filter(item => isFeatureEnabled(item.feature))
+            .map((item) => {
+              const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
+              const Icon = item.icon;
+              const count = getCount(item.href);
 
-            return (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMobileMenuOpen(false)}
-                className={cn(
-                  'flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
-                  'min-h-[44px]', // Minimum touch target size for mobile
-                  isActive
-                    ? 'bg-primary text-primary-foreground shadow-sm'
-                    : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                )}
-                aria-current={isActive ? 'page' : undefined}
-              >
-                <div className="flex items-center gap-3">
-                  <Icon className="h-5 w-5 flex-shrink-0" />
-                  <span className="truncate">{item.name}</span>
-                </div>
-                {count !== undefined && count > 0 && (
-                  <span className={cn(
-                    "text-xs px-2 py-0.5 rounded-full",
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={cn(
+                    'flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
+                    'min-h-[44px]', // Minimum touch target size for mobile
                     isActive
-                      ? "bg-primary-foreground/20 text-primary-foreground"
-                      : "bg-muted-foreground/20 text-muted-foreground"
-                  )}>
-                    {count}
-                  </span>
-                )}
-              </Link>
-            );
-          })}
+                      ? 'bg-primary text-primary-foreground shadow-sm'
+                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                  )}
+                  aria-current={isActive ? 'page' : undefined}
+                >
+                  <div className="flex items-center gap-3">
+                    <Icon className="h-5 w-5 flex-shrink-0" />
+                    <span className="truncate">{item.name}</span>
+                  </div>
+                  {count !== undefined && count > 0 && (
+                    <span className={cn(
+                      "text-xs px-2 py-0.5 rounded-full",
+                      isActive
+                        ? "bg-primary-foreground/20 text-primary-foreground"
+                        : "bg-muted-foreground/20 text-muted-foreground"
+                    )}>
+                      {count}
+                    </span>
+                  )}
+                </Link>
+              );
+            })}
 
           <Separator className="my-3" />
           <div className="pt-2">
             <p className="px-3 text-xs font-semibold text-muted-foreground mb-2">Settings</p>
             {settingsNavigation
               .filter(() => isSuperMegaAdmin())
+              .filter(item => isFeatureEnabled(item.feature))
               .map((item) => {
                 const isActive = pathname === item.href || pathname.startsWith(item.href + '/');
                 const Icon = item.icon;
@@ -260,7 +285,7 @@ export function Sidebar({ counts }: { counts?: Record<string, number> }) {
           {/* App Version */}
           <div className="text-xs text-muted-foreground text-center">
             <p>© 2024 {companyName}</p>
-            <p className="mt-1">v1.0.0</p>
+            <p className="mt-1">{tenantConfig.version}</p>
           </div>
         </div>
       </aside>

@@ -12,13 +12,18 @@ import { BranchProvider } from "@/contexts/branch-context";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata: Metadata = {
-  title: "InventoryPro - Inventory Management System",
-  description: "Comprehensive inventory management and POS system for wholesale delivery companies",
-  other: {
-    'color-scheme': 'light dark',
-  },
-};
+import { getTenantConfig } from "@/lib/tenant-config";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const tenant = getTenantConfig();
+  return {
+    title: `${tenant.name} - ${tenant.description}`,
+    description: tenant.description,
+    other: {
+      'color-scheme': 'light dark',
+    },
+  };
+}
 
 export default function RootLayout({
   children,
