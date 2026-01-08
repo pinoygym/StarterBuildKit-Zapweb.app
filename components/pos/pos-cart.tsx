@@ -68,17 +68,17 @@ export function POSCart({
         </Button>
       </CardHeader>
 
-      <CardContent className="space-y-4">
+      <CardContent className="space-y-3 sm:space-y-4">
         {/* Cart Items */}
-        <div className="space-y-3 max-h-[500px] overflow-y-auto">
+        <div className="space-y-2 sm:space-y-3 max-h-[400px] sm:max-h-[500px] overflow-y-auto mobile-scroll">
           {items.map((item, index) => (
-            <div key={index} data-testid="cart-item" className="space-y-2 pb-3 border-b last:border-0">
+            <div key={index} data-testid="cart-item" className="space-y-2 pb-2 sm:pb-3 border-b last:border-0">
               {/* Product Name */}
-              <div className="flex items-start justify-between">
-                <div className="flex-1">
-                  <span className="font-medium text-sm">{item.productName}</span>
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex-1 min-w-0">
+                  <span className="font-medium text-sm block truncate">{item.productName}</span>
                   {item.discount > 0 && (
-                    <Badge variant="secondary" className="ml-2 text-xs">
+                    <Badge variant="secondary" className="ml-0 mt-1 text-xs">
                       {item.discountType === 'percentage'
                         ? `-${item.discountValue}%`
                         : `-${formatCurrency(item.discountValue || 0)}`}
@@ -89,7 +89,7 @@ export function POSCart({
                   variant="ghost"
                   size="sm"
                   onClick={() => onRemoveItem(index)}
-                  className="h-6 w-6 p-0"
+                  className="h-8 w-8 p-0 flex-shrink-0"
                   data-testid="remove-from-cart"
                 >
                   <Trash2 className="h-4 w-4 text-destructive" />

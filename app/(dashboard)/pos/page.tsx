@@ -352,14 +352,14 @@ export default function POSPage() {
 
       {/* Warehouse Selection */}
       {warehouses.length > 1 && (
-        <Card className="mt-6">
-          <CardContent className="p-4">
-            <div className="flex items-center gap-4">
-              <Label htmlFor="warehouse-select" className="whitespace-nowrap">
+        <Card className="mt-4 sm:mt-6">
+          <CardContent className="p-3 sm:p-4">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
+              <Label htmlFor="warehouse-select" className="text-sm sm:text-base">
                 Select Warehouse:
               </Label>
               <Select value={selectedWarehouse} onValueChange={setSelectedWarehouse}>
-                <SelectTrigger id="warehouse-select" className="w-[300px]">
+                <SelectTrigger id="warehouse-select" className="w-full sm:w-[300px]">
                   <SelectValue placeholder="Select warehouse" />
                 </SelectTrigger>
                 <SelectContent>
@@ -375,9 +375,10 @@ export default function POSPage() {
         </Card>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
-        {/* Left: Product Grid (2/3 width) */}
-        <div className="lg:col-span-2">
+      {/* Mobile: Stack vertically, Desktop: 2/3 + 1/3 grid */}
+      <div className="flex flex-col lg:grid lg:grid-cols-3 gap-4 sm:gap-6 mt-4 sm:mt-6">
+        {/* Product Grid */}
+        <div className="lg:col-span-2 order-2 lg:order-1">
           <POSProductGrid
             warehouseId={selectedWarehouse}
             onAddToCart={handleAddToCart}
@@ -385,8 +386,8 @@ export default function POSPage() {
           />
         </div>
 
-        {/* Right: Cart and Payment (1/3 width) */}
-        <div className="space-y-6">
+        {/* Cart and Payment - Show first on mobile for better UX */}
+        <div className="space-y-4 sm:space-y-6 order-1 lg:order-2">
           {!showPayment ? (
             <>
               <POSCart

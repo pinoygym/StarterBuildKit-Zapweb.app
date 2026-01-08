@@ -41,19 +41,23 @@ export function DashboardLayoutClient({ children, counts, tenantConfig }: { chil
     return (
         <div className="min-h-screen bg-background">
             <Sidebar counts={counts} tenantConfig={tenantConfig} />
-            <div className="lg:pl-64">
-                <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between gap-x-4 border-b border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+            {/* Add padding-top on mobile to account for fixed mobile header */}
+            <div className="lg:pl-64 pt-16 lg:pt-0">
+                <div className="fixed lg:sticky top-0 left-0 right-0 z-40 flex h-16 shrink-0 items-center justify-between gap-x-2 border-b border-border bg-background px-3 shadow-sm sm:gap-x-4 sm:px-4 lg:gap-x-6 lg:px-8 lg:left-64">
                     <BranchSelector />
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm text-muted-foreground mr-4 hidden sm:block">
-                            Support: 0981-125-4446 & 0915-891-8530
-                        </span>
+                    <div className="flex items-center gap-2 sm:gap-4">
+                        {/* Stack support numbers vertically on very small screens */}
+                        <div className="hidden md:block">
+                            <span className="text-xs sm:text-sm text-muted-foreground">
+                                Support: 0981-125-4446 & 0915-891-8530
+                            </span>
+                        </div>
                         <NotificationBell />
                         {/* Add UserNav or other right-side items here later */}
                     </div>
                 </div>
-                <main className="py-10">
-                    <div className="px-4 sm:px-6 lg:px-8">
+                <main className="py-4 sm:py-6 lg:py-10">
+                    <div className="px-3 sm:px-4 lg:px-8">
                         {children}
                     </div>
                 </main>

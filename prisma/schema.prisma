@@ -989,6 +989,9 @@ model User {
   Session                              Session[]
   CreatedSuppliers                     Supplier[]            @relation("SupplierCreatedBy")
   UpdatedSuppliers                     Supplier[]            @relation("SupplierUpdatedBy")
+  CreatedCooperativeMembers            CooperativeMember[]   @relation("CooperativeMemberCreatedBy")
+  UpdatedCooperativeMembers            CooperativeMember[]   @relation("CooperativeMemberUpdatedBy")
+  RecordedMemberContributions          MemberContribution[]  @relation("MemberContributionRecordedBy")
   Branch                               Branch?               @relation(fields: [branchId], references: [id])
   Role                                 Role                  @relation(fields: [roleId], references: [id])
   UserBranchAccess                     UserBranchAccess[]
@@ -1133,7 +1136,6 @@ model JobOrder {
   @@index([deviceType])
   @@index([scheduledAt])
   @@index([status, createdAt])
-  @@index([status])
 }
 
 model JobPerformed {
@@ -1405,3 +1407,113 @@ enum JobStatus {
   COMPLETED
   CANCELLED
 }
+
+// Cooperative Management Models
+model CooperativeMember {
+  id                     String              @id @default(cuid())
+  memberCode             String              @unique
+  firstName              String
+  lastName               String
+  middleName             String?
+  dateOfBirth            DateTime
+  gender                 String              // 'male', 'female', 'other'
+  civilStatus            String              // 'single', 'married', 'widowed', 'separated'
+  email                  String?             @unique
+  phone                  String
+  alternatePhone         String?
+  address                String
+  city                   String?
+  region                 String?
+  postalCode             String?
+  membershipTypeId       String
+  membershipDate         DateTime            @default(now())
+  status                 String              @default("active") // 'active', 'inactive', 'suspended'
+  emergencyContactName   String?
+  emergencyContactPhone  String?
+  emergencyContactRelation String?
+  tinNumber              String?
+  sssNumber              String?
+  photoUrl               String?
+  notes                  String?
+  createdAt              DateTime            @default(now())
+  updatedAt              DateTime            @updatedAt
+  createdById            String?
+  updatedById            String?
+  
+  MembershipType         MembershipType      @relation(fields: [membershipTypeId], references: [id])
+  CreatedBy              User?               @relation("CooperativeMemberCreatedBy", fields: [createdById], references: [id])
+  UpdatedBy              User?               @relation("CooperativeMemberUpdatedBy", fields: [updatedById], references: [id])
+  Contributions          MemberContribution[]
+  Beneficiaries          MemberBeneficiary[]
+
+  @@index([memberCode])
+  @@index([email])
+  @@index([status])
+  @@index([membershipTypeId])
+  @@index([firstName])
+  @@index([lastName])
+  @@index([phone])
+  @@index([status, membershipTypeId])
+  @@index([createdAt])
+}
+
+model MembershipType {
+  id                   String              @id @default(cuid())
+  name                 String              @unique
+  code                 String              @unique
+  description          String?
+  requiredShareCapital Float               @default(0)
+  monthlyDues          Float               @default(0)
+  benefits             String?             // JSON string
+  status               String              @default("active") // 'active', 'inactive'
+  displayOrder         Int                 @default(0)
+  isSystemDefined      Boolean             @default(false)
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime            @updatedAt
+  
+  Members              CooperativeMember[]
+
+  @@index([status])
+  @@index([displayOrder])
+}
+
+model MemberContribution {
+  id               String            @id @default(cuid())
+  memberId         String
+  contributionType String            // 'share_capital', 'savings', 'loan_payment', 'membership_fee', 'other'
+  amount           Float
+  contributionDate DateTime          @default(now())
+  referenceNumber  String?
+  paymentMethod    String            // 'cash', 'bank_transfer', 'check', 'online'
+  notes            String?
+  recordedById     String
+  createdAt        DateTime          @default(now())
+  
+  Member           CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  RecordedBy       User              @relation("MemberContributionRecordedBy", fields: [recordedById], references: [id])
+
+  @@index([memberId])
+  @@index([contributionType])
+  @@index([contributionDate])
+  @@index([recordedById])
+  @@index([memberId, contributionDate])
+}
+
+model MemberBeneficiary {
+  id           String            @id @default(cuid())
+  memberId     String
+  fullName     String
+  relationship String            // 'spouse', 'child', 'parent', 'sibling', 'other'
+  dateOfBirth  DateTime?
+  phone        String?
+  percentage   Float?            // 0-100
+  isPrimary    Boolean           @default(false)
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
+  
+  Member       CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+  @@index([isPrimary])
+}
+
