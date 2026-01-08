@@ -164,8 +164,8 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
             description="Try adjusting your search or filters"
           />
         ) : (
-          {/* Responsive grid: 1 col mobile, 2 cols sm, 3 cols md, 4 cols lg+ */ }
-          < div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+          {/* Responsive grid: 1 col mobile, 2 cols sm, 3 cols md, 4 cols lg+ */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
         {filteredProducts.map((product) => (
           <Card
             key={product.id}
