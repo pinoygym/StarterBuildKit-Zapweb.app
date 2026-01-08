@@ -8,9 +8,10 @@ import { Loader2 } from 'lucide-react';
 import { Sidebar } from '@/components/shared/sidebar';
 import { BranchSelector } from '@/components/shared/branch-selector';
 import { NotificationBell } from '@/components/layout/notification-bell';
+import { TenantConfig } from '@/config/tenants';
 
 
-export function DashboardLayoutClient({ children, counts }: { children: ReactNode, counts?: Record<string, number> }) {
+export function DashboardLayoutClient({ children, counts, tenantConfig }: { children: ReactNode, counts?: Record<string, number>, tenantConfig?: TenantConfig }) {
     const { isAuthenticated, isLoading } = useAuth();
     const router = useRouter();
     const pathname = usePathname();
@@ -39,7 +40,7 @@ export function DashboardLayoutClient({ children, counts }: { children: ReactNod
 
     return (
         <div className="min-h-screen bg-background">
-            <Sidebar counts={counts} />
+            <Sidebar counts={counts} tenantConfig={tenantConfig} />
             <div className="lg:pl-64">
                 <div className="sticky top-0 z-40 flex h-16 shrink-0 items-center justify-between gap-x-4 border-b border-border bg-background px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
                     <BranchSelector />

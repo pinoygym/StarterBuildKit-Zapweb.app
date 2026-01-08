@@ -75,6 +75,11 @@ export default function LoginPage() {
               </div>
             )}
             <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
+            <div className="flex items-center gap-1.5 -mt-2 mb-2">
+              <span className="text-[10px] text-muted-foreground font-medium">testTemplateGithub</span>
+              <span className="text-[10px] text-muted-foreground">•</span>
+              <span className="text-[10px] text-muted-foreground font-medium">v0.1.0</span>
+            </div>
           </div>
           <CardDescription className="text-center">
             Sign in to your {companyName} account
