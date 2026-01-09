@@ -53,13 +53,14 @@
   * {
     @apply border-border;
   }
-  
+
   /* FIX: Ensure root elements have height so content is visible */
-  html, body {
+  html,
+  body {
     height: 100%;
     min-height: 100vh;
   }
-  
+
   body {
     @apply bg-background text-foreground;
   }
@@ -67,57 +68,95 @@
 
 /* Mobile-specific utilities */
 @layer utilities {
+
   /* Touch-friendly minimum sizes (Apple HIG recommends 44x44px) */
   .touch-target {
-    min-width: 44px;
-    min-height: 44px;
+    @apply min-h-[44px] min-w-[44px] flex items-center justify-center;
   }
-  
+
   /* Safe area support for notched devices */
   .safe-area-inset-top {
     padding-top: env(safe-area-inset-top);
   }
-  
+
   .safe-area-inset-bottom {
     padding-bottom: env(safe-area-inset-bottom);
   }
-  
+
   /* Prevent text from being too small on mobile */
   @media (max-width: 640px) {
     html {
-      font-size: 16px; /* Prevents iOS zoom on input focus */
+      font-size: 16px;
+      /* Prevents iOS zoom on input focus */
+    }
+
+    .text-responsive-h1 {
+      @apply text-xl font-bold tracking-tight;
+    }
+
+    .text-responsive-h2 {
+      @apply text-lg font-semibold;
+    }
+
+    .text-responsive-base {
+      @apply text-sm;
     }
   }
-  
+
+  @media (min-width: 641px) {
+    .text-responsive-h1 {
+      @apply text-3xl font-bold tracking-tight;
+    }
+
+    .text-responsive-h2 {
+      @apply text-xl font-semibold;
+    }
+
+    .text-responsive-base {
+      @apply text-base;
+    }
+  }
+
   /* Optimize scrolling on mobile */
   .mobile-scroll {
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
+    @apply overflow-auto;
   }
-  
+
   /* Hide scrollbar but keep functionality */
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  
+
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
+  }
+
+  /* Compact spacing for mobile */
+  .mobile-compact {
+    @apply p-3 sm:p-6;
+  }
+
+  .mobile-gap {
+    @apply gap-3 sm:gap-6;
   }
 }
 
 /* Print styles for receipts */
 @media print {
+
   /* Hide everything except the receipt content */
   body * {
     visibility: hidden;
   }
-  
+
   #receipt-content,
   #receipt-content * {
     visibility: visible;
   }
-  
+
   #receipt-content {
     position: absolute;
     left: 0;
@@ -126,14 +165,14 @@
     max-width: 300px;
     margin: 0 auto;
   }
-  
+
   /* Hide dialog overlay and other UI elements */
   [role="dialog"],
   [data-radix-dialog-overlay],
   button {
     display: none !important;
   }
-  
+
   /* Show only receipt content */
   #receipt-content {
     display: block !important;

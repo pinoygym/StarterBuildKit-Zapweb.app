@@ -89,8 +89,10 @@ export async function createTestUser(overrides: Partial<any> = {}): Promise<any>
       // If not found, try to create it
       role = await prisma.role.create({
         data: {
+          id: randomUUID(),
           name: 'Super Admin',
           description: 'Super Administrator role for tests',
+          updatedAt: new Date(),
         },
       });
       break; // Success, exit retry loop

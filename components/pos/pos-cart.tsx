@@ -70,15 +70,15 @@ export function POSCart({
 
       <CardContent className="space-y-3 sm:space-y-4">
         {/* Cart Items */}
-        <div className="space-y-2 sm:space-y-3 max-h-[400px] sm:max-h-[500px] overflow-y-auto mobile-scroll">
+        <div className="space-y-2 sm:space-y-3 max-h-[400px] sm:max-h-[600px] overflow-y-auto mobile-scroll pr-1">
           {items.map((item, index) => (
-            <div key={index} data-testid="cart-item" className="space-y-2 pb-2 sm:pb-3 border-b last:border-0">
-              {/* Product Name */}
+            <div key={index} data-testid="cart-item" className="space-y-2 pb-2 sm:pb-3 border-b last:border-0 border-muted/50">
+              {/* Product Name and Remove */}
               <div className="flex items-start justify-between gap-2">
                 <div className="flex-1 min-w-0">
-                  <span className="font-medium text-sm block truncate">{item.productName}</span>
+                  <span className="font-semibold text-xs xs:text-sm block truncate">{item.productName}</span>
                   {item.discount > 0 && (
-                    <Badge variant="secondary" className="ml-0 mt-1 text-xs">
+                    <Badge variant="secondary" className="mt-0.5 text-[10px] py-0 px-1">
                       {item.discountType === 'percentage'
                         ? `-${item.discountValue}%`
                         : `-${formatCurrency(item.discountValue || 0)}`}
@@ -89,76 +89,67 @@ export function POSCart({
                   variant="ghost"
                   size="sm"
                   onClick={() => onRemoveItem(index)}
-                  className="h-8 w-8 p-0 flex-shrink-0"
+                  className="h-7 w-7 p-0 flex-shrink-0 text-destructive hover:bg-destructive/10"
                   data-testid="remove-from-cart"
                 >
-                  <Trash2 className="h-4 w-4 text-destructive" />
+                  <Trash2 className="h-3.5 w-3.5" />
                 </Button>
               </div>
 
-              {/* UOM Selection */}
-              <Select
-                value={item.uom}
-                onValueChange={(value) => onUpdateUOM(index, value)}
-              >
-                <SelectTrigger className="h-8">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {item.availableUOMs.map((uom) => (
-                    <SelectItem key={uom.name} value={uom.name}>
-                      {uom.name} - {formatCurrency(uom.sellingPrice)}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              {/* UOM and Controls row */}
+              <div className="grid grid-cols-2 gap-2 mt-1">
+                <Select
+                  value={item.uom}
+                  onValueChange={(value) => onUpdateUOM(index, value)}
+                >
+                  <SelectTrigger className="h-7 text-[10px] xs:text-xs px-2">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {item.availableUOMs.map((uom) => (
+                      <SelectItem key={uom.name} value={uom.name} className="text-[10px] xs:text-xs">
+                        {uom.name} - {formatCurrency(uom.sellingPrice)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
 
-              {/* Quantity Controls */}
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+                <div className="flex items-center justify-end gap-1.5">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => onUpdateQuantity(index, item.quantity - 1)}
-                    className="h-8 w-8 p-0"
+                    className="h-7 w-7 p-0"
                     data-testid="decrease-quantity"
                   >
-                    <Minus className="h-4 w-4" />
+                    <Minus className="h-3 w-3" />
                   </Button>
-                  <NumberInput
+                  <input
+                    type="number"
                     min={1}
                     value={item.quantity}
-                    onChange={(value) => {
-                      onUpdateQuantity(index, Math.max(1, value || 1));
+                    onChange={(e) => {
+                      const val = parseInt(e.target.value);
+                      onUpdateQuantity(index, Math.max(1, isNaN(val) ? 1 : val));
                     }}
-                    className="w-12 h-8 text-center px-1"
+                    className="w-8 h-7 text-center text-[10px] xs:text-xs bg-transparent border rounded focus:outline-none focus:ring-1 focus:ring-primary px-0"
                     data-testid="quantity-input"
                   />
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => onUpdateQuantity(index, item.quantity + 1)}
-                    className="h-8 w-8 p-0"
+                    className="h-7 w-7 p-0"
                     data-testid="increase-quantity"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-3 w-3" />
                   </Button>
-                </div>
-
-                {/* Subtotal */}
-                <div className="text-right">
-                  {item.discount > 0 && (
-                    <div className="text-xs text-muted-foreground line-through">
-                      {formatCurrency(item.originalPrice * item.quantity)}
-                    </div>
-                  )}
-                  <span className="font-semibold">{formatCurrency(item.subtotal)}</span>
                 </div>
               </div>
 
-              {/* Discount Controls */}
-              <div className="space-y-2">
-                <div className="flex items-center gap-2">
+              {/* Discount and Subtotal row */}
+              <div className="flex items-center justify-between gap-2 mt-1.5">
+                <div className="flex items-center gap-1.5 flex-1 min-w-0">
                   <Select
                     value={item.discountType || 'none'}
                     onValueChange={(value) => {
@@ -170,59 +161,40 @@ export function POSCart({
                       }
                     }}
                   >
-                    <SelectTrigger className="h-8 w-[110px]">
+                    <SelectTrigger className="h-7 w-[90px] text-[10px] px-2">
                       <SelectValue />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="none">No Discount</SelectItem>
-                      <SelectItem value="percentage">
-                        <div className="flex items-center gap-1">
-                          <Percent className="h-3 w-3" />
-                          <span>Percent</span>
-                        </div>
-                      </SelectItem>
-                      <SelectItem value="fixed">
-                        <div className="flex items-center gap-1">
-                          <DollarSign className="h-3 w-3" />
-                          <span>Fixed</span>
-                        </div>
-                      </SelectItem>
+                      <SelectItem value="none" className="text-[10px]">No Disc</SelectItem>
+                      <SelectItem value="percentage" className="text-[10px]">Percent</SelectItem>
+                      <SelectItem value="fixed" className="text-[10px]">Fixed</SelectItem>
                     </SelectContent>
                   </Select>
 
                   {item.discountType && (item.discountType as string) !== 'none' && (
-                    <NumberInput
+                    <input
+                      type="number"
                       min={0}
                       step={item.discountType === 'percentage' ? 1 : 0.01}
                       max={item.discountType === 'percentage' ? 100 : item.originalPrice}
                       value={item.discountValue || 0}
-                      onChange={(value) => {
-                        onItemDiscount(index, item.discountType!, value || 0);
+                      onChange={(e) => {
+                        const val = parseFloat(e.target.value);
+                        onItemDiscount(index, item.discountType!, isNaN(val) ? 0 : val);
                       }}
-                      placeholder={item.discountType === 'percentage' ? '0%' : '₱0.00'}
-                      className="h-8 flex-1"
+                      placeholder={item.discountType === 'percentage' ? '%' : '₱'}
+                      className="h-7 flex-1 min-w-[40px] text-[10px] bg-transparent border rounded focus:outline-none focus:ring-1 focus:ring-primary px-1.5"
                     />
                   )}
                 </div>
 
-                {/* Price Breakdown */}
-                <div className="text-xs text-muted-foreground space-y-0.5">
-                  <div className="flex justify-between">
-                    <span>Unit Price:</span>
-                    <span>{formatCurrency(item.originalPrice)}</span>
-                  </div>
+                <div className="text-right flex-shrink-0">
                   {item.discount > 0 && (
-                    <>
-                      <div className="flex justify-between text-green-600">
-                        <span>Discount:</span>
-                        <span>-{formatCurrency(item.discount)}</span>
-                      </div>
-                      <div className="flex justify-between font-medium">
-                        <span>Final Price:</span>
-                        <span>{formatCurrency(item.unitPrice)}</span>
-                      </div>
-                    </>
+                    <div className="text-[9px] text-muted-foreground line-through leading-none mb-0.5">
+                      {formatCurrency(item.originalPrice * item.quantity)}
+                    </div>
                   )}
+                  <span className="font-bold text-xs xs:text-sm text-primary">{formatCurrency(item.subtotal)}</span>
                 </div>
               </div>
             </div>

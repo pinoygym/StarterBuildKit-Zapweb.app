@@ -702,25 +702,40 @@ export default function ReportsPage() {
                   <Skeleton className="h-10 w-full" />
                 </div>
               ) : balanceSheet ? (
-                <div className="grid grid-cols-3 gap-4">
-                  <div>
-                    <p className="text-sm text-muted-foreground">Assets</p>
-                    <div className="space-y-1">
-                      <p>Inventory Value: <span className="font-semibold">{formatCurrency(Number(balanceSheet.assets.inventoryValue))}</span></p>
-                      <p>Accounts Receivable: <span className="font-semibold">{formatCurrency(Number(balanceSheet.assets.accountsReceivable))}</span></p>
-                      <p className="pt-2 border-t">Total Assets: <span className="font-bold">{formatCurrency(Number(balanceSheet.assets.total))}</span></p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  <div className="space-y-3">
+                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Assets</p>
+                    <div className="space-y-2 text-sm xs:text-base">
+                      <div className="flex justify-between">
+                        <span>Inventory:</span>
+                        <span className="font-semibold">{formatCurrency(Number(balanceSheet.assets.inventoryValue))}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span>AR:</span>
+                        <span className="font-semibold">{formatCurrency(Number(balanceSheet.assets.accountsReceivable))}</span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t font-bold">
+                        <span>Total Assets:</span>
+                        <span>{formatCurrency(Number(balanceSheet.assets.total))}</span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Liabilities</p>
-                    <div className="space-y-1">
-                      <p>Accounts Payable: <span className="font-semibold">{formatCurrency(Number(balanceSheet.liabilities.accountsPayable))}</span></p>
-                      <p className="pt-2 border-t">Total Liabilities: <span className="font-bold">{formatCurrency(Number(balanceSheet.liabilities.total))}</span></p>
+                  <div className="space-y-3">
+                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Liabilities</p>
+                    <div className="space-y-2 text-sm xs:text-base">
+                      <div className="flex justify-between">
+                        <span>AP:</span>
+                        <span className="font-semibold">{formatCurrency(Number(balanceSheet.liabilities.accountsPayable))}</span>
+                      </div>
+                      <div className="flex justify-between pt-2 border-t font-bold">
+                        <span>Total Liabilities:</span>
+                        <span>{formatCurrency(Number(balanceSheet.liabilities.total))}</span>
+                      </div>
                     </div>
                   </div>
-                  <div>
-                    <p className="text-sm text-muted-foreground">Equity</p>
-                    <p className="text-2xl font-bold">{formatCurrency(Number(balanceSheet.equity))}</p>
+                  <div className="space-y-3">
+                    <p className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">Equity</p>
+                    <p className="text-2xl xs:text-3xl font-bold text-primary">{formatCurrency(Number(balanceSheet.equity))}</p>
                   </div>
                 </div>
               ) : (
@@ -746,37 +761,44 @@ export default function ReportsPage() {
                   <Skeleton className="h-10 w-full" />
                 </div>
               ) : profitLoss ? (
-                <div className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <p className="text-sm text-muted-foreground">Revenue</p>
-                      <p className="text-2xl font-bold">{formatCurrency(Number(profitLoss.revenue))}</p>
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="p-3 bg-muted/30 rounded-lg">
+                      <p className="text-xs font-medium text-muted-foreground uppercase">Revenue</p>
+                      <p className="text-lg xs:text-xl font-bold">{formatCurrency(Number(profitLoss.revenue))}</p>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Cost of Goods Sold</p>
-                      <p className="text-2xl font-bold text-red-600">-{formatCurrency(Number(profitLoss.cogs))}</p>
+                    <div className="p-3 bg-red-50 dark:bg-red-900/10 rounded-lg">
+                      <p className="text-xs font-medium text-red-600 uppercase">COGS</p>
+                      <p className="text-lg xs:text-xl font-bold text-red-600">-{formatCurrency(Number(profitLoss.cogs))}</p>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Gross Profit</p>
-                      <p className="text-2xl font-bold">{formatCurrency(Number(profitLoss.grossProfit))}</p>
+                    <div className="p-3 bg-green-50 dark:bg-green-900/10 rounded-lg">
+                      <p className="text-xs font-medium text-green-600 uppercase">Gross Profit</p>
+                      <p className="text-lg xs:text-xl font-bold text-green-600">{formatCurrency(Number(profitLoss.grossProfit))}</p>
                     </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Operating Expenses</p>
-                      <p className="text-2xl font-bold text-red-600">-{formatCurrency(Number(profitLoss.expenses))}</p>
+                    <div className="p-3 bg-red-50 dark:bg-red-900/10 rounded-lg">
+                      <p className="text-xs font-medium text-red-600 uppercase">Expenses</p>
+                      <p className="text-lg xs:text-xl font-bold text-red-600">-{formatCurrency(Number(profitLoss.expenses))}</p>
                     </div>
-                    <div className="col-span-2 pt-4 border-t">
-                      <p className="text-sm text-muted-foreground">Net Profit</p>
-                      <p className={`text-3xl font-bold ${Number(profitLoss.netProfit) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                        {formatCurrency(Number(profitLoss.netProfit))}
-                      </p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Gross Margin</p>
-                      <p className="text-xl font-semibold">{formatPercentage(profitLoss.grossMargin)}</p>
-                    </div>
-                    <div>
-                      <p className="text-sm text-muted-foreground">Net Margin</p>
-                      <p className="text-xl font-semibold">{formatPercentage(profitLoss.netMargin)}</p>
+                  </div>
+
+                  <div className="pt-4 border-t">
+                    <div className="flex flex-col xs:flex-row xs:items-end justify-between gap-4">
+                      <div>
+                        <p className="text-sm font-medium text-muted-foreground">Net Profit</p>
+                        <p className={`text-3xl xs:text-4xl font-bold ${Number(profitLoss.netProfit) >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                          {formatCurrency(Number(profitLoss.netProfit))}
+                        </p>
+                      </div>
+                      <div className="flex gap-4">
+                        <div>
+                          <p className="text-xs text-muted-foreground">Gross Margin</p>
+                          <p className="text-base font-semibold">{formatPercentage(profitLoss.grossMargin)}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs text-muted-foreground">Net Margin</p>
+                          <p className="text-base font-semibold">{formatPercentage(profitLoss.netMargin)}</p>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>

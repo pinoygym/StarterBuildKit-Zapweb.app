@@ -29,7 +29,7 @@ export async function seedAdminUser(prisma: PrismaClient) {
     where: { email: 'cybergada@gmail.com' },
   });
 
-  const passwordHash = await bcrypt.hash('Qweasd145698@', 12);
+  const passwordHash = await bcrypt.hash('Qweasd1234', 12);
 
   if (existingAdmin) {
     console.log('Regular admin user exists, updating password...');

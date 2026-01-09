@@ -337,7 +337,7 @@ export default function POSPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-3 sm:p-4 md:p-6">
       <PageHeader
         title="Point of Sale"
         description="Process sales transactions"

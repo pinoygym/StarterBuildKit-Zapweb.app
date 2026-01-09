@@ -71,10 +71,19 @@ const settingsNavigation: { name: string, href: string, icon: any, feature?: Fea
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 
-export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?: Record<string, number>, tenantConfig?: TenantConfig }) {
+export function Sidebar({
+  counts,
+  tenantConfig: initialTenantConfig,
+  isOpen,
+  onOpenChange
+}: {
+  counts?: Record<string, number>,
+  tenantConfig?: TenantConfig,
+  isOpen?: boolean,
+  onOpenChange?: (open: boolean) => void
+}) {
   const pathname = usePathname();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, logout, isSuperMegaAdmin } = useAuth();
+  const { logout, isSuperMegaAdmin, user } = useAuth();
   const { companyName } = useCompanyName();
 
   // Use provided config or fallback to one loaded via env (if available on client)
@@ -109,40 +118,11 @@ export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?
 
   return (
     <>
-      {/* Mobile menu button */}
-      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
-            <Package className="h-5 w-5 text-primary-foreground" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold text-lg text-foreground leading-none">{companyName}</span>
-            <div className="flex items-center gap-1 mt-0.5">
-              <span className="text-[10px] text-muted-foreground font-medium">{tenantConfig.shortName}</span>
-              <span className="text-[10px] text-muted-foreground">•</span>
-              <span className="text-[10px] text-muted-foreground font-medium">{tenantConfig.version}</span>
-            </div>
-          </div>
-        </div>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-        >
-          {isMobileMenuOpen ? (
-            <X className="h-6 w-6" />
-          ) : (
-            <Menu className="h-6 w-6" />
-          )}
-        </Button>
-      </div>
-
       {/* Mobile menu overlay */}
-      {isMobileMenuOpen && (
+      {isOpen && (
         <div
           className="lg:hidden fixed inset-0 bg-black/50 z-40"
-          onClick={() => setIsMobileMenuOpen(false)}
+          onClick={() => onOpenChange?.(false)}
           aria-hidden="true"
         />
       )}
@@ -150,16 +130,19 @@ export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?
       {/* Sidebar */}
       <aside
         className={cn(
-          'fixed top-0 left-0 z-40 h-screen transition-transform duration-300',
+          'fixed top-0 left-0 z-50 h-screen transition-transform duration-300',
           'w-64 bg-background border-r flex flex-col',
           'lg:translate-x-0',
-          isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'
+          isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Logo and Branding */}
         <div className="h-16 flex items-center gap-3 px-6 border-b">
-          <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary flex-shrink-0">
-            <Package className="h-5 w-5 text-primary-foreground" />
+          <div className="flex flex-col items-center gap-0.5 flex-shrink-0">
+            <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-primary">
+              <Package className="h-5 w-5 text-primary-foreground" />
+            </div>
+            <span className="text-[10px] text-muted-foreground font-medium">testTemplateGithub</span>
           </div>
           <div className="flex flex-col min-w-0 flex-1">
             <span className="font-bold text-base text-foreground leading-tight line-clamp-2">{companyName}</span>
@@ -184,7 +167,7 @@ export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?
                 <Link
                   key={item.name}
                   href={item.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
+                  onClick={() => onOpenChange?.(false)}
                   className={cn(
                     'flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                     'min-h-[44px]', // Minimum touch target size for mobile
@@ -226,7 +209,7 @@ export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?
                   <Link
                     key={item.name}
                     href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)}
+                    onClick={() => onOpenChange?.(false)}
                     className={cn(
                       'flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors',
                       'min-h-[44px]',
@@ -255,7 +238,7 @@ export function Sidebar({ counts, tenantConfig: initialTenantConfig }: { counts?
           {user && (
             <Link
               href="/profile"
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={() => onOpenChange?.(false)}
               className="flex items-center gap-3 px-3 py-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors cursor-pointer"
             >
               <div className="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-primary-foreground font-semibold text-sm">

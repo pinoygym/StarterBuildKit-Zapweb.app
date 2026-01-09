@@ -91,4 +91,4 @@ The `prisma/schema.prisma` file defines the database schema. The provider is cur
 
 **Default Admin Credentials** (after seeding):
 - **Email**: cybergada@gmail.com
-- **Password**: Qweasd145698@
+- **Password**: Qweasd1234

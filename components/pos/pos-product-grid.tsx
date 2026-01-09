@@ -124,12 +124,12 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
               placeholder="Search products..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
+              className="pl-10 h-9"
             />
           </div>
 
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
-            <SelectTrigger className="w-full sm:w-[180px]">
+            <SelectTrigger className="w-full sm:w-[180px] h-9">
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
@@ -164,66 +164,58 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
             description="Try adjusting your search or filters"
           />
         ) : (
-          {/* Responsive grid: 1 col mobile, 2 cols sm, 3 cols md, 4 cols lg+ */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-        {filteredProducts.map((product) => (
-          <Card
-            key={product.id}
-            data-testid="product-card"
-            className={`cursor-pointer hover:shadow-lg transition-shadow ${!product.inStock ? 'opacity-60' : ''
-              }`}
-            onClick={() => handleAddToCart(product)}
-          >
-            <CardContent className="p-3 sm:p-4">
-              {/* Product Image */}
-              {/* 
-                  <div className="aspect-square bg-muted rounded-md mb-3 flex items-center justify-center">
-                    {product.imageUrl ? (
-                      <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="w-full h-full object-cover rounded-md"
-                      />
-                    ) : (
-                      <Package className="h-12 w-12 text-muted-foreground" />
-                    )}
+          <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 xs:gap-3 sm:gap-4">
+            {filteredProducts.map((product) => (
+              <Card
+                key={product.id}
+                data-testid="product-card"
+                className={`cursor-pointer hover:shadow-md transition-shadow active:scale-[0.98] ${!product.inStock ? 'opacity-60' : ''
+                  }`}
+                onClick={() => handleAddToCart(product)}
+              >
+                <CardContent className="p-2 xs:p-3 sm:p-4 h-full flex flex-col">
+                  {/* Product Info */}
+                  <div className="space-y-1.5 xs:space-y-2 flex-1">
+                    <h3 className="font-semibold text-xs xs:text-sm line-clamp-2 h-8 xs:h-10 leading-tight">
+                      {product.name}
+                    </h3>
+
+                    <div className="flex flex-col xs:flex-row xs:items-center justify-between gap-1">
+                      <span className="text-sm xs:text-base sm:text-lg font-bold text-primary">
+                        {formatCurrency(product.basePrice)}
+                      </span>
+                      <Badge variant={product.inStock ? 'default' : 'destructive'} className="text-[10px] py-0 px-1.5 w-fit">
+                        {product.inStock ? 'In' : 'Out'}
+                      </Badge>
+                    </div>
+
+                    {/* Stock Info */}
+                    <div className="flex flex-col gap-0.5">
+                      {product.inStock && (
+                        <div className="text-[10px] xs:text-xs text-muted-foreground truncate">
+                          Stock: {formatQuantity(product.currentStock)} {product.baseUOM}
+                        </div>
+                      )}
+
+                      {/* Available UOMs */}
+                      <div className="text-[10px] text-muted-foreground truncate">
+                        {product.baseUOM}
+                        {product.alternateUOMs.length > 0 && (
+                          <span className="text-primary font-medium"> (+{product.alternateUOMs.length})</span>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  */}
 
-              {/* Product Info */}
-              <div className="space-y-2">
-                <h3 className="font-semibold text-sm line-clamp-2">{product.name}</h3>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-base sm:text-lg font-bold text-primary">
-                    {formatCurrency(product.basePrice)}
-                  </span>
-                  <Badge variant={product.inStock ? 'default' : 'destructive'} className="text-xs">
-                    {product.inStock ? 'In Stock' : 'Out'}
-                  </Badge>
-                </div>
-
-                {/* Stock Info */}
-                {product.inStock && (
-                  <div className="text-xs text-muted-foreground">
-                    Stock: {formatQuantity(product.currentStock)} {product.baseUOM}
-                  </div>
-                )}
-
-                {/* Available UOMs */}
-                <div className="text-xs text-muted-foreground">
-                  {product.baseUOM}
-                  {product.alternateUOMs.length > 0 && (
-                    <span> (+{product.alternateUOMs.length} more)</span>
-                  )}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+                  <Button size="sm" className="w-full mt-2 h-7 xs:h-8 text-[10px] xs:text-xs" disabled={!product.inStock}>
+                    Add
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
         )}
-    </CardContent>
-    </Card >
+      </CardContent>
+    </Card>
   );
 }

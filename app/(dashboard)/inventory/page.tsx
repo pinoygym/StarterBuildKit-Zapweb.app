@@ -86,7 +86,7 @@ export default function InventoryPage() {
 
   if (isLoading) {
     return (
-      <div className="p-6">
+      <div className="p-3 sm:p-4 md:p-6">
         <PageHeader
           title="Inventory"
           description="Track inventory with average costing"
@@ -97,7 +97,7 @@ export default function InventoryPage() {
   }
 
   return (
-    <div className="p-6">
+    <div className="p-3 sm:p-4 md:p-6">
       <PageHeader
         title="Inventory"
         description="Track inventory levels with weighted average costing"

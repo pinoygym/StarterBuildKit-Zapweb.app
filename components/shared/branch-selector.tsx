@@ -47,8 +47,8 @@ export function BranchSelector() {
   }
 
   return (
-    <div className="flex items-center gap-2">
-      <Building2 className="h-4 w-4 text-muted-foreground flex-shrink-0" />
+    <div className="flex items-center gap-2 max-w-[150px] sm:max-w-none">
+      <Building2 className="h-4 w-4 text-muted-foreground flex-shrink-0 hidden xs:block" />
       <Select
         value={selectedBranch?.id || 'all'}
         onValueChange={(value) => {
@@ -60,13 +60,13 @@ export function BranchSelector() {
           }
         }}
       >
-        <SelectTrigger className="w-[200px] h-9 border-muted-foreground/20" data-testid="branch-selector">
+        <SelectTrigger className="w-[120px] xs:w-[160px] sm:w-[200px] h-9 border-muted-foreground/20" data-testid="branch-selector">
           <SelectValue placeholder="Select branch">
             {selectedBranch ? (
-              <div className="flex items-center gap-2">
-                <span className="font-medium">{selectedBranch.name}</span>
+              <div className="flex items-center gap-1 sm:gap-2 truncate">
+                <span className="font-medium truncate">{selectedBranch.name}</span>
                 {selectedBranch.code && (
-                  <span className="text-xs text-muted-foreground">({selectedBranch.code})</span>
+                  <span className="text-[10px] sm:text-xs text-muted-foreground hidden sm:inline">({selectedBranch.code})</span>
                 )}
               </div>
             ) : (
