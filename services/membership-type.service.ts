@@ -70,13 +70,6 @@ export class MembershipTypeService {
             throw new NotFoundError('Membership Type');
         }
 
-        // Check if it's a system-defined type
-        if (existingType.isSystemDefined) {
-            throw new ValidationError('Cannot modify system-defined membership type', {
-                type: 'System-defined types cannot be modified'
-            });
-        }
-
         // Validate input
         const validationResult = updateMembershipTypeSchema.safeParse(data);
         if (!validationResult.success) {
@@ -104,18 +97,23 @@ export class MembershipTypeService {
             }
         }
 
-        const type = await membershipTypeRepository.update(id, validationResult.data);
+        try {
+            const type = await membershipTypeRepository.update(id, validationResult.data);
 
-        // Log action
-        await auditService.log({
-            userId,
-            action: 'UPDATE',
-            resource: 'MEMBERSHIP_TYPE',
-            resourceId: id,
-            details: { changedFields: Object.keys(data) }
-        });
+            // Log action
+            await auditService.log({
+                userId,
+                action: 'UPDATE',
+                resource: 'MEMBERSHIP_TYPE',
+                resourceId: id,
+                details: { changedFields: Object.keys(data) }
+            });
 
-        return type;
+            return type;
+        } catch (error) {
+            console.error(`[Service] Error updating membership type [${id}]:`, error);
+            throw error;
+        }
     }
 
     async deleteType(id: string, userId?: string): Promise<void> {
@@ -123,13 +121,6 @@ export class MembershipTypeService {
         const type = await membershipTypeRepository.findById(id);
         if (!type) {
             throw new NotFoundError('Membership Type');
-        }
-
-        // Check if it's a system-defined type
-        if (type.isSystemDefined) {
-            throw new ValidationError('Cannot delete system-defined membership type', {
-                type: 'System-defined types cannot be deleted'
-            });
         }
 
         // Check if type has members

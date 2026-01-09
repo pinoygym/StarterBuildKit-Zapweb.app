@@ -54,7 +54,7 @@ export class CooperativeMemberRepository {
         return rows.map((m: any) => ({
             ...m,
             _count: m._count
-                ? { contributions: m._count.Contributions || 0, beneficiaries: m._count.Beneficiaries || 0 }
+                ? { contributions: m._count.Contributions ?? 0, beneficiaries: m._count.Beneficiaries ?? 0 }
                 : undefined,
         }));
     }
@@ -104,11 +104,15 @@ export class CooperativeMemberRepository {
 
         if (!row) return null;
 
+        const contributionsCount = (row as any)._count?.Contributions ?? 0;
+        const beneficiariesCount = (row as any)._count?.Beneficiaries ?? 0;
+
         return {
             ...row,
-            _count: row._count
-                ? { contributions: (row as any)._count.Contributions || 0, beneficiaries: (row as any)._count.Beneficiaries || 0 }
-                : undefined,
+            _count: {
+                contributions: contributionsCount,
+                beneficiaries: beneficiariesCount
+            }
         } as any;
     }
 
@@ -160,13 +164,15 @@ export class CooperativeMemberRepository {
     async create(data: CreateMemberInput & { createdById?: string }): Promise<CooperativeMember> {
         const memberCode = data.memberCode || await this.getNextMemberCode();
         const { createdById, ...memberData } = data;
+        const { phoneNumber, ...rest } = memberData as any;
 
         return await prisma.cooperativeMember.create({
             data: {
                 id: randomUUID(),
-                ...memberData,
+                ...rest,
                 memberCode,
                 createdById,
+                phone: phoneNumber || (memberData as any).phone,
                 dateOfBirth: new Date(memberData.dateOfBirth),
                 membershipDate: memberData.membershipDate ? new Date(memberData.membershipDate) : new Date(),
                 status: data.status || 'active',

@@ -29,6 +29,7 @@ import {
   ClipboardEdit,
   Milestone,
   Wallet,
+  Handshake,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -61,6 +62,7 @@ const navigation: { name: string, href: string, icon: any, feature?: FeatureKey 
   { name: 'Alerts', href: '/alerts', icon: AlertCircle },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
+  { name: 'Cooperative', href: '/cooperative', icon: Handshake },
   { name: 'Roadmap', href: '/roadmap', icon: Milestone, feature: 'roadmap' },
 ];
 

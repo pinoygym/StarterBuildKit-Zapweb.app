@@ -18,7 +18,7 @@ export async function GET(
 
         return NextResponse.json(type);
     } catch (error: any) {
-        console.error('Error fetching membership type:', error);
+        console.error(`Error fetching membership type [${params.id}]:`, error);
 
         if (error instanceof NotFoundError) {
             return NextResponse.json(
@@ -55,7 +55,7 @@ export async function PATCH(
 
         return NextResponse.json(type);
     } catch (error: any) {
-        console.error('Error updating membership type:', error);
+        console.error(`Error updating membership type [${params.id}]:`, error);
 
         if (error instanceof ValidationError) {
             return NextResponse.json(

@@ -18,7 +18,7 @@ export async function GET(
 
         return NextResponse.json(member);
     } catch (error: any) {
-        console.error('Error fetching cooperative member:', error);
+        console.error(`Error fetching cooperative member [${params.id}]:`, error);
 
         if (error instanceof NotFoundError) {
             return NextResponse.json(

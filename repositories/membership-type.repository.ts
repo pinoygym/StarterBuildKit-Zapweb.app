@@ -42,22 +42,31 @@ export class MembershipTypeRepository {
         return await prisma.membershipType.create({
             data: {
                 id: randomUUID(),
-                ...data,
-                requiredShareCapital: data.requiredShareCapital || 0,
-                monthlyDues: data.monthlyDues || 0,
+                name: data.name,
+                code: data.code,
+                description: data.description,
+                monthlyFee: (data as any).monthlyFee || (data as any).monthlyDues || 0,
+                registrationFee: (data as any).registrationFee || 0,
+                minimumShareCapital: (data as any).minimumShareCapital || (data as any).requiredShareCapital || 0,
+                requirements: (data as any).requirements,
+                benefits: (data as any).benefits,
                 status: data.status || 'active',
                 displayOrder: data.displayOrder || 0,
-                isSystemDefined: false,
                 updatedAt: new Date(),
             },
         });
     }
 
     async update(id: string, data: UpdateMembershipTypeInput): Promise<MembershipType> {
+        const { monthlyFee, monthlyDues, registrationFee, minimumShareCapital, requiredShareCapital, ...rest } = data as any;
+
         return await prisma.membershipType.update({
             where: { id },
             data: {
-                ...data,
+                ...rest,
+                monthlyFee: monthlyFee !== undefined ? Number(monthlyFee) : (monthlyDues !== undefined ? Number(monthlyDues) : undefined),
+                registrationFee: registrationFee !== undefined ? Number(registrationFee) : undefined,
+                minimumShareCapital: minimumShareCapital !== undefined ? Number(minimumShareCapital) : (requiredShareCapital !== undefined ? Number(requiredShareCapital) : undefined),
                 updatedAt: new Date(),
             },
         });

@@ -21,11 +21,16 @@ export class CooperativeMemberService {
     }
 
     async getMemberById(id: string): Promise<MemberWithRelations> {
-        const member = await cooperativeMemberRepository.findById(id);
-        if (!member) {
-            throw new NotFoundError('Cooperative Member');
+        try {
+            const member = await cooperativeMemberRepository.findById(id);
+            if (!member) {
+                throw new NotFoundError('Cooperative Member');
+            }
+            return member;
+        } catch (error) {
+            console.error(`[Service] Error fetching member [${id}]:`, error);
+            throw error;
         }
-        return member;
     }
 
     async getActiveMembers(): Promise<CooperativeMember[]> {

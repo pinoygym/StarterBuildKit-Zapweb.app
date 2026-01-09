@@ -1460,6 +1460,13 @@ model CooperativeMember {
   UpdatedBy      User?                @relation("CooperativeMemberUpdatedBy", fields: [updatedById], references: [id])
   Contributions  MemberContribution[]
   Beneficiaries  MemberBeneficiary[]
+  EngagementScore MemberEngagementScore?
+  Wallet          MemberWallet?
+  Farms           CooperativeFarm[]
+  ProposalVotes   ProposalVote[]
+  TaskAssignments TaskAssignment[]
+  Initiatives     CooperativeInitiative[]
+  Proposals       CooperativeProposal[]
 
   @@index([memberCode])
   @@index([email])
@@ -1531,4 +1538,217 @@ model MemberBeneficiary {
 
   @@index([memberId])
   @@index([isPrimary])
+}
+
+// ===============================
+// Coordination Center Models
+// ===============================
+
+model CooperativeInitiative {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  category     String // 'project', 'program', 'campaign'
+  status       String   @default("draft") // 'draft', 'active', 'completed', 'cancelled'
+  priority     String   @default("medium") // 'low', 'medium', 'high', 'urgent'
+  targetDate   DateTime?
+  budget       Float?
+  progress     Float    @default(0) // 0-100 percentage
+  leadMemberId String?
+  Member       CooperativeMember? @relation(fields: [leadMemberId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  Tasks CooperativeTask[]
+
+  @@index([status])
+  @@index([category])
+  @@index([leadMemberId])
+}
+
+model CooperativeProposal {
+  id              String    @id @default(cuid())
+  title           String
+  description     String
+  category        String // 'policy', 'budget', 'project', 'governance'
+  status          String    @default("pending") // 'pending', 'voting', 'approved', 'rejected', 'implemented'
+  proposedById    String
+  Member          CooperativeMember @relation(fields: [proposedById], references: [id])
+  votingStartDate DateTime?
+  votingEndDate   DateTime?
+  requiredVotes   Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  Votes ProposalVote[]
+
+  @@index([status])
+  @@index([proposedById])
+  @@index([votingEndDate])
+}
+
+model ProposalVote {
+  id         String   @id @default(cuid())
+  proposalId String
+  memberId   String
+  Member     CooperativeMember @relation(fields: [memberId], references: [id])
+  voteType   String // 'approve', 'reject', 'abstain'
+  comment    String?
+  votedAt    DateTime @default(now())
+
+  Proposal CooperativeProposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  @@unique([proposalId, memberId])
+  @@index([proposalId])
+  @@index([memberId])
+}
+
+model CooperativeTask {
+  id           String    @id @default(cuid())
+  title        String
+  description  String?
+  category     String // 'community', 'admin', 'outreach', 'training'
+  status       String    @default("open") // 'open', 'in_progress', 'completed', 'cancelled'
+  priority     String    @default("medium")
+  xpReward     Int       @default(10)
+  badgeReward  String?
+  dueDate      DateTime?
+  initiativeId String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  Initiative  CooperativeInitiative? @relation(fields: [initiativeId], references: [id])
+  Assignments TaskAssignment[]
+
+  @@index([status])
+  @@index([initiativeId])
+  @@index([dueDate])
+}
+
+model TaskAssignment {
+  id          String    @id @default(cuid())
+  taskId      String
+  memberId    String
+  Member      CooperativeMember @relation(fields: [memberId], references: [id])
+  status      String    @default("assigned") // 'assigned', 'accepted', 'completed', 'declined'
+  assignedAt  DateTime  @default(now())
+  completedAt DateTime?
+  xpEarned    Int?
+
+  Task CooperativeTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, memberId])
+  @@index([taskId])
+  @@index([memberId])
+  @@index([status])
+}
+
+model MemberEngagementScore {
+  id             String   @id @default(cuid())
+  memberId       String   @unique
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  totalXp        Int      @default(0)
+  tasksCompleted Int      @default(0)
+  proposalsVoted Int      @default(0)
+  badgesEarned   String[] @default([])
+  rank           Int?
+  updatedAt      DateTime @updatedAt
+
+  @@index([totalXp])
+  @@index([rank])
+}
+
+// ===============================
+// E-Wallet Models
+// ===============================
+
+model MemberWallet {
+  id             String   @id @default(cuid())
+  memberId       String   @unique
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  walletBalance  Float    @default(0)
+  shareCapital   Float    @default(0)
+  savingsBalance Float    @default(0)
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  Transactions WalletTransaction[]
+
+  @@index([memberId])
+  @@index([status])
+}
+
+model WalletTransaction {
+  id              String   @id @default(cuid())
+  walletId        String
+  type            String // 'cash_in', 'send_money', 'pay_bills', 'loan_payment', 'withdrawal'
+  amount          Float
+  description     String?
+  referenceNumber String?
+  status          String   @default("completed")
+  balanceBefore   Float
+  balanceAfter    Float
+  transactionDate DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  Wallet MemberWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@index([type])
+  @@index([transactionDate])
+}
+
+// ===============================
+// Farm Management Models
+// ===============================
+
+model CooperativeFarm {
+  id             String    @id @default(cuid())
+  name           String
+  memberId       String
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  latitude       Float
+  longitude      Float
+  sizeHectares   Float
+  cropType       String
+  lastHarvest    DateTime?
+  nextHarvestEst DateTime?
+  status         String    @default("active")
+  notes          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([memberId])
+  @@index([status])
+  @@index([cropType])
+}
+
+// ===============================
+// ID Card System Models
+// ===============================
+
+model IDCardTemplate {
+  id               String   @id @default(cuid())
+  name             String
+  orientation      String   @default("landscape") // 'landscape', 'portrait'
+  primaryColor     String   @default("#004d20")
+  secondaryColor   String   @default("#004d20")
+  textColor        String   @default("#d4af37")
+  accentColor      String   @default("#d4af37")
+  pattern          String   @default("logo")
+  patternSize      Int      @default(400)
+  patternOpacity   Int      @default(10)
+  borderRadius     Int      @default(8)
+  layout           String   @default("standard") // 'standard', 'luxury', 'minimal'
+  fontFamily       String   @default("Inter")
+  backPrimaryColor String?
+  backTextColor    String?
+  showProfileImage Boolean  @default(true)
+  showBackQr       Boolean  @default(true)
+  isDefault        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([isDefault])
 }

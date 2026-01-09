@@ -257,7 +257,7 @@ describe('CooperativeMemberService', () => {
             };
 
             vi.mocked(cooperativeMemberRepository.findById).mockResolvedValue(mockMember as any);
-            vi.mocked(cooperativeMemberRepository.softDelete).mockResolvedValue(undefined);
+            vi.mocked(cooperativeMemberRepository.softDelete).mockResolvedValue(mockMember as any);
 
             await service.deleteMember('1', 'user-1');
 

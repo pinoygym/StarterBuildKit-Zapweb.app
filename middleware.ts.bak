@@ -29,18 +29,32 @@ const PUBLIC_API_ROUTES = [
     '/api/auth/me', // Allow checking auth status without token
     '/api/auth/verify-email', // Allow email verification
     '/api/dev/seed', // Allow seeding in dev/test environment
+    '/api/test-minimal',
 ];
 
 export async function middleware(request: NextRequest) {
     const { pathname } = request.nextUrl;
 
+    try {
+        const fs = require('fs');
+        fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Middleware started for ${pathname}\n`);
+    } catch (e) { }
+
     // Allow public routes
     if (PUBLIC_ROUTES.some(route => pathname.startsWith(route))) {
+        try {
+            const fs = require('fs');
+            fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Middleware: allowing public route ${pathname}\n`);
+        } catch (e) { }
         return NextResponse.next();
     }
 
     // Allow public API routes
     if (PUBLIC_API_ROUTES.some(route => pathname.startsWith(route))) {
+        try {
+            const fs = require('fs');
+            fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Middleware: allowing public API route ${pathname}\n`);
+        } catch (e) { }
         return NextResponse.next();
     }
 

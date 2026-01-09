@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { authService } from '../../../services/auth.service';
 import { LoginInput } from '@/types/auth.types';
+import { getServerSession } from '@/lib/auth';
 
 export const dynamic = 'force-dynamic';
 
@@ -9,6 +11,11 @@ const RATE_LIMIT_WINDOW_MS = 60_000;
 
 export async function POST(request: NextRequest) {
   try {
+    try {
+      const fs = require('fs');
+      fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Login attempt started\n`);
+    } catch (e) { }
+
     const body: LoginInput = await request.json();
 
     // Validate required fields
@@ -45,7 +52,6 @@ export async function POST(request: NextRequest) {
     }
 
     // Attempt login
-    const { authService } = await import('@/services/auth.service');
     const result = await authService.login(body, ipAddress, userAgent);
 
     if (!result.success) {

@@ -7,6 +7,10 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
+    try {
+      const fs = require('fs');
+      fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Seed attempt started\n`);
+    } catch (e) { }
     // Create Roles
     const roles = [
       { name: 'Super Admin', description: 'Full system access', isSystem: true },
