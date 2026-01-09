@@ -19,17 +19,8 @@ import { AuditAction, AuditResource } from '@/types/audit.types';
 const JWT_SECRET = process.env.JWT_SECRET;
 const JWT_EXPIRATION = process.env.JWT_EXPIRATION || '24h';
 
-try {
-  const fs = require('fs');
-  fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] auth.service initializing. JWT_SECRET length: ${JWT_SECRET?.length || 0}\n`);
-} catch (e) { }
-
 // Validate JWT_SECRET at module initialization
 if (!JWT_SECRET || JWT_SECRET.length < 32) {
-  try {
-    const fs = require('fs');
-    fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] auth.service validation FAILED: secret too short or missing\n`);
-  } catch (e) { }
   throw new Error(
     'JWT_SECRET must be set in environment variables and be at least 32 characters long. ' +
     'Generate a secure secret with: openssl rand -base64 64'

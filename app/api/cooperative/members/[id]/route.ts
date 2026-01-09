@@ -6,19 +6,21 @@ import { ValidationError, NotFoundError } from '@/lib/errors';
 // GET /api/cooperative/members/[id] - Get member details
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const member = await cooperativeMemberService.getMemberById(params.id);
+        const member = await cooperativeMemberService.getMemberById(id);
 
         return NextResponse.json(member);
     } catch (error: any) {
-        console.error(`Error fetching cooperative member [${params.id}]:`, error);
+        const { id } = await params;
+        console.error(`Error fetching cooperative member [${id}]:`, error);
 
         if (error instanceof NotFoundError) {
             return NextResponse.json(
@@ -37,9 +39,10 @@ export async function GET(
 // PATCH /api/cooperative/members/[id] - Update member
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -48,7 +51,7 @@ export async function PATCH(
         const body = await request.json();
 
         const member = await cooperativeMemberService.updateMember(
-            params.id,
+            id,
             body,
             session.user.id
         );
@@ -81,15 +84,16 @@ export async function PATCH(
 // DELETE /api/cooperative/members/[id] - Deactivate member (soft delete)
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        await cooperativeMemberService.deleteMember(params.id, session.user.id);
+        await cooperativeMemberService.deleteMember(id, session.user.id);
 
         return NextResponse.json({ message: 'Member deactivated successfully' });
     } catch (error: any) {

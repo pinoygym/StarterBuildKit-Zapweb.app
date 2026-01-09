@@ -7,10 +7,6 @@ export const dynamic = 'force-dynamic';
 
 export async function POST(req: NextRequest) {
   try {
-    try {
-      const fs = require('fs');
-      fs.appendFileSync('api_debug.log', `[${new Date().toISOString()}] Seed attempt started\n`);
-    } catch (e) { }
     // Create Roles
     const roles = [
       { name: 'Super Admin', description: 'Full system access', isSystem: true },
@@ -35,7 +31,7 @@ export async function POST(req: NextRequest) {
     // Create Admin User
     const superAdminRole = await prisma.role.findUnique({ where: { name: 'Super Admin' } })
     if (superAdminRole) {
-      const passwordHash = await bcrypt.hash('Qweasd145698@', 12)
+      const passwordHash = await bcrypt.hash('Qweasd1234', 12)
       await prisma.user.upsert({
         where: { email: 'cybergada@gmail.com' },
         update: {

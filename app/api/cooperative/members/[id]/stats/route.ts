@@ -6,9 +6,10 @@ import { NotFoundError } from '@/lib/errors';
 // GET /api/cooperative/members/[id]/stats - Get member statistics
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
