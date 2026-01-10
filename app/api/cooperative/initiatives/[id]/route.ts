@@ -4,15 +4,16 @@ import { getServerSession } from '@/lib/auth';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const initiative = await initiativeService.getInitiativeById(params.id);
+        const initiative = await initiativeService.getInitiativeById(id);
         return NextResponse.json(initiative);
     } catch (error: any) {
         console.error('Error fetching initiative:', error);
@@ -22,16 +23,17 @@ export async function GET(
 
 export async function PUT(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
         const body = await request.json();
-        const initiative = await initiativeService.updateInitiative(params.id, body);
+        const initiative = await initiativeService.updateInitiative(id, body);
         return NextResponse.json(initiative);
     } catch (error: any) {
         console.error('Error updating initiative:', error);
@@ -41,15 +43,16 @@ export async function PUT(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        await initiativeService.deleteInitiative(params.id);
+        await initiativeService.deleteInitiative(id);
         return NextResponse.json({ success: true });
     } catch (error: any) {
         console.error('Error deleting initiative:', error);

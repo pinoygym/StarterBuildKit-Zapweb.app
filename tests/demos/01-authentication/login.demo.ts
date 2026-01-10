@@ -49,7 +49,7 @@ test.describe('Login & Authentication Demo', () => {
 
     // Fill password
     await narration.narrate('Next, enter your password.', 3000, 'Type password');
-    await demo.fill(page.getByLabel(/password/i), 'Qweasd145698@', { typingSpeed: 80 });
+    await demo.fill(page.getByLabel(/password/i), 'Qweasd1234', { typingSpeed: 80 });
 
     // Click sign in
     await narration.narrate(

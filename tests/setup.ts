@@ -34,7 +34,7 @@ export async function initTestAuth(baseUrl: string = process.env.BASE_URL || 'ht
   // This avoids Prisma client initialization issues in setup
   const seededAdmin = {
     email: 'cybergada@gmail.com',
-    password: 'Qweasd145698@',
+    password: 'Qweasd1234',
   };
 
   try {

@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 // Load test environment variables BEFORE any other configuration
 // This ensures E2E tests run against the test database (neondb_test), not production
 dotenv.config({ path: '.env.test' });
+dotenv.config({ path: '.env.test.local' });
 
 console.log('🧪 Playwright loading .env.test - Database:', process.env.DATABASE_URL?.includes('neondb_test') ? 'neondb_test ✅' : 'WARNING: Not using test DB!');
 

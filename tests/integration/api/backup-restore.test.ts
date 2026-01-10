@@ -17,7 +17,7 @@ describe('Backup and Restore API Integration', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: 'cybergada@gmail.com',
-                password: 'Qweasd145698@',
+                password: 'Qweasd1234',
             }),
         });
 

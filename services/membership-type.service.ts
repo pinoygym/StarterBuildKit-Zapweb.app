@@ -70,6 +70,11 @@ export class MembershipTypeService {
             throw new NotFoundError('Membership Type');
         }
 
+        // Check if system defined
+        if (existingType.isSystemDefined) {
+            throw new ValidationError('Cannot update system-defined membership type');
+        }
+
         // Validate input
         const validationResult = updateMembershipTypeSchema.safeParse(data);
         if (!validationResult.success) {
@@ -121,6 +126,11 @@ export class MembershipTypeService {
         const type = await membershipTypeRepository.findById(id);
         if (!type) {
             throw new NotFoundError('Membership Type');
+        }
+
+        // Check if system defined
+        if (type.isSystemDefined) {
+            throw new ValidationError('Cannot delete system-defined membership type');
         }
 
         // Check if type has members

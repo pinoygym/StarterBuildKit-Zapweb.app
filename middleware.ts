@@ -38,7 +38,17 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    const token = request.cookies.get('auth-token')?.value;
+    let token = request.cookies.get('auth-token')?.value;
+    let tokenFromHeader = false;
+
+    // Support Bearer token for API requests
+    if (!token) {
+        const authHeader = request.headers.get('Authorization');
+        if (authHeader?.startsWith('Bearer ')) {
+            token = authHeader.substring(7);
+            tokenFromHeader = true;
+        }
+    }
 
     if (!token) {
         if (pathname.startsWith('/api')) {
@@ -51,6 +61,18 @@ export async function middleware(request: NextRequest) {
 
     try {
         await jwtVerify(token, JWT_SECRET);
+
+        // If we got the token from the header, inject it as a cookie for downstream route handlers
+        if (tokenFromHeader) {
+            const requestHeaders = new Headers(request.headers);
+            requestHeaders.set('Cookie', `auth-token=${token}`);
+            return NextResponse.next({
+                request: {
+                    headers: requestHeaders,
+                },
+            });
+        }
+
         return NextResponse.next();
     } catch (error) {
         if (pathname.startsWith('/api')) {

@@ -43,6 +43,7 @@ import { TenantConfig, FeatureKey } from '@/config/tenants';
 
 const navigation: { name: string, href: string, icon: any, feature?: FeatureKey }[] = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Cooperative', href: '/cooperative', icon: Handshake },
   { name: 'Products', href: '/products', icon: Package },
   { name: 'Inventory', href: '/inventory', icon: BoxIcon },
   { name: 'Adjustments', href: '/inventory/adjustments', icon: ClipboardEdit },
@@ -62,7 +63,6 @@ const navigation: { name: string, href: string, icon: any, feature?: FeatureKey 
   { name: 'Alerts', href: '/alerts', icon: AlertCircle },
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
-  { name: 'Cooperative', href: '/cooperative', icon: Handshake },
   { name: 'Roadmap', href: '/roadmap', icon: Milestone, feature: 'roadmap' },
 ];
 

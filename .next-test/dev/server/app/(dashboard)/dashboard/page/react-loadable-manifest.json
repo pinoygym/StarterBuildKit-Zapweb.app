@@ -1,0 +1,39 @@
+{
+  "[project]/components/dashboard/warehouse-utilization-chart.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/dashboard/warehouse-utilization-chart.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/_9ebe122d._.js",
+      "static/chunks/components_dashboard_warehouse-utilization-chart_tsx_dda43032._.js"
+    ]
+  },
+  "[project]/components/dashboard/branch-comparison-chart.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/dashboard/branch-comparison-chart.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_lodash_c8d69288._.js",
+      "static/chunks/node_modules_recharts_es6_da378ed4._.js",
+      "static/chunks/node_modules_9614fdad._.js",
+      "static/chunks/components_621b486d._.js",
+      "static/chunks/components_dashboard_branch-comparison-chart_tsx_dda43032._.js"
+    ]
+  },
+  "[project]/components/dashboard/top-products-chart.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/dashboard/top-products-chart.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_lodash_c8d69288._.js",
+      "static/chunks/node_modules_recharts_es6_da378ed4._.js",
+      "static/chunks/node_modules_9614fdad._.js",
+      "static/chunks/components_dashboard_top-products-chart_tsx_ea56366e._.js",
+      "static/chunks/components_dashboard_top-products-chart_tsx_dda43032._.js"
+    ]
+  },
+  "[project]/components/dashboard/sales-trends-chart.tsx [app-client] (ecmascript, next/dynamic entry)": {
+    "id": "[project]/components/dashboard/sales-trends-chart.tsx [app-client] (ecmascript, next/dynamic entry)",
+    "files": [
+      "static/chunks/node_modules_lodash_c8d69288._.js",
+      "static/chunks/node_modules_recharts_es6_6ca69039._.js",
+      "static/chunks/node_modules_9614fdad._.js",
+      "static/chunks/components_dashboard_sales-trends-chart_tsx_4c4558a5._.js",
+      "static/chunks/components_dashboard_sales-trends-chart_tsx_dda43032._.js"
+    ]
+  }
+}

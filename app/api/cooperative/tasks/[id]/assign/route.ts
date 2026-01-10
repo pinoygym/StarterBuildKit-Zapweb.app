@@ -1,21 +1,22 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { cooperativeTaskService } from '@/services/cooperative-task.service';
-import { getServerSession } from '@/lib/auth';
+import { NextRequest, NextResponse } from "next/server";
+import { cooperativeTaskService } from "@/services/cooperative-task.service";
+import { getServerSession } from "@/lib/auth";
 
 export async function POST(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
-        if (!session) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+        if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
         const body = await request.json();
         const { memberId } = body;
 
-        if (!memberId) return NextResponse.json({ error: 'Member ID is required' }, { status: 400 });
+        if (!memberId) return NextResponse.json({ error: "Member ID is required" }, { status: 400 });
 
-        const assignment = await cooperativeTaskService.assignTask(params.id, memberId);
+        const assignment = await cooperativeTaskService.assignTask(id, memberId);
         return NextResponse.json(assignment);
     } catch (error: any) {
         return NextResponse.json({ error: error.message }, { status: 500 });

@@ -4,17 +4,19 @@ import { getServerSession } from '@/lib/auth';
 
 export async function GET(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const proposal = await proposalService.getProposalById(params.id);
+        const proposal = await proposalService.getProposalById(id);
         return NextResponse.json(proposal);
     } catch (error: any) {
+        const { id } = await params;
         console.error('Error fetching proposal:', error);
         return NextResponse.json({ error: error.message }, { status: error.message === 'Proposal not found' ? 404 : 500 });
     }
@@ -22,9 +24,10 @@ export async function GET(
 
 export async function PATCH(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -32,7 +35,7 @@ export async function PATCH(
 
         const body = await request.json();
         if (body.status) {
-            const result = await proposalService.updateProposalStatus(params.id, body.status);
+            const result = await proposalService.updateProposalStatus(id, body.status);
             return NextResponse.json(result);
         }
 
@@ -45,15 +48,16 @@ export async function PATCH(
 
 export async function DELETE(
     request: NextRequest,
-    { params }: { params: { id: string } }
+    { params }: { params: Promise<{ id: string }> }
 ) {
     try {
+        const { id } = await params;
         const session = await getServerSession();
         if (!session) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        await proposalService.deleteProposal(params.id);
+        await proposalService.deleteProposal(id);
         return NextResponse.json({ success: true });
     } catch (error: any) {
         console.error('Error deleting proposal:', error);

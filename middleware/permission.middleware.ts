@@ -33,6 +33,16 @@ export async function withPermission(
       );
     }
 
+    // Get user and check if Super Mega Admin
+    const user = await prisma.user.findUnique({
+      where: { id: payload.userId },
+      select: { isSuperMegaAdmin: true }
+    });
+
+    if (user?.isSuperMegaAdmin) {
+      return await handler(request);
+    }
+
     // Get user permissions
     const permissions = await permissionService.getUserPermissions(payload.userId);
 
@@ -43,8 +53,8 @@ export async function withPermission(
 
     if (!hasPermission) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           message: 'You do not have permission to perform this action',
           required: `${requiredResource}:${requiredAction}`
         },
@@ -92,6 +102,16 @@ export async function withAnyPermission(
       );
     }
 
+    // Get user and check if Super Mega Admin
+    const user = await prisma.user.findUnique({
+      where: { id: payload.userId },
+      select: { isSuperMegaAdmin: true }
+    });
+
+    if (user?.isSuperMegaAdmin) {
+      return await handler(request);
+    }
+
     // Get user permissions
     const permissions = await permissionService.getUserPermissions(payload.userId);
 
@@ -104,8 +124,8 @@ export async function withAnyPermission(
 
     if (!hasAnyPermission) {
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           message: 'You do not have the required permissions to perform this action'
         },
         { status: 403 }
@@ -132,9 +152,16 @@ export async function userHasPermission(
   action: PermissionAction
 ): Promise<boolean> {
   try {
-    console.log('Getting permissions for user:', userId);
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { isSuperMegaAdmin: true }
+    });
+
+    if (user?.isSuperMegaAdmin) {
+      return true;
+    }
+
     const permissions = await permissionService.getUserPermissions(userId);
-    console.log('User permissions:', permissions);
     const hasPermission = permissions.some((p) => p.resource.toLowerCase() === resource.toLowerCase() && p.action.toLowerCase() === action.toLowerCase());
     return hasPermission;
   } catch (error) {

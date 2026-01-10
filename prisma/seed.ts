@@ -388,7 +388,7 @@ async function main() {
   console.log('\n=== Seed completed successfully! ===');
   console.log('\nDefault Admin Credentials:');
   console.log('Email: cybergada@gmail.com');
-  console.log('Password: Qweasd145698@');
+  console.log('Password: Qweasd1234');
   console.log('\n✅ Demo account ready for 1-click login!\n');
 }
 

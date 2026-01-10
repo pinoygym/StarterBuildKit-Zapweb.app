@@ -11,21 +11,78 @@ describe('End-to-End UOM Traceability Test', () => {
     let testBranchId: string;
 
     beforeAll(async () => {
-        // Setup test data
-        const product = await prisma.product.findFirst({
-            where: { productUOMs: { some: {} } }, // Find a product with at least one alternate UOM
+        // 1. Create Branch
+        const branch = await prisma.branch.create({
+            data: {
+                id: randomUUID(),
+                name: 'UOM Test Branch',
+                code: `UTB-${Date.now()}`,
+                location: 'Test Location',
+                manager: 'Test Manager',
+                phone: '123456789',
+                status: 'active',
+                updatedAt: new Date(),
+            }
+        });
+        testBranchId = branch.id;
+
+        // 2. Create Warehouse
+        const warehouse = await prisma.warehouse.create({
+            data: {
+                id: randomUUID(),
+                name: 'UOM Test Warehouse',
+                location: 'Test Location',
+                branchId: testBranchId,
+                manager: 'Test Manager',
+                maxCapacity: 1000,
+                updatedAt: new Date(),
+            }
+        });
+        testWarehouseId = warehouse.id;
+
+        // 3. Create Product with alternate UOM
+        const product = await prisma.product.create({
+            data: {
+                id: randomUUID(),
+                name: `UOM Test Product ${Date.now()}`,
+                description: 'Test Description',
+                category: 'Test Category',
+                baseUOM: 'pcs',
+                basePrice: 100,
+                minStockLevel: 10,
+                shelfLifeDays: 365,
+                status: 'active',
+                updatedAt: new Date(),
+                productUOMs: {
+                    create: [
+                        {
+                            id: randomUUID(),
+                            name: 'box',
+                            conversionFactor: 10,
+                            sellingPrice: 1000
+                        }
+                    ]
+                }
+            },
             include: { productUOMs: true }
         });
-
-        if (!product) throw new Error('No product with alternate UOMs found for testing');
         testProductId = product.id;
+    });
 
-        const warehouse = await prisma.warehouse.findFirst({
-            include: { Branch: true }
-        });
-        if (!warehouse) throw new Error('No warehouse found for testing');
-        testWarehouseId = warehouse.id;
-        testBranchId = warehouse.branchId;
+    afterAll(async () => {
+        try {
+            await prisma.stockMovement.deleteMany({ where: { productId: testProductId } });
+            await prisma.inventory.deleteMany({ where: { productId: testProductId } });
+            await prisma.pOSSaleItem.deleteMany({ where: { productId: testProductId } });
+            await prisma.pOSSale.deleteMany({ where: { branchId: testBranchId } });
+            await prisma.inventoryAdjustmentItem.deleteMany({ where: { productId: testProductId } });
+            await prisma.productUOM.deleteMany({ where: { productId: testProductId } });
+            await prisma.product.delete({ where: { id: testProductId } });
+            await prisma.warehouse.delete({ where: { id: testWarehouseId } });
+            await prisma.branch.delete({ where: { id: testBranchId } });
+        } catch (error) {
+            console.error('Cleanup failed:', error);
+        }
     });
 
     it('should track UOM correctly for both Adjustments and POS Sales', async () => {

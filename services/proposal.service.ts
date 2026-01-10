@@ -1,5 +1,6 @@
 import { cooperativeProposalRepository } from '@/repositories/cooperative-proposal.repository';
 import { CreateProposalInput, ProposalFilters } from '@/types/cooperative.types';
+import { prisma } from '@/lib/prisma';
 
 export class ProposalService {
     async createProposal(data: CreateProposalInput) {
@@ -31,7 +32,23 @@ export class ProposalService {
             throw new Error('Voting period has ended');
         }
 
-        return await cooperativeProposalRepository.vote(proposalId, memberId, voteType, comment);
+        const vote = await cooperativeProposalRepository.vote(proposalId, memberId, voteType, comment);
+
+        // Update engagement score: +10 XP for voting
+        await prisma.memberEngagementScore.upsert({
+            where: { memberId },
+            create: {
+                memberId,
+                totalXp: 10,
+                proposalsVoted: 1
+            },
+            update: {
+                totalXp: { increment: 10 },
+                proposalsVoted: { increment: 1 }
+            }
+        });
+
+        return vote;
     }
 
     async getProposals(filters?: ProposalFilters) {

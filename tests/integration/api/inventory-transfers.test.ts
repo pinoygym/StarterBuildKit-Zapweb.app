@@ -88,7 +88,7 @@ describe('Inventory Transfer API Routes', () => {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: 'cybergada@gmail.com',
-                    password: 'Qweasd145698@',
+                    password: 'Qweasd1234',
                 }),
             });
 

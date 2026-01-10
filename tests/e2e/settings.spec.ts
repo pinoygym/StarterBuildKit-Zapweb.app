@@ -11,7 +11,7 @@ test.describe('Settings', () => {
         if (page.url().includes('/login')) {
             // Re-login if needed (though auth.setup.ts should handle this)
             await page.getByLabel('Email').fill('cybergada@gmail.com');
-            await page.getByLabel('Password').fill('Qweasd145698@');
+            await page.getByLabel('Password').fill('Qweasd1234');
             await page.getByRole('button', { name: 'Sign in' }).click();
             await page.waitForURL('**/settings');
         }

@@ -21,7 +21,7 @@ setup('authenticate', async ({ page }) => {
 
   // Fill in login credentials
   await page.getByLabel('Email').fill('cybergada@gmail.com');
-  await page.getByLabel('Password').fill('Qweasd145698@');
+  await page.getByLabel('Password').fill('Qweasd1234');
 
   // Click login button - target the form submit button specifically to avoid OAuth buttons
   await page.locator('form button[type="submit"]').click();

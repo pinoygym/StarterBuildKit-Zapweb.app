@@ -21,12 +21,21 @@ export async function withRateLimit(
 ): Promise<NextResponse> {
   try {
     // Get client identifier (IP address)
-    const clientId = 
-      request.headers.get('x-forwarded-for') || 
-      request.headers.get('x-real-ip') || 
+    const clientId =
+      request.headers.get('x-forwarded-for') ||
+      request.headers.get('x-real-ip') ||
       'unknown';
 
     const now = Date.now();
+    // Skip rate limiting in test environment or for localhost during development
+    if (
+      process.env.NODE_ENV === 'test' ||
+      process.env.DISABLE_RATE_LIMIT === 'true' ||
+      (process.env.NODE_ENV === 'development' && (clientId === '::1' || clientId === '127.0.0.1' || clientId === 'localhost'))
+    ) {
+      return await handler(request);
+    }
+
     const limit = rateLimitMap.get(clientId);
 
     if (!limit || now > limit.resetTime) {
@@ -35,26 +44,26 @@ export async function withRateLimit(
         count: 1,
         resetTime: now + options.windowMs,
       });
-      
+
       // Clean up old entries periodically
       if (Math.random() < 0.01) { // 1% chance to cleanup
         cleanupRateLimitMap();
       }
-      
+
       return await handler(request);
     }
 
     if (limit.count >= options.maxRequests) {
       // Rate limit exceeded
       const retryAfter = Math.ceil((limit.resetTime - now) / 1000);
-      
+
       return NextResponse.json(
-        { 
-          success: false, 
+        {
+          success: false,
           message: 'Too many requests. Please try again later.',
-          retryAfter 
+          retryAfter
         },
-        { 
+        {
           status: 429,
           headers: {
             'Retry-After': retryAfter.toString(),

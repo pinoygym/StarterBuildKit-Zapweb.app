@@ -27,7 +27,7 @@ test.describe('UI/UX Screenshot Testing', () => {
         // If redirected to login, then we need to log in
         if (page.url().includes('login')) {
             await page.fill('input[type="email"]', 'cybergada@gmail.com');
-            await page.fill('input[type="password"]', 'Qweasd145698@');
+            await page.fill('input[type="password"]', 'Qweasd1234');
             await page.click('button[type="submit"]');
             await page.waitForLoadState('networkidle');
             await page.waitForTimeout(2000);
@@ -56,7 +56,7 @@ test.describe('UI/UX Screenshot Testing', () => {
             await page.waitForLoadState('networkidle');
 
             await page.getByLabel(/email/i).fill('cybergada@gmail.com');
-            await page.getByLabel(/password/i).fill('Qweasd145698@');
+            await page.getByLabel(/password/i).fill('Qweasd1234');
             await page.waitForTimeout(500);
 
             await page.screenshot({

@@ -68,7 +68,7 @@ describe('Stock Level API', () => {
 
         // Ensure user exists for login
         const email = 'cybergada@gmail.com';
-        const password = 'Qweasd145698@';
+        const password = 'Qweasd1234';
         const hashedPassword = await bcrypt.hash(password, 4);
 
         // Find or create admin role
@@ -112,7 +112,7 @@ describe('Stock Level API', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 email: 'cybergada@gmail.com',
-                password: 'Qweasd145698@',
+                password: 'Qweasd1234',
             }),
         });
 

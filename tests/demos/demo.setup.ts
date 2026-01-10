@@ -29,7 +29,7 @@ setup('setup demo environment', async ({ page }) => {
 
   // Login as super admin
   await page.getByLabel(/email/i).fill('cybergada@gmail.com');
-  await page.getByLabel(/password/i).fill('Qweasd145698@');
+  await page.getByLabel(/password/i).fill('Qweasd1234');
   await page.getByRole('button', { name: /sign in/i }).click();
 
   // Wait for dashboard

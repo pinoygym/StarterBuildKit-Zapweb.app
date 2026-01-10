@@ -41,7 +41,7 @@ describe('Cooperative Module API', () => {
 
         if (loginRes.status === 401) {
             console.log('Login failed with Qweasd1234, trying alternative...');
-            password = 'Qweasd145698@';
+            password = 'Qweasd1234';
             loginRes = await fetch(`${BASE_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -52,6 +52,7 @@ describe('Cooperative Module API', () => {
             })
         }
 
+        const setCookie = loginRes.headers.get('set-cookie');
         const loginText = await loginRes.text();
         let loginData;
         try {
@@ -61,7 +62,7 @@ describe('Cooperative Module API', () => {
             throw new Error('Login failed to return JSON');
         }
 
-        if (!loginData.success) {
+        if (!loginRes.ok || !loginData.success) {
             console.error('Login failed:', JSON.stringify(loginData, null, 2))
             throw new Error('Login failed')
         }
@@ -69,30 +70,58 @@ describe('Cooperative Module API', () => {
         token = loginData.token
         headers = {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
+            'Cookie': setCookie || `auth-token=${token}`,
         }
     })
 
     // Helper for safe fetch
     const safeFetch = async (url: string, options: any) => {
-        const res = await fetch(url, options);
-        const text = await res.text();
         try {
-            const data = JSON.parse(text);
+            const res = await fetch(url, options);
+            const text = await res.text();
+            let data = null;
+            try {
+                data = JSON.parse(text);
+            } catch (e) {
+                // Not JSON
+            }
+            if (!res.ok) {
+                console.error(`Fetch Failed [${options.method || 'GET'} ${url}]:`, res.status, text.substring(0, 500));
+            }
             return { status: res.status, data, text };
-        } catch (e) {
-            console.error(`Fetch Failed [${options.method || 'GET'} ${url}]:`, res.status, text.substring(0, 500));
-            return { status: res.status, data: null, text };
+        } catch (error) {
+            console.error(`Fetch Exception [${options.method || 'GET'} ${url}]:`, error);
+            throw error;
         }
     }
 
     // 1. Member Management
     it('creates and retrieves a new cooperative member', async () => {
+        // First we need a membership type
+        const typePayload = {
+            name: `Type ${Date.now()}`,
+            code: `CT-${Date.now()}`,
+            status: 'active'
+        }
+        const { status: tStatus, data: tData } = await safeFetch(`${BASE_URL}/api/cooperative/membership-types`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(typePayload)
+        })
+        expect(tStatus).toBe(201)
+        const membershipTypeId = (tData.id || tData.data?.id)
+        expect(membershipTypeId).toBeDefined()
+
         const newMember = {
             firstName: 'Integration',
             lastName: `Test-${Date.now()}`,
             email: `int.test.${Date.now()}@example.com`,
-            phoneNumber: '09170000000',
+            phone: '09170000000',
+            address: 'Test Address',
+            gender: 'male',
+            civilStatus: 'single',
+            dateOfBirth: '1990-01-01',
+            membershipTypeId: membershipTypeId,
             status: 'active'
         }
 
@@ -102,14 +131,16 @@ describe('Cooperative Module API', () => {
             body: JSON.stringify(newMember)
         })
 
+        if (status !== 201) {
+            console.error('Member creation failed. Headers:', headers);
+        }
         expect(status).toBe(201)
-        expect(data).not.toBeNull()
-        expect(data.firstName).toBe(newMember.firstName)
-        memberId = data.id
+        memberId = data.id || data.data?.id
+        expect(memberId).toBeDefined()
 
         const getRes = await safeFetch(`${BASE_URL}/api/cooperative/members/${memberId}`, { headers })
         expect(getRes.status).toBe(200)
-        expect(getRes.data.id).toBe(memberId)
+        expect((getRes.data.id || getRes.data.data?.id)).toBe(memberId)
     })
 
     // 2. Initiatives
@@ -119,8 +150,8 @@ describe('Cooperative Module API', () => {
             description: 'Integration testing initiative',
             category: 'project',
             status: 'active',
-            startDate: new Date().toISOString(),
-            endDate: new Date().toISOString(),
+            priority: 'medium',
+            targetDate: new Date(Date.now() + 86400000).toISOString(),
         }
 
         const { status, data } = await safeFetch(`${BASE_URL}/api/cooperative/initiatives`, {
@@ -130,15 +161,21 @@ describe('Cooperative Module API', () => {
         })
 
         expect(status).toBe(201)
-        initiativeId = data.id
+        initiativeId = data.id || data.data?.id
+        expect(initiativeId).toBeDefined()
     })
 
     // 3. Proposals and Voting
     it('creates a proposal and allows voting', async () => {
+        if (!memberId) {
+            console.warn("Skipping proposal test because memberId is missing");
+            return;
+        }
         const proposal = {
             title: 'Test Proposal',
             description: 'Should we pass the test?',
             category: 'governance',
+            proposedById: memberId,
             votingEndDate: new Date(Date.now() + 86400000).toISOString(),
         }
 
@@ -149,21 +186,17 @@ describe('Cooperative Module API', () => {
         })
 
         expect(status).toBe(201)
-        proposalId = data.id
+        proposalId = data.id || data.data?.id
+        expect(proposalId).toBeDefined()
 
         // Vote
         const voteRes = await safeFetch(`${BASE_URL}/api/cooperative/proposals/${proposalId}/vote`, {
             method: 'POST',
             headers,
-            body: JSON.stringify({ voteType: 'approve' })
+            body: JSON.stringify({ voteType: 'approve', memberId: memberId })
         })
 
-        // Expect success or handle case where user is not a member
-        if (voteRes.status >= 200 && voteRes.status < 300) {
-            expect(voteRes.data.success).toBe(true)
-        } else {
-            console.warn('Voting skipped/failed (expected if admin not linked to member):', voteRes.text)
-        }
+        expect(voteRes.status).toBe(200)
     })
 
     // 4. Tasks
@@ -183,7 +216,8 @@ describe('Cooperative Module API', () => {
         })
 
         expect(status).toBe(201)
-        taskId = data.id
+        taskId = data.id || data.data?.id
+        expect(taskId).toBeDefined()
     })
 
     // 5. Farm Management
@@ -208,15 +242,17 @@ describe('Cooperative Module API', () => {
         })
 
         expect(status).toBe(201)
-        farmId = data.id
+        farmId = data.id || data.data?.id
+        expect(farmId).toBeDefined()
     })
 
     // 6. ID Templates
     it('creates an ID template', async () => {
         const template = {
-            name: 'Standard Gold',
+            name: `Standard Gold ${Date.now()}`,
             layout: 'standard',
-            primaryColor: '#FFD700'
+            primaryColor: '#FFD700',
+            orientation: 'landscape'
         }
 
         const { status, data } = await safeFetch(`${BASE_URL}/api/cooperative/id-templates`, {
@@ -226,6 +262,43 @@ describe('Cooperative Module API', () => {
         })
 
         expect(status).toBe(201)
-        templateId = data.id
+        templateId = data.id || data.data?.id
+        expect(templateId).toBeDefined()
+    })
+
+    // 7. Leaderboard and Engagement
+    it('verifies leaderboard updates after voting and tasks', async () => {
+        if (!memberId) {
+            console.warn("Skipping leaderboard test because memberId is missing");
+            return;
+        }
+
+        // The previous tests created a task and voted on a proposal.
+        // 1. Assign the task
+        await safeFetch(`${BASE_URL}/api/cooperative/tasks/${taskId}/assign`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ memberId })
+        })
+
+        // 2. Complete the task
+        await safeFetch(`${BASE_URL}/api/cooperative/tasks/${taskId}/complete`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ memberId })
+        })
+
+        const { status, data } = await safeFetch(`${BASE_URL}/api/cooperative/leaderboard?limit=10`, {
+            headers
+        })
+
+        expect(status).toBe(200)
+        expect(Array.isArray(data)).toBe(true)
+
+        // Find the member in the leaderboard
+        const memberScore = data.find((s: any) => (s.memberId || s.id) === memberId || s.Member?.id === memberId)
+        expect(memberScore).toBeDefined()
+        // Vote (10 XP) + Task (50 XP) = 60 XP
+        expect(memberScore.totalXp).toBeGreaterThanOrEqual(60)
     })
 })

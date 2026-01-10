@@ -7,7 +7,8 @@ try {
 
 if (process.env.NODE_ENV === 'test' || process.env.IS_PLAYWRIGHT === 'true') {
   dotenv.config({ path: '.env.test', override: true });
-} else {
+} else if (process.env.NODE_ENV === 'development') {
+  // Only load .env.local in development; Vercel provides env vars directly
   dotenv.config({ path: '.env.local' });
 }
 
@@ -36,11 +37,12 @@ const connectionString = process.env.DATABASE_URL?.includes('localhost')
 
 if (!connectionString) {
   logger.error('DATABASE_URL is not defined in lib/prisma.ts');
+  console.log('[DEBUG] DATABASE_URL is MISSING');
 } else {
-  const host = connectionString.split('@')[1]?.split('/')[0];
-  const dbName = connectionString.split('/').pop()?.split('?')[0];
+  const host = connectionString.split('@')[1]?.split('/')[0] || 'no-host';
+  const dbName = connectionString.split('/').pop()?.split('?')[0] || 'no-db';
   logger.info(`Initializing Prisma with Host: ${host}, DB: ${dbName}`);
-  console.log(`[DEBUG] Prisma Source: ${process.env.NODE_ENV === 'test' ? '.env.test' : '.env.local'} | Host: ${host}`);
+  console.log(`[DEBUG] Prisma Source: ${process.env.NODE_ENV} | Host: ${host} | URL Length: ${connectionString.length}`);
 }
 
 // Create PostgreSQL connection pool

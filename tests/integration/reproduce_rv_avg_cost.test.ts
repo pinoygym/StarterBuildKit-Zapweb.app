@@ -233,8 +233,16 @@ describe('Receiving Voucher Average Cost Anomaly Reproduction', () => {
                     await prisma.receivingVoucherItem.deleteMany({ where: { productId: product.id } });
                     await prisma.purchaseOrderItem.deleteMany({ where: { productId: product.id } });
                     await prisma.productUOM.deleteMany({ where: { productId: product.id } });
-                    await prisma.product.delete({ where: { id: product.id } });
                 }
+
+                // Delete dependent transaction records
+                if (supplier) {
+                    await prisma.accountsPayable.deleteMany({ where: { supplierId: supplier.id } });
+                    await prisma.receivingVoucher.deleteMany({ where: { PurchaseOrder: { supplierId: supplier.id } } });
+                    await prisma.purchaseOrder.deleteMany({ where: { supplierId: supplier.id } });
+                }
+
+                if (product) await prisma.product.delete({ where: { id: product.id } });
                 if (supplier) await prisma.supplier.delete({ where: { id: supplier.id } });
                 if (warehouse) await prisma.warehouse.delete({ where: { id: warehouse.id } });
                 if (branch) await prisma.branch.delete({ where: { id: branch.id } });

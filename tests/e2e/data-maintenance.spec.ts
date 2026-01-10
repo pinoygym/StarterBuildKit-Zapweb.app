@@ -8,7 +8,7 @@ test.describe('Data Maintenance', () => {
         // Check if redirected to login
         if (page.url().includes('/login')) {
             await page.getByLabel('Email').fill('cybergada@gmail.com');
-            await page.getByLabel('Password').fill('Qweasd145698@');
+            await page.getByLabel('Password').fill('Qweasd1234');
             await page.getByRole('button', { name: 'Sign in' }).click();
             await page.waitForURL('**/data-maintenance');
         }

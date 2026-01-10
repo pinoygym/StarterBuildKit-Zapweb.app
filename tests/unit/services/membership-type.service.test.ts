@@ -86,7 +86,7 @@ describe('MembershipTypeService', () => {
                 name: 'Regular',
                 code: 'REG',
                 description: 'Regular membership',
-                monthlyFee: 100,
+                monthlyDues: 100,
             };
 
             const mockType = {
@@ -116,7 +116,7 @@ describe('MembershipTypeService', () => {
                 name: 'Regular',
                 code: 'REG',
                 description: 'Regular membership',
-                monthlyFee: 100,
+                monthlyDues: 100,
             };
 
             vi.mocked(membershipTypeRepository.findByName).mockResolvedValue({ id: '2' } as any);
@@ -129,7 +129,7 @@ describe('MembershipTypeService', () => {
                 name: 'Regular',
                 code: 'REG',
                 description: 'Regular membership',
-                monthlyFee: 100,
+                monthlyDues: 100,
             };
 
             vi.mocked(membershipTypeRepository.findByName).mockResolvedValue(null);

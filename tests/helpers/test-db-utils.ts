@@ -118,7 +118,7 @@ export async function createTestUser(overrides: Partial<any> = {}): Promise<any>
           email: 'cybergada@gmail.com',
           firstName: 'Admin',
           lastName: 'User',
-          password: 'Qweasd145698@', // The seeded admin password
+          password: 'Qweasd1234', // The seeded admin password
           roleId: 'seeded',
           status: 'ACTIVE',
           emailVerified: true,
@@ -155,7 +155,7 @@ export async function createTestUser(overrides: Partial<any> = {}): Promise<any>
       email: 'cybergada@gmail.com',
       firstName: 'Admin',
       lastName: 'User',
-      password: 'Qweasd145698@',
+      password: 'Qweasd1234',
       roleId: 'seeded',
       status: 'ACTIVE',
       emailVerified: true,
