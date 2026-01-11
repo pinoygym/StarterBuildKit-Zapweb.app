@@ -15,7 +15,7 @@ export async function seedReferenceData(prisma: PrismaClient) {
 
   for (const category of productCategories) {
     await prisma.productCategory.upsert({
-      where: { code: category.code },
+      where: { name: category.name },
       update: {},
       create: { ...category, updatedAt: new Date() },
     });

@@ -148,8 +148,11 @@ async function main() {
   console.log('Created suppliers');
 
   // Create Customers
-  const customer1 = await prisma.customer.create({
-    data: {
+  // Create Customers
+  const customer1 = await prisma.customer.upsert({
+    where: { customerCode: 'CUST-00001' },
+    update: {},
+    create: {
       id: crypto.randomUUID(),
       customerCode: 'CUST-00001',
       companyName: '7-Eleven Philippines',
@@ -169,8 +172,10 @@ async function main() {
     },
   });
 
-  const customer2 = await prisma.customer.create({
-    data: {
+  const customer2 = await prisma.customer.upsert({
+    where: { customerCode: 'CUST-00002' },
+    update: {},
+    create: {
       id: crypto.randomUUID(),
       customerCode: 'CUST-00002',
       companyName: 'Mini Stop Corporation',
@@ -190,8 +195,10 @@ async function main() {
     },
   });
 
-  const customer3 = await prisma.customer.create({
-    data: {
+  const customer3 = await prisma.customer.upsert({
+    where: { customerCode: 'CUST-00003' },
+    update: {},
+    create: {
       id: crypto.randomUUID(),
       customerCode: 'CUST-00003',
       contactPerson: 'Juan Dela Cruz',
@@ -316,25 +323,37 @@ async function main() {
     },
   ];
 
-  for (const productData of products) {
-    const { alternateUOMs, ...productInfo } = productData;
-    await prisma.product.create({
-      data: {
-        id: crypto.randomUUID(),
-        ...productInfo,
-        updatedAt: new Date(),
-        productUOMs: {
-          create: alternateUOMs.map(uom => ({
-            id: crypto.randomUUID(),
-            name: uom.name,
-            conversionFactor: uom.conversionFactor,
-            sellingPrice: uom.sellingPrice,
-          })),
-        },
-        averageCostPrice: productInfo.basePrice * 0.6,
+  await prisma.product.upsert({
+    where: { name: productInfo.name },
+    update: {
+      ...productInfo,
+      updatedAt: new Date(),
+      productUOMs: {
+        deleteMany: {},
+        create: alternateUOMs.map(uom => ({
+          id: crypto.randomUUID(),
+          name: uom.name,
+          conversionFactor: uom.conversionFactor,
+          sellingPrice: uom.sellingPrice,
+        })),
       },
-    });
-  }
+      averageCostPrice: productInfo.basePrice * 0.6,
+    },
+    create: {
+      id: crypto.randomUUID(),
+      ...productInfo,
+      updatedAt: new Date(),
+      productUOMs: {
+        create: alternateUOMs.map(uom => ({
+          id: crypto.randomUUID(),
+          name: uom.name,
+          conversionFactor: uom.conversionFactor,
+          sellingPrice: uom.sellingPrice,
+        })),
+      },
+      averageCostPrice: productInfo.basePrice * 0.6,
+    },
+  });
 
   console.log('Created products with UOMs');
 

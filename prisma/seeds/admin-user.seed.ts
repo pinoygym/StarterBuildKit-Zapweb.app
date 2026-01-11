@@ -20,8 +20,12 @@ export async function seedAdminUser(prisma: PrismaClient) {
   });
 
   if (existingSuperMegaAdmin) {
-    console.log('Super Mega Admin user already exists, skipping...');
-    return;
+    console.log('Super Mega Admin user already exists, ensuring password is correct...');
+    await prisma.user.update({
+      where: { id: existingSuperMegaAdmin.id },
+      data: { passwordHash },
+    });
+    // Continue without creating a new user
   }
 
   // Check if regular admin user exists
