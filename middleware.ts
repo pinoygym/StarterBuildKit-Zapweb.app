@@ -28,12 +28,16 @@ export async function middleware(request: NextRequest) {
         return NextResponse.next();
     }
 
-    // Skip auth for static files
+    // Skip auth for static files and PWA assets
     if (
         pathname.startsWith('/_next') ||
         pathname.startsWith('/api/_next') ||
         pathname.startsWith('/static') ||
-        pathname.includes('favicon.ico')
+        pathname.startsWith('/icons') ||
+        pathname.includes('favicon.ico') ||
+        pathname === '/manifest.json' ||
+        pathname === '/sw.js' ||
+        pathname === '/offline.html'
     ) {
         return NextResponse.next();
     }

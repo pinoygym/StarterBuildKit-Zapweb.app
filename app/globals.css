@@ -178,3 +178,33 @@
     display: block !important;
   }
 }
+
+/* Barcode Scanner Styles */
+@layer utilities {
+
+  /* When scanner is active, make body transparent for camera view */
+  body.barcode-scanner-active {
+    background: transparent !important;
+  }
+
+  body.barcode-scanner-active>*:not(.scanner-overlay) {
+    display: none !important;
+  }
+
+  /* Scanning animation */
+  @keyframes scan {
+
+    0%,
+    100% {
+      transform: translateY(-100%);
+    }
+
+    50% {
+      transform: translateY(100%);
+    }
+  }
+
+  .animate-scan {
+    animation: scan 2s ease-in-out infinite;
+  }
+}

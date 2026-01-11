@@ -15,7 +15,7 @@ export async function GET(
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-        const stats = await cooperativeMemberService.getMemberStats(params.id);
+        const stats = await cooperativeMemberService.getMemberStats(id);
 
         return NextResponse.json(stats);
     } catch (error: any) {

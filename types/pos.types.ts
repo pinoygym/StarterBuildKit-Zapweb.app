@@ -110,6 +110,7 @@ export interface ProductWithStock {
   basePrice: number;
   baseUOM: string;
   status: string;
+  sku?: string; // Optional SKU/barcode for scanning
   alternateUOMs: Array<{
     id: string;
     name: string;

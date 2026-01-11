@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { Search, Package } from 'lucide-react';
+import { useState, useEffect, useCallback } from 'react';
+import { Search, Package, ScanLine } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -18,6 +18,8 @@ import { TableSkeleton } from '@/components/shared/loading-skeleton';
 import { EmptyState } from '@/components/shared/empty-state';
 import { toast } from '@/hooks/use-toast';
 import { formatCurrency, formatQuantity } from '@/lib/utils';
+import { BarcodeScanner } from '@/components/native/barcode-scanner';
+import { Haptics, isNativeApp } from '@/lib/native-utils';
 
 interface POSProductGridProps {
   warehouseId: string;
@@ -30,6 +32,7 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
   const [loading, setLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState<string>('all');
+  const [showScanner, setShowScanner] = useState(false);
 
   useEffect(() => {
     if (!warehouseId) {
@@ -72,9 +75,49 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
     }
   };
 
+  // Handle barcode scan - find product by barcode/SKU and add to cart
+  const handleBarcodeScan = useCallback((barcode: string) => {
+    setShowScanner(false);
+
+    // Find product by barcode (checking SKU field)
+    const product = products.find(
+      (p) => p.sku?.toLowerCase() === barcode.toLowerCase() ||
+        p.name.toLowerCase().includes(barcode.toLowerCase())
+    );
+
+    if (product) {
+      if (product.inStock) {
+        onAddToCart(product, product.baseUOM, 1);
+        // Haptic feedback on native
+        Haptics.notification('Success');
+        toast({
+          title: 'Product Found!',
+          description: `${product.name} added to cart`,
+        });
+      } else {
+        Haptics.notification('Error');
+        toast({
+          title: 'Out of Stock',
+          description: `${product.name} is currently out of stock`,
+          variant: 'destructive',
+        });
+      }
+    } else {
+      Haptics.notification('Warning');
+      toast({
+        title: 'Product Not Found',
+        description: `No product found with barcode: ${barcode}`,
+        variant: 'destructive',
+      });
+      // Set barcode as search query so user can see what was scanned
+      setSearchQuery(barcode);
+    }
+  }, [products, onAddToCart]);
+
   // Filter products - show all products but filter by search and category
   const filteredProducts = products.filter((product) => {
-    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesSearch = product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      product.sku?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = categoryFilter === 'all' || product.category === categoryFilter;
     return matchesSearch && matchesCategory;
   });
@@ -91,6 +134,9 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
 
     // Add with base UOM by default
     onAddToCart(product, product.baseUOM, 1);
+
+    // Haptic feedback on native
+    Haptics.impact('Light');
 
     toast({
       title: 'Added to Cart',
@@ -118,13 +164,29 @@ export function POSProductGrid({ warehouseId, onAddToCart, refreshTrigger = 0 }:
 
         {/* Search and Filters */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-4">
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-9"
+          <div className="relative flex-1 flex gap-2">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search products or scan barcode..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 h-9"
+              />
+            </div>
+
+            {/* Barcode Scanner Button - shows on all devices, works on native */}
+            <BarcodeScanner
+              onScan={handleBarcodeScan}
+              onError={(error) => {
+                toast({
+                  title: 'Scanner Error',
+                  description: error.message,
+                  variant: 'destructive',
+                });
+              }}
+              buttonText=""
+              className="h-9 w-9 p-0 shrink-0"
             />
           </div>
 

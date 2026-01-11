@@ -9,6 +9,7 @@ import { ClientToaster } from "@/components/ui/client-toaster";
 import { Toaster as Sonner } from "sonner";
 import { Suspense } from "react";
 import { BranchProvider } from "@/contexts/branch-context";
+import { ServiceWorkerRegistration } from "@/components/pwa/service-worker-registration";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,6 +34,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        {/* PWA Meta Tags */}
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#3b82f6" />
+
+        {/* Apple PWA Meta Tags */}
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="InventoryPro" />
+        <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png" />
+
+        {/* Mobile Viewport */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+        <meta name="mobile-web-app-capable" content="yes" />
+
+        {/* Existing Meta */}
         <meta name="darkreader-lock" content="true" />
         <meta name="color-scheme" content="light dark" />
       </head>
@@ -50,6 +66,7 @@ export default function RootLayout({
             </QueryProvider>
           </ThemeProvider>
         </Suspense>
+        <ServiceWorkerRegistration />
         <SpeedInsights />
       </body>
     </html>
