@@ -45,8 +45,8 @@ async function middleware(request) {
     if (PUBLIC_ROUTES.some((route)=>pathname.startsWith(route))) {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
     }
-    // Skip auth for static files
-    if (pathname.startsWith('/_next') || pathname.startsWith('/api/_next') || pathname.startsWith('/static') || pathname.includes('favicon.ico')) {
+    // Skip auth for static files and PWA assets
+    if (pathname.startsWith('/_next') || pathname.startsWith('/api/_next') || pathname.startsWith('/static') || pathname.startsWith('/icons') || pathname.includes('favicon.ico') || pathname === '/manifest.json' || pathname === '/sw.js' || pathname === '/offline.html') {
         return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$esm$2f$server$2f$web$2f$exports$2f$index$2e$js__$5b$middleware$2d$edge$5d$__$28$ecmascript$29$__["NextResponse"].next();
     }
     let token = request.cookies.get('auth-token')?.value;

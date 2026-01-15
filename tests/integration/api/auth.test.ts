@@ -3,16 +3,23 @@ import { BASE_URL } from '../config';
 import * as fs from 'fs';
 import * as path from 'path';
 import { createTestUser, cleanupTestData } from '@/tests/helpers/test-db-utils'; // Import necessary helpers
+import { prisma } from '@/lib/prisma'; // Import prisma client
 
 describe('Auth API', () => {
   let testUser: any;
-  let testUserPassword = 'TestUser123!'; // Define a password for the test user
+  const testUserEmail = 'test@example.com';
+  const testUserPassword = 'TestUser123!';
 
   beforeAll(async () => {
-    // Create a user directly in the DB for the "valid login" test
-    testUser = await createTestUser({ password: testUserPassword });
-    // Note: No API registration for testUser here, as this test focuses on login.
-    // The user is created directly in the DB to ensure existence before login attempt.
+    // Clean up if exists
+    await prisma.session.deleteMany({ where: { User: { email: testUserEmail } } });
+    await prisma.user.deleteMany({ where: { email: testUserEmail } });
+
+    // Create a user directly in the DB
+    testUser = await createTestUser({
+      email: testUserEmail,
+      password: testUserPassword
+    });
   });
 
   afterAll(async () => {
@@ -48,20 +55,24 @@ describe('Auth API', () => {
 
   it('valid login returns 200 and me returns 200 with cookie', async () => {
     // Log in with the dynamically created test user
-    const login = await fetch(`${BASE_URL}/api/auth/login`, {
+    // Use seeded admin user for login test to rule out user creation issues
+    const seededAdminEmail = 'cybergada@gmail.com';
+    const seededAdminPassword = 'Qweasd1234';
+
+    const loginResponse = await fetch(`${BASE_URL}/api/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: testUser.email, password: testUserPassword })
+      body: JSON.stringify({ email: seededAdminEmail, password: seededAdminPassword })
     });
-    const setCookie = login.headers.get('set-cookie') || '';
-    const loginBody = await login.json();
 
-    if (login.status !== 200) {
-      console.log('Login failed status:', login.status);
-      console.log('Login failed body:', JSON.stringify(loginBody));
-      fs.writeFileSync('c:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/login-error.json', JSON.stringify({ status: login.status, body: loginBody }, null, 2));
+    if (loginResponse.status !== 200) {
+      const errorBody = await loginResponse.clone().json();
+      throw new Error(`Login failed with status ${loginResponse.status}: ${JSON.stringify(errorBody)}`);
     }
-    expect(login.status).toBe(200);
+
+    const setCookie = loginResponse.headers.get('set-cookie') || '';
+    const loginBody = await loginResponse.json();
+    expect(loginResponse.status).toBe(200);
     expect(loginBody.success).toBe(true);
 
     const me = await fetch(`${BASE_URL}/api/auth/me`, { headers: { 'Cookie': setCookie } });
@@ -69,7 +80,6 @@ describe('Auth API', () => {
     if (me.status !== 200) {
       console.log('Me failed status:', me.status);
       console.log('Me failed body:', JSON.stringify(meBody));
-      fs.writeFileSync('c:/Users/HI/Documents/GitHub/_deve local/_React Apps/test/me-error.json', JSON.stringify({ status: me.status, body: meBody }, null, 2));
     }
     expect(me.status).toBe(200);
     expect(meBody.success).toBe(true);

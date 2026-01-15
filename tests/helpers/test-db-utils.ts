@@ -71,7 +71,8 @@ export async function cleanupTestData(testIds: TestDataIds | Partial<TestDataIds
 export async function createTestUser(overrides: Partial<any> = {}): Promise<any> {
   const userId = randomUUID();
   const password = overrides.password || 'Test@123';
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const rounds = process.env.NODE_ENV === 'test' ? 4 : 10;
+  const hashedPassword = await bcrypt.hash(password, rounds);
 
   // Remove 'password' from overrides to prevent Prisma validation error
   const { password: _, ...cleanOverrides } = overrides;
