@@ -1,15 +1,15 @@
-import { AttendanceRepository } from '@/lib/repositories/attendance.repository';
-import { AttendanceStatus } from '@prisma/client';
+import { AttendanceRepository } from '@/repositories/attendance.repository';
+
 
 export class AttendanceService {
     static async clockIn(userId: string) {
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-        let status = AttendanceStatus.PRESENT;
+        let status = 'PRESENT';
         const startHour = 9;
         if (now.getHours() > startHour || (now.getHours() === startHour && now.getMinutes() > 0)) {
-            status = AttendanceStatus.LATE;
+            status = 'LATE';
         }
 
         return AttendanceRepository.create({

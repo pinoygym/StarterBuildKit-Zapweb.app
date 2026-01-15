@@ -1,7 +1,7 @@
 'use server';
 
-import { AttendanceService } from '@/lib/services/attendance.service';
-import { PayrollService } from '@/lib/services/payroll.service';
+import { AttendanceService } from '@/services/attendance.service';
+import { PayrollService } from '@/services/payroll.service';
 import { revalidatePath } from 'next/cache';
 
 export async function clockIn(userId: string) {

@@ -1,4 +1,4 @@
-import { PayrollRepository } from '@/lib/repositories/payroll.repository';
+import { PayrollRepository } from '@/repositories/payroll.repository';
 import { prisma } from '@/lib/prisma';
 
 export class PayrollService {
@@ -35,7 +35,7 @@ export class PayrollService {
                 }
             });
 
-            const totalHours = attendance.reduce((sum, record) => sum + (record.totalHours || 0), 0);
+            const totalHours = attendance.reduce((sum: number, record: any) => sum + (record.totalHours || 0), 0);
 
             const rate = user.EmployeeProfile.hourlyRate;
             const grossPay = totalHours * rate;
