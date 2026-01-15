@@ -15,7 +15,7 @@ export default defineConfig({
   ],
 
   use: {
-    baseURL: process.env.DEMO_BASE_URL || 'http://localhost:3002',
+    baseURL: process.env.DEMO_BASE_URL || 'http://localhost:3000',
 
     // Video recording configuration
     video: {
@@ -81,9 +81,9 @@ export default defineConfig({
     },
   ],
 
-  webServer: {
-    command: 'npm run dev',
-    url: 'http://localhost:3002',
+  webServer: process.env.SKIP_WEBSERVER ? undefined : {
+    command: 'bun run dev',
+    url: 'http://localhost:3000',
     reuseExistingServer: true,
     timeout: 120000,
   },
