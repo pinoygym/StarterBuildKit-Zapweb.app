@@ -30,6 +30,9 @@ import {
   Milestone,
   Wallet,
   Handshake,
+  Clock,
+  ScanFace,
+  Banknote,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -64,6 +67,9 @@ const navigation: { name: string, href: string, icon: any, feature?: FeatureKey 
   { name: 'Reports', href: '/reports', icon: BarChart3 },
   { name: 'Data Maintenance', href: '/data-maintenance', icon: Database },
   { name: 'Roadmap', href: '/roadmap', icon: Milestone, feature: 'roadmap' },
+  { name: 'Attendance', href: '/hr/attendance', icon: Clock },
+  { name: 'Payroll', href: '/hr/payroll', icon: Banknote },
+  { name: 'Kiosk', href: '/hr/kiosk', icon: ScanFace },
 ];
 
 const settingsNavigation: { name: string, href: string, icon: any, feature?: FeatureKey }[] = [
