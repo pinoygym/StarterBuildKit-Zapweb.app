@@ -1,4 +1,5 @@
-import { AttendanceRepository } from '@/repositories/attendance.repository';
+import { AttendanceRepository } from '../repositories/attendance.repository';
+import { AttendanceStatus } from '@prisma/client';
 
 
 export class AttendanceService {
@@ -6,7 +7,7 @@ export class AttendanceService {
         const now = new Date();
         const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
 
-        let status = 'PRESENT';
+        let status: AttendanceStatus = 'PRESENT';
         const startHour = 9;
         if (now.getHours() > startHour || (now.getHours() === startHour && now.getMinutes() > 0)) {
             status = 'LATE';

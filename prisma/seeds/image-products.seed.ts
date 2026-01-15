@@ -112,7 +112,8 @@ export async function seedImageProducts(prisma: PrismaClient) {
             console.log(`Created: ${productName}`);
         }
 
-        // Add UOMs
+        // Add UOMs with deduplication
+        const processedUOMs = new Set<string>();
         for (const wsItem of wholesaleItems) {
             // Determine UOM name
             let uomName = wsItem.unit;
@@ -124,23 +125,20 @@ export async function seedImageProducts(prisma: PrismaClient) {
                 else uomName = 'WHOLESALE_UNIT';
             }
 
-            // Skip if UOM name same as base
-            if (uomName === existingProduct.baseUOM) continue;
+            // Skip if UOM name same as base or already processed
+            if (uomName === existingProduct.baseUOM || processedUOMs.has(uomName)) continue;
+            processedUOMs.add(uomName);
 
             // Calculate Conversion
-            // If explicit qty provided in data (e.g. 48 CANS/BOX)
             let conversion = 1;
             if (wsItem.qty && wsItem.qty.match(/\d+/)) {
                 conversion = parseQuantity(wsItem.qty);
             } else {
-                // Price ratio fallback
                 if (wsItem.cost > existingProduct.basePrice) {
                     conversion = Math.round(wsItem.cost / existingProduct.basePrice);
                 }
             }
-
-            // Sanity check conversion
-            if (conversion < 2) conversion = 1; // Avoid 1:1 if not distinct?
+            if (conversion < 2) conversion = 1;
 
             const uomExists = await prisma.productUOM.findFirst({
                 where: { productId: existingProduct.id, name: uomName }

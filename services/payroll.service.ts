@@ -1,5 +1,5 @@
-import { PayrollRepository } from '@/repositories/payroll.repository';
-import { prisma } from '@/lib/prisma';
+import { PayrollRepository } from '../repositories/payroll.repository';
+import { prisma } from '../lib/prisma';
 
 export class PayrollService {
     static async generatePayroll(startDate: Date, endDate: Date) {

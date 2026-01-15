@@ -14,7 +14,12 @@ import { seedImageProducts } from './seeds/image-products.seed';
 import { seedReferenceData } from './seeds/reference-data.seed';
 
 const connectionString = process.env.DATABASE_URL;
-const pool = new Pool({ connectionString });
+const pool = new Pool({
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
+});
 const adapter = new PrismaPg(pool);
 const prisma = new PrismaClient({ adapter });
 
@@ -323,37 +328,41 @@ async function main() {
     },
   ];
 
-  await prisma.product.upsert({
-    where: { name: productInfo.name },
-    update: {
-      ...productInfo,
-      updatedAt: new Date(),
-      productUOMs: {
-        deleteMany: {},
-        create: alternateUOMs.map(uom => ({
-          id: crypto.randomUUID(),
-          name: uom.name,
-          conversionFactor: uom.conversionFactor,
-          sellingPrice: uom.sellingPrice,
-        })),
+  // Insert or update each product with its UOMs
+  for (const productInfo of products) {
+    const { alternateUOMs, ...rest } = productInfo;
+    await prisma.product.upsert({
+      where: { name: productInfo.name },
+      update: {
+        ...rest,
+        updatedAt: new Date(),
+        productUOMs: {
+          deleteMany: {},
+          create: alternateUOMs.map(uom => ({
+            id: crypto.randomUUID(),
+            name: uom.name,
+            conversionFactor: uom.conversionFactor,
+            sellingPrice: uom.sellingPrice,
+          })),
+        },
+        averageCostPrice: productInfo.basePrice * 0.6,
       },
-      averageCostPrice: productInfo.basePrice * 0.6,
-    },
-    create: {
-      id: crypto.randomUUID(),
-      ...productInfo,
-      updatedAt: new Date(),
-      productUOMs: {
-        create: alternateUOMs.map(uom => ({
-          id: crypto.randomUUID(),
-          name: uom.name,
-          conversionFactor: uom.conversionFactor,
-          sellingPrice: uom.sellingPrice,
-        })),
+      create: {
+        id: crypto.randomUUID(),
+        ...rest,
+        updatedAt: new Date(),
+        productUOMs: {
+          create: alternateUOMs.map(uom => ({
+            id: crypto.randomUUID(),
+            name: uom.name,
+            conversionFactor: uom.conversionFactor,
+            sellingPrice: uom.sellingPrice,
+          })),
+        },
+        averageCostPrice: productInfo.basePrice * 0.6,
       },
-      averageCostPrice: productInfo.basePrice * 0.6,
-    },
-  });
+    });
+  }
 
   console.log('Created products with UOMs');
 

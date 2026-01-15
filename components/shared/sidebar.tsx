@@ -33,6 +33,7 @@ import {
   Clock,
   ScanFace,
   Banknote,
+  Fingerprint,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -70,6 +71,7 @@ const navigation: { name: string, href: string, icon: any, feature?: FeatureKey 
   { name: 'Attendance', href: '/hr/attendance', icon: Clock },
   { name: 'Payroll', href: '/hr/payroll', icon: Banknote },
   { name: 'Kiosk', href: '/hr/kiosk', icon: ScanFace },
+  { name: 'Biometric Enrollment', href: '/hr/biometrics', icon: Fingerprint },
 ];
 
 const settingsNavigation: { name: string, href: string, icon: any, feature?: FeatureKey }[] = [

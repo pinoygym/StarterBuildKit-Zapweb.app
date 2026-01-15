@@ -19,6 +19,9 @@ export async function seedAdminUser(prisma: PrismaClient) {
     where: { isSuperMegaAdmin: true },
   });
 
+  // Generate password hash for superadmin and regular admin
+  const passwordHash = await bcrypt.hash('12345678', 12);
+
   if (existingSuperMegaAdmin) {
     console.log('Super Mega Admin user already exists, ensuring password is correct...');
     await prisma.user.update({
@@ -32,8 +35,6 @@ export async function seedAdminUser(prisma: PrismaClient) {
   const existingAdmin = await prisma.user.findUnique({
     where: { email: 'cybergada@gmail.com' },
   });
-
-  const passwordHash = await bcrypt.hash('12345678', 12);
 
   if (existingAdmin) {
     console.log('Regular admin user exists, updating password...');

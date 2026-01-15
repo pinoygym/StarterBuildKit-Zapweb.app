@@ -1,5 +1,5 @@
-import { prisma } from '@/lib/prisma';
-import { AttendanceStatus } from '@prisma/client';
+import { prisma } from '../lib/prisma';
+import { AttendanceStatus, AttendanceRecord } from '@prisma/client';
 
 export class AttendanceRepository {
     static async create(data: {
@@ -65,10 +65,10 @@ export class AttendanceRepository {
             },
         });
 
-        const present = records.filter(r => r.status === 'PRESENT').length;
-        const late = records.filter(r => r.status === 'LATE').length;
-        const absent = records.filter(r => r.status === 'ABSENT').length;
-        const onLeave = records.filter(r => r.status === 'ON_LEAVE').length;
+        const present = records.filter((r: AttendanceRecord) => r.status === 'PRESENT').length;
+        const late = records.filter((r: AttendanceRecord) => r.status === 'LATE').length;
+        const absent = records.filter((r: AttendanceRecord) => r.status === 'ABSENT').length;
+        const onLeave = records.filter((r: AttendanceRecord) => r.status === 'ON_LEAVE').length;
 
         return {
             present,
