@@ -52,7 +52,7 @@ export default function SalesOrdersPage() {
 
   const handleConvertToPOS = (order: SalesOrderWithItems) => {
     // This will be implemented in the POS module
-    console.log('Convert to POS:', order);
+
   };
 
   if (loading) {

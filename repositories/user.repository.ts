@@ -58,8 +58,7 @@ export class UserRepository {
       };
     }
 
-    console.log('DEBUG REPO: filters received:', JSON.stringify(filters));
-    console.log('DEBUG REPO: where clause:', JSON.stringify(where));
+
 
     const [users, total] = await Promise.all([
       prisma.user.findMany({

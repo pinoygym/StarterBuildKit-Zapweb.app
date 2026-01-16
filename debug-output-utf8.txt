@@ -1,9 +1,0 @@
-﻿{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-24T08:59:36.071Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
-Testing getKPIs...
-{"level":"error","message":"Prisma error","timestamp":"2025-12-24T08:59:36.768Z","context":{"target":"expense.findMany","timestamp":"2025-12-24T08:59:36.768Z","message":"\nInvalid `prisma.expense.findMany()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\services\\dashboard.service.ts:129:22\n\n  126 }),\n  127 \n  128 // Current month expenses\nΓåÆ 129 prisma.expense.findMany(\nThe column `(not available)` does not exist in the current database."}}
-
-Testing getRecentActivities...
-{"level":"error","message":"Prisma error","timestamp":"2025-12-24T08:59:36.843Z","context":{"target":"expense.findMany","timestamp":"2025-12-24T08:59:36.843Z","message":"\nInvalid `prisma.expense.findMany()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\services\\dashboard.service.ts:630:22\n\n  627   orderBy: { createdAt: 'desc' },\n  628   take: limit,\n  629 }),\nΓåÆ 630 prisma.expense.findMany(\nThe column `(not available)` does not exist in the current database."}}
-
-Testing getBranchComparison...
-{"level":"error","message":"Prisma error","timestamp":"2025-12-24T08:59:36.981Z","context":{"target":"branch.findMany","timestamp":"2025-12-24T08:59:36.981Z","message":"\nInvalid `prisma.branch.findMany()` invocation in\nC:\\Users\\HI\\Documents\\GitHub\\buenasv2\\services\\dashboard.service.ts:301:42\n\n  298 }\n  299 \n  300 async getBranchComparison(): Promise<BranchComparison[]> {\nΓåÆ 301   const branches = await prisma.branch.findMany(\nThe column `(not available)` does not exist in the current database."}}

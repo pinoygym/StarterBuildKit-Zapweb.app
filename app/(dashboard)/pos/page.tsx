@@ -70,15 +70,15 @@ export default function POSPage() {
         const response = await fetch(`/api/warehouses?branchId=${selectedBranch.id}`);
         const data = await response.json();
 
-        console.log('Warehouses response:', data);
+
 
         if (data.success && data.data.length > 0) {
           setWarehouses(data.data);
           // Auto-select first warehouse
           setSelectedWarehouse(data.data[0].id);
-          console.log('Selected warehouse:', data.data[0].id);
+
         } else {
-          console.log('No warehouses found for branch:', selectedBranch.id);
+
         }
       } catch (error) {
         console.error('Error fetching warehouses:', error);

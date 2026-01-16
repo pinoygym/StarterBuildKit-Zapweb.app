@@ -30,7 +30,7 @@ export async function GET() {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    console.log('Branch creation request body:', body);
+
     const branch = await branchService.createBranch(body);
 
     return NextResponse.json(
