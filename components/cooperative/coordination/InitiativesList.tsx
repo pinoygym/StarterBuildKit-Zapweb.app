@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Plus, Calendar, Target } from "lucide-react";
 import { format } from "date-fns";
+import { CreateInitiativeDialog } from "./CreateInitiativeDialog";
 
 async function fetchInitiatives() {
     const res = await fetch('/api/cooperative/initiatives');
@@ -27,7 +28,7 @@ export function InitiativesList() {
         <div className="space-y-4">
             <div className="flex justify-between items-center">
                 <h3 className="text-lg font-medium">Active Initiatives</h3>
-                <Button size="sm"><Plus className="mr-2 h-4 w-4" /> New Initiative</Button>
+                <CreateInitiativeDialog />
             </div>
 
             {initiatives?.length === 0 ? (

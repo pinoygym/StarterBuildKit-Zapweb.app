@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-// Trigger rebuild
-
 const nextConfig: NextConfig = {
   distDir: process.env.IS_PLAYWRIGHT === 'true' ? '.next-test' : '.next',
 
@@ -15,7 +13,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // TODO: Restrict this to actual image hosts for improved security and performance. E.g., 'your-image-cdn.com', 'res.cloudinary.com'
+        hostname: '**',
       },
     ],
   },
