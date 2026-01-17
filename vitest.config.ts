@@ -18,8 +18,8 @@ export default defineConfig({
     hookTimeout: 120000,
     env: {
       BASE_URL: process.env.BASE_URL || 'http://127.0.0.1:3000',
-      DATABASE_URL: process.env.DATABASE_URL, // Ensure test DB is passed to tests
-      JWT_SECRET: process.env.JWT_SECRET,
+      DATABASE_URL: process.env.DATABASE_URL || 'file:./test.db', // Ensure test DB is passed to tests, or use local file for fallback
+      JWT_SECRET: process.env.JWT_SECRET || 'test-secret-that-is-at-least-32-chars-long-for-security',
       NODE_ENV: 'test',
     },
     // Limit concurrency to prevent database connection pool exhaustion

@@ -1,6 +1,6 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { BiometricsService } from '../../../services/biometrics.service';
-import { prisma } from '../../../lib/prisma';
+import { prisma } from '@/lib/prisma';
 import crypto from 'crypto';
 
 // Mock prisma
