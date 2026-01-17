@@ -10,7 +10,7 @@ export const dynamic = 'force-dynamic';
 // GET /api/purchase-orders - Fetch all purchase orders with optional filters
 export async function GET(request: NextRequest) {
   try {
-
+    console.log('=== PURCHASE ORDERS GET REQUEST START ===');
     const searchParams = request.nextUrl.searchParams;
 
     const filters: PurchaseOrderFilters = {
@@ -23,9 +23,10 @@ export async function GET(request: NextRequest) {
       endDate: searchParams.get('endDate') ? new Date(searchParams.get('endDate')!) : undefined,
     };
 
-
+    console.log('Purchase order filters:', JSON.stringify(filters, null, 2));
+    console.log('Calling purchaseOrderService.getAllPurchaseOrders...');
     const purchaseOrders = await purchaseOrderService.getAllPurchaseOrders(filters);
-
+    console.log('Purchase orders retrieved successfully, count:', purchaseOrders.length);
     return NextResponse.json({ success: true, data: purchaseOrders });
   } catch (error) {
     console.error('Error fetching purchase orders:', error);

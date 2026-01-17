@@ -7,7 +7,8 @@ export const dynamic = 'force-dynamic';
 
 // GET /api/auth/me - Get current authenticated user
 export async function GET(request: NextRequest) {
-
+  console.log('=== /api/auth/me REQUEST START ===');
+  console.log('Timestamp:', new Date().toISOString());
   console.log('Method:', request.method);
   console.log('URL:', request.url);
   console.log('Headers:', Object.fromEntries(request.headers.entries()));

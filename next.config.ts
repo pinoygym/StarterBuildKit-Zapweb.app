@@ -16,6 +16,7 @@ const nextConfig: NextConfig = {
       {
         protocol: 'https',
         hostname: '**', // TODO: Restrict this to actual image hosts for improved security and performance. E.g., 'your-image-cdn.com', 'res.cloudinary.com'
+
       },
     ],
   },
@@ -63,3 +64,4 @@ const nextConfig: NextConfig = {
 };
 
 export default nextConfig;
+

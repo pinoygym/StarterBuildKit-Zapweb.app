@@ -1,0 +1,8 @@
+scripts/post-production/generate-tts.ts(68,23): error TS1355: A 'const' assertions can only be applied to references to enum members, or string, number, boolean, array, or object literals.
+scripts/test-case-sensitivity.ts(20,9): error TS2322: Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; updatedAt: Date; }' is not assignable to type '(Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput) | (Without<...> & UserCreateInput)'.
+  Type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; updatedAt: Date; }' is not assignable to type 'Without<UserCreateInput, UserUncheckedCreateInput> & UserUncheckedCreateInput'.
+    Property 'id' is missing in type '{ email: string; passwordHash: string; firstName: string; lastName: string; roleId: string; status: string; updatedAt: Date; }' but required in type 'UserUncheckedCreateInput'.
+tests/integration/api/ar-payments-report.test.ts(29,17): error TS2353: Object literal may only specify known properties, and 'branchId' does not exist in type '(Without<CustomerCreateInput, CustomerUncheckedCreateInput> & CustomerUncheckedCreateInput) | (Without<...> & CustomerCreateInput)'.
+tests/integration/api/inventory-adjustments.test.ts(68,13): error TS2454: Variable 'testAdjustmentId' is used before being assigned.
+tests/security-updates-test.ts(205,16): error TS2393: Duplicate function implementation.
+tests/selenium/run-multiple.ts(39,16): error TS2393: Duplicate function implementation.

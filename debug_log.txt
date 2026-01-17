@@ -1,0 +1,31 @@
+
+[1m[46m RUN [49m[22m [36mv4.0.15 [39m[90mC:/Users/HI/Documents/GitHub/buenasv2[39m
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (20) from .env.local -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+{"level":"info","message":"Initializing Prisma","timestamp":"2025-12-26T09:14:12.344Z","context":{"databaseHost":"ep-spring-pond-a1stve3k-pooler.ap-southeast-1.aws.neon.tech"}}
+
+[90mstdout[2m | tests/integration/api/ar.test.ts
+[22m[39m[dotenv@17.2.3] injecting env (0) from .env.local -- tip: 🛠️  run anywhere with `dotenvx run -- yourcommand`
+[dotenv@17.2.3] injecting env (0) from .env -- tip: ⚙️  specify custom .env file path with { path: '/custom/path/.env' }
+Setup: DATABASE_URL is defined
+
+ [32m✓[39m tests/integration/api/ar.test.ts [2m([22m[2m14 tests[22m[2m)[22m[33m 15635[2mms[22m[39m
+       [33m[2m✓[22m[39m should create AR record successfully [33m 713[2mms[22m[39m
+       [33m[2m✓[22m[39m should record full payment and update status to paid [33m 1040[2mms[22m[39m
+       [33m[2m✓[22m[39m should record partial payment and update status to partial [33m 953[2mms[22m[39m
+       [33m[2m✓[22m[39m should handle multiple partial payments [33m 2399[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject payment exceeding balance [33m 531[2mms[22m[39m
+       [33m[2m✓[22m[39m should reject zero or negative payment [33m 489[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate aging buckets correctly [33m 617[2mms[22m[39m
+       [33m[2m✓[22m[39m should group by customer correctly [33m 558[2mms[22m[39m
+       [33m[2m✓[22m[39m should calculate total outstanding correctly [33m 560[2mms[22m[39m
+       [33m[2m✓[22m[39m should fetch all AR records [33m 493[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by status [33m 528[2mms[22m[39m
+       [33m[2m✓[22m[39m should filter by branch [33m 520[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m1 passed[39m[22m[90m (1)[39m
+[2m      Tests [22m [1m[32m14 passed[39m[22m[90m (14)[39m
+[2m   Start at [22m 17:14:11
+[2m   Duration [22m 16.09s[2m (transform 86ms, setup 245ms, import 16ms, tests 15.63s, environment 0ms)[22m
+

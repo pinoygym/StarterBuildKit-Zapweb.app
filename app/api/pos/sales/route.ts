@@ -53,10 +53,10 @@ export async function GET(request: NextRequest) {
 export async function POST(request: NextRequest) {
   try {
     const rawBody = await request.json();
-
+    console.log('POS sale raw body:', JSON.stringify(rawBody, null, 2));
 
     const body = posSaleSchema.parse(rawBody);
-
+    console.log('POS sale validated data:', JSON.stringify(body, null, 2));
 
     const sale = await posService.processSale(body);
 

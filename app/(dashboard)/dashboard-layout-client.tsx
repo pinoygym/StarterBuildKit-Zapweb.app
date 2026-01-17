@@ -23,11 +23,11 @@ export function DashboardLayoutClient({ children, counts, tenantConfig }: { chil
     const { companyName } = useCompanyName();
 
     useEffect(() => {
-
+        console.log('DashboardLayout Effect:', { isLoading, isAuthenticated, pathname });
         if (!isLoading && !isAuthenticated) {
             const url = new URL('/login', window.location.href);
             url.searchParams.set('redirect', pathname);
-
+            console.log('Redirecting to:', url.toString());
             router.push(url.pathname + url.search);
         }
     }, [isLoading, isAuthenticated, router, pathname]);

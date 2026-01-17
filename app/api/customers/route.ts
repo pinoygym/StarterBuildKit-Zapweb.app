@@ -99,7 +99,8 @@ export async function POST(request: NextRequest) {
       status: body.status,
     };
 
-
+    console.log('POST /api/customers body:', body);
+    console.log('POST /api/customers customerData:', customerData);
 
     // Extract userId from token
     let userId = undefined;
