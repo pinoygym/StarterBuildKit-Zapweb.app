@@ -1,9 +1,0 @@
-
-Checking database: Spring Pond (Dev??)
-[PASS] 'taxId' column exists in 'Supplier'.
-
-Checking database: Broad Darkness (Unpooled??)
-[PASS] 'taxId' column exists in 'Supplier'.
-
-Checking database: Floral Silence (Production??)
-[PASS] 'taxId' column exists in 'Supplier'.

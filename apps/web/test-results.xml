@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="10" failures="10" errors="0" time="0.0143539">
+    <testsuite name="tests/unit/services/inventory-adjustment-types.test.ts" timestamp="2025-12-30T04:22:28.878Z" hostname="DESKTOP-HQV3RB6" tests="10" failures="10" errors="0" skipped="0" time="0.0143539">
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should correctly calculate actual quantity for positive RELATIVE adjustment" time="0.0059591">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-1
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should correctly calculate actual quantity for negative RELATIVE adjustment" time="0.0010047">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-2
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; RELATIVE Adjustments &gt; should handle RELATIVE adjustment when current stock is 0" time="0.0007921">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-3
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should correctly set actual quantity for ABSOLUTE adjustment (increase)" time="0.0007913">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-4
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should correctly set actual quantity for ABSOLUTE adjustment (decrease)" time="0.0006943">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-5
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should handle ABSOLUTE adjustment to 0 (clearing stock)" time="0.0006568">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-6
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; ABSOLUTE Adjustments &gt; should handle ABSOLUTE adjustment when no existing stock" time="0.0006652">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-7
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Mixed Adjustments (ABSOLUTE and RELATIVE in same slip) &gt; should correctly process both ABSOLUTE and RELATIVE adjustments together" time="0.0007227">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-8
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Edge Cases &gt; should handle ABSOLUTE adjustment with same value as current stock" time="0.0007921">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-9
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustment-types.test.ts" name="InventoryAdjustmentService - Adjustment Types (ABSOLUTE vs RELATIVE) &gt; Edge Cases &gt; should handle RELATIVE adjustment of 0 (no change)" time="0.0006868">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-10
+User ID: user-123
+Error: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+    at C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:288:71
+    at Array.map (&lt;anonymous&gt;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:284:52)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="__vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function" type="TypeError">
+TypeError: __vite_ssr_import_2__.inventoryService.convertToBaseUOM is not a function
+ ❯ services/inventory-adjustment.service.ts:288:71
+ ❯ prisma.$transaction.maxWait services/inventory-adjustment.service.ts:284:52
+            </failure>
+        </testcase>
+    </testsuite>
+</testsuites>

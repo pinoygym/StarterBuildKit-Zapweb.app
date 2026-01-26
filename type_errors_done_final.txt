@@ -1,5 +1,0 @@
-tests/integration/api/ar-payments-report.test.ts(22,13): error TS2322: Type '{ id: `${string}-${string}-${string}-${string}-${string}`; customerCode: string; companyName: string; contactPerson: string; email: string; phone: string; address: string; }' is not assignable to type '(Without<CustomerCreateInput, CustomerUncheckedCreateInput> & CustomerUncheckedCreateInput) | (Without<...> & CustomerCreateInput)'.
-  Type '{ id: `${string}-${string}-${string}-${string}-${string}`; customerCode: string; companyName: string; contactPerson: string; email: string; phone: string; address: string; }' is not assignable to type 'Without<CustomerUncheckedCreateInput, CustomerCreateInput> & CustomerCreateInput'.
-    Property 'updatedAt' is missing in type '{ id: `${string}-${string}-${string}-${string}-${string}`; customerCode: string; companyName: string; contactPerson: string; email: string; phone: string; address: string; }' but required in type 'CustomerCreateInput'.
-tests/security-updates-test.ts(242,1): error TS2304: Cannot find name 'runAllTests'.
-tests/security-updates-test.ts(242,21): error TS7006: Parameter 'error' implicitly has an 'any' type.

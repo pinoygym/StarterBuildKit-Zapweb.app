@@ -1,2 +1,0 @@
-tests/security-updates-test.ts(242,1): error TS2304: Cannot find name 'runAllTests'.
-tests/security-updates-test.ts(242,21): error TS7006: Parameter 'error' implicitly has an 'any' type.

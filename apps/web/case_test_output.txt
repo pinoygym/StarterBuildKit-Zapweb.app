@@ -1,0 +1,7 @@
+﻿User-related tables: [
+  {
+    [0mtable_name[2m:[0m [0m[32m[0m[32m"UserBranchAccess"[0m[0m[0m[2m,[0m
+  }[0m[2m,[0m {
+    [0mtable_name[2m:[0m [0m[32m[0m[32m"User"[0m[0m[0m[2m,[0m
+  }
+]

@@ -1,0 +1,1841 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+  engineType      = "library"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model APPayment {
+  id              String          @id @default(cuid())
+  apId            String
+  amount          Float
+  paymentMethod   String
+  referenceNumber String?
+  paymentDate     DateTime
+  createdAt       DateTime        @default(now())
+  fundSourceId    String?
+  AccountsPayable AccountsPayable @relation(fields: [apId], references: [id], onDelete: Cascade)
+  FundSource      FundSource?     @relation(fields: [fundSourceId], references: [id])
+
+  @@index([apId])
+  @@index([fundSourceId])
+  @@index([paymentDate])
+}
+
+model ARPayment {
+  id                 String             @id @default(cuid())
+  arId               String
+  amount             Float
+  paymentMethod      String
+  referenceNumber    String?
+  paymentDate        DateTime
+  createdAt          DateTime           @default(now())
+  fundSourceId       String?
+  AccountsReceivable AccountsReceivable @relation(fields: [arId], references: [id], onDelete: Cascade)
+  FundSource         FundSource?        @relation(fields: [fundSourceId], references: [id])
+
+  @@index([arId])
+  @@index([fundSourceId])
+  @@index([paymentDate])
+}
+
+model AccountsPayable {
+  id              String      @id
+  branchId        String
+  supplierId      String
+  purchaseOrderId String?
+  totalAmount     Float
+  paidAmount      Float       @default(0)
+  balance         Float
+  dueDate         DateTime
+  status          String      @default("pending")
+  createdAt       DateTime    @default(now())
+  updatedAt       DateTime
+  discountAmount  Float       @default(0)
+  otherCharges    Float       @default(0)
+  taxAmount       Float       @default(0)
+  rebates         Float       @default(0)
+  salesDiscount   Float       @default(0)
+  taxExemption    Float       @default(0)
+  withholdingTax  Float       @default(0)
+  APPayment       APPayment[]
+  Branch          Branch      @relation(fields: [branchId], references: [id])
+  Supplier        Supplier    @relation(fields: [supplierId], references: [id])
+
+  @@index([branchId])
+  @@index([branchId, status])
+  @@index([createdAt])
+  @@index([dueDate])
+  @@index([status, dueDate])
+  @@index([supplierId])
+  @@index([supplierId, status])
+  @@index([purchaseOrderId])
+}
+
+model AccountsReceivable {
+  id           String      @id
+  branchId     String
+  customerId   String?
+  customerName String
+  salesOrderId String?
+  totalAmount  Float
+  paidAmount   Float       @default(0)
+  balance      Float
+  dueDate      DateTime
+  status       String      @default("pending")
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime
+  ARPayment    ARPayment[]
+  Branch       Branch      @relation(fields: [branchId], references: [id])
+  Customer     Customer?   @relation(fields: [customerId], references: [id])
+
+  @@index([branchId])
+  @@index([branchId, status])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([customerName])
+  @@index([dueDate])
+  @@index([status, dueDate])
+  @@index([salesOrderId])
+}
+
+model AuditLog {
+  id         String   @id
+  userId     String?
+  action     String
+  resource   String
+  resourceId String?
+  details    Json?
+  ipAddress  String?
+  userAgent  String?
+  createdAt  DateTime @default(now())
+  User       User?    @relation(fields: [userId], references: [id])
+
+  @@index([action], map: "idx_audit_log_action")
+  @@index([createdAt], map: "idx_audit_log_created")
+  @@index([resource], map: "idx_audit_log_resource")
+  @@index([resourceId], map: "idx_audit_log_resource_id")
+  @@index([userId], map: "idx_audit_log_user")
+}
+
+model Branch {
+  id                      String                    @id
+  name                    String
+  code                    String                    @unique
+  location                String
+  manager                 String
+  phone                   String
+  status                  String                    @default("active")
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  AccountsPayable         AccountsPayable[]
+  AccountsReceivable      AccountsReceivable[]
+  CustomerPurchaseHistory CustomerPurchaseHistory[]
+  DailySalesSummary       DailySalesSummary[]
+  EmployeePerformance     EmployeePerformance[]
+  Expense                 Expense[]
+  FundSources             FundSource[]
+  InventoryAdjustment     InventoryAdjustment[]
+  InventoryTransfer       InventoryTransfer[]
+  POSReceipt              POSReceipt[]
+  POSSale                 POSSale[]
+  PromotionUsage          PromotionUsage[]
+  PurchaseOrder           PurchaseOrder[]
+  ReceivingVoucher        ReceivingVoucher[]
+  SalesOrder              SalesOrder[]
+  User                    User[]
+  UserBranchAccess        UserBranchAccess[]
+  Warehouse               Warehouse[]
+
+  @@index([code])
+  @@index([createdAt])
+  @@index([status])
+}
+
+model CompanySettings {
+  id                        String   @id
+  companyName               String
+  address                   String
+  phone                     String?
+  email                     String?
+  taxId                     String?
+  website                   String?
+  logoUrl                   String?
+  headerText                String?
+  footerText                String?
+  receiptHeader             String?
+  receiptFooter             String?
+  primaryColor              String   @default("#3b82f6")
+  secondaryColor            String   @default("#1e40af")
+  fontFamily                String   @default("Inter")
+  paperSize                 String   @default("A4")
+  thermalPrinter            Boolean  @default(false)
+  autoPrintReceipts         Boolean  @default(false)
+  createdAt                 DateTime @default(now())
+  updatedAt                 DateTime
+  discountApprovalThreshold Float    @default(20.0)
+  maxDiscountPercentage     Float    @default(50.0)
+  requireDiscountApproval   Boolean  @default(false)
+  taxInclusive              Boolean  @default(true)
+  vatEnabled                Boolean  @default(false)
+  vatRate                   Float    @default(12.0)
+  vatRegistrationNumber     String?
+  approvalRules             String   @default("{}")
+}
+
+model Customer {
+  id                      String                    @id
+  customerCode            String                    @unique
+  companyName             String?
+  contactPerson           String
+  phone                   String
+  email                   String?
+  address                 String?
+  city                    String?
+  region                  String?
+  postalCode              String?
+  paymentTerms            String                    @default("Net 30")
+  creditLimit             Float?
+  taxId                   String?
+  customerType            String                    @default("regular")
+  notes                   String?
+  status                  String                    @default("active")
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  createdById             String?
+  updatedById             String?
+  AccountsReceivable      AccountsReceivable[]
+  CreatedBy               User?                     @relation("CustomerCreatedBy", fields: [createdById], references: [id])
+  UpdatedBy               User?                     @relation("CustomerUpdatedBy", fields: [updatedById], references: [id])
+  CustomerPurchaseHistory CustomerPurchaseHistory[]
+  JobOrder                JobOrder[]
+  POSReceipt              POSReceipt[]
+  possales                POSSale[]
+  PromotionUsage          PromotionUsage[]
+  SalesOrder              SalesOrder[]
+
+  @@index([companyName])
+  @@index([contactPerson])
+  @@index([customerCode])
+  @@index([customerType])
+  @@index([email])
+  @@index([status])
+  @@index([customerType, status])
+  @@index([status, createdAt])
+}
+
+model CustomerPurchaseHistory {
+  id                  String   @id
+  customerId          String
+  saleId              String   @unique
+  branchId            String
+  totalAmount         Float
+  itemsCount          Int
+  paymentMethod       String
+  purchaseDate        DateTime
+  loyaltyPointsEarned Int      @default(0)
+  createdAt           DateTime @default(now())
+  Branch              Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  Customer            Customer @relation(fields: [customerId], references: [id], onDelete: Cascade)
+  POSSale             POSSale  @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([customerId])
+  @@index([customerId, purchaseDate])
+  @@index([paymentMethod])
+  @@index([purchaseDate])
+}
+
+model DailySalesSummary {
+  id                 String   @id
+  branchId           String
+  date               DateTime
+  totalSales         Float
+  totalTransactions  Int
+  averageTransaction Float
+  cashSales          Float
+  cardSales          Float
+  digitalSales       Float
+  creditSales        Float
+  totalTax           Float
+  totalDiscount      Float
+  grossProfit        Float
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime
+  Branch             Branch   @relation(fields: [branchId], references: [id])
+
+  @@unique([branchId, date])
+  @@index([branchId, date])
+  @@index([branchId])
+  @@index([date])
+}
+
+model EmployeePerformance {
+  id                   String   @id
+  userId               String
+  branchId             String
+  date                 DateTime
+  totalSales           Float
+  transactionCount     Int
+  averageTransaction   Float
+  itemsSold            Int
+  returnsHandled       Int      @default(0)
+  customerSatisfaction Float?
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime
+  Branch               Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, branchId, date])
+  @@index([branchId, date])
+  @@index([branchId])
+  @@index([date])
+  @@index([userId, date])
+  @@index([userId])
+}
+
+model Expense {
+  id            String      @id
+  branchId      String
+  expenseDate   DateTime
+  category      String
+  amount        Float
+  description   String
+  paymentMethod String
+  vendor        String?
+  receiptUrl    String?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime
+  fundSourceId  String?
+  Branch        Branch      @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  FundSource    FundSource? @relation(fields: [fundSourceId], references: [id])
+
+  @@index([fundSourceId])
+  @@index([branchId, category])
+  @@index([branchId, expenseDate])
+  @@index([branchId])
+  @@index([category, expenseDate])
+  @@index([category])
+  @@index([createdAt])
+  @@index([expenseDate])
+}
+
+model ExpenseCategory {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model ExpenseVendor {
+  id            String   @id @default(cuid())
+  name          String   @unique
+  contactPerson String?
+  phone         String?
+  email         String?
+  status        String   @default("active")
+  displayOrder  Int      @default(0)
+  usageCount    Int      @default(0)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime
+
+  @@index([name])
+  @@index([status])
+  @@index([usageCount])
+}
+
+model POSReceipt {
+  id             String    @id
+  saleId         String    @unique
+  receiptNumber  String    @unique
+  branchId       String
+  cashierId      String
+  customerId     String?
+  subtotal       Float
+  tax            Float
+  totalAmount    Float
+  paymentMethod  String
+  amountReceived Float
+  change         Float
+  discountAmount Float     @default(0)
+  discountReason String?
+  loyaltyPoints  Int       @default(0)
+  notes          String?
+  barcode        String?
+  qrCode         String?
+  isPrinted      Boolean   @default(false)
+  printCount     Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime
+  Branch         Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User           User      @relation(fields: [cashierId], references: [id], onDelete: Cascade)
+  Customer       Customer? @relation(fields: [customerId], references: [id])
+  POSSale        POSSale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([cashierId])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([paymentMethod])
+  @@index([receiptNumber])
+}
+
+model POSSale {
+  id                      String                   @id
+  receiptNumber           String                   @unique
+  branchId                String
+  subtotal                Float
+  tax                     Float                    @default(0)
+  totalAmount             Float
+  paymentMethod           String
+  amountReceived          Float?
+  change                  Float?
+  convertedFromOrderId    String?
+  createdAt               DateTime                 @default(now())
+  discount                Float                    @default(0)
+  discountReason          String?
+  discountType            String?
+  discountValue           Float?
+  salesAgentId            String?
+  customerId              String?
+  customerName            String?
+  CustomerPurchaseHistory CustomerPurchaseHistory?
+  POSReceipt              POSReceipt?
+  Branch                  Branch                   @relation(fields: [branchId], references: [id])
+  Customer                Customer?                @relation(fields: [customerId], references: [id])
+  SalesAgent              SalesAgent?              @relation(fields: [salesAgentId], references: [id])
+  POSSaleItem             POSSaleItem[]
+  PromotionUsage          PromotionUsage[]
+
+  @@index([customerId])
+  @@index([branchId, createdAt])
+  @@index([branchId])
+  @@index([branchId, paymentMethod])
+  @@index([createdAt])
+  @@index([paymentMethod])
+  @@index([receiptNumber])
+  @@index([salesAgentId])
+}
+
+model POSSaleItem {
+  id              String  @id
+  saleId          String
+  productId       String
+  quantity        Float
+  uom             String
+  unitPrice       Float
+  subtotal        Float
+  costOfGoodsSold Float
+  discount        Float   @default(0)
+  discountType    String?
+  discountValue   Float?
+  originalPrice   Float?
+  Product         Product @relation(fields: [productId], references: [id])
+  POSSale         POSSale @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([saleId])
+  @@index([saleId, productId])
+}
+
+model PasswordResetToken {
+  id        String   @id
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt], map: "idx_password_reset_expires")
+  @@index([token], map: "idx_password_reset_token")
+  @@index([userId], map: "idx_password_reset_user")
+}
+
+model PaymentMethod {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  applicableTo    String[]
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model Permission {
+  id             String           @id
+  resource       String
+  action         String
+  description    String?
+  createdAt      DateTime         @default(now())
+  RolePermission RolePermission[]
+
+  @@unique([resource, action], map: "unique_permission_resource_action")
+  @@index([action], map: "idx_permission_action")
+  @@index([resource], map: "idx_permission_resource")
+}
+
+model Product {
+  id                      String                    @id
+  name                    String                    @unique
+  description             String?
+  category                String
+  imageUrl                String?
+  basePrice               Float
+  baseUOM                 String
+  minStockLevel           Int
+  shelfLifeDays           Int
+  status                  String                    @default("active")
+  createdAt               DateTime                  @default(now())
+  updatedAt               DateTime
+  averageCostPrice        Float                     @default(0)
+  productCategoryId       String?
+  supplierId              String?
+  createdById             String?
+  updatedById             String?
+  Inventory               Inventory[]
+  InventoryAdjustmentItem InventoryAdjustmentItem[]
+  InventoryTransferItem   InventoryTransferItem[]
+  POSSaleItem             POSSaleItem[]
+  CreatedBy               User?                     @relation("ProductCreatedBy", fields: [createdById], references: [id])
+  ProductCategory         ProductCategory?          @relation(fields: [productCategoryId], references: [id])
+  Supplier                Supplier?                 @relation(fields: [supplierId], references: [id])
+  UpdatedBy               User?                     @relation("ProductUpdatedBy", fields: [updatedById], references: [id])
+  productUOMs             ProductUOM[]
+  PurchaseOrderItem       PurchaseOrderItem[]
+  ReceivingVoucherItem    ReceivingVoucherItem[]
+  SalesOrderItem          SalesOrderItem[]
+  StockMovement           StockMovement[]
+
+  @@index([category])
+  @@index([supplierId])
+  @@index([productCategoryId])
+  @@index([category, status])
+  @@index([createdAt])
+  @@index([name])
+  @@index([status])
+}
+
+model ProductCategory {
+  id              String    @id @default(cuid())
+  name            String    @unique
+  code            String    @unique
+  description     String?
+  status          String    @default("active")
+  displayOrder    Int       @default(0)
+  isSystemDefined Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime
+  Products        Product[]
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model ProductUOM {
+  id               String   @id
+  productId        String
+  name             String
+  conversionFactor Float
+  sellingPrice     Float
+  createdAt        DateTime @default(now())
+  Product          Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([productId, name])
+  @@index([productId])
+}
+
+model PromotionUsage {
+  id             String    @id
+  promotionName  String
+  promotionCode  String?
+  saleId         String
+  customerId     String?
+  discountAmount Float
+  discountType   String
+  discountValue  Float
+  usageDate      DateTime
+  branchId       String
+  createdAt      DateTime  @default(now())
+  Branch         Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  Customer       Customer? @relation(fields: [customerId], references: [id])
+  POSSale        POSSale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
+  @@index([branchId])
+  @@index([customerId])
+  @@index([promotionCode])
+  @@index([promotionName])
+  @@index([saleId])
+  @@index([usageDate])
+}
+
+model PurchaseOrder {
+  id                   String              @id
+  poNumber             String              @unique
+  supplierId           String
+  warehouseId          String
+  branchId             String
+  totalAmount          Float
+  status               String              @default("draft")
+  receivingStatus      String?             @default("pending")
+  expectedDeliveryDate DateTime
+  actualDeliveryDate   DateTime?
+  notes                String?
+  createdAt            DateTime            @default(now())
+  updatedAt            DateTime
+  discountAmount       Float               @default(0)
+  otherCharges         Float               @default(0)
+  taxAmount            Float               @default(0)
+  createdById          String?
+  Branch               Branch              @relation(fields: [branchId], references: [id])
+  CreatedBy            User?               @relation("PurchaseOrderCreatedBy", fields: [createdById], references: [id])
+  Supplier             Supplier            @relation(fields: [supplierId], references: [id])
+  Warehouse            Warehouse           @relation(fields: [warehouseId], references: [id])
+  PurchaseOrderItem    PurchaseOrderItem[]
+  ReceivingVoucher     ReceivingVoucher[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([poNumber])
+  @@index([receivingStatus])
+  @@index([status])
+  @@index([supplierId])
+  @@index([warehouseId])
+  @@index([status, createdAt])
+  @@index([branchId, status, createdAt])
+}
+
+model PurchaseOrderItem {
+  id               String        @id
+  poId             String
+  productId        String
+  quantity         Float
+  unitPrice        Float
+  subtotal         Float
+  receivedQuantity Float         @default(0)
+  uom              String
+  PurchaseOrder    PurchaseOrder @relation(fields: [poId], references: [id], onDelete: Cascade)
+  Product          Product       @relation(fields: [productId], references: [id])
+
+  @@index([poId])
+  @@index([productId])
+  @@index([poId, productId])
+}
+
+model ReceivingVoucher {
+  id                        String                 @id
+  rvNumber                  String                 @unique
+  purchaseOrderId           String
+  warehouseId               String
+  branchId                  String
+  receiverName              String
+  deliveryNotes             String?
+  status                    String                 @default("complete")
+  totalOrderedAmount        Float
+  totalReceivedAmount       Float
+  varianceAmount            Float
+  receivedDate              DateTime               @default(now())
+  createdAt                 DateTime               @default(now())
+  updatedAt                 DateTime
+  additionalFees            Float                  @default(0)
+  additionalFeesDescription String?
+  netAmount                 Float                  @default(0)
+  recomputeAverageCost      Boolean                @default(false)
+  supplierDiscount          Float                  @default(0)
+  supplierDiscountType      String?
+  createdById               String?
+  Branch                    Branch                 @relation(fields: [branchId], references: [id])
+  CreatedBy                 User?                  @relation("ReceivingVoucherCreatedBy", fields: [createdById], references: [id])
+  PurchaseOrder             PurchaseOrder          @relation(fields: [purchaseOrderId], references: [id])
+  Warehouse                 Warehouse              @relation(fields: [warehouseId], references: [id])
+  ReceivingVoucherItem      ReceivingVoucherItem[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([purchaseOrderId])
+  @@index([receivedDate])
+  @@index([rvNumber])
+  @@index([status])
+  @@index([warehouseId])
+  @@index([status, createdAt])
+  @@index([branchId, status, createdAt])
+}
+
+model ReceivingVoucherItem {
+  id                 String           @id
+  rvId               String
+  productId          String
+  orderedQuantity    Float
+  receivedQuantity   Float
+  varianceQuantity   Float
+  variancePercentage Float
+  varianceReason     String?
+  unitPrice          Float
+  lineTotal          Float
+  uom                String
+  Product            Product          @relation(fields: [productId], references: [id])
+  ReceivingVoucher   ReceivingVoucher @relation(fields: [rvId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([rvId])
+  @@index([rvId, productId])
+}
+
+model ReportExport {
+  id           String    @id
+  reportType   String
+  reportName   String
+  format       String
+  fileUrl      String?
+  fileSize     Int?
+  status       String    @default("PENDING")
+  filters      Json?
+  errorMessage String?
+  requestedBy  String
+  completedAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime
+
+  @@index([createdAt])
+  @@index([reportType])
+  @@index([requestedBy])
+  @@index([status])
+}
+
+model ReportTemplate {
+  id          String   @id
+  name        String
+  type        String
+  description String?
+  template    Json
+  isDefault   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  createdBy   String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime
+
+  @@index([isActive])
+  @@index([isDefault])
+  @@index([type])
+}
+
+model Role {
+  id             String           @id
+  name           String           @unique
+  description    String?
+  isSystem       Boolean          @default(false)
+  createdAt      DateTime         @default(now())
+  updatedAt      DateTime
+  RolePermission RolePermission[]
+  User           User[]
+
+  @@index([isSystem], map: "idx_role_is_system")
+  @@index([name], map: "idx_role_name")
+}
+
+model RolePermission {
+  id           String     @id
+  roleId       String
+  permissionId String
+  createdAt    DateTime   @default(now())
+  Permission   Permission @relation(fields: [permissionId], references: [id], onDelete: Cascade)
+  Role         Role       @relation(fields: [roleId], references: [id], onDelete: Cascade)
+
+  @@unique([roleId, permissionId], map: "unique_role_permission")
+  @@index([permissionId], map: "idx_role_permission_permission")
+  @@index([roleId], map: "idx_role_permission_role")
+}
+
+model RoadmapItem {
+  id          String           @id @default(cuid())
+  title       String
+  description String
+  status      String           @default("PLANNED")
+  priority    String           @default("MEDIUM")
+  tags        String[]
+  targetDate  DateTime?
+  authorId    String
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+  comments    RoadmapComment[]
+  Author      User             @relation(fields: [authorId], references: [id])
+
+  @@index([status])
+  @@index([priority])
+  @@index([authorId])
+  @@index([createdAt])
+}
+
+model RoadmapComment {
+  id            String      @id @default(cuid())
+  content       String
+  roadmapItemId String
+  userId        String
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  RoadmapItem   RoadmapItem @relation(fields: [roadmapItemId], references: [id], onDelete: Cascade)
+  User          User        @relation(fields: [userId], references: [id])
+
+  @@index([roadmapItemId])
+  @@index([userId])
+}
+
+model SalesAgent {
+  id            String    @id @default(cuid())
+  name          String    @unique
+  code          String    @unique
+  contactPerson String?
+  phone         String?
+  email         String?
+  status        String    @default("active")
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  displayOrder  Int       @default(0)
+  POSSale       POSSale[]
+
+  @@index([name])
+  @@index([status])
+}
+
+model SalesOrder {
+  id                String           @id
+  orderNumber       String           @unique
+  customerId        String?
+  customerName      String
+  customerPhone     String
+  customerEmail     String?
+  deliveryAddress   String
+  warehouseId       String
+  branchId          String
+  totalAmount       Float
+  status            String           @default("draft")
+  salesOrderStatus  String           @default("pending")
+  deliveryDate      DateTime
+  convertedToSaleId String?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime
+  ciNumber          String?
+  createdById       String?
+  Branch            Branch           @relation(fields: [branchId], references: [id])
+  CreatedBy         User?            @relation("SalesOrderCreatedBy", fields: [createdById], references: [id])
+  Customer          Customer?        @relation(fields: [customerId], references: [id])
+  Warehouse         Warehouse        @relation(fields: [warehouseId], references: [id])
+  SalesOrderItem    SalesOrderItem[]
+
+  @@index([branchId])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([orderNumber])
+  @@index([salesOrderStatus])
+  @@index([status])
+  @@index([warehouseId])
+  @@index([status, createdAt])
+  @@index([branchId, status, createdAt])
+}
+
+model SalesOrderItem {
+  id         String     @id
+  soId       String
+  productId  String
+  quantity   Float
+  uom        String
+  unitPrice  Float
+  subtotal   Float
+  Product    Product    @relation(fields: [productId], references: [id])
+  SalesOrder SalesOrder @relation(fields: [soId], references: [id], onDelete: Cascade)
+
+  @@index([productId])
+  @@index([soId])
+  @@index([soId, productId])
+}
+
+model Session {
+  id        String   @id
+  userId    String
+  token     String   @unique
+  ipAddress String?
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt], map: "idx_session_expires")
+  @@index([token], map: "idx_session_token")
+  @@index([userId], map: "idx_session_user")
+}
+
+model StockMovement {
+  id               String    @id
+  type             String
+  quantity         Float
+  reason           String?
+  referenceId      String?
+  referenceType    String?
+  createdAt        DateTime  @default(now())
+  productId        String
+  warehouseId      String
+  conversionFactor Float?
+  uom              String?
+  Product          Product   @relation(fields: [productId], references: [id])
+  Warehouse        Warehouse @relation(fields: [warehouseId], references: [id])
+
+  @@index([productId])
+  @@index([warehouseId])
+  @@index([createdAt])
+  @@index([referenceId, referenceType])
+  @@index([type, createdAt])
+  @@index([warehouseId, createdAt])
+  @@index([referenceId, referenceType, createdAt])
+}
+
+model Supplier {
+  id              String            @id
+  companyName     String
+  contactPerson   String
+  phone           String
+  email           String?
+  paymentTerms    String
+  status          String            @default("active")
+  createdAt       DateTime          @default(now())
+  updatedAt       DateTime
+  taxId           String?
+  createdById     String?
+  updatedById     String?
+  AccountsPayable AccountsPayable[]
+  Products        Product[]
+  PurchaseOrder   PurchaseOrder[]
+  CreatedBy       User?             @relation("SupplierCreatedBy", fields: [createdById], references: [id])
+  UpdatedBy       User?             @relation("SupplierUpdatedBy", fields: [updatedById], references: [id])
+
+  @@index([companyName])
+  @@index([status])
+}
+
+model UnitOfMeasure {
+  id              String   @id @default(cuid())
+  name            String   @unique
+  code            String   @unique
+  description     String?
+  status          String   @default("active")
+  displayOrder    Int      @default(0)
+  isSystemDefined Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime
+
+  @@index([displayOrder])
+  @@index([status])
+}
+
+model User {
+  id                                   String                @id
+  email                                String                @unique
+  passwordHash                         String
+  firstName                            String
+  lastName                             String
+  phone                                String?
+  roleId                               String
+  branchId                             String?
+  status                               String                @default("ACTIVE")
+  emailVerified                        Boolean               @default(false)
+  lastLoginAt                          DateTime?
+  passwordChangedAt                    DateTime?
+  createdAt                            DateTime              @default(now())
+  updatedAt                            DateTime
+  branchLockEnabled                    Boolean               @default(false)
+  isSuperMegaAdmin                     Boolean               @default(false)
+  RequestedApprovals                   ApprovalRequest[]     @relation("RequestedApprovals")
+  ReviewedApprovals                    ApprovalRequest[]     @relation("ReviewedApprovals")
+  AuditLog                             AuditLog[]
+  CreatedCustomers                     Customer[]            @relation("CustomerCreatedBy")
+  UpdatedCustomers                     Customer[]            @relation("CustomerUpdatedBy")
+  EmployeePerformance                  EmployeePerformance[]
+  FundTransactions                     FundTransaction[]     @relation("FundTransactionCreatedBy")
+  FundTransfers                        FundTransfer[]        @relation("FundTransferCreatedBy")
+  CreatedAdjustments                   InventoryAdjustment[] @relation("AdjustmentCreatedBy")
+  PostedAdjustments                    InventoryAdjustment[] @relation("AdjustmentPostedBy")
+  UpdatedAdjustments                   InventoryAdjustment[] @relation("AdjustmentUpdatedBy")
+  CreatedInventoryTransfers            InventoryTransfer[]   @relation("TransferCreatedBy")
+  JobComment                           JobComment[]
+  JobImage                             JobImage[]
+  JobOrder_JobOrder_assignedToIdToUser JobOrder[]            @relation("JobOrder_assignedToIdToUser")
+  JobOrder_JobOrder_createdByIdToUser  JobOrder[]            @relation("JobOrder_createdByIdToUser")
+  Notification                         Notification[]
+  POSReceipt                           POSReceipt[]
+  PasswordResetToken                   PasswordResetToken[]
+  CreatedProducts                      Product[]             @relation("ProductCreatedBy")
+  UpdatedProducts                      Product[]             @relation("ProductUpdatedBy")
+  CreatedPurchaseOrders                PurchaseOrder[]       @relation("PurchaseOrderCreatedBy")
+  CreatedReceivingVouchers             ReceivingVoucher[]    @relation("ReceivingVoucherCreatedBy")
+  RoadmapComments                      RoadmapComment[]
+  RoadmapItems                         RoadmapItem[]
+  CreatedSalesOrders                   SalesOrder[]          @relation("SalesOrderCreatedBy")
+  Session                              Session[]
+  CreatedSuppliers                     Supplier[]            @relation("SupplierCreatedBy")
+  UpdatedSuppliers                     Supplier[]            @relation("SupplierUpdatedBy")
+  CooperativeMembersCreated            CooperativeMember[]   @relation("CooperativeMemberCreatedBy")
+  CooperativeMembersUpdated            CooperativeMember[]   @relation("CooperativeMemberUpdatedBy")
+  MemberContributionsCreated           MemberContribution[]  @relation("MemberContributionCreatedBy")
+  Branch                               Branch?               @relation(fields: [branchId], references: [id])
+  Role                                 Role                  @relation(fields: [roleId], references: [id])
+  UserBranchAccess                     UserBranchAccess[]
+  EmployeeProfile                      EmployeeProfile?
+  AttendanceRecords                    AttendanceRecord[]
+  PayrollRecords                       PayrollRecord[]
+
+  @@index([branchId], map: "idx_user_branch")
+  @@index([email], map: "idx_user_email")
+  @@index([emailVerified], map: "idx_user_email_verified")
+  @@index([roleId], map: "idx_user_role")
+  @@index([status], map: "idx_user_status")
+  @@index([roleId, status])
+  @@index([branchId, status])
+}
+
+model UserBranchAccess {
+  id        String   @id
+  userId    String
+  branchId  String
+  createdAt DateTime @default(now())
+  Branch    Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, branchId], map: "unique_user_branch_access")
+  @@index([branchId], map: "idx_user_branch_access_branch")
+  @@index([userId], map: "idx_user_branch_access_user")
+}
+
+model Warehouse {
+  id                   String                @id
+  name                 String
+  location             String
+  manager              String
+  maxCapacity          Int
+  branchId             String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime
+  Inventory            Inventory[]
+  InventoryAdjustment  InventoryAdjustment[]
+  DestinationTransfers InventoryTransfer[]   @relation("DestinationWarehouse")
+  SourceTransfers      InventoryTransfer[]   @relation("SourceWarehouse")
+  PurchaseOrder        PurchaseOrder[]
+  ReceivingVoucher     ReceivingVoucher[]
+  SalesOrder           SalesOrder[]
+  StockMovement        StockMovement[]
+  Branch               Branch                @relation(fields: [branchId], references: [id])
+
+  @@index([branchId])
+  @@index([branchId, name])
+}
+
+model Inventory {
+  id          String    @id @default(cuid())
+  productId   String
+  warehouseId String
+  quantity    Float     @default(0)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  Product     Product   @relation(fields: [productId], references: [id])
+  Warehouse   Warehouse @relation(fields: [warehouseId], references: [id])
+
+  @@unique([productId, warehouseId])
+  @@index([productId])
+  @@index([warehouseId])
+}
+
+model JobComment {
+  id          String   @id
+  jobOrderId  String
+  userId      String
+  commentText String
+  createdAt   DateTime @default(now())
+  JobOrder    JobOrder @relation(fields: [jobOrderId], references: [id], onDelete: Cascade)
+  User        User     @relation(fields: [userId], references: [id])
+
+  @@index([createdAt])
+  @@index([jobOrderId])
+  @@index([userId])
+}
+
+model JobImage {
+  id           String   @id
+  jobOrderId   String
+  uploadedById String
+  fileUrl      String
+  thumbnailUrl String?
+  caption      String?
+  uploadedAt   DateTime @default(now())
+  JobOrder     JobOrder @relation(fields: [jobOrderId], references: [id], onDelete: Cascade)
+  User         User     @relation(fields: [uploadedById], references: [id])
+
+  @@index([jobOrderId])
+  @@index([uploadedAt])
+  @@index([uploadedById])
+}
+
+model JobOrder {
+  id                               String             @id
+  refNo                            String             @unique
+  title                            String
+  description                      String?
+  customerId                       String?
+  createdById                      String
+  assignedToId                     String?
+  priority                         JobPriority        @default(MEDIUM)
+  location                         Json?
+  scheduledAt                      DateTime?
+  startedAt                        DateTime?
+  completedAt                      DateTime?
+  status                           JobStatus          @default(PENDING)
+  estimatedCost                    Float?
+  actualCost                       Float?
+  metadata                         Json?
+  createdAt                        DateTime           @default(now())
+  updatedAt                        DateTime
+  deviceType                       DeviceType?
+  serialNumber                     String?
+  deviceBrand                      String?
+  deviceModel                      String?
+  dateReceived                     DateTime?
+  dateReleased                     DateTime?
+  contactPerson                    String?
+  branch                           String?
+  problemReported                  String?
+  commonCauses                     Json?
+  issueResolved                    Boolean            @default(false)
+  recommendation                   String?
+  technicianName                   String?
+  technicianSignature              String?
+  customerSignature                String?
+  JobComment                       JobComment[]
+  JobImage                         JobImage[]
+  User_JobOrder_assignedToIdToUser User?              @relation("JobOrder_assignedToIdToUser", fields: [assignedToId], references: [id])
+  User_JobOrder_createdByIdToUser  User               @relation("JobOrder_createdByIdToUser", fields: [createdById], references: [id])
+  Customer                         Customer?          @relation(fields: [customerId], references: [id])
+  JobPerformed                     JobPerformed[]
+  PartsReplacement                 PartsReplacement[]
+
+  @@index([assignedToId])
+  @@index([assignedToId, status])
+  @@index([createdAt])
+  @@index([customerId])
+  @@index([dateReceived])
+  @@index([deviceType])
+  @@index([scheduledAt])
+  @@index([status, createdAt])
+  @@index([status])
+}
+
+model JobPerformed {
+  id         String   @id
+  jobOrderId String
+  category   String
+  taskName   String
+  status     String?
+  notes      String?
+  createdAt  DateTime @default(now())
+  JobOrder   JobOrder @relation(fields: [jobOrderId], references: [id], onDelete: Cascade)
+
+  @@index([category])
+  @@index([jobOrderId])
+}
+
+model PartsReplacement {
+  id           String   @id
+  jobOrderId   String
+  description  String
+  serialNumber String?
+  quantity     Float
+  unitPrice    Float
+  lineTotal    Float
+  createdAt    DateTime @default(now())
+  JobOrder     JobOrder @relation(fields: [jobOrderId], references: [id], onDelete: Cascade)
+
+  @@index([jobOrderId])
+}
+
+model ApprovalRequest {
+  id          String   @id
+  type        String
+  entityId    String
+  data        String
+  status      String   @default("PENDING")
+  requestedId String
+  reviewedId  String?
+  reason      String?
+  reviewNote  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  RequestedBy User     @relation("RequestedApprovals", fields: [requestedId], references: [id])
+  ReviewedBy  User?    @relation("ReviewedApprovals", fields: [reviewedId], references: [id])
+
+  @@index([requestedId])
+  @@index([reviewedId])
+  @@index([status])
+  @@index([type])
+}
+
+model Notification {
+  id        String   @id
+  type      String
+  title     String
+  message   String
+  link      String?
+  isRead    Boolean  @default(false)
+  userId    String?
+  createdAt DateTime @default(now())
+  User      User?    @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([isRead])
+  @@index([createdAt])
+}
+
+model InventoryAdjustment {
+  id               String                    @id
+  adjustmentNumber String                    @unique
+  warehouseId      String
+  branchId         String
+  reason           String
+  status           String                    @default("DRAFT")
+  referenceNumber  String?
+  adjustmentDate   DateTime                  @default(now())
+  createdAt        DateTime                  @default(now())
+  updatedAt        DateTime                  @updatedAt
+  createdById      String
+  postedById       String?
+  updatedById      String?
+  Branch           Branch                    @relation(fields: [branchId], references: [id])
+  CreatedBy        User                      @relation("AdjustmentCreatedBy", fields: [createdById], references: [id])
+  PostedBy         User?                     @relation("AdjustmentPostedBy", fields: [postedById], references: [id])
+  UpdatedBy        User?                     @relation("AdjustmentUpdatedBy", fields: [updatedById], references: [id])
+  Warehouse        Warehouse                 @relation(fields: [warehouseId], references: [id])
+  items            InventoryAdjustmentItem[]
+
+  @@index([warehouseId])
+  @@index([status])
+  @@index([adjustmentDate])
+}
+
+model InventoryAdjustmentItem {
+  id                  String              @id
+  adjustmentId        String
+  productId           String
+  quantity            Float
+  uom                 String
+  systemQuantity      Float?
+  actualQuantity      Float?
+  type                String              @default("RELATIVE")
+  createdAt           DateTime            @default(now())
+  InventoryAdjustment InventoryAdjustment @relation(fields: [adjustmentId], references: [id], onDelete: Cascade)
+  Product             Product             @relation(fields: [productId], references: [id])
+
+  @@unique([adjustmentId, productId])
+  @@index([adjustmentId])
+  @@index([productId])
+}
+
+model InventoryTransfer {
+  id                     String                  @id
+  transferNumber         String                  @unique
+  sourceWarehouseId      String
+  destinationWarehouseId String
+  branchId               String
+  reason                 String?
+  status                 String                  @default("DRAFT")
+  transferDate           DateTime                @default(now())
+  createdAt              DateTime                @default(now())
+  updatedAt              DateTime                @updatedAt
+  createdById            String
+  Branch                 Branch                  @relation(fields: [branchId], references: [id])
+  CreatedBy              User                    @relation("TransferCreatedBy", fields: [createdById], references: [id])
+  destinationWarehouse   Warehouse               @relation("DestinationWarehouse", fields: [destinationWarehouseId], references: [id])
+  sourceWarehouse        Warehouse               @relation("SourceWarehouse", fields: [sourceWarehouseId], references: [id])
+  items                  InventoryTransferItem[]
+
+  @@index([sourceWarehouseId])
+  @@index([destinationWarehouseId])
+  @@index([status])
+  @@index([transferDate])
+}
+
+model InventoryTransferItem {
+  id                String            @id
+  transferId        String
+  productId         String
+  quantity          Float
+  uom               String
+  Product           Product           @relation(fields: [productId], references: [id])
+  InventoryTransfer InventoryTransfer @relation(fields: [transferId], references: [id], onDelete: Cascade)
+
+  @@unique([transferId, productId])
+  @@index([transferId])
+  @@index([productId])
+}
+
+model FundSource {
+  id               String            @id @default(cuid())
+  name             String
+  code             String            @unique
+  type             String
+  branchId         String?
+  bankName         String?
+  accountNumber    String?
+  accountHolder    String?
+  description      String?
+  openingBalance   Float             @default(0)
+  currentBalance   Float             @default(0)
+  currency         String            @default("PHP")
+  status           String            @default("active")
+  isDefault        Boolean           @default(false)
+  displayOrder     Int               @default(0)
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  APPayments       APPayment[]
+  ARPayments       ARPayment[]
+  Expenses         Expense[]
+  Branch           Branch?           @relation(fields: [branchId], references: [id])
+  FundTransactions FundTransaction[]
+  TransfersFrom    FundTransfer[]    @relation("FromFundSource")
+  TransfersTo      FundTransfer[]    @relation("ToFundSource")
+
+  @@index([branchId])
+  @@index([code])
+  @@index([status])
+}
+
+model FundTransaction {
+  id              String     @id @default(cuid())
+  fundSourceId    String
+  type            String
+  amount          Float
+  runningBalance  Float
+  referenceType   String?
+  referenceId     String?
+  description     String?
+  transactionDate DateTime   @default(now())
+  createdById     String
+  createdAt       DateTime   @default(now())
+  CreatedBy       User       @relation("FundTransactionCreatedBy", fields: [createdById], references: [id])
+  FundSource      FundSource @relation(fields: [fundSourceId], references: [id], onDelete: Cascade)
+
+  @@index([fundSourceId])
+  @@index([createdById])
+  @@index([transactionDate])
+}
+
+model FundTransfer {
+  id               String     @id @default(cuid())
+  transferNumber   String     @unique
+  fromFundSourceId String
+  toFundSourceId   String
+  amount           Float
+  transferFee      Float      @default(0)
+  netAmount        Float
+  description      String?
+  status           String     @default("completed")
+  transferDate     DateTime   @default(now())
+  createdById      String
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+  CreatedBy        User       @relation("FundTransferCreatedBy", fields: [createdById], references: [id])
+  FromFundSource   FundSource @relation("FromFundSource", fields: [fromFundSourceId], references: [id])
+  ToFundSource     FundSource @relation("ToFundSource", fields: [toFundSourceId], references: [id])
+
+  @@index([fromFundSourceId])
+  @@index([toFundSourceId])
+  @@index([transferNumber])
+}
+
+enum PermissionAction {
+  READ
+  CREATE
+  UPDATE
+  DELETE
+  MANAGE
+}
+
+enum PermissionResource {
+  USERS
+  ROLES
+  PRODUCTS
+  INVENTORY
+  SALES
+  PURCHASES
+  CUSTOMERS
+  SUPPLIERS
+  REPORTS
+  SETTINGS
+  ACCOUNTING
+  BRANCHES
+  JOB_ORDERS
+}
+
+enum DeviceType {
+  DESKTOP
+  LAPTOP
+  PRINTER
+  MONITOR
+  PROJECTOR
+  CHARGER
+  UPS
+  OTHER
+}
+
+enum JobPriority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum JobStatus {
+  PENDING
+  IN_PROGRESS
+  COMPLETED
+  CANCELLED
+}
+
+model Tenant {
+  id              String   @id @default(cuid())
+  slug            String   @unique // e.g., 'default', 'buenas'
+  name            String
+  shortName       String
+  description     String?
+  version         String   @default("1.0.0")
+  enabledFeatures Json     @default("[]") // Store FeatureKey[]
+  isActive        Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([slug])
+}
+
+model CooperativeMember {
+  id                       String   @id @default(cuid())
+  memberCode               String   @unique
+  firstName                String
+  lastName                 String
+  middleName               String?
+  dateOfBirth              DateTime
+  gender                   String // 'male', 'female', 'other'
+  civilStatus              String // 'single', 'married', 'widowed', 'separated'
+  email                    String?  @unique
+  phone                    String
+  alternatePhone           String?
+  address                  String
+  city                     String?
+  region                   String?
+  postalCode               String?
+  membershipTypeId         String
+  membershipDate           DateTime @default(now())
+  status                   String   @default("active") // 'active', 'inactive', 'suspended'
+  emergencyContactName     String?
+  emergencyContactPhone    String?
+  emergencyContactRelation String?
+  tinNumber                String?
+  sssNumber                String?
+  photoUrl                 String?
+  notes                    String?
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+  createdById              String?
+  updatedById              String?
+
+  MembershipType MembershipType       @relation(fields: [membershipTypeId], references: [id])
+  CreatedBy      User?                @relation("CooperativeMemberCreatedBy", fields: [createdById], references: [id])
+  UpdatedBy      User?                @relation("CooperativeMemberUpdatedBy", fields: [updatedById], references: [id])
+  Contributions  MemberContribution[]
+  Beneficiaries  MemberBeneficiary[]
+  EngagementScore MemberEngagementScore?
+  Wallet          MemberWallet?
+  Farms           CooperativeFarm[]
+  ProposalVotes   ProposalVote[]
+  TaskAssignments TaskAssignment[]
+  Initiatives     CooperativeInitiative[]
+  Proposals       CooperativeProposal[]
+
+  @@index([memberCode])
+  @@index([email])
+  @@index([status])
+  @@index([membershipTypeId])
+  @@index([firstName])
+  @@index([lastName])
+  @@index([phone])
+  @@index([status, membershipTypeId])
+  @@index([createdAt])
+}
+
+model MembershipType {
+  id                  String   @id @default(cuid())
+  name                String   @unique
+  code                String   @unique
+  description         String?
+  monthlyFee          Float    @default(0)
+  registrationFee     Float    @default(0)
+  minimumShareCapital Float    @default(0)
+  benefits            String?
+  requirements        String?
+  status              String   @default("active")
+  displayOrder        Int      @default(0)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+
+  Members CooperativeMember[]
+
+  @@index([code])
+  @@index([status])
+  @@index([displayOrder])
+}
+
+model MemberContribution {
+  id               String   @id @default(cuid())
+  memberId         String
+  contributionType String // 'share_capital', 'savings', 'loan_payment', 'other'
+  amount           Float
+  paymentMethod    String
+  referenceNumber  String?
+  contributionDate DateTime @default(now())
+  notes            String?
+  createdAt        DateTime @default(now())
+  createdById      String?
+
+  Member    CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  CreatedBy User?             @relation("MemberContributionCreatedBy", fields: [createdById], references: [id])
+
+  @@index([memberId])
+  @@index([contributionType])
+  @@index([contributionDate])
+  @@index([createdById])
+}
+
+model MemberBeneficiary {
+  id           String    @id @default(cuid())
+  memberId     String
+  fullName     String
+  relationship String // 'spouse', 'child', 'parent', 'sibling', 'other'
+  dateOfBirth  DateTime?
+  phone        String?
+  percentage   Float? // 0-100
+  isPrimary    Boolean   @default(false)
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  Member CooperativeMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+
+  @@index([memberId])
+  @@index([isPrimary])
+}
+
+// ===============================
+// Coordination Center Models
+// ===============================
+
+model CooperativeInitiative {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  category     String // 'project', 'program', 'campaign'
+  status       String   @default("draft") // 'draft', 'active', 'completed', 'cancelled'
+  priority     String   @default("medium") // 'low', 'medium', 'high', 'urgent'
+  targetDate   DateTime?
+  budget       Float?
+  progress     Float    @default(0) // 0-100 percentage
+  leadMemberId String?
+  Member       CooperativeMember? @relation(fields: [leadMemberId], references: [id])
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  Tasks CooperativeTask[]
+
+  @@index([status])
+  @@index([category])
+  @@index([leadMemberId])
+}
+
+model CooperativeProposal {
+  id              String    @id @default(cuid())
+  title           String
+  description     String
+  category        String // 'policy', 'budget', 'project', 'governance'
+  status          String    @default("pending") // 'pending', 'voting', 'approved', 'rejected', 'implemented'
+  proposedById    String
+  Member          CooperativeMember @relation(fields: [proposedById], references: [id])
+  votingStartDate DateTime?
+  votingEndDate   DateTime?
+  requiredVotes   Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  Votes ProposalVote[]
+
+  @@index([status])
+  @@index([proposedById])
+  @@index([votingEndDate])
+}
+
+model ProposalVote {
+  id         String   @id @default(cuid())
+  proposalId String
+  memberId   String
+  Member     CooperativeMember @relation(fields: [memberId], references: [id])
+  voteType   String // 'approve', 'reject', 'abstain'
+  comment    String?
+  votedAt    DateTime @default(now())
+
+  Proposal CooperativeProposal @relation(fields: [proposalId], references: [id], onDelete: Cascade)
+
+  @@unique([proposalId, memberId])
+  @@index([proposalId])
+  @@index([memberId])
+}
+
+model CooperativeTask {
+  id           String    @id @default(cuid())
+  title        String
+  description  String?
+  category     String // 'community', 'admin', 'outreach', 'training'
+  status       String    @default("open") // 'open', 'in_progress', 'completed', 'cancelled'
+  priority     String    @default("medium")
+  xpReward     Int       @default(10)
+  badgeReward  String?
+  dueDate      DateTime?
+  initiativeId String?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+
+  Initiative  CooperativeInitiative? @relation(fields: [initiativeId], references: [id])
+  Assignments TaskAssignment[]
+
+  @@index([status])
+  @@index([initiativeId])
+  @@index([dueDate])
+}
+
+model TaskAssignment {
+  id          String    @id @default(cuid())
+  taskId      String
+  memberId    String
+  Member      CooperativeMember @relation(fields: [memberId], references: [id])
+  status      String    @default("assigned") // 'assigned', 'accepted', 'completed', 'declined'
+  assignedAt  DateTime  @default(now())
+  completedAt DateTime?
+  xpEarned    Int?
+
+  Task CooperativeTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+
+  @@unique([taskId, memberId])
+  @@index([taskId])
+  @@index([memberId])
+  @@index([status])
+}
+
+model MemberEngagementScore {
+  id             String   @id @default(cuid())
+  memberId       String   @unique
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  totalXp        Int      @default(0)
+  tasksCompleted Int      @default(0)
+  proposalsVoted Int      @default(0)
+  badgesEarned   String[] @default([])
+  rank           Int?
+  updatedAt      DateTime @updatedAt
+
+  @@index([totalXp])
+  @@index([rank])
+}
+
+// ===============================
+// E-Wallet Models
+// ===============================
+
+model MemberWallet {
+  id             String   @id @default(cuid())
+  memberId       String   @unique
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  walletBalance  Float    @default(0)
+  shareCapital   Float    @default(0)
+  savingsBalance Float    @default(0)
+  status         String   @default("active")
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  Transactions WalletTransaction[]
+
+  @@index([memberId])
+  @@index([status])
+}
+
+model WalletTransaction {
+  id              String   @id @default(cuid())
+  walletId        String
+  type            String // 'cash_in', 'send_money', 'pay_bills', 'loan_payment', 'withdrawal'
+  amount          Float
+  description     String?
+  referenceNumber String?
+  status          String   @default("completed")
+  balanceBefore   Float
+  balanceAfter    Float
+  transactionDate DateTime @default(now())
+  createdAt       DateTime @default(now())
+
+  Wallet MemberWallet @relation(fields: [walletId], references: [id], onDelete: Cascade)
+
+  @@index([walletId])
+  @@index([type])
+  @@index([transactionDate])
+}
+
+// ===============================
+// Farm Management Models
+// ===============================
+
+model CooperativeFarm {
+  id             String    @id @default(cuid())
+  name           String
+  memberId       String
+  Member         CooperativeMember @relation(fields: [memberId], references: [id])
+  latitude       Float
+  longitude      Float
+  sizeHectares   Float
+  cropType       String
+  lastHarvest    DateTime?
+  nextHarvestEst DateTime?
+  status         String    @default("active")
+  notes          String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+
+  @@index([memberId])
+  @@index([status])
+  @@index([cropType])
+}
+
+// ===============================
+// ID Card System Models
+// ===============================
+
+model IDCardTemplate {
+  id               String   @id @default(cuid())
+  name             String
+  orientation      String   @default("landscape") // 'landscape', 'portrait'
+  primaryColor     String   @default("#004d20")
+  secondaryColor   String   @default("#004d20")
+  textColor        String   @default("#d4af37")
+  accentColor      String   @default("#d4af37")
+  pattern          String   @default("logo")
+  patternSize      Int      @default(400)
+  patternOpacity   Int      @default(10)
+  borderRadius     Int      @default(8)
+  layout           String   @default("standard") // 'standard', 'luxury', 'minimal'
+  fontFamily       String   @default("Inter")
+  backPrimaryColor String?
+  backTextColor    String?
+  showProfileImage Boolean  @default(true)
+  showBackQr       Boolean  @default(true)
+  isDefault        Boolean  @default(false)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  @@index([isDefault])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  LATE
+  ABSENT
+  ON_LEAVE
+}
+
+enum PayrollStatus {
+  DRAFT
+  PENDING
+  APPROVED
+  PAID
+  CANCELLED
+}
+
+model AttendanceRecord {
+  id         String           @id @default(cuid())
+  userId     String
+  date       DateTime
+  checkIn    DateTime?
+  checkOut   DateTime?
+  status     AttendanceStatus @default(PRESENT)
+  totalHours Float            @default(0)
+  notes      String?
+  createdAt  DateTime         @default(now())
+  updatedAt  DateTime         @updatedAt
+  User       User             @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+}
+
+model EmployeeProfile {
+  id             String   @id @default(cuid())
+  userId         String   @unique
+  employeeId     String   @unique
+  designation    String?
+  department     String?
+  joiningDate    DateTime @default(now())
+  hourlyRate     Float    @default(0)
+  bankName       String?
+  accountNumber  String?
+  tinNumber      String?
+  sssNumber      String?
+  philhealthNo          String?
+  pagibigNo             String?
+  faceBiometrics        Json?     // Stores the 128-float descriptor array
+  fingerprintBiometrics Json?     // Stores WebAuthn credential data or template
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+  User           User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PayrollPeriod {
+  id             String          @id @default(cuid())
+  startDate      DateTime
+  endDate        DateTime
+  status         PayrollStatus   @default(DRAFT)
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  PayrollRecords PayrollRecord[]
+}
+
+model PayrollRecord {
+  id              String        @id @default(cuid())
+  payrollPeriodId String
+  userId          String
+  regularHours    Float         @default(0)
+  overtimeHours   Float         @default(0)
+  grossPay        Float         @default(0)
+  deductions      Float         @default(0)
+  netPay          Float         @default(0)
+  status          String        @default("PENDING")
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  PayrollPeriod   PayrollPeriod @relation(fields: [payrollPeriodId], references: [id], onDelete: Cascade)
+  User            User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([payrollPeriodId])
+  @@index([userId])
+}

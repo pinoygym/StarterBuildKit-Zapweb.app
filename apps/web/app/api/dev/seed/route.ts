@@ -1,0 +1,308 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { prisma } from '@/lib/prisma'
+import { randomUUID } from 'crypto'
+import bcrypt from 'bcryptjs'
+
+export const dynamic = 'force-dynamic';
+
+export async function POST(req: NextRequest) {
+  try {
+    // Create Roles
+    const roles = [
+      { name: 'Super Admin', description: 'Full system access', isSystem: true },
+      { name: 'Branch Manager', description: 'Manage branch operations', isSystem: true },
+      { name: 'Cashier', description: 'Handle POS transactions', isSystem: true },
+      { name: 'Warehouse Staff', description: 'Manage inventory', isSystem: true },
+      { name: 'Accountant', description: 'Manage finances', isSystem: true },
+    ]
+
+    for (const role of roles) {
+      await prisma.role.upsert({
+        where: { name: role.name },
+        update: { updatedAt: new Date() },
+        create: {
+          id: randomUUID(),
+          ...role,
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Create Admin User
+    const superAdminRole = await prisma.role.findUnique({ where: { name: 'Super Admin' } })
+    if (superAdminRole) {
+      const passwordHash = await bcrypt.hash('Qweasd1234', 12)
+      await prisma.user.upsert({
+        where: { email: 'cybergada@gmail.com' },
+        update: {
+          updatedAt: new Date(),
+          isSuperMegaAdmin: true,
+          passwordHash,
+        },
+        create: {
+          id: randomUUID(),
+          email: 'cybergada@gmail.com',
+          passwordHash,
+          firstName: 'Cyber',
+          lastName: 'Gada',
+          roleId: superAdminRole.id,
+          status: 'ACTIVE',
+          emailVerified: true,
+          isSuperMegaAdmin: true,
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Create Demo User for testing
+    const branchManagerRole = await prisma.role.findUnique({ where: { name: 'Branch Manager' } })
+    if (branchManagerRole) {
+      const demoPasswordHash = await bcrypt.hash('Password123!', 12)
+      await prisma.user.upsert({
+        where: { email: 'demo@example.com' },
+        update: { updatedAt: new Date() },
+        create: {
+          id: randomUUID(),
+          email: 'demo@example.com',
+          passwordHash: demoPasswordHash,
+          firstName: 'Demo',
+          lastName: 'User',
+          roleId: branchManagerRole.id,
+          status: 'ACTIVE',
+          emailVerified: true,
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Create or update branches
+    const branchMain = await prisma.branch.upsert({
+      where: { code: 'MNL-001' },
+      update: { updatedAt: new Date() },
+      create: {
+        id: randomUUID(),
+        name: 'Manila Main Branch',
+        code: 'MNL-001',
+        location: '123 Rizal Avenue, Manila',
+        manager: 'Juan Dela Cruz',
+        phone: '+63 2 1234 5678',
+        status: 'active',
+        updatedAt: new Date(),
+      },
+    })
+
+    const branchQC = await prisma.branch.upsert({
+      where: { code: 'QC-001' },
+      update: { updatedAt: new Date() },
+      create: {
+        id: randomUUID(),
+        name: 'Quezon City Branch',
+        code: 'QC-001',
+        location: '456 Commonwealth Avenue, Quezon City',
+        manager: 'Maria Santos',
+        phone: '+63 2 8765 4321',
+        status: 'active',
+        updatedAt: new Date(),
+      },
+    })
+
+    // Warehouses
+    let whManila = await prisma.warehouse.findFirst({ where: { name: 'Manila Central Warehouse', branchId: branchMain.id } })
+    if (whManila) {
+      whManila = await prisma.warehouse.update({ where: { id: whManila.id }, data: { updatedAt: new Date() } })
+    } else {
+      whManila = await prisma.warehouse.create({
+        data: {
+          id: randomUUID(),
+          name: 'Manila Central Warehouse',
+          location: '789 Port Area, Manila',
+          manager: 'Pedro Garcia',
+          maxCapacity: 100000,
+          branchId: branchMain.id,
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    let whQC = await prisma.warehouse.findFirst({ where: { name: 'QC Storage Facility', branchId: branchQC.id } })
+    if (whQC) {
+      whQC = await prisma.warehouse.update({ where: { id: whQC.id }, data: { updatedAt: new Date() } })
+    } else {
+      whQC = await prisma.warehouse.create({
+        data: {
+          id: randomUUID(),
+          name: 'QC Storage Facility',
+          location: '321 Mindanao Avenue, Quezon City',
+          manager: 'Ana Reyes',
+          maxCapacity: 75000,
+          branchId: branchQC.id,
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Supplier
+    let supplier = await prisma.supplier.findFirst({ where: { companyName: 'Absolute Beverage Supply' } })
+    if (supplier) {
+      supplier = await prisma.supplier.update({ where: { id: supplier.id }, data: { status: 'active', updatedAt: new Date() } })
+    } else {
+      supplier = await prisma.supplier.create({
+        data: {
+          id: randomUUID(),
+          companyName: 'Absolute Beverage Supply',
+          contactPerson: 'Carlos D.',
+          phone: '+63 917 555 1212',
+          email: 'absupply@example.com',
+          paymentTerms: 'Net 30',
+          status: 'active',
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Product Categories
+    const categories = ['Water', 'Carbonated', 'Juice', 'Alcohol']
+    for (const catName of categories) {
+      const code = catName.toUpperCase().substring(0, 3)
+      await prisma.productCategory.upsert({
+        where: { name: catName },
+        update: { updatedAt: new Date() },
+        create: {
+          id: randomUUID(),
+          name: catName,
+          code: code,
+          description: `${catName} products`,
+          status: 'active',
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Products
+    let pWater = await prisma.product.findFirst({ where: { name: 'Absolute 500ml Bottle' } })
+    if (pWater) {
+      pWater = await prisma.product.update({ where: { id: pWater.id }, data: { updatedAt: new Date() } })
+    } else {
+      pWater = await prisma.product.create({
+        data: {
+          id: randomUUID(),
+          name: 'Absolute 500ml Bottle',
+          description: 'Purified distilled water 500ml',
+          category: 'Water',
+          baseUOM: 'bottle',
+          basePrice: 15,
+          minStockLevel: 600,
+          shelfLifeDays: 730,
+          status: 'active',
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    let pSoda = await prisma.product.findFirst({ where: { name: 'Soda 12oz Can' } })
+    if (pSoda) {
+      pSoda = await prisma.product.update({ where: { id: pSoda.id }, data: { updatedAt: new Date() } })
+    } else {
+      pSoda = await prisma.product.create({
+        data: {
+          id: randomUUID(),
+          name: 'Soda 12oz Can',
+          description: 'Carbonated drink 12oz can',
+          category: 'Carbonated',
+          baseUOM: 'can',
+          basePrice: 18,
+          minStockLevel: 500,
+          shelfLifeDays: 540,
+          status: 'active',
+          updatedAt: new Date(),
+        },
+      })
+    }
+
+    // Create or update inventory records
+    const now = new Date()
+
+    await prisma.inventory.upsert({
+      where: {
+        productId_warehouseId: {
+          productId: pWater.id,
+          warehouseId: whManila.id,
+        },
+      },
+      update: {
+        quantity: 5000,
+        updatedAt: now,
+      },
+      create: {
+        id: randomUUID(),
+        productId: pWater.id,
+        warehouseId: whManila.id,
+        quantity: 5000,
+        updatedAt: now,
+      },
+    })
+
+    await prisma.inventory.upsert({
+      where: {
+        productId_warehouseId: {
+          productId: pWater.id,
+          warehouseId: whQC.id,
+        },
+      },
+      update: {
+        quantity: 3750,
+        updatedAt: now,
+      },
+      create: {
+        id: randomUUID(),
+        productId: pWater.id,
+        warehouseId: whQC.id,
+        quantity: 3750,
+        updatedAt: now,
+      },
+    })
+
+    await prisma.inventory.upsert({
+      where: {
+        productId_warehouseId: {
+          productId: pSoda.id,
+          warehouseId: whManila.id,
+        },
+      },
+      update: {
+        quantity: 4000,
+        updatedAt: now,
+      },
+      create: {
+        id: randomUUID(),
+        productId: pSoda.id,
+        warehouseId: whManila.id,
+        quantity: 4000,
+        updatedAt: now,
+      },
+    })
+
+    // Update product average cost prices
+    await prisma.product.update({
+      where: { id: pWater.id },
+      data: { averageCostPrice: 12 },
+    })
+
+    await prisma.product.update({
+      where: { id: pSoda.id },
+      data: { averageCostPrice: 14 },
+    })
+
+    return NextResponse.json({
+      success: true,
+      data: {
+        branches: [branchMain, branchQC],
+        warehouses: [whManila, whQC],
+        supplier,
+        products: [pWater, pSoda],
+      },
+    }, { status: 201 })
+  } catch (error: any) {
+    return NextResponse.json({ success: false, message: String(error?.message || 'Seed error') }, { status: 500 })
+  }
+}

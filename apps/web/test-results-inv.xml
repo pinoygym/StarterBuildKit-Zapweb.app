@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="12" failures="4" errors="0" time="0.0222537">
+    <testsuite name="tests/unit/services/inventory-adjustments.service.test.ts" timestamp="2025-12-30T04:24:16.611Z" hostname="DESKTOP-HQV3RB6" tests="12" failures="4" errors="0" skipped="0" time="0.0222537">
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; create &gt; should create a draft adjustment successfully" time="0.0069229">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:98:61
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should update a draft adjustment" time="0.00348">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should throw ValidationError if updating non-draft adjustment" time="0.0012185">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; update &gt; should throw NotFoundError if adjustment does not exist" time="0.000465">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; post &gt; should post an adjustment, update inventory records with system quantities, and update stock" time="0.0020685">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; post &gt; should throw error if posting non-draft adjustment" time="0.0026555">
+            <system-err>
+===== INVENTORY ADJUSTMENT POST ERROR =====
+Adjustment ID: adj-1
+User ID: user-123
+Error: TypeError: Cannot read properties of undefined (reading &apos;length&apos;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:265:38)
+[90m    at processTicksAndRejections (node:internal/process/task_queues:105:5)[39m
+Stack: TypeError: Cannot read properties of undefined (reading &apos;length&apos;)
+    at __vite_ssr_import_0__.prisma.$transaction.maxWait (C:/Users/HI/Documents/GitHub/buenasv2/services/inventory-adjustment.service.ts:265:38)
+    at processTicksAndRejections (node:internal/process/task_queues:105:5)
+============================================
+
+            </system-err>
+            <failure message="expected error to be instance of ValidationError" type="AssertionError">
+AssertionError: expected error to be instance of ValidationError
+
+- Expected: 
+[Function ValidationError]
+
++ Received: 
+TypeError {
+  &quot;message&quot;: &quot;Cannot read properties of undefined (reading &apos;length&apos;)&quot;,
+}
+
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:248:13
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findAll &gt; should return adjustments with filters" time="0.0006376">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findById &gt; should return adjustment if found" time="0.0003558">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; findById &gt; should throw NotFoundError if not found" time="0.0004928">
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; copy &gt; should create a copy of an adjustment" time="0.0007856">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ InventoryAdjustmentService.copy services/inventory-adjustment.service.ts:527:33
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:317:13
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; reverse &gt; should create a reversal adjustment and automatically post it" time="0.0008318">
+            <failure message="Cannot read properties of undefined (reading &apos;findMany&apos;)" type="TypeError">
+TypeError: Cannot read properties of undefined (reading &apos;findMany&apos;)
+ ❯ InventoryAdjustmentService.validateUOMs services/inventory-adjustment.service.ts:60:47
+ ❯ InventoryAdjustmentService.create services/inventory-adjustment.service.ts:92:20
+ ❯ InventoryAdjustmentService.reverse services/inventory-adjustment.service.ts:583:37
+ ❯ tests/unit/services/inventory-adjustments.service.test.ts:368:28
+            </failure>
+        </testcase>
+        <testcase classname="tests/unit/services/inventory-adjustments.service.test.ts" name="InventoryAdjustmentService &gt; reverse &gt; should throw error if reversing non-posted adjustment" time="0.0003101">
+        </testcase>
+    </testsuite>
+</testsuites>
