@@ -25,7 +25,7 @@ const nextConfig: NextConfig = isMobileBuild ? {
   experimental: {
     // @ts-ignore
     skipTrailingSlashRedirect: true,
-    turbopack: {
+    turbo: {
       root: process.cwd(),
     },
   },
@@ -51,9 +51,24 @@ const nextConfig: NextConfig = isMobileBuild ? {
     'nativewind',
     'react-native-css-interop',
     'solito',
-    'react-native-web'
+    'react-native-web',
+    'react-native-safe-area-context'
   ],
   output: 'standalone',
+
+  webpack: (config) => {
+    config.resolve.alias = {
+      ...(config.resolve.alias || {}),
+      'react-native': 'react-native-web',
+    };
+    config.resolve.extensions = [
+      '.web.js',
+      '.web.ts',
+      '.web.tsx',
+      ...config.resolve.extensions,
+    ];
+    return config;
+  },
 
   async headers() {
     return [
@@ -93,11 +108,25 @@ const nextConfig: NextConfig = isMobileBuild ? {
     ]
   },
   experimental: {
-    turbopack: {
-      resolveAlias: {
-        'react-native': 'react-native-web',
-      },
+  },
+
+  turbopack: {
+    resolveAlias: {
+      'react-native': 'react-native-web',
     },
+    resolveExtensions: [
+      '.web.js',
+      '.web.jsx',
+      '.web.ts',
+      '.web.tsx',
+      '.mdx',
+      '.tsx',
+      '.ts',
+      '.jsx',
+      '.js',
+      '.mjs',
+      '.json',
+    ],
   },
 };
 

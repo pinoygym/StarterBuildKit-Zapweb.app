@@ -14,6 +14,7 @@ const PUBLIC_ROUTES = [
     '/api/auth/me',
     '/api/auth/verify-email',
     '/api/dev/seed',
+    '/solito',
 ];
 
 const JWT_SECRET = new TextEncoder().encode(
