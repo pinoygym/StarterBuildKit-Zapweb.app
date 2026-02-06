@@ -1,25 +1,25 @@
-import { Decimal } from '@prisma/client/runtime/client';
+import { Prisma } from '@prisma/client';
 
 export interface DashboardKPIs {
   totalProducts: number;
   totalStock: number;
   activeSalesOrders: number;
   salesOrderConversionRate: number;
-  inventoryValue: Decimal;
+  inventoryValue: Prisma.Decimal;
   todaySalesCount: number;
-  todaySalesRevenue: Decimal;
-  outstandingAR: Decimal;
-  outstandingAP: Decimal;
-  currentMonthExpenses: Decimal;
+  todaySalesRevenue: Prisma.Decimal;
+  outstandingAR: Prisma.Decimal;
+  outstandingAP: Prisma.Decimal;
+  currentMonthExpenses: Prisma.Decimal;
   overdueReceivables: number;
   overduePayables: number;
-  grossProfit?: Decimal;
-  netProfit?: Decimal;
+  grossProfit?: Prisma.Decimal;
+  netProfit?: Prisma.Decimal;
 }
 
 export interface AgingBucket {
   bucket: '0-30' | '31-60' | '61-90' | '90+';
-  amount: Decimal;
+  amount: Prisma.Decimal;
   count: number;
 }
 
@@ -31,14 +31,14 @@ export interface ARAPAging {
 export interface SalesOrderSummary {
   status: string;
   count: number;
-  totalAmount: Decimal;
+  totalAmount: Prisma.Decimal;
 }
 
 export interface DashboardActivity {
   id: string;
   type: 'sale' | 'purchase' | 'adjustment' | 'expense';
   description: string;
-  amount?: Decimal;
+  amount?: Prisma.Decimal;
   status?: string;
   timestamp: Date;
   referenceId: string;
@@ -48,7 +48,7 @@ export interface TopProduct {
   productId: string;
   productName: string;
   quantitySold: number;
-  revenue: Decimal;
+  revenue: Prisma.Decimal;
 }
 
 export interface WarehouseUtilization {
@@ -64,10 +64,10 @@ export interface WarehouseUtilization {
 export interface BranchComparison {
   branchId: string;
   branchName: string;
-  revenue: Decimal;
-  expenses: Decimal;
-  profit: Decimal;
-  inventoryValue: Decimal;
+  revenue: Prisma.Decimal;
+  expenses: Prisma.Decimal;
+  profit: Prisma.Decimal;
+  inventoryValue: Prisma.Decimal;
 }
 
 export interface DashboardFilters {

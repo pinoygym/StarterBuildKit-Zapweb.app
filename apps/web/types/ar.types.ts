@@ -1,5 +1,4 @@
-import { AccountsReceivable, ARPayment, Branch } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/client';
+import { AccountsReceivable, ARPayment, Branch, Prisma } from '@prisma/client';
 
 export interface ARWithPayments extends AccountsReceivable {
   payments: ARPayment[];
@@ -11,9 +10,9 @@ export interface ARWithPayments extends AccountsReceivable {
 }
 
 export interface ARSummary {
-  totalOutstanding: Decimal;
-  totalPaid: Decimal;
-  totalOverdue: Decimal;
+  totalOutstanding: Prisma.Decimal;
+  totalPaid: Prisma.Decimal;
+  totalOverdue: Prisma.Decimal;
   countPending: number;
   countPartial: number;
   countPaid: number;
@@ -23,15 +22,15 @@ export interface ARSummary {
 export interface ARAgingBucket {
   bucket: '0-30' | '31-60' | '61-90' | '90+';
   count: number;
-  totalAmount: Decimal;
+  totalAmount: Prisma.Decimal;
 }
 
 export interface ARAgingReport {
   buckets: ARAgingBucket[];
-  totalOutstanding: Decimal;
+  totalOutstanding: Prisma.Decimal;
   byCustomer: {
     customerName: string;
-    total: Decimal;
+    total: Prisma.Decimal;
     aging: ARAgingBucket[];
   }[];
 }

@@ -1,34 +1,33 @@
-import { Expense, Branch } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/client';
+import { Expense, Branch, Prisma } from '@prisma/client';
 
 export interface ExpenseWithBranch extends Expense {
   branch: Branch;
 }
 
 export interface ExpenseSummary {
-  totalExpenses: Decimal;
+  totalExpenses: Prisma.Decimal;
   countByCategory: {
     category: string;
     count: number;
-    total: Decimal;
+    total: Prisma.Decimal;
   }[];
   countByVendor: {
     vendor: string;
     count: number;
-    total: Decimal;
+    total: Prisma.Decimal;
   }[];
 }
 
 export interface ExpenseByCategoryReport {
   category: string;
-  total: Decimal;
+  total: Prisma.Decimal;
   percentage: number;
   count: number;
 }
 
 export interface ExpenseByVendorReport {
   vendor: string;
-  total: Decimal;
+  total: Prisma.Decimal;
   count: number;
 }
 

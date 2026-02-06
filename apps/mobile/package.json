@@ -14,12 +14,14 @@
     "expo-linking": "^8.0.11",
     "expo-status-bar": "~3.0.9",
     "nativewind": "^4.2.1",
-    "react": "19.1.0",
+    "react": "19.2.3",
+    "react-dom": "19.2.3",
     "react-native": "0.81.5",
     "solito": "^5.0.0"
   },
   "devDependencies": {
-    "@types/react": "~19.1.0",
+    "@types/react": "19.2.3",
+    "@types/react-dom": "19.2.3",
     "typescript": "~5.9.2"
   },
   "private": true

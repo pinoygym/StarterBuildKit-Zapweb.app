@@ -1,4 +1,4 @@
-import { Decimal } from '@prisma/client/runtime/client';
+import { Prisma } from '@prisma/client';
 
 export interface StockLevelReport {
   productId: string;
@@ -16,16 +16,16 @@ export interface InventoryValueReport {
   productId: string;
   productName: string;
   totalQuantity: number;
-  averageCost: Decimal;
-  totalValue: Decimal;
+  averageCost: Prisma.Decimal;
+  totalValue: Prisma.Decimal;
 }
 
 export interface SalesReport {
   date: Date;
   transactionCount: number;
-  totalRevenue: Decimal;
-  totalCOGS: Decimal;
-  grossProfit: Decimal;
+  totalRevenue: Prisma.Decimal;
+  totalCOGS: Prisma.Decimal;
+  grossProfit: Prisma.Decimal;
   grossMargin: number;
 }
 
@@ -34,45 +34,45 @@ export interface BestSellingProduct {
   productName: string;
   category: string;
   quantitySold: number;
-  revenue: Decimal;
-  profit: Decimal;
+  revenue: Prisma.Decimal;
+  profit: Prisma.Decimal;
 }
 
 export interface ProfitLossStatement {
-  revenue: Decimal;
-  cogs: Decimal;
-  grossProfit: Decimal;
-  expenses: Decimal;
-  netProfit: Decimal;
+  revenue: Prisma.Decimal;
+  cogs: Prisma.Decimal;
+  grossProfit: Prisma.Decimal;
+  expenses: Prisma.Decimal;
+  netProfit: Prisma.Decimal;
   grossMargin: number;
   netMargin: number;
 }
 
 export interface CashFlowStatement {
   cashInflows: {
-    posSales: Decimal;
-    arPayments: Decimal;
-    total: Decimal;
+    posSales: Prisma.Decimal;
+    arPayments: Prisma.Decimal;
+    total: Prisma.Decimal;
   };
   cashOutflows: {
-    expenses: Decimal;
-    apPayments: Decimal;
-    total: Decimal;
+    expenses: Prisma.Decimal;
+    apPayments: Prisma.Decimal;
+    total: Prisma.Decimal;
   };
-  netCashFlow: Decimal;
+  netCashFlow: Prisma.Decimal;
 }
 
 export interface BalanceSheet {
   assets: {
-    inventoryValue: Decimal;
-    accountsReceivable: Decimal;
-    total: Decimal;
+    inventoryValue: Prisma.Decimal;
+    accountsReceivable: Prisma.Decimal;
+    total: Prisma.Decimal;
   };
   liabilities: {
-    accountsPayable: Decimal;
-    total: Decimal;
+    accountsPayable: Prisma.Decimal;
+    total: Prisma.Decimal;
   };
-  equity: Decimal;
+  equity: Prisma.Decimal;
 }
 
 export interface ReportFilters {

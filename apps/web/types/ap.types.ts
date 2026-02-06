@@ -1,5 +1,4 @@
-import { AccountsPayable, APPayment, Branch, Supplier } from '@prisma/client';
-import { Decimal } from '@prisma/client/runtime/client';
+import { AccountsPayable, APPayment, Branch, Supplier, Prisma } from '@prisma/client';
 
 export interface APWithPayments extends AccountsPayable {
   payments: APPayment[];
@@ -8,9 +7,9 @@ export interface APWithPayments extends AccountsPayable {
 }
 
 export interface APSummary {
-  totalOutstanding: Decimal;
-  totalPaid: Decimal;
-  totalOverdue: Decimal;
+  totalOutstanding: Prisma.Decimal;
+  totalPaid: Prisma.Decimal;
+  totalOverdue: Prisma.Decimal;
   countPending: number;
   countPartial: number;
   countPaid: number;
@@ -20,15 +19,15 @@ export interface APSummary {
 export interface APAgingBucket {
   bucket: '0-30' | '31-60' | '61-90' | '90+';
   count: number;
-  totalAmount: Decimal;
+  totalAmount: Prisma.Decimal;
 }
 
 export interface APAgingReport {
   buckets: APAgingBucket[];
-  totalOutstanding: Decimal;
+  totalOutstanding: Prisma.Decimal;
   bySupplier: {
     supplierName: string;
-    total: Decimal;
+    total: Prisma.Decimal;
     aging: APAgingBucket[];
   }[];
 }
